@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/constants/app_colors.dart';
@@ -11,6 +12,11 @@ class WikipediaSectionWidget extends StatefulWidget {
   final Color accentColor;
   final String languageCode;
   final String? fallbackDescription;
+  // When true, the lead (summary) section is hidden — shown in the Resumen tab.
+  final bool hideLeadSection;
+  // Set true when the network fetch failed AND there is no cached content.
+  final bool hasFailed;
+  final VoidCallback? onRetry;
 
   const WikipediaSectionWidget({
     super.key,
@@ -19,6 +25,9 @@ class WikipediaSectionWidget extends StatefulWidget {
     required this.accentColor,
     required this.languageCode,
     this.fallbackDescription,
+    this.hideLeadSection = false,
+    this.hasFailed = false,
+    this.onRetry,
   });
 
   @override
@@ -26,8 +35,7 @@ class WikipediaSectionWidget extends StatefulWidget {
 }
 
 class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
-  static const int _maxSections = 5;
-  static const int _previewChars = 600;
+  static const int _previewChars = 800;
 
   final Map<int, bool> _expanded = {};
 
@@ -41,7 +49,8 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isLoading) return _buildLoader();
+    if (widget.isLoading) return _buildSkeleton();
+    if (widget.hasFailed) return _buildRetryView();
 
     final content = widget.content;
     final fallback = widget.fallbackDescription;
@@ -51,43 +60,111 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
           content.displayLang != widget.languageCode;
 
       if (!isWrongLanguage) return _buildArticle(content);
-
-      // Wrong language — prefer static description in user's language
-      if (fallback != null && fallback.isNotEmpty) {
-        return _buildFallback(fallback);
-      }
-      // Show cross-language Wikipedia as last resort
+      if (fallback != null && fallback.isNotEmpty) return _buildFallback(fallback);
       return _buildArticle(content);
     }
 
-    if (fallback != null && fallback.isNotEmpty) {
-      return _buildFallback(fallback);
-    }
+    if (fallback != null && fallback.isNotEmpty) return _buildFallback(fallback);
     return const SizedBox.shrink();
   }
 
-  // ── Loader ────────────────────────────────────────────────────────────────
+  // ── Skeleton loader ───────────────────────────────────────────────────────
 
-  Widget _buildLoader() {
+  Widget _buildSkeleton() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24),
-      child: Row(
+      padding: const EdgeInsets.only(top: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 18,
-            height: 18,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: widget.accentColor,
+          _skeletonBar(width: 200, height: 12),
+          const SizedBox(height: 20),
+          _skeletonBar(width: double.infinity, height: 14, delay: 0),
+          const SizedBox(height: 8),
+          _skeletonBar(width: double.infinity, height: 14, delay: 60),
+          const SizedBox(height: 8),
+          _skeletonBar(width: 260, height: 14, delay: 120),
+          const SizedBox(height: 28),
+          _skeletonBar(width: 160, height: 12, delay: 180),
+          const SizedBox(height: 16),
+          _skeletonBar(width: double.infinity, height: 14, delay: 240),
+          const SizedBox(height: 8),
+          _skeletonBar(width: double.infinity, height: 14, delay: 300),
+          const SizedBox(height: 8),
+          _skeletonBar(width: 200, height: 14, delay: 360),
+          const SizedBox(height: 28),
+          _skeletonBar(width: 180, height: 12, delay: 420),
+          const SizedBox(height: 16),
+          _skeletonBar(width: double.infinity, height: 14, delay: 480),
+          const SizedBox(height: 8),
+          _skeletonBar(width: 300, height: 14, delay: 540),
+        ],
+      ),
+    );
+  }
+
+  Widget _skeletonBar({
+    required double width,
+    required double height,
+    int delay = 0,
+  }) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: AppColors.dividerColor.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(4),
+      ),
+    )
+        .animate(onPlay: (c) => c.repeat(reverse: true))
+        .fade(
+          begin: 0.35,
+          end: 0.9,
+          duration: 900.ms,
+          delay: Duration(milliseconds: delay),
+          curve: Curves.easeInOut,
+        );
+  }
+
+  // ── Retry view ────────────────────────────────────────────────────────────
+
+  Widget _buildRetryView() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 40),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.wifi_off_rounded,
+            size: 44,
+            color: AppColors.textSecondary.withOpacity(0.4),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            _noConnectionLabel,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.lato(
+              fontSize: 14,
+              color: AppColors.textSecondary,
             ),
           ),
-          const SizedBox(width: 12),
-          Text(
-            _loadingLabel,
-            style: GoogleFonts.lato(
-              fontSize: 13,
-              color: AppColors.textSecondary,
-              fontStyle: FontStyle.italic,
+          const SizedBox(height: 20),
+          OutlinedButton.icon(
+            onPressed: widget.onRetry,
+            icon: Icon(Icons.refresh_rounded, size: 16, color: widget.accentColor),
+            label: Text(
+              _retryLabel,
+              style: GoogleFonts.lato(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: widget.accentColor,
+              ),
+            ),
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              side: BorderSide(color: widget.accentColor, width: 1.5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
         ],
@@ -95,7 +172,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
     );
   }
 
-  // ── Fallback ──────────────────────────────────────────────────────────────
+  // ── Fallback (no Wikipedia article) ──────────────────────────────────────
 
   Widget _buildFallback(String description) {
     return Padding(
@@ -128,32 +205,39 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
   // ── Full article ──────────────────────────────────────────────────────────
 
   Widget _buildArticle(WikipediaContent content) {
-    final visibleSections =
-        content.contentSections.take(_maxSections).toList();
+    final sections = widget.hideLeadSection
+        ? content.contentSections
+        : [if (content.leadSection != null) content.leadSection!, ...content.contentSections];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 32),
+        const SizedBox(height: 24),
 
-        _buildWikiBadge(content.displayLang),
-        const SizedBox(height: 20),
+        _buildWikiBadge(content),
+        const SizedBox(height: 4),
 
-        if (content.hasThumbnail) ...[
+        if (content.isFromCache) ...[
+          const SizedBox(height: 10),
+          _buildOfflineBadge(),
+        ],
+
+        const SizedBox(height: 16),
+
+        if (!widget.hideLeadSection && content.hasThumbnail) ...[
           _buildThumbnail(content.thumbnailUrl!),
           const SizedBox(height: 20),
         ],
 
-        if (content.leadSection != null)
-          _buildLeadText(content.leadSection!.content),
-
-        ...visibleSections.asMap().entries.map(
-              (entry) => _buildSection(entry.value, entry.key),
+        ...sections.asMap().entries.map(
+              (e) => e.value.isLead
+                  ? _buildLeadText(e.value.content)
+                  : _buildSection(e.value, e.key),
             ),
 
-        const SizedBox(height: 28),
+        const SizedBox(height: 24),
         _buildReadMoreButton(content.sourceUrl),
-        const SizedBox(height: 16),
+        const SizedBox(height: 12),
         _buildAttribution(content),
         const SizedBox(height: 8),
       ],
@@ -162,9 +246,11 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
 
   // ── Sub-widgets ───────────────────────────────────────────────────────────
 
-  Widget _buildWikiBadge(String displayLang) {
-    final effectiveLang =
-        displayLang.isNotEmpty ? displayLang : widget.languageCode;
+  Widget _buildWikiBadge(WikipediaContent content) {
+    final effectiveLang = content.displayLang.isNotEmpty
+        ? content.displayLang
+        : widget.languageCode;
+
     return Row(
       children: [
         Container(width: 32, height: 2, color: widget.accentColor),
@@ -179,48 +265,59 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
           ),
         ),
         const SizedBox(width: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-          decoration: BoxDecoration(
-            color: widget.accentColor.withOpacity(0.12),
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(
-              color: widget.accentColor.withOpacity(0.3),
-              width: 0.5,
-            ),
-          ),
-          child: Text(
-            effectiveLang.toUpperCase(),
-            style: GoogleFonts.lato(
-              fontSize: 9,
-              fontWeight: FontWeight.w700,
-              color: widget.accentColor,
-              letterSpacing: 0.5,
-            ),
-          ),
-        ),
+        _chip(effectiveLang.toUpperCase()),
         const SizedBox(width: 6),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-          decoration: BoxDecoration(
-            color: widget.accentColor.withOpacity(0.08),
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(
-              color: widget.accentColor.withOpacity(0.2),
-              width: 0.5,
-            ),
-          ),
-          child: Text(
-            'CC BY-SA',
-            style: GoogleFonts.lato(
-              fontSize: 9,
-              fontWeight: FontWeight.w700,
-              color: widget.accentColor.withOpacity(0.7),
-              letterSpacing: 0.5,
-            ),
-          ),
-        ),
+        _chip('CC BY-SA', opacity: 0.6),
       ],
+    );
+  }
+
+  Widget _chip(String label, {double opacity = 1.0}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: widget.accentColor.withOpacity(0.10 * opacity + 0.02),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: widget.accentColor.withOpacity(0.3 * opacity),
+          width: 0.5,
+        ),
+      ),
+      child: Text(
+        label,
+        style: GoogleFonts.lato(
+          fontSize: 9,
+          fontWeight: FontWeight.w700,
+          color: widget.accentColor.withOpacity(opacity),
+          letterSpacing: 0.5,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOfflineBadge() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.orange.withOpacity(0.10),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.orange.withOpacity(0.35), width: 0.8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.cloud_off_rounded, size: 12, color: Colors.orange),
+          const SizedBox(width: 6),
+          Text(
+            _offlineCacheLabel,
+            style: GoogleFonts.lato(
+              fontSize: 11,
+              color: Colors.orange,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -267,7 +364,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
   Widget _buildSection(WikipediaSection section, int index) {
     final isExpanded = _expanded[index] ?? false;
     final isSubSection = section.level > 1;
-    final isTruncated = section.content.length > _previewChars;
+    final isTruncated = section.content.length >= _previewChars;
     final preview = isTruncated
         ? '${section.content.substring(0, _previewChars).trimRight()}…'
         : section.content;
@@ -277,6 +374,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
       children: [
         const SizedBox(height: 20),
 
+        // Section header — tap to expand/collapse
         InkWell(
           onTap: () => setState(() => _expanded[index] = !isExpanded),
           borderRadius: BorderRadius.circular(8),
@@ -297,7 +395,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
                 SizedBox(width: isSubSection ? 10 : 12),
                 Expanded(
                   child: Text(
-                    section.title,
+                    section.title.isEmpty ? _sectionLabel(index) : section.title,
                     style: isSubSection
                         ? GoogleFonts.playfairDisplay(
                             fontSize: 16,
@@ -305,7 +403,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
                             color: AppColors.textSecondary,
                           )
                         : GoogleFonts.playfairDisplay(
-                            fontSize: 19,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: AppColors.textPrimary,
                           ),
@@ -335,9 +433,9 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
         ),
 
         Padding(
-          padding: const EdgeInsets.only(top: 14, left: 4),
+          padding: const EdgeInsets.only(top: 12, left: 4),
           child: AnimatedCrossFade(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 280),
             crossFadeState: isExpanded
                 ? CrossFadeState.showFirst
                 : CrossFadeState.showSecond,
@@ -387,8 +485,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
       width: double.infinity,
       child: OutlinedButton.icon(
         onPressed: () => _launchUrl(url),
-        icon: Icon(Icons.open_in_new_rounded,
-            size: 16, color: widget.accentColor),
+        icon: Icon(Icons.open_in_new_rounded, size: 16, color: widget.accentColor),
         label: Text(
           _readMoreLabel,
           style: GoogleFonts.lato(
@@ -418,7 +515,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: AppColors.dividerColor.withOpacity(0.2),
         borderRadius: BorderRadius.circular(10),
@@ -430,7 +527,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
           Row(
             children: [
               Icon(Icons.info_outline_rounded,
-                  size: 13, color: AppColors.textSecondary),
+                  size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
                 'Fuente: Wikipedia $langLabel — ',
@@ -451,7 +548,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
             ],
           ),
           if (isFallback) ...[
-            const SizedBox(height: 4),
+            const SizedBox(height: 3),
             Text(
               _fallbackNoteLabel(langLabel),
               style: GoogleFonts.lato(
@@ -475,14 +572,14 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
 
   // ── Localized labels ──────────────────────────────────────────────────────
 
-  String get _loadingLabel {
+  String _sectionLabel(int index) {
     switch (widget.languageCode) {
       case 'en':
-        return 'Loading from Wikipedia…';
+        return 'Section ${index + 1}';
       case 'es':
-        return 'Cargando desde Wikipedia…';
+        return 'Sección ${index + 1}';
       default:
-        return 'Caricamento da Wikipedia…';
+        return 'Sezione ${index + 1}';
     }
   }
 
@@ -516,6 +613,39 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
         return 'Fuente: contenido editorial';
       default:
         return 'Fonte: contenuto editoriale';
+    }
+  }
+
+  String get _noConnectionLabel {
+    switch (widget.languageCode) {
+      case 'en':
+        return 'No connection. Check your internet\nand try again.';
+      case 'es':
+        return 'Sin conexión. Verifica tu internet\ne intenta de nuevo.';
+      default:
+        return 'Nessuna connessione. Verifica internet\ne riprova.';
+    }
+  }
+
+  String get _retryLabel {
+    switch (widget.languageCode) {
+      case 'en':
+        return 'Retry';
+      case 'es':
+        return 'Reintentar';
+      default:
+        return 'Riprova';
+    }
+  }
+
+  String get _offlineCacheLabel {
+    switch (widget.languageCode) {
+      case 'en':
+        return 'Showing cached content';
+      case 'es':
+        return 'Mostrando contenido sin conexión';
+      default:
+        return 'Contenuto dalla cache locale';
     }
   }
 

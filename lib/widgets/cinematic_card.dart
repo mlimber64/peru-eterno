@@ -1,0 +1,215 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../core/constants/app_colors.dart';
+
+/// A reusable cinematic card: image/gradient background + dark overlay + text.
+class CinematicCard extends StatelessWidget {
+  final String? assetImagePath;
+  final String? networkImageUrl;
+  final Color accentColor;
+  final String title;
+  final String? subtitle;
+  final String? badge;
+  final bool isPremium;
+  final VoidCallback? onTap;
+  final double width;
+  final double height;
+  final BorderRadius borderRadius;
+
+  const CinematicCard({
+    super.key,
+    this.assetImagePath,
+    this.networkImageUrl,
+    required this.accentColor,
+    required this.title,
+    this.subtitle,
+    this.badge,
+    this.isPremium = false,
+    this.onTap,
+    this.width = double.infinity,
+    this.height = 200,
+    this.borderRadius = const BorderRadius.all(Radius.circular(16)),
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: borderRadius,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Background image or gradient
+              _buildBackground(),
+              // Dark overlay (always present for readability)
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.75),
+                    ],
+                    stops: const [0.35, 1.0],
+                  ),
+                ),
+              ),
+              // Premium lock overlay
+              if (isPremium)
+                Container(color: Colors.black.withOpacity(0.4))
+              ,
+              // Content
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (badge != null) ...[
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: accentColor.withOpacity(0.85),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            badge!,
+                            style: GoogleFonts.lato(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              letterSpacing: 0.8,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                      ],
+                      Text(
+                        title,
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          height: 1.2,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      if (subtitle != null) ...[
+                        const SizedBox(height: 3),
+                        Text(
+                          subtitle!,
+                          style: GoogleFonts.lato(
+                            fontSize: 11,
+                            color: Colors.white.withOpacity(0.75),
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+              // Premium icon
+              if (isPremium)
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.lock_rounded,
+                        size: 14, color: AppColors.ocre),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBackground() {
+    // Priority: asset image → network image → gradient
+    if (assetImagePath != null) {
+      return Image.asset(
+        assetImagePath!,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => _buildGradient(),
+      );
+    }
+    if (networkImageUrl != null && networkImageUrl!.isNotEmpty) {
+      return CachedNetworkImage(
+        imageUrl: networkImageUrl!,
+        fit: BoxFit.cover,
+        errorWidget: (_, __, ___) => _buildGradient(),
+        placeholder: (_, __) => _buildGradient(),
+      );
+    }
+    return _buildGradient();
+  }
+
+  Widget _buildGradient() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            accentColor.withOpacity(0.9),
+            accentColor.withOpacity(0.4),
+            Colors.black.withOpacity(0.8),
+          ],
+          stops: const [0.0, 0.5, 1.0],
+        ),
+      ),
+      child: CustomPaint(painter: _DiagonalPatternPainter(accentColor)),
+    );
+  }
+}
+
+// Subtle diagonal line pattern for gradient placeholders
+class _DiagonalPatternPainter extends CustomPainter {
+  final Color color;
+  const _DiagonalPatternPainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color.withOpacity(0.08)
+      ..strokeWidth = 1;
+
+    const spacing = 20.0;
+    for (double i = -size.height; i < size.width + size.height; i += spacing) {
+      canvas.drawLine(Offset(i, 0), Offset(i + size.height, size.height), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}

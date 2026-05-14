@@ -34,8 +34,9 @@ class WikipediaContent {
   final String? thumbnailUrl;
   final String sourceUrl;
   final DateTime cachedAt;
-  // Actual language used — may differ from user's language when fallback was triggered
   final String displayLang;
+  // True when content was served from local cache, not freshly fetched
+  final bool isFromCache;
 
   const WikipediaContent({
     required this.title,
@@ -44,11 +45,10 @@ class WikipediaContent {
     required this.sourceUrl,
     required this.cachedAt,
     this.displayLang = '',
+    this.isFromCache = false,
   });
 
-  // Backward-compat: text of lead section
-  String get extract =>
-      sections.isNotEmpty ? sections.first.content : '';
+  String get extract => sections.isNotEmpty ? sections.first.content : '';
 
   bool get hasContent => sections.any((s) => s.content.length > 30);
   bool get hasThumbnail => thumbnailUrl != null && thumbnailUrl!.isNotEmpty;
@@ -61,58 +61,98 @@ class WikipediaContent {
   WikipediaSection? get leadSection =>
       sections.where((s) => s.isLead).firstOrNull;
 
-  // ── Parsing ──────────────────────────────────────────────────────────────
+  // ── Text cleaning ──────────────────────────────────────────────────────────
+
+  static String _cleanText(String text) {
+    return text
+        .replaceAll(RegExp(r'\n{3,}'), '\n\n')      // collapse 3+ newlines
+        .replaceAll(RegExp(r'[^\S\n]+\n'), '\n')     // trailing spaces on lines
+        .replaceAll(RegExp(r'={2,}[^=\n]*={2,}'), '') // leftover == headers ==
+        .replaceAll(RegExp(r'\[\d+\]'), '')           // citation numbers [1]
+        .replaceAll(' ', ' ')                    // non-breaking space
+        .replaceAll('\t', ' ')                        // tabs → space
+        .trim();
+  }
+
+  // ── Section parsing ───────────────────────────────────────────────────────
+  //
+  // Splits `exsectionformat=plain` extract by double newlines.
+  // First chunk → lead section (no title).
+  // Subsequent chunks: if first line is short & looks like a header, it
+  // becomes the section title; the rest is the body.
+  // Limits: max 8 sections, max 800 chars per section body.
+
+  static const int _maxSections = 8;
+  static const int _maxChars = 800;
 
   static const Set<String> _skipTitles = {
     // ES
     'referencias', 'véase también', 'bibliografía', 'notas',
     'fuentes', 'enlaces externos', 'galería', 'galeria',
     'lectura adicional', 'notas y referencias', 'notas al pie', 'citas',
-    'en otros idiomas', 'publicaciones', 'obras',
+    'publicaciones', 'obras', 'en la cultura popular', 'filmografía',
     // EN
     'references', 'see also', 'bibliography', 'notes',
     'external links', 'gallery', 'further reading', 'sources',
-    'footnotes', 'citations', 'other languages',
+    'footnotes', 'citations', 'in popular culture', 'filmography',
     // IT
-    'riferimenti', 'vedi anche', 'bibliografia', 'note',
-    'fonti', 'collegamenti esterni', 'galleria',
-    'letture consigliate', 'altre lingue',
+    'riferimenti', 'vedi anche', 'note', 'fonti',
+    'collegamenti esterni', 'galleria', 'letture consigliate',
+    'nella cultura di massa', 'filmografia',
   };
 
   static List<WikipediaSection> parseSections(String fullText) {
+    final cleaned = _cleanText(fullText);
+    if (cleaned.isEmpty) return [];
+
+    final chunks = cleaned.split('\n\n');
     final sections = <WikipediaSection>[];
-    final lines = fullText.split('\n');
-    final headerRe = RegExp(r'^(={2,4})\s*(.+?)\s*\1\s*$');
+    bool isFirst = true;
 
-    String currentTitle = '';
-    int currentLevel = 0;
-    final buffer = StringBuffer();
+    for (final chunk in chunks) {
+      final trimmed = chunk.trim();
+      if (trimmed.length < 40) continue;
 
-    void flush() {
-      final content = buffer.toString().trim();
-      buffer.clear();
-      if (content.length < 40) return;
-      if (_skipTitles.contains(currentTitle.toLowerCase().trim())) return;
-      sections.add(WikipediaSection(
-        title: currentTitle,
-        content: content,
-        level: currentLevel,
-      ));
-    }
+      String sectionTitle = '';
+      String sectionBody = trimmed;
 
-    for (final line in lines) {
-      final match = headerRe.firstMatch(line.trim());
-      if (match != null) {
-        flush();
-        currentTitle = match.group(2) ?? '';
-        currentLevel = (match.group(1)?.length ?? 2) - 1;
-      } else {
-        if (buffer.isNotEmpty || line.trim().isNotEmpty) {
-          buffer.writeln(line);
+      // For non-lead chunks, detect if the first line is a section header:
+      // short (≤ 70 chars), no terminal punctuation, followed by body text.
+      if (!isFirst) {
+        final lines = trimmed
+            .split('\n')
+            .map((l) => l.trim())
+            .where((l) => l.isNotEmpty)
+            .toList();
+        if (lines.length >= 2) {
+          final firstLine = lines.first;
+          if (firstLine.length <= 70 &&
+              !firstLine.endsWith('.') &&
+              !firstLine.endsWith(',') &&
+              !firstLine.endsWith(';') &&
+              !firstLine.endsWith(':')) {
+            sectionTitle = firstLine;
+            sectionBody = lines.skip(1).join('\n').trim();
+          }
         }
       }
+
+      if (sectionBody.length < 40) continue;
+      if (_skipTitles.contains(sectionTitle.toLowerCase().trim())) continue;
+
+      final truncated = sectionBody.length > _maxChars
+          ? sectionBody.substring(0, _maxChars).trimRight()
+          : sectionBody;
+
+      sections.add(WikipediaSection(
+        title: isFirst ? '' : sectionTitle,
+        content: truncated,
+        level: sectionTitle.isEmpty ? 0 : 1,
+      ));
+
+      isFirst = false;
+      if (sections.length >= _maxSections) break;
     }
-    flush();
 
     return sections;
   }
@@ -123,9 +163,9 @@ class WikipediaContent {
     required Map<String, dynamic> pageJson,
     required String lang,
     required String slug,
+    String? thumbnailUrl,
   }) {
     final rawExtract = pageJson['extract'] as String? ?? '';
-    final thumbnail = pageJson['thumbnail'] as Map<String, dynamic>?;
     final title = pageJson['title'] as String? ?? slug;
     final pageId = pageJson['pageid'];
 
@@ -136,10 +176,11 @@ class WikipediaContent {
     return WikipediaContent(
       title: title,
       sections: parseSections(rawExtract),
-      thumbnailUrl: thumbnail?['source'] as String?,
+      thumbnailUrl: thumbnailUrl,
       sourceUrl: sourceUrl,
       cachedAt: DateTime.now(),
       displayLang: lang,
+      isFromCache: false,
     );
   }
 
@@ -152,7 +193,6 @@ class WikipediaContent {
           .map((e) => WikipediaSection.fromJson(e as Map<String, dynamic>))
           .toList();
     } else {
-      // Migrate from old cache format (single extract string)
       final oldExtract = json['extract'] as String? ?? '';
       sections = parseSections(oldExtract);
     }
@@ -164,6 +204,19 @@ class WikipediaContent {
       sourceUrl: json['sourceUrl'] as String? ?? '',
       cachedAt: DateTime.parse(json['cachedAt'] as String),
       displayLang: json['displayLang'] as String? ?? '',
+      isFromCache: true,
+    );
+  }
+
+  WikipediaContent copyWith({String? displayLang, bool? isFromCache}) {
+    return WikipediaContent(
+      title: title,
+      sections: sections,
+      thumbnailUrl: thumbnailUrl,
+      sourceUrl: sourceUrl,
+      cachedAt: cachedAt,
+      displayLang: displayLang ?? this.displayLang,
+      isFromCache: isFromCache ?? this.isFromCache,
     );
   }
 
@@ -174,7 +227,7 @@ class WikipediaContent {
         'sourceUrl': sourceUrl,
         'cachedAt': cachedAt.toIso8601String(),
         'displayLang': displayLang,
-        'version': 2,
+        'version': 3,
       };
 
   String toCacheString() => jsonEncode(toCache());

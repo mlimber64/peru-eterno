@@ -8,45 +8,40 @@ class WikipediaService {
   static WikipediaService get instance => _instance;
   WikipediaService._();
 
-  static const Duration _cacheDuration = Duration(days: 7);
-  static const Duration _requestTimeout = Duration(seconds: 15);
-
-  // Minimum total chars across all sections to consider content "sufficient"
+  static const Duration _cacheDuration = Duration(days: 30);
+  static const Duration _requestTimeout = Duration(seconds: 10);
   static const int _minContentChars = 500;
 
-  // Fallback chain: if the requested language is thin, try these in order
   static const Map<String, List<String>> _fallbacks = {
     'it': ['es', 'en'],
     'es': ['en'],
     'en': [],
   };
 
-  // v2 prefix avoids collisions with old summary-based cache
-  String _cacheKey(String eraId, String lang) => 'wiki_v2_${eraId}_$lang';
+  // v3: plain-format extracts, 30-day cache, separate thumbnail call
+  String _cacheKey(String contentId, String lang) =>
+      'wiki_v3_${contentId}_$lang';
 
-  bool _isSufficient(WikipediaContent content) =>
-      content.hasContent && content.totalContentChars >= _minContentChars;
+  bool _isSufficient(WikipediaContent c) =>
+      c.hasContent && c.totalContentChars >= _minContentChars;
 
   // ── Public API ────────────────────────────────────────────────────────────
 
-  /// Fetches Wikipedia content for [eraId] in [lang], falling back to richer
-  /// languages if the requested language article is absent or too thin.
-  /// [slugMap] must map language codes to Wikipedia article titles.
+  /// Fetches Wikipedia content for [contentId] in [lang], falling back to
+  /// richer languages if needed. [slugMap] maps lang codes → article titles.
   Future<WikipediaContent?> fetch({
-    required String eraId,
+    required String contentId,
     required String lang,
     required Map<String, String> slugMap,
   }) async {
-    // Try cache for the requested language first — only if content is sufficient
-    final key = _cacheKey(eraId, lang);
+    final key = _cacheKey(contentId, lang);
     final cached = await _getFromCache(key);
     if (cached != null && _isSufficient(cached)) return cached;
 
-    // Try fetching the requested language from the API
     final slug = slugMap[lang];
     if (slug != null) {
       final content = await _fetchFromApi(
-        eraId: eraId,
+        contentId: contentId,
         lang: lang,
         slug: slug,
         cacheKey: key,
@@ -54,46 +49,33 @@ class WikipediaService {
       if (content != null && _isSufficient(content)) return content;
     }
 
-    // Fallback: try richer languages in order
     for (final fbLang in (_fallbacks[lang] ?? [])) {
       final fbSlug = slugMap[fbLang];
       if (fbSlug == null) continue;
 
-      final fbKey = _cacheKey(eraId, fbLang);
-
-      // Reuse cached fallback if available
+      final fbKey = _cacheKey(contentId, fbLang);
       WikipediaContent? fbContent = await _getFromCache(fbKey);
       fbContent ??= await _fetchFromApi(
-        eraId: eraId,
+        contentId: contentId,
         lang: fbLang,
         slug: fbSlug,
         cacheKey: fbKey,
       );
 
       if (fbContent != null && _isSufficient(fbContent)) {
-        // Tag with the actual display language so the UI can show a note
-        final tagged = WikipediaContent(
-          title: fbContent.title,
-          sections: fbContent.sections,
-          thumbnailUrl: fbContent.thumbnailUrl,
-          sourceUrl: fbContent.sourceUrl,
-          cachedAt: fbContent.cachedAt,
-          displayLang: fbLang,
-        );
-        // Cache under the original key so subsequent loads are instant
+        final tagged = fbContent.copyWith(displayLang: fbLang, isFromCache: false);
         await _saveToCache(key, tagged);
         return tagged;
       }
     }
 
-    return null;
+    // Return stale cache as last resort (offline scenario)
+    return cached;
   }
 
   Future<void> clearCache() async {
     final prefs = await SharedPreferences.getInstance();
-    final toRemove = prefs.getKeys()
-        .where((k) => k.startsWith('wiki_'))
-        .toList();
+    final toRemove = prefs.getKeys().where((k) => k.startsWith('wiki_')).toList();
     for (final k in toRemove) {
       await prefs.remove(k);
     }
@@ -108,9 +90,7 @@ class WikipediaService {
       if (raw == null) return null;
 
       final json = jsonDecode(raw) as Map<String, dynamic>;
-
-      // Reject old format (no 'version' field means old summary cache)
-      if ((json['version'] as int?) != 2) {
+      if ((json['version'] as int?) != 3) {
         await prefs.remove(key);
         return null;
       }
@@ -133,18 +113,46 @@ class WikipediaService {
     } catch (_) {}
   }
 
-  // ── Wikipedia Action API ──────────────────────────────────────────────────
+  // ── Wikipedia Action API — extract ────────────────────────────────────────
   //
-  // Uses w/api.php with prop=extracts|pageimages to get the full article
-  // text (plain text, with == Section == headers) plus the page thumbnail
-  // in a single request.
+  // Uses exsectionformat=plain so section text is clean paragraphs separated
+  // by \n\n. WikipediaContent.parseSections handles the splitting.
 
   Future<WikipediaContent?> _fetchFromApi({
-    required String eraId,
+    required String contentId,
     required String lang,
     required String slug,
     required String cacheKey,
   }) async {
+    try {
+      // Fetch extract and thumbnail in parallel
+      final results = await Future.wait([
+        _fetchExtract(lang, slug),
+        _fetchThumbnail(lang, slug),
+      ]);
+
+      final pageJson = results[0] as Map<String, dynamic>?;
+      final thumbnailUrl = results[1] as String?;
+
+      if (pageJson == null) return null;
+
+      final content = WikipediaContent.fromApiResponse(
+        pageJson: pageJson,
+        lang: lang,
+        slug: slug,
+        thumbnailUrl: thumbnailUrl,
+      );
+
+      if (!content.hasContent) return null;
+
+      await _saveToCache(cacheKey, content);
+      return content;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> _fetchExtract(String lang, String slug) async {
     try {
       final url = Uri.https(
         '$lang.wikipedia.org',
@@ -152,46 +160,72 @@ class WikipediaService {
         {
           'action': 'query',
           'titles': slug,
-          'prop': 'extracts|pageimages',
-          'exintro': 'false',       // full article, not only intro
-          'explaintext': 'true',    // plain text, no HTML
-          'exsectionformat': 'wiki', // == headers for section detection
-          'pithumbsize': '640',     // thumbnail width in px
+          'prop': 'extracts',
+          'explaintext': 'true',
+          'exsectionformat': 'plain',
           'format': 'json',
           'utf8': '1',
-          'redirects': '1',         // follow redirects automatically
+          'redirects': '1',
+          'origin': '*',
         },
       );
 
       final response = await http
           .get(url, headers: {
             'Accept': 'application/json',
-            'User-Agent': 'PeruEterno/2.0 (flutter; educational)',
+            'User-Agent': 'PeruEterno/3.0 (flutter; educational)',
           })
           .timeout(_requestTimeout);
 
       if (response.statusCode != 200) return null;
 
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      final pages =
-          (body['query'] as Map<String, dynamic>?)?['pages']
-              as Map<String, dynamic>?;
+      final pages = (body['query'] as Map<String, dynamic>?)?['pages']
+          as Map<String, dynamic>?;
       if (pages == null || pages.isEmpty) return null;
 
-      // The API returns a map keyed by page ID; -1 means "not found"
       final pageJson = pages.values.first as Map<String, dynamic>;
       if (pageJson['pageid'] == null) return null;
+      return pageJson;
+    } catch (_) {
+      return null;
+    }
+  }
 
-      final content = WikipediaContent.fromApiResponse(
-        pageJson: pageJson,
-        lang: lang,
-        slug: slug,
+  Future<String?> _fetchThumbnail(String lang, String slug) async {
+    try {
+      final url = Uri.https(
+        '$lang.wikipedia.org',
+        '/w/api.php',
+        {
+          'action': 'query',
+          'titles': slug,
+          'prop': 'pageimages',
+          'pithumbsize': '500',
+          'format': 'json',
+          'utf8': '1',
+          'redirects': '1',
+          'origin': '*',
+        },
       );
 
-      if (!content.hasContent) return null;
+      final response = await http
+          .get(url, headers: {
+            'Accept': 'application/json',
+            'User-Agent': 'PeruEterno/3.0 (flutter; educational)',
+          })
+          .timeout(_requestTimeout);
 
-      await _saveToCache(cacheKey, content);
-      return content;
+      if (response.statusCode != 200) return null;
+
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      final pages = (body['query'] as Map<String, dynamic>?)?['pages']
+          as Map<String, dynamic>?;
+      if (pages == null || pages.isEmpty) return null;
+
+      final pageJson = pages.values.first as Map<String, dynamic>;
+      final thumbnail = pageJson['thumbnail'] as Map<String, dynamic>?;
+      return thumbnail?['source'] as String?;
     } catch (_) {
       return null;
     }

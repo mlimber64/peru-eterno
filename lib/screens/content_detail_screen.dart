@@ -5,27 +5,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/constants/app_colors.dart';
-import '../models/era_model.dart';
+import '../core/constants/category_config.dart';
+import '../models/content_item.dart';
 import '../models/wikipedia_content.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/history_provider.dart';
 import '../providers/language_provider.dart';
 import '../services/wikipedia_service.dart';
-import '../widgets/image_with_fallback.dart';
 import '../widgets/language_selector_button.dart';
 import '../widgets/wikipedia_section_widget.dart';
-import 'gallery_screen.dart';
 
-class EraDetailScreen extends StatefulWidget {
-  final EraModel era;
+class ContentDetailScreen extends StatefulWidget {
+  final ContentItem item;
 
-  const EraDetailScreen({super.key, required this.era});
+  const ContentDetailScreen({super.key, required this.item});
 
   @override
-  State<EraDetailScreen> createState() => _EraDetailScreenState();
+  State<ContentDetailScreen> createState() => _ContentDetailScreenState();
 }
 
-class _EraDetailScreenState extends State<EraDetailScreen>
+class _ContentDetailScreenState extends State<ContentDetailScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
@@ -34,7 +33,6 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   bool _wikiFailed = false;
   String? _lastLoadedLang;
 
-  // Pinch-to-zoom for Resumen and Contenido tabs
   final TransformationController _txController = TransformationController();
   double _textScale = 1.0;
   double _baseTextScale = 1.0;
@@ -65,14 +63,13 @@ class _EraDetailScreenState extends State<EraDetailScreen>
       _lastLoadedLang = lang;
       _loadWikipediaContent(lang);
     }
-    // Track in history (once)
     if (_lastLoadedLang != null) {
-      context.read<HistoryProvider>().add(widget.era.id);
+      context.read<HistoryProvider>().add(widget.item.id);
     }
   }
 
   Future<void> _loadWikipediaContent(String lang) async {
-    if (widget.era.wikipediaSlug.isEmpty) return;
+    if (widget.item.wikipediaSlug.isEmpty) return;
 
     setState(() {
       _isLoadingWiki = true;
@@ -81,9 +78,9 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     });
 
     final content = await WikipediaService.instance.fetch(
-      contentId: widget.era.id,
+      contentId: widget.item.id,
       lang: lang,
-      slugMap: widget.era.wikipediaSlug,
+      slugMap: widget.item.wikipediaSlug,
     );
 
     if (mounted) {
@@ -97,24 +94,24 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
   @override
   Widget build(BuildContext context) {
-    final t = context.watch<LanguageProvider>().t;
     final lang = context.watch<LanguageProvider>().currentLanguage;
     final labels = _tabLabels(lang);
+    final color = CategoryConfigs.colorOf(widget.item.category);
 
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          _buildSliverAppBar(context, t),
+          _buildSliverAppBar(context, color),
           SliverPersistentHeader(
             pinned: true,
             delegate: _TabBarDelegate(
               color: AppColors.bgColor,
               child: TabBar(
                 controller: _tabController,
-                indicatorColor: widget.era.accentColor,
+                indicatorColor: color,
                 indicatorWeight: 2.5,
-                labelColor: widget.era.accentColor,
+                labelColor: color,
                 unselectedLabelColor: AppColors.textSecondary,
                 labelStyle: GoogleFonts.lato(
                   fontSize: 11,
@@ -134,9 +131,9 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         body: TabBarView(
           controller: _tabController,
           children: [
-            _buildResumenTab(t, lang),
-            _buildContenidoTab(t, lang),
-            _buildGaleriaTab(context),
+            _buildResumenTab(lang),
+            _buildContenidoTab(lang),
+            _buildGaleriaTab(),
           ],
         ),
       ),
@@ -145,9 +142,11 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
   // ── SliverAppBar ──────────────────────────────────────────────────────────
 
-  Widget _buildSliverAppBar(BuildContext context, String Function(String) t) {
+  Widget _buildSliverAppBar(BuildContext context, Color color) {
+    final icon = CategoryConfigs.iconOf(widget.item.category);
+
     return SliverAppBar(
-      expandedHeight: 280,
+      expandedHeight: 260,
       pinned: true,
       backgroundColor: AppColors.marronOscuro,
       foregroundColor: AppColors.cremaPergamino,
@@ -163,7 +162,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         onPressed: () => Navigator.of(context).pop(),
       ),
       actions: [
-        _FavoriteButton(itemId: widget.era.id),
+        _FavButton(itemId: widget.item.id),
         const LanguageSelectorButton(),
       ],
       flexibleSpace: FlexibleSpaceBar(
@@ -171,12 +170,41 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         background: Stack(
           fit: StackFit.expand,
           children: [
-            ImageWithFallback(
-              assetPath:
-                  widget.era.imageAssetPath(widget.era.imageFilenames.first),
-              fallbackColor: widget.era.accentColor,
-              fit: BoxFit.cover,
+            // Category gradient background
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    color.withOpacity(0.9),
+                    color.withOpacity(0.6),
+                    AppColors.marronOscuro,
+                  ],
+                  stops: const [0.0, 0.5, 1.0],
+                ),
+              ),
             ),
+            // Large background icon
+            Positioned(
+              right: -20,
+              top: 20,
+              child: Icon(
+                icon,
+                size: 180,
+                color: Colors.white.withOpacity(0.07),
+              ),
+            ),
+            // Wikipedia thumbnail if available
+            if (_wikiContent?.hasThumbnail == true)
+              Positioned.fill(
+                child: CachedNetworkImage(
+                  imageUrl: _wikiContent!.thumbnailUrl!,
+                  fit: BoxFit.cover,
+                  errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                ),
+              ),
+            // Gradient overlay
             DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -184,12 +212,13 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    AppColors.marronOscuro.withOpacity(0.85),
+                    AppColors.marronOscuro.withOpacity(0.9),
                   ],
-                  stops: const [0.4, 1.0],
+                  stops: const [0.3, 1.0],
                 ),
               ),
             ),
+            // Title area
             Positioned(
               bottom: 20,
               left: 20,
@@ -201,34 +230,36 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: widget.era.accentColor.withOpacity(0.9),
+                      color: color.withOpacity(0.85),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text(
-                      t('eras.${widget.era.id}.period'),
-                      style: GoogleFonts.lato(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        letterSpacing: 1,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(icon, size: 11, color: Colors.white),
+                        const SizedBox(width: 5),
+                        Text(
+                          CategoryConfigs.labelOf(
+                            widget.item.category,
+                            _lastLoadedLang ?? 'es',
+                          ).toUpperCase(),
+                          style: GoogleFonts.lato(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    t('eras.${widget.era.id}.title'),
+                    widget.item.displayName,
                     style: GoogleFonts.playfairDisplay(
-                      fontSize: 30,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    t('eras.${widget.era.id}.subtitle'),
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 14,
-                      fontStyle: FontStyle.italic,
-                      color: AppColors.cremaPergamino.withOpacity(0.85),
                     ),
                   ),
                 ],
@@ -242,50 +273,43 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
   // ── Tab 1: Resumen ────────────────────────────────────────────────────────
 
-  Widget _buildResumenTab(String Function(String) t, String lang) {
+  Widget _buildResumenTab(String lang) {
+    final color = CategoryConfigs.colorOf(widget.item.category);
+
     return _wrapWithZoom(
       SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 40),
-        child: _buildResumenContent(t, lang)
+        child: _buildResumenContent(lang, color)
             .animate()
             .fadeIn(duration: 500.ms, delay: 80.ms),
       ),
     );
   }
 
-  Widget _buildResumenContent(String Function(String) t, String lang) {
-    // Loading state
+  Widget _buildResumenContent(String lang, Color color) {
     if (_isLoadingWiki) {
-      return Column(
-        children: [
-          const SizedBox(height: 8),
-          WikipediaSectionWidget(
-            content: null,
-            isLoading: true,
-            accentColor: widget.era.accentColor,
-            languageCode: lang,
-          ),
-        ],
+      return WikipediaSectionWidget(
+        content: null,
+        isLoading: true,
+        accentColor: color,
+        languageCode: lang,
       );
     }
 
-    // Error state — no content at all
     if (_wikiFailed && _wikiContent == null) {
       return WikipediaSectionWidget(
         content: null,
         isLoading: false,
         hasFailed: true,
         onRetry: () => _loadWikipediaContent(lang),
-        accentColor: widget.era.accentColor,
+        accentColor: color,
         languageCode: lang,
       );
     }
 
     final content = _wikiContent;
-
-    // Fallback to translation description when no Wikipedia content
     if (content == null || !content.hasContent) {
-      return _buildFallbackResumen(t, lang);
+      return _buildNoContentPlaceholder(color);
     }
 
     final lead = content.leadSection;
@@ -293,60 +317,55 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Offline badge
         if (content.isFromCache) ...[
           _buildOfflineCard(lang),
           const SizedBox(height: 14),
         ],
-
-        // Wikipedia thumbnail
         if (content.hasThumbnail) ...[
-          _buildHeroThumbnail(content.thumbnailUrl!),
+          _buildHeroThumbnail(content.thumbnailUrl!, color),
           const SizedBox(height: 20),
         ],
-
-        // Lead paragraph card
-        if (lead != null) _buildLeadCard(lead.content),
-
+        if (lead != null) _buildLeadCard(lead.content, color),
         const SizedBox(height: 20),
-
-        // Source + read more
-        _buildReadMoreButton(content.sourceUrl, lang),
+        _buildReadMoreButton(content.sourceUrl, lang, color),
         const SizedBox(height: 12),
         _buildSourceAttribution(content, lang),
       ],
     );
   }
 
-  Widget _buildFallbackResumen(String Function(String) t, String lang) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: widget.era.accentColor.withOpacity(0.07),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: widget.era.accentColor.withOpacity(0.2),
-              width: 1,
-            ),
+  Widget _buildNoContentPlaceholder(Color color) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.07),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color.withOpacity(0.2)),
+      ),
+      child: Column(
+        children: [
+          Icon(
+            CategoryConfigs.iconOf(widget.item.category),
+            size: 48,
+            color: color.withOpacity(0.4),
           ),
-          child: Text(
-            t('eras.${widget.era.id}.description'),
-            style: GoogleFonts.lato(
-              fontSize: 15,
+          const SizedBox(height: 16),
+          Text(
+            widget.item.displayName,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.playfairDisplay(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
               color: AppColors.textPrimary,
-              height: 1.75,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _buildHeroThumbnail(String url) {
+  Widget _buildHeroThumbnail(String url, Color color) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: CachedNetworkImage(
@@ -356,12 +375,9 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         fit: BoxFit.cover,
         placeholder: (_, __) => Container(
           height: 220,
-          color: widget.era.accentColor.withOpacity(0.1),
+          color: color.withOpacity(0.1),
           child: Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: widget.era.accentColor,
-            ),
+            child: CircularProgressIndicator(strokeWidth: 2, color: color),
           ),
         ),
         errorWidget: (_, __, ___) => const SizedBox.shrink(),
@@ -369,35 +385,28 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     );
   }
 
-  Widget _buildLeadCard(String text) {
+  Widget _buildLeadCard(String text, Color color) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: widget.era.accentColor.withOpacity(0.07),
+        color: color.withOpacity(0.07),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: widget.era.accentColor.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: color.withOpacity(0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Container(
-                width: 28,
-                height: 2,
-                color: widget.era.accentColor,
-              ),
+              Container(width: 28, height: 2, color: color),
               const SizedBox(width: 10),
               Text(
                 'RESUMEN',
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
-                  color: widget.era.accentColor,
+                  color: color,
                   letterSpacing: 2,
                 ),
               ),
@@ -449,7 +458,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     );
   }
 
-  Widget _buildReadMoreButton(String url, String lang) {
+  Widget _buildReadMoreButton(String url, String lang, Color color) {
     final label = switch (lang) {
       'en' => 'Read more on Wikipedia',
       'it' => 'Leggi di più su Wikipedia',
@@ -459,19 +468,18 @@ class _EraDetailScreenState extends State<EraDetailScreen>
       width: double.infinity,
       child: OutlinedButton.icon(
         onPressed: () => _launchUrl(url),
-        icon: Icon(Icons.open_in_new_rounded,
-            size: 16, color: widget.era.accentColor),
+        icon: Icon(Icons.open_in_new_rounded, size: 16, color: color),
         label: Text(
           label,
           style: GoogleFonts.lato(
             fontSize: 13,
             fontWeight: FontWeight.w700,
-            color: widget.era.accentColor,
+            color: color,
           ),
         ),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 14),
-          side: BorderSide(color: widget.era.accentColor, width: 1.5),
+          side: BorderSide(color: color, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -481,12 +489,11 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   }
 
   Widget _buildSourceAttribution(WikipediaContent content, String lang) {
-    final isFallback = content.displayLang.isNotEmpty &&
-        content.displayLang != lang;
-    final langLabel = (content.displayLang.isNotEmpty
-            ? content.displayLang
-            : lang)
-        .toUpperCase();
+    final isFallback =
+        content.displayLang.isNotEmpty && content.displayLang != lang;
+    final langLabel =
+        (content.displayLang.isNotEmpty ? content.displayLang : lang)
+            .toUpperCase();
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -539,7 +546,9 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
   // ── Tab 2: Contenido ──────────────────────────────────────────────────────
 
-  Widget _buildContenidoTab(String Function(String) t, String lang) {
+  Widget _buildContenidoTab(String lang) {
+    final color = CategoryConfigs.colorOf(widget.item.category);
+
     return _wrapWithZoom(
       SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
@@ -548,7 +557,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
           isLoading: _isLoadingWiki,
           hasFailed: _wikiFailed && _wikiContent == null,
           onRetry: () => _loadWikipediaContent(lang),
-          accentColor: widget.era.accentColor,
+          accentColor: color,
           languageCode: lang,
           hideLeadSection: true,
           fallbackDescription: null,
@@ -559,90 +568,42 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
   // ── Tab 3: Galería ────────────────────────────────────────────────────────
 
-  Widget _buildGaleriaTab(BuildContext context) {
-    final images = widget.era.imageFilenames;
-    final hasWikiThumb =
-        _wikiContent?.hasThumbnail == true && !_isLoadingWiki;
-    final totalItems = images.length + (hasWikiThumb ? 1 : 0);
+  Widget _buildGaleriaTab() {
+    final color = CategoryConfigs.colorOf(widget.item.category);
+    final icon = CategoryConfigs.iconOf(widget.item.category);
+    final hasThumb = _wikiContent?.hasThumbnail == true && !_isLoadingWiki;
 
-    return GridView.builder(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-      ),
-      itemCount: totalItems,
-      itemBuilder: (context, index) {
-        // Wikipedia thumbnail as the last grid item
-        if (hasWikiThumb && index == images.length) {
-          return _buildWikiGridThumb(_wikiContent!.thumbnailUrl!)
-              .animate()
-              .fadeIn(duration: 400.ms, delay: (index * 60).ms);
-        }
-
-        return GestureDetector(
-          onTap: () => _openGallery(context, initialIndex: index),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(14),
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                ImageWithFallback(
-                  assetPath: widget.era.imageAssetPath(images[index]),
-                  fallbackColor: widget.era.accentColor.withOpacity(0.7),
-                  fit: BoxFit.cover,
-                  fallbackIcon: Center(
-                    child: Text(
-                      '${index + 1}',
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 28,
-                        color: Colors.white.withOpacity(0.5),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 5),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.5),
-                          Colors.transparent,
-                        ],
-                      ),
-                    ),
-                    child: Text(
-                      '${index + 1} / ${images.length}',
-                      style: GoogleFonts.lato(
-                        fontSize: 10,
-                        color: Colors.white.withOpacity(0.85),
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ),
-              ],
+    if (!hasThumb) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 64, color: color.withOpacity(0.25)),
+            const SizedBox(height: 16),
+            Text(
+              widget.item.displayName,
+              style: GoogleFonts.playfairDisplay(
+                fontSize: 18,
+                color: AppColors.textSecondary,
+              ),
             ),
-          ),
-        )
-            .animate()
-            .fadeIn(duration: 400.ms, delay: (index * 60).ms)
-            .scale(begin: const Offset(0.95, 0.95), duration: 400.ms);
-      },
+          ],
+        ),
+      );
+    }
+
+    return GridView.count(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
+      crossAxisCount: 2,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+      children: [
+        _buildWikiThumb(_wikiContent!.thumbnailUrl!, color),
+      ],
     );
   }
 
-  Widget _buildWikiGridThumb(String url) {
+  Widget _buildWikiThumb(String url, Color color) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(14),
       child: Stack(
@@ -651,11 +612,10 @@ class _EraDetailScreenState extends State<EraDetailScreen>
           CachedNetworkImage(
             imageUrl: url,
             fit: BoxFit.cover,
-            placeholder: (_, __) => Container(
-              color: widget.era.accentColor.withOpacity(0.1),
-            ),
+            placeholder: (_, __) =>
+                Container(color: color.withOpacity(0.1)),
             errorWidget: (_, __, ___) => Container(
-              color: widget.era.accentColor.withOpacity(0.1),
+              color: color.withOpacity(0.1),
               child: const Icon(Icons.image_not_supported_outlined),
             ),
           ),
@@ -681,7 +641,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
           ),
         ],
       ),
-    );
+    ).animate().fadeIn(duration: 400.ms);
   }
 
   // ── Pinch-to-zoom ─────────────────────────────────────────────────────────
@@ -713,17 +673,6 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
   // ── Helpers ───────────────────────────────────────────────────────────────
 
-  void _openGallery(BuildContext context, {int initialIndex = 0}) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => GalleryScreen(
-          era: widget.era,
-          initialIndex: initialIndex,
-        ),
-      ),
-    );
-  }
-
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -742,9 +691,9 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
 // ── Favorite button ───────────────────────────────────────────────────────────
 
-class _FavoriteButton extends StatelessWidget {
+class _FavButton extends StatelessWidget {
   final String itemId;
-  const _FavoriteButton({required this.itemId});
+  const _FavButton({required this.itemId});
 
   @override
   Widget build(BuildContext context) {
@@ -760,7 +709,7 @@ class _FavoriteButton extends StatelessWidget {
   }
 }
 
-// ── TabBar persistent header delegate ─────────────────────────────────────────
+// ── TabBar persistent header delegate ────────────────────────────────────────
 
 class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;

@@ -8,20 +8,30 @@ class PeruEternoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Peru Eterno',
+      title: 'Perú Eterno',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.ocre,
-          brightness: Brightness.light,
+          brightness: Brightness.dark,
+          surface: AppColors.negoCacao,
         ),
-        scaffoldBackgroundColor: AppColors.cremaPergamino,
+        scaffoldBackgroundColor: AppColors.negoCacao,
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.marronOscuro,
+          backgroundColor: Colors.transparent,
           foregroundColor: AppColors.cremaPergamino,
           elevation: 0,
-          centerTitle: true,
+          centerTitle: false,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.marronProfundo,
+          selectedItemColor: AppColors.ocre,
+          unselectedItemColor: Color(0x80F5E6C8),
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
+          elevation: 0,
         ),
       ),
       home: const SplashScreen(),
