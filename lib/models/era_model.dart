@@ -6,6 +6,7 @@ class EraModel {
   final List<String> imageFilenames;
   final Color accentColor;
   final int sortOrder;
+  final Map<String, String> wikipediaSlug;
 
   const EraModel({
     required this.id,
@@ -13,9 +14,12 @@ class EraModel {
     required this.imageFilenames,
     required this.accentColor,
     required this.sortOrder,
+    required this.wikipediaSlug,
   });
 
   String get imageFolderPath => 'assets/images/$id/';
 
   String imageAssetPath(String filename) => '$imageFolderPath$filename';
+
+  String? slugForLang(String lang) => wikipediaSlug[lang];
 }

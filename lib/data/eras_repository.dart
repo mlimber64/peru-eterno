@@ -15,6 +15,11 @@ class ErasRepository {
       ],
       accentColor: AppColors.caralColor,
       sortOrder: 0,
+      wikipediaSlug: {
+        'es': 'Caral',
+        'en': 'Caral',
+        'it': 'Caral',
+      },
     ),
     EraModel(
       id: 'moche',
@@ -28,6 +33,11 @@ class ErasRepository {
       ],
       accentColor: AppColors.mocheColor,
       sortOrder: 1,
+      wikipediaSlug: {
+        'es': 'Cultura_moche',
+        'en': 'Moche_culture',
+        'it': 'Cultura_mochica',
+      },
     ),
     EraModel(
       id: 'tiahuanaco',
@@ -41,6 +51,11 @@ class ErasRepository {
       ],
       accentColor: AppColors.tiahuanacoColor,
       sortOrder: 2,
+      wikipediaSlug: {
+        'es': 'Tiahuanaco',
+        'en': 'Tiwanaku',
+        'it': 'Tiwanaku',
+      },
     ),
     EraModel(
       id: 'inca',
@@ -54,6 +69,11 @@ class ErasRepository {
       ],
       accentColor: AppColors.incaColor,
       sortOrder: 3,
+      wikipediaSlug: {
+        'es': 'Imperio_incaico',
+        'en': 'Inca_Empire',
+        'it': 'Impero_inca',
+      },
     ),
     EraModel(
       id: 'conquista',
@@ -67,6 +87,11 @@ class ErasRepository {
       ],
       accentColor: AppColors.conquistaColor,
       sortOrder: 4,
+      wikipediaSlug: {
+        'es': 'Conquista_del_Perú',
+        'en': 'Spanish_conquest_of_the_Inca_Empire',
+        'it': 'Conquista_del_Perù',
+      },
     ),
     EraModel(
       id: 'virreinato',
@@ -80,6 +105,11 @@ class ErasRepository {
       ],
       accentColor: AppColors.virreinatoColor,
       sortOrder: 5,
+      wikipediaSlug: {
+        'es': 'Virreinato_del_Perú',
+        'en': 'Viceroyalty_of_Peru',
+        'it': 'Vicereame_del_Perù',
+      },
     ),
     EraModel(
       id: 'independencia',
@@ -93,6 +123,11 @@ class ErasRepository {
       ],
       accentColor: AppColors.independenciaColor,
       sortOrder: 6,
+      wikipediaSlug: {
+        'es': 'Independencia_del_Perú',
+        'en': 'Peruvian_War_of_Independence',
+        'it': 'Indipendenza_del_Perù',
+      },
     ),
   ];
 }

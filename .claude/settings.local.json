@@ -8,7 +8,12 @@
       "Bash(flutter analyze *)",
       "Bash(curl -s --head \"https://image.pollinations.ai/prompt/test\")",
       "Bash(python scripts/generate_images.py)",
-      "Bash(flutter clean *)"
+      "Bash(flutter clean *)",
+      "PowerShell(flutter analyze *)",
+      "PowerShell(Get-ChildItem \"D:\\\\peru-eterno\\\\android\\\\app\\\\src\\\\main\\\\res\" -Recurse | Where-Object { -not $_.PSIsContainer } | Select-Object FullName, Length | Sort-Object FullName)",
+      "Bash(Get-ChildItem -Path \"D:\\\\peru-eterno\\\\lib\" -Recurse -File)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)"
     ]
   }
 }
