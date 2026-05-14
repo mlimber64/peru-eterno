@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "Peru Eterno",
+    "tagline": "Un viaje en el tiempo"
+  },
+  "navigation": {
+    "timeline": "Línea de tiempo",
+    "back": "Volver",
+    "gallery": "Galería",
+    "read": "Leer",
+    "discover": "Descubrir",
+    "close": "Cerrar"
+  },
+  "premium": {
+    "title": "Desbloquear Premium",
+    "subtitle": "Toda la historia del Perú",
+    "description": "Descubre el Imperio Inca, la Conquista Española, el Virreinato y la Independencia del Perú en un viaje único a través de los siglos.",
+    "price": "€2,99",
+    "unlock_button": "Desbloquear ahora",
+    "restore_button": "Restaurar compra",
+    "locked_label": "Contenido Premium",
+    "tap_to_unlock": "Toca para desbloquear",
+    "features_title": "Qué incluye Premium",
+    "features": [
+      "Acceso completo a las 7 eras históricas",
+      "Galerías de ilustraciones exclusivas por era",
+      "Descripciones históricas detalladas trilingüe",
+      "Lectura offline completa",
+      "Sin publicidad"
+    ],
+    "free_label": "GRATIS",
+    "premium_label": "PREMIUM"
+  },
+  "language": {
+    "select": "Seleccionar idioma",
+    "it": "Italiano",
+    "es": "Español",
+    "en": "English"
+  },
+  "gallery": {
+    "image_of": "de",
+    "no_images": "Imágenes próximamente",
+    "placeholder_hint": "Reemplaza con tus ilustraciones IA"
+  },
+  "splash": {
+    "loading": "Cargando..."
+  },
+  "home": {
+    "title": "PERU ETERNO",
+    "subtitle": "Siete eras de historia",
+    "free_section": "Eras gratuitas",
+    "premium_section": "Eras premium"
+  },
+  "eras": {
+    "caral": {
+      "title": "Caral",
+      "subtitle": "La civilización más antigua de América",
+      "period": "3000 — 1800 a.C.",
+      "description": "Caral es considerada la civilización más antigua de las Américas, floreciente en el Valle Caral-Supe, a unos 200 km al norte de Lima. Esta extraordinaria cultura prehistórica desarrolló complejas estructuras monumentales sin el uso de cerámica ni escritura. Sus majestuosas pirámides, anfiteatros circulares y plazas ceremoniales atestiguan una organización social avanzada basada en la cooperación y el comercio, no en la guerra. Los instrumentos musicales encontrados —flautas de hueso y trompetas— sugieren una rica vida ritual y artística. Caral fue declarada Patrimonio de la Humanidad por la UNESCO en 2009.",
+      "description_short": "La más antigua civilización de América, construida en el desierto sin cerámica ni escritura.",
+      "highlight": "UNESCO 2009"
+    },
+    "moche": {
+      "title": "Moche",
+      "subtitle": "Maestros de la cerámica y el oro",
+      "period": "100 — 800 d.C.",
+      "description": "La cultura Moche floreció en la costa norte del Perú, dejando un patrimonio artístico extraordinario. Famosos por su cerámica retrato increíblemente detallada, los Moche representaban la vida cotidiana, la guerra y lo sagrado con un realismo sin igual. La Huaca del Sol y la Huaca de la Luna son sus obras más imponentes, erigidas con millones de ladrillos de adobe. El descubrimiento de la Tumba del Señor de Sipán en 1987 reveló invaluables tesoros de oro y plata, confirmando la sofisticación artesanal de esta civilización. Los Moche desarrollaron sistemas de irrigación avanzados para hacer florecer el desierto costero.",
+      "description_short": "Maestros del oro y la cerámica en la costa norte, creadores de la Tumba de Sipán.",
+      "highlight": "Señor de Sipán"
+    },
+    "tiahuanaco": {
+      "title": "Tiahuanaco",
+      "subtitle": "El pueblo de los Andes altos",
+      "period": "500 — 1100 d.C.",
+      "description": "Tiahuanaco (o Tiwanaku) surgió en las orillas del Lago Titicaca, a casi 3.800 metros sobre el nivel del mar, convirtiéndose en uno de los centros urbanos más importantes de la América precolombina. Su obra maestra arquitectónica, la Puerta del Sol, está decorada con figuras misteriosas y símbolos cósmicos que aún son objeto de estudio. Los megalitos de piedra andesita, transportados a gran distancia sin ruedas ni bestias de carga, testimonian técnicas constructivas extraordinarias. Los artefactos Tiwanaku se han encontrado en toda la cuenca del Titicaca, evidenciando una vasta red de intercambio cultural.",
+      "description_short": "Civilización de los altos Andes en el Lago Titicaca, constructores de la misteriosa Puerta del Sol.",
+      "highlight": "Puerta del Sol"
+    },
+    "inca": {
+      "title": "Imperio Inca",
+      "subtitle": "El más grande imperio precolombino",
+      "period": "1438 — 1533 d.C.",
+      "description": "El Tahuantinsuyu —'las cuatro regiones del mundo'— fue el imperio más extenso de las Américas precolombinas, extendiéndose por más de 4.000 km a lo largo de la costa del Pacífico. Bajo el gobierno del Sapa Inca, millones de personas estaban organizadas en un sistema de reciprocidad y trabajo colectivo llamado mita. El Qhapaq Ñan, red vial de 40.000 km, conectaba todo el imperio permitiendo comunicaciones rápidas mediante relevos (chasquis). Machu Picchu, construida como palacio real de Pachacutec en el siglo XV, sigue siendo el símbolo más icónico de esta civilización. Los quipus, cuerdas anudadas, servían para registrar datos ante la ausencia de escritura.",
+      "description_short": "El gran Tahuantinsuyu se extendía por 4.000 km, con Machu Picchu como corona.",
+      "highlight": "Machu Picchu"
+    },
+    "conquista": {
+      "title": "Conquista Española",
+      "subtitle": "La caída de un imperio",
+      "period": "1532 — 1572 d.C.",
+      "description": "El 16 de noviembre de 1532, Francisco Pizarro y 168 conquistadores capturaron al Inca Atahualpa en Cajamarca, marcando el inicio del fin del Tahuantinsuyu. A pesar del pago de un rescate en oro y plata que llenó una habitación entera, Atahualpa fue ejecutado en 1533. La conquista fue facilitada por las luchas internas entre los hermanos Atahualpa y Huáscar, las enfermedades europeas que diezmaron a la población indígena, y la superioridad tecnológica de los españoles. En 1535, Pizarro fundó Lima como nueva capital colonial, iniciando una profunda transformación cultural, religiosa y social del territorio.",
+      "description_short": "168 conquistadores y Francisco Pizarro marcaron el fin del gran Imperio Inca.",
+      "highlight": "1532 Cajamarca"
+    },
+    "virreinato": {
+      "title": "Virreinato del Perú",
+      "subtitle": "Tres siglos de dominio colonial",
+      "period": "1542 — 1821 d.C.",
+      "description": "El Virreinato del Perú, establecido en 1542, fue el principal centro del poder colonial español en Sudamérica durante casi tres siglos. Lima se convirtió en la 'Ciudad de los Reyes', sede del virrey, la Inquisición y cruce del comercio atlántico. Las minas de Potosí producían enormes cantidades de plata, alimentando la economía del imperio español. La fusión entre cultura indígena, africana y española creó una sociedad mestiza con nuevas expresiones artísticas, musicales y culinarias que definieron la identidad peruana. Revueltas como la de Túpac Amaru II (1780) anticiparon las luchas por la independencia.",
+      "description_short": "Lima, la 'Ciudad de los Reyes', dominó tres siglos de historia colonial sudamericana.",
+      "highlight": "Ciudad de los Reyes"
+    },
+    "independencia": {
+      "title": "Independencia",
+      "subtitle": "El nacimiento de una nación",
+      "period": "1821 d.C.",
+      "description": "El 28 de julio de 1821, el general José de San Martín proclamó la Independencia del Perú en Lima, ante una multitud entusiasta que había esperado este momento durante décadas. Tras siglos de dominio colonial y movimientos insurreccionales como la revuelta de Túpac Amaru II, el Perú se emancipaba de la corona española. La victoria definitiva llegó el 9 de diciembre de 1824, con la histórica Batalla de Ayacucho, liderada por Antonio José de Sucre bajo el mando de Simón Bolívar. Esta victoria puso fin definitivo a la dominación española en Sudamérica. El joven Perú independiente se enfrentó a enormes desafíos para construir una identidad nacional.",
+      "description_short": "El 28 de julio de 1821 San Martín proclamó la Independencia. La Batalla de Ayacucho la confirmó.",
+      "highlight": "28 Julio 1821"
+    }
+  }
+}

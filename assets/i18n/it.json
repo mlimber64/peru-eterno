@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "Peru Eterno",
+    "tagline": "Un viaggio nel tempo"
+  },
+  "navigation": {
+    "timeline": "Timeline",
+    "back": "Indietro",
+    "gallery": "Galleria",
+    "read": "Leggi",
+    "discover": "Scopri",
+    "close": "Chiudi"
+  },
+  "premium": {
+    "title": "Sblocca Premium",
+    "subtitle": "Intera storia del Perù",
+    "description": "Scopri l'Impero Inca, la Conquista Spagnola, il Vicereame e l'Indipendenza del Perù in un viaggio unico attraverso i secoli.",
+    "price": "€2,99",
+    "unlock_button": "Sblocca ora",
+    "restore_button": "Ripristina acquisto",
+    "locked_label": "Contenuto Premium",
+    "tap_to_unlock": "Tocca per sbloccare",
+    "features_title": "Cosa include Premium",
+    "features": [
+      "Accesso completo a tutte le 7 ere storiche",
+      "Gallerie di illustrazioni esclusive per ogni era",
+      "Descrizioni storiche dettagliate trilingue",
+      "Lettura offline completa",
+      "Nessuna pubblicità"
+    ],
+    "free_label": "GRATUITO",
+    "premium_label": "PREMIUM"
+  },
+  "language": {
+    "select": "Seleziona lingua",
+    "it": "Italiano",
+    "es": "Español",
+    "en": "English"
+  },
+  "gallery": {
+    "image_of": "di",
+    "no_images": "Immagini in arrivo",
+    "placeholder_hint": "Sostituisci con le tue illustrazioni IA"
+  },
+  "splash": {
+    "loading": "Caricamento..."
+  },
+  "home": {
+    "title": "PERU ETERNO",
+    "subtitle": "Sette ere di storia",
+    "free_section": "Ere gratuite",
+    "premium_section": "Ere premium"
+  },
+  "eras": {
+    "caral": {
+      "title": "Caral",
+      "subtitle": "La civiltà più antica delle Americhe",
+      "period": "3000 — 1800 a.C.",
+      "description": "Caral è considerata la civiltà più antica delle Americhe, fiorente nella Valle Caral-Supe, a circa 200 km a nord di Lima. Questa straordinaria cultura preistorica sviluppò complesse strutture monumentali senza l'uso della ceramica o della scrittura. Le sue piramidi maestose, anfiteatri circolari e piazze cerimoniali testimoniano un'organizzazione sociale avanzata basata sulla cooperazione e il commercio, non sulla guerra. Gli strumenti musicali ritrovati — flauti di osso e corni di caprina — suggeriscono una ricca vita rituale e artistica. Caral fu dichiarata Patrimonio dell'Umanità dall'UNESCO nel 2009.",
+      "description_short": "La più antica civiltà delle Americhe, costruita nel deserto senza ceramica né scrittura.",
+      "highlight": "UNESCO 2009"
+    },
+    "moche": {
+      "title": "Moche",
+      "subtitle": "Maestri della ceramica e dell'oro",
+      "period": "100 — 800 d.C.",
+      "description": "La cultura Moche fiorì sulla costa nord del Perù, lasciando un patrimonio artistico straordinario. Famosi per la loro ceramica ritratto incredibilmente dettagliata, i Moche raffiguravano la vita quotidiana, la guerra e il sacro con realismo senza pari. La Huaca del Sole e la Huaca della Luna sono le loro opere più imponenti, erette con milioni di mattoni di adobe. La scoperta della Tomba del Signore di Sipán nel 1987 rivelò inestimabili tesori d'oro e argento, confermando la raffinatezza artigianale di questa civiltà. I Moche svilupparono sistemi di irrigazione avanzati per far fiorire il deserto costiero.",
+      "description_short": "Maestri dell'oro e della ceramica sulla costa nord, creatori della Tomba di Sipán.",
+      "highlight": "Signore di Sipán"
+    },
+    "tiahuanaco": {
+      "title": "Tiahuanaco",
+      "subtitle": "Il popolo delle alte Ande",
+      "period": "500 — 1100 d.C.",
+      "description": "Tiahuanaco (o Tiwanaku) sorse sulle rive del Lago Titicaca, a quasi 3.800 metri sul livello del mare, diventando uno dei centri urbani più importanti dell'America precolombiana. Il loro capolavoro architettonico, la Porta del Sole, è decorata con figure misteriose e simboli cosmici ancora oggi oggetto di studio. I megaliti di pietra andesita, trasportati a grande distanza senza ruote né bestie da soma, testimoniano tecniche costruttive straordinarie. Artefatti Tiwanaku sono stati rinvenuti in tutto il bacino del Titicaca, testimoniando una vasta rete di scambio culturale e commerciale che anticipò l'Impero Inca.",
+      "description_short": "Civiltà delle alte Ande sul Lago Titicaca, costruttori della misteriosa Porta del Sole.",
+      "highlight": "Porta del Sole"
+    },
+    "inca": {
+      "title": "Impero Inca",
+      "subtitle": "Il più grande impero precolombiano",
+      "period": "1438 — 1533 d.C.",
+      "description": "Il Tahuantinsuyu — 'le quattro regioni del mondo' — fu l'impero più esteso delle Americhe precolombiane, estendendosi per oltre 4.000 km lungo la costa del Pacifico. Sotto il governo del Sapa Inca, milioni di persone erano organizzate in un sistema di reciprocità e lavoro collettivo chiamato mita. Il Qhapaq Ñan, rete stradale di 40.000 km, connetteva l'intero impero permettendo comunicazioni rapide tramite staffette (chasquis). Machu Picchu, costruita come palazzo reale di Pachacutec nel XV secolo, rimane il simbolo più iconico di questa civiltà. I quipu, cordicelle annodate, servivano per registrare dati in assenza di scrittura.",
+      "description_short": "Il grande Tahuantinsuyu si estendeva per 4.000 km, con Machu Picchu come corona.",
+      "highlight": "Machu Picchu"
+    },
+    "conquista": {
+      "title": "Conquista Spagnola",
+      "subtitle": "La caduta di un impero",
+      "period": "1532 — 1572 d.C.",
+      "description": "Il 16 novembre 1532, Francisco Pizarro e 168 conquistadores catturarono l'Inca Atahualpa a Cajamarca, segnando l'inizio della fine del Tahuantinsuyu. Nonostante il pagamento di un riscatto in oro e argento che riempì una stanza intera, Atahualpa fu giustiziato nel 1533. La conquista fu facilitata dalle lotte intestine tra i fratelli Atahualpa e Huáscar, dalle malattie europee che decimarono la popolazione indigena, e dalla superiorità tecnologica degli spagnoli. Nel 1535, Pizarro fondò Lima come nuova capitale coloniale, iniziando una profonda trasformazione culturale, religiosa e sociale del territorio.",
+      "description_short": "168 conquistadores e Francisco Pizarro segnarono la fine del grande Impero Inca.",
+      "highlight": "1532 Cajamarca"
+    },
+    "virreinato": {
+      "title": "Vicereame del Perù",
+      "subtitle": "Tre secoli di dominio coloniale",
+      "period": "1542 — 1821 d.C.",
+      "description": "Il Vicereame del Perù, istituito nel 1542, fu il principale centro del potere coloniale spagnolo in Sud America per quasi tre secoli. Lima divenne la 'Ciudad de los Reyes', sede del viceré, dell'Inquisizione e crocevia del commercio atlantico. Le miniere di Potosí producevano quantità enormi di argento, alimentando l'economia dell'impero spagnolo e finanziando le guerre europee. La fusione tra cultura indigena, africana e spagnola creò una società meticcia con nuove espressioni artistiche, musicali e culinarie che definirono l'identità peruana. Rivolte come quella di Túpac Amaru II (1780) anticiparono le lotte per l'indipendenza.",
+      "description_short": "Lima, la 'Ciudad de los Reyes', dominò tre secoli di storia coloniale sudamericana.",
+      "highlight": "Ciudad de los Reyes"
+    },
+    "independencia": {
+      "title": "Indipendenza",
+      "subtitle": "La nascita di una nazione",
+      "period": "1821 d.C.",
+      "description": "Il 28 luglio 1821, il generale José de San Martín proclamò l'Indipendenza del Perù a Lima, davanti a una folla entusiasta che aveva atteso questo momento per decenni. Dopo secoli di dominio coloniale e movimenti insurrezionali come la rivolta di Túpac Amaru II, il Perù si emancipava dalla corona spagnola. La vittoria definitiva arrivò il 9 dicembre 1824, con la storica Battaglia di Ayacucho, guidata da Antonio José de Sucre sotto il comando di Simón Bolívar. Questa vittoria pose fine definitivamente alla dominazione spagnola in Sud America. Il giovane Perù indipendente si confrontò con enormi sfide: costruire un'identità nazionale che integrasse le diverse etnie e culture.",
+      "description_short": "Il 28 luglio 1821 San Martín proclamò l'Indipendenza. La Battaglia di Ayacucho la consacrò.",
+      "highlight": "28 Luglio 1821"
+    }
+  }
+}

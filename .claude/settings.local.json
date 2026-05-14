@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(code \"D:\\\\peru-eterno\")",
+      "Bash(flutter --version)",
+      "Bash(flutter create *)",
+      "Bash(flutter pub *)",
+      "Bash(flutter analyze *)",
+      "Bash(curl -s --head \"https://image.pollinations.ai/prompt/test\")",
+      "Bash(python scripts/generate_images.py)",
+      "Bash(flutter clean *)"
+    ]
+  }
+}

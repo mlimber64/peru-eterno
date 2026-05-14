@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "Peru Eterno",
+    "tagline": "A journey through time"
+  },
+  "navigation": {
+    "timeline": "Timeline",
+    "back": "Back",
+    "gallery": "Gallery",
+    "read": "Read",
+    "discover": "Discover",
+    "close": "Close"
+  },
+  "premium": {
+    "title": "Unlock Premium",
+    "subtitle": "Full Peruvian history",
+    "description": "Discover the Inca Empire, the Spanish Conquest, the Viceroyalty and the Independence of Peru in a unique journey through the centuries.",
+    "price": "€2.99",
+    "unlock_button": "Unlock now",
+    "restore_button": "Restore purchase",
+    "locked_label": "Premium Content",
+    "tap_to_unlock": "Tap to unlock",
+    "features_title": "What Premium includes",
+    "features": [
+      "Full access to all 7 historical eras",
+      "Exclusive illustration galleries per era",
+      "Detailed trilingual historical descriptions",
+      "Complete offline reading",
+      "No ads"
+    ],
+    "free_label": "FREE",
+    "premium_label": "PREMIUM"
+  },
+  "language": {
+    "select": "Select language",
+    "it": "Italiano",
+    "es": "Español",
+    "en": "English"
+  },
+  "gallery": {
+    "image_of": "of",
+    "no_images": "Images coming soon",
+    "placeholder_hint": "Replace with your AI illustrations"
+  },
+  "splash": {
+    "loading": "Loading..."
+  },
+  "home": {
+    "title": "PERU ETERNO",
+    "subtitle": "Seven eras of history",
+    "free_section": "Free eras",
+    "premium_section": "Premium eras"
+  },
+  "eras": {
+    "caral": {
+      "title": "Caral",
+      "subtitle": "The oldest civilization in the Americas",
+      "period": "3000 — 1800 BC",
+      "description": "Caral is considered the oldest civilization in the Americas, flourishing in the Caral-Supe Valley, about 200 km north of Lima. This extraordinary prehistoric culture developed complex monumental structures without the use of ceramics or writing. Its majestic pyramids, circular amphitheaters and ceremonial plazas testify to an advanced social organization based on cooperation and trade, not war. Musical instruments found—bone flutes and horns—suggest a rich ritual and artistic life. Caral was declared a UNESCO World Heritage Site in 2009.",
+      "description_short": "The oldest civilization of the Americas, built in the desert without ceramics or writing.",
+      "highlight": "UNESCO 2009"
+    },
+    "moche": {
+      "title": "Moche",
+      "subtitle": "Masters of ceramics and gold",
+      "period": "100 — 800 AD",
+      "description": "The Moche culture flourished on the northern coast of Peru, leaving an extraordinary artistic heritage. Famous for their incredibly detailed portrait ceramics, the Moche depicted everyday life, war and the sacred with unparalleled realism. The Huaca of the Sun and the Huaca of the Moon are their most imposing works, erected with millions of adobe bricks. The discovery of the Tomb of the Lord of Sipán in 1987 revealed invaluable gold and silver treasures, confirming the artisanal sophistication of this civilization. The Moche developed advanced irrigation systems to make the coastal desert bloom.",
+      "description_short": "Masters of gold and ceramics on the northern coast, creators of the Sipán Tomb.",
+      "highlight": "Lord of Sipán"
+    },
+    "tiahuanaco": {
+      "title": "Tiahuanaco",
+      "subtitle": "The people of the high Andes",
+      "period": "500 — 1100 AD",
+      "description": "Tiahuanaco (or Tiwanaku) arose on the shores of Lake Titicaca, at nearly 3,800 meters above sea level, becoming one of the most important urban centers in pre-Columbian America. Their architectural masterpiece, the Gateway of the Sun, is decorated with mysterious figures and cosmic symbols still studied today. The andesite stone megaliths, transported great distances without wheels or beasts of burden, testify to extraordinary construction techniques. Tiwanaku artifacts have been found throughout the Titicaca basin, evidencing a vast network of cultural and commercial exchange.",
+      "description_short": "High Andes civilization on Lake Titicaca, builders of the mysterious Gateway of the Sun.",
+      "highlight": "Gateway of the Sun"
+    },
+    "inca": {
+      "title": "Inca Empire",
+      "subtitle": "The greatest pre-Columbian empire",
+      "period": "1438 — 1533 AD",
+      "description": "The Tahuantinsuyu—'the four regions of the world'—was the most extensive empire in pre-Columbian Americas, stretching over 4,000 km along the Pacific coast. Under the rule of the Sapa Inca, millions of people were organized in a system of reciprocity and collective labor called mita. The Qhapaq Ñan, a 40,000 km road network, connected the entire empire allowing rapid communications via relay runners (chasquis). Machu Picchu, built as the royal palace of Pachacutec in the 15th century, remains the most iconic symbol of this civilization. Quipus, knotted cords, served to record data in the absence of writing.",
+      "description_short": "The great Tahuantinsuyu stretched 4,000 km, with Machu Picchu as its crown jewel.",
+      "highlight": "Machu Picchu"
+    },
+    "conquista": {
+      "title": "Spanish Conquest",
+      "subtitle": "The fall of an empire",
+      "period": "1532 — 1572 AD",
+      "description": "On November 16, 1532, Francisco Pizarro and 168 conquistadors captured the Inca Atahualpa at Cajamarca, marking the beginning of the end of the Tahuantinsuyu. Despite paying a ransom in gold and silver that filled an entire room, Atahualpa was executed in 1533. The conquest was facilitated by internal strife between brothers Atahualpa and Huáscar, European diseases that decimated the indigenous population, and the technological superiority of the Spanish. In 1535, Pizarro founded Lima as the new colonial capital, beginning a profound cultural, religious and social transformation of the territory.",
+      "description_short": "168 conquistadors and Francisco Pizarro marked the end of the great Inca Empire.",
+      "highlight": "1532 Cajamarca"
+    },
+    "virreinato": {
+      "title": "Viceroyalty of Peru",
+      "subtitle": "Three centuries of colonial rule",
+      "period": "1542 — 1821 AD",
+      "description": "The Viceroyalty of Peru, established in 1542, was the main center of Spanish colonial power in South America for nearly three centuries. Lima became the 'City of Kings', seat of the viceroy, the Inquisition and crossroads of Atlantic trade. The mines of Potosí produced enormous quantities of silver, fueling the Spanish imperial economy. The fusion of indigenous, African and Spanish culture created a mestizo society with new artistic, musical and culinary expressions that defined Peruvian identity. Revolts such as that of Túpac Amaru II (1780) foreshadowed the independence struggles.",
+      "description_short": "Lima, the 'City of Kings', dominated three centuries of South American colonial history.",
+      "highlight": "City of Kings"
+    },
+    "independencia": {
+      "title": "Independence",
+      "subtitle": "The birth of a nation",
+      "period": "1821 AD",
+      "description": "On July 28, 1821, General José de San Martín proclaimed the Independence of Peru in Lima, before an enthusiastic crowd that had awaited this moment for decades. After centuries of colonial rule and insurrectionary movements like Túpac Amaru II's revolt, Peru was emancipating itself from the Spanish crown. The definitive victory came on December 9, 1824, with the historic Battle of Ayacucho, led by Antonio José de Sucre under the command of Simón Bolívar. This victory definitively ended Spanish domination in South America. The young independent Peru faced enormous challenges in building a national identity.",
+      "description_short": "On July 28, 1821 San Martín proclaimed Independence. The Battle of Ayacucho sealed it.",
+      "highlight": "July 28, 1821"
+    }
+  }
+}
