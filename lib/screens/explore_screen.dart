@@ -11,6 +11,7 @@ import '../models/era_model.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/cinematic_card.dart';
+import '../widgets/wiki_cinematic_card.dart';
 import 'content_detail_screen.dart';
 import 'era_detail_screen.dart';
 import 'premium_screen.dart';
@@ -243,44 +244,31 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             : null;
                         final isLocked = item.isPremium && !isPremium;
                         final t = context.read<LanguageProvider>().t;
-                        final color = era?.accentColor ??
-                            CategoryConfigs.colorOf(item.category);
+                        final tapAction = isLocked
+                            ? () => Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => const PremiumScreen()))
+                            : era != null
+                                ? () => Navigator.push(context,
+                                    MaterialPageRoute(builder: (_) => EraDetailScreen(era: era)))
+                                : () => Navigator.push(context,
+                                    MaterialPageRoute(builder: (_) => ContentDetailScreen(item: item)));
 
-                        return CinematicCard(
-                          assetImagePath: era != null
-                              ? era.imageAssetPath(era.imageFilenames.first)
-                              : null,
-                          accentColor: color,
-                          title: era != null
-                              ? t('eras.${era.id}.title')
-                              : item.displayName,
-                          subtitle: era != null
-                              ? t('eras.${era.id}.period')
-                              : CategoryConfigs.labelOf(
-                                  item.category, lang),
+                        if (era != null) {
+                          return CinematicCard(
+                            assetImagePath: era.imageAssetPath(era.imageFilenames.first),
+                            accentColor: era.accentColor,
+                            title: t('eras.${era.id}.title'),
+                            subtitle: t('eras.${era.id}.period'),
+                            isPremium: isLocked,
+                            onTap: tapAction,
+                          ).animate().fadeIn(duration: 400.ms, delay: Duration(milliseconds: i * 40));
+                        }
+
+                        return WikiCinematicCard(
+                          item: item,
+                          subtitle: CategoryConfigs.labelOf(item.category, lang),
                           isPremium: isLocked,
-                          onTap: isLocked
-                              ? () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          const PremiumScreen()))
-                              : () {
-                                  if (era != null) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                EraDetailScreen(era: era)));
-                                  } else {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                ContentDetailScreen(
-                                                    item: item)));
-                                  }
-                                },
+                          onTap: tapAction,
                         )
                             .animate()
                             .fadeIn(

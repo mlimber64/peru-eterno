@@ -83,6 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
           // ── Hero principal (60% pantalla) ───────────────────────────────
           SliverToBoxAdapter(child: _HeroSection(lang: lang)),
 
+          // ── Intro Perú ──────────────────────────────────────────────────
+          SliverToBoxAdapter(child: _PeruIntroSection(lang: lang)),
+
           // ── Mundos ──────────────────────────────────────────────────────
           SliverToBoxAdapter(
             child: _SectionHeader(
@@ -449,6 +452,436 @@ class _HeroTexturePainter extends CustomPainter {
       canvas.drawLine(
           Offset(i, 0), Offset(i + size.height, size.height), paint);
     }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}
+
+// ── Peru intro section ────────────────────────────────────────────────────────
+
+class _PeruIntroSection extends StatelessWidget {
+  final String lang;
+  const _PeruIntroSection({required this.lang});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 28, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ── Stats + Map card ──
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.marronProfundo,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: AppColors.ocre.withOpacity(0.15),
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Map drawing
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: CustomPaint(
+                      size: const Size(100, 130),
+                      painter: _PeruMapPainter(),
+                    ),
+                  ),
+                  // Stats column
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'PERÚ',
+                            style: GoogleFonts.playfairDisplay(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.cremaPergamino,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          _Stat(
+                            icon: Icons.location_city_rounded,
+                            label: _capitalLabel(lang),
+                            value: 'Lima',
+                          ),
+                          const SizedBox(height: 8),
+                          _Stat(
+                            icon: Icons.map_rounded,
+                            label: _areaLabel(lang),
+                            value: '1.285.216 km²',
+                          ),
+                          const SizedBox(height: 8),
+                          _Stat(
+                            icon: Icons.people_rounded,
+                            label: _populationLabel(lang),
+                            value: '33 M',
+                          ),
+                          const SizedBox(height: 8),
+                          _Stat(
+                            icon: Icons.terrain_rounded,
+                            label: _regionsLabel(lang),
+                            value: _regionsValue(lang),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+              .animate()
+              .fadeIn(duration: 600.ms, delay: 100.ms)
+              .slideY(begin: 0.08, end: 0),
+
+          const SizedBox(height: 16),
+
+          // ── Description card ──
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppColors.marronProfundo,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: AppColors.ocre.withOpacity(0.15),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(width: 3, height: 16, color: AppColors.ocre),
+                    const SizedBox(width: 10),
+                    Text(
+                      _aboutTitle(lang).toUpperCase(),
+                      style: GoogleFonts.lato(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.ocre,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  _aboutText(lang),
+                  style: GoogleFonts.lato(
+                    fontSize: 13,
+                    color: AppColors.cremaPergamino.withOpacity(0.75),
+                    height: 1.6,
+                  ),
+                ),
+              ],
+            ),
+          )
+              .animate()
+              .fadeIn(duration: 600.ms, delay: 200.ms)
+              .slideY(begin: 0.08, end: 0),
+
+          const SizedBox(height: 16),
+
+          // ── How to use card ──
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.ocre.withOpacity(0.12),
+                  AppColors.marronProfundo,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: AppColors.ocre.withOpacity(0.25),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.explore_rounded,
+                        color: AppColors.ocre, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      _howTitle(lang).toUpperCase(),
+                      style: GoogleFonts.lato(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.ocre,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                _HowStep(number: '1', text: _step1(lang)),
+                const SizedBox(height: 10),
+                _HowStep(number: '2', text: _step2(lang)),
+                const SizedBox(height: 10),
+                _HowStep(number: '3', text: _step3(lang)),
+              ],
+            ),
+          )
+              .animate()
+              .fadeIn(duration: 600.ms, delay: 300.ms)
+              .slideY(begin: 0.08, end: 0),
+        ],
+      ),
+    );
+  }
+
+  String _capitalLabel(String lang) => switch (lang) {
+        'en' => 'Capital',
+        'it' => 'Capitale',
+        _ => 'Capital',
+      };
+  String _areaLabel(String lang) => switch (lang) {
+        'en' => 'Area',
+        'it' => 'Superficie',
+        _ => 'Área',
+      };
+  String _populationLabel(String lang) => switch (lang) {
+        'en' => 'Population',
+        'it' => 'Popolazione',
+        _ => 'Población',
+      };
+  String _regionsLabel(String lang) => switch (lang) {
+        'en' => 'Regions',
+        'it' => 'Regioni',
+        _ => 'Regiones',
+      };
+  String _regionsValue(String lang) => switch (lang) {
+        'en' => 'Coast · Highlands · Jungle',
+        'it' => 'Costa · Sierra · Giungla',
+        _ => 'Costa · Sierra · Selva',
+      };
+  String _aboutTitle(String lang) => switch (lang) {
+        'en' => 'About Peru',
+        'it' => 'Il Perù',
+        _ => 'Sobre el Perú',
+      };
+  String _aboutText(String lang) => switch (lang) {
+        'en' =>
+          'Peru is one of the world\'s great cradles of civilization. '
+              'Home to the Inca Empire, the sacred city of Machu Picchu, '
+              'and dozens of cultures spanning 5,000 years — from the Norte '
+              'Chico civilization to the Spanish colonial era — Peru\'s history '
+              'is one of the richest on Earth.',
+        'it' =>
+          'Il Perù è una delle più grandi culle della civiltà mondiale. '
+              'Patria dell\'Impero Inca, della sacra città di Machu Picchu e '
+              'di decine di culture che si estendono per 5.000 anni — dalla '
+              'civiltà di Norte Chico all\'era coloniale spagnola — la storia '
+              'del Perù è una delle più ricche del mondo.',
+        _ =>
+          'El Perú es una de las grandes cunas de la civilización mundial. '
+              'Hogar del Imperio Inca, la sagrada ciudad de Machu Picchu y '
+              'decenas de culturas que abarcan 5,000 años — desde la '
+              'civilización de Norte Chico hasta la era colonial española — '
+              'la historia del Perú es una de las más ricas del mundo.',
+      };
+  String _howTitle(String lang) => switch (lang) {
+        'en' => 'How to use Peru Eterno',
+        'it' => 'Come usare Peru Eterno',
+        _ => 'Cómo usar Peru Eterno',
+      };
+  String _step1(String lang) => switch (lang) {
+        'en' => 'Choose a world (History, Culture, Flavors…) to start exploring',
+        'it' => 'Scegli un mondo (Storia, Cultura, Sapori…) per iniziare',
+        _ => 'Elige un mundo (Historia, Cultura, Sabores…) para explorar',
+      };
+  String _step2(String lang) => switch (lang) {
+        'en' => 'Tap any card to read its full article from Wikipedia',
+        'it' => 'Tocca una scheda per leggere l\'articolo completo da Wikipedia',
+        _ => 'Toca cualquier card para leer su artículo completo de Wikipedia',
+      };
+  String _step3(String lang) => switch (lang) {
+        'en' => 'Save your favorites with the heart icon to find them later',
+        'it' => 'Salva i preferiti con il cuore per ritrovarli facilmente',
+        _ => 'Guarda tus favoritos con el corazón para encontrarlos después',
+      };
+}
+
+class _Stat extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  const _Stat({required this.icon, required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 13, color: AppColors.ocre.withOpacity(0.7)),
+        const SizedBox(width: 6),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: '$label: ',
+                  style: GoogleFonts.lato(
+                    fontSize: 11,
+                    color: AppColors.cremaPergamino.withOpacity(0.45),
+                  ),
+                ),
+                TextSpan(
+                  text: value,
+                  style: GoogleFonts.lato(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.cremaPergamino.withOpacity(0.85),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HowStep extends StatelessWidget {
+  final String number;
+  final String text;
+  const _HowStep({required this.number, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 22,
+          height: 22,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColors.ocre.withOpacity(0.2),
+            border: Border.all(color: AppColors.ocre.withOpacity(0.5)),
+          ),
+          child: Center(
+            child: Text(
+              number,
+              style: GoogleFonts.lato(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                color: AppColors.ocre,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Text(
+            text,
+            style: GoogleFonts.lato(
+              fontSize: 13,
+              color: AppColors.cremaPergamino.withOpacity(0.7),
+              height: 1.5,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PeruMapPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AppColors.ocre.withOpacity(0.55)
+      ..style = PaintingStyle.fill;
+
+    final borderPaint = Paint()
+      ..color = AppColors.ocre.withOpacity(0.9)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5;
+
+    // Simplified Peru outline (normalized to 100x130 box)
+    final path = Path();
+    final w = size.width;
+    final h = size.height;
+
+    path.moveTo(w * 0.38, h * 0.02); // top-north
+    path.lineTo(w * 0.60, h * 0.04);
+    path.lineTo(w * 0.80, h * 0.10);
+    path.lineTo(w * 0.90, h * 0.18);
+    path.lineTo(w * 0.88, h * 0.30);
+    path.lineTo(w * 0.82, h * 0.42);
+    path.lineTo(w * 0.95, h * 0.50);
+    path.lineTo(w * 0.98, h * 0.62);
+    path.lineTo(w * 0.88, h * 0.72);
+    path.lineTo(w * 0.75, h * 0.78);
+    path.lineTo(w * 0.68, h * 0.92);
+    path.lineTo(w * 0.55, h * 0.98);
+    path.lineTo(w * 0.38, h * 0.90);
+    path.lineTo(w * 0.18, h * 0.85);
+    path.lineTo(w * 0.05, h * 0.72);
+    path.lineTo(w * 0.08, h * 0.55);
+    path.lineTo(w * 0.02, h * 0.40);
+    path.lineTo(w * 0.10, h * 0.25);
+    path.lineTo(w * 0.22, h * 0.12);
+    path.close();
+
+    canvas.drawPath(path, paint);
+    canvas.drawPath(path, borderPaint);
+
+    // Lima dot
+    final limaPaint = Paint()
+      ..color = Colors.white.withOpacity(0.9)
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(Offset(w * 0.15, h * 0.50), 3.5, limaPaint);
+
+    // Lima label
+    final tp = TextPainter(
+      text: TextSpan(
+        text: 'Lima',
+        style: GoogleFonts.lato(
+          fontSize: 8,
+          color: Colors.white.withOpacity(0.85),
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    tp.paint(canvas, Offset(w * 0.18, h * 0.465));
+
+    // Cusco dot
+    final cuscoPaint = Paint()
+      ..color = AppColors.ocre.withOpacity(0.9)
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(Offset(w * 0.55, h * 0.60), 2.5, cuscoPaint);
+
+    final tp2 = TextPainter(
+      text: TextSpan(
+        text: 'Cusco',
+        style: GoogleFonts.lato(
+          fontSize: 7,
+          color: AppColors.ocre.withOpacity(0.85),
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    tp2.paint(canvas, Offset(w * 0.58, h * 0.575));
   }
 
   @override

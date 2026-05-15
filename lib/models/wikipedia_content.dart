@@ -227,7 +227,7 @@ class WikipediaContent {
         'sourceUrl': sourceUrl,
         'cachedAt': cachedAt.toIso8601String(),
         'displayLang': displayLang,
-        'version': 3,
+        'version': 4,
       };
 
   String toCacheString() => jsonEncode(toCache());

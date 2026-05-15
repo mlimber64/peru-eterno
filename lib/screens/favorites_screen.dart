@@ -12,6 +12,7 @@ import '../providers/favorites_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/cinematic_card.dart';
+import '../widgets/wiki_cinematic_card.dart';
 import 'content_detail_screen.dart';
 import 'era_detail_screen.dart';
 
@@ -105,40 +106,30 @@ class FavoritesScreen extends StatelessWidget {
                             : null;
                         final isLocked = item.isPremium && !isPremium;
                         final t = context.read<LanguageProvider>().t;
-                        final color = era?.accentColor ??
-                            CategoryConfigs.colorOf(item.category);
+                        final card = era != null
+                            ? CinematicCard(
+                                assetImagePath:
+                                    era.imageAssetPath(era.imageFilenames.first),
+                                accentColor: era.accentColor,
+                                title: t('eras.${era.id}.title'),
+                                subtitle: t('eras.${era.id}.period'),
+                                isPremium: isLocked,
+                                onTap: () => Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (_) => EraDetailScreen(era: era))),
+                              )
+                            : WikiCinematicCard(
+                                item: item,
+                                subtitle: CategoryConfigs.labelOf(item.category, lang),
+                                isPremium: isLocked,
+                                onTap: () => Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (_) => ContentDetailScreen(item: item))),
+                              );
 
                         return Stack(
                           children: [
-                            CinematicCard(
-                              assetImagePath: era != null
-                                  ? era.imageAssetPath(era.imageFilenames.first)
-                                  : null,
-                              accentColor: color,
-                              title: era != null
-                                  ? t('eras.${era.id}.title')
-                                  : item.displayName,
-                              subtitle: era != null
-                                  ? t('eras.${era.id}.period')
-                                  : CategoryConfigs.labelOf(
-                                      item.category, lang),
-                              isPremium: isLocked,
-                              onTap: () {
-                                if (era != null) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              EraDetailScreen(era: era)));
-                                } else {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              ContentDetailScreen(item: item)));
-                                }
-                              },
-                            ),
+                            card,
                             // Remove from favorites button
                             Positioned(
                               top: 8,

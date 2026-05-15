@@ -10,7 +10,7 @@ class WikipediaService {
 
   static const Duration _cacheDuration = Duration(days: 30);
   static const Duration _requestTimeout = Duration(seconds: 10);
-  static const int _minContentChars = 500;
+  static const int _minContentChars = 200;
 
   static const Map<String, List<String>> _fallbacks = {
     'it': ['es', 'en'],
@@ -18,9 +18,9 @@ class WikipediaService {
     'en': [],
   };
 
-  // v3: plain-format extracts, 30-day cache, separate thumbnail call
+  // v4: fixed fallback caching bug (Spanish saved under Italian key)
   String _cacheKey(String contentId, String lang) =>
-      'wiki_v3_${contentId}_$lang';
+      'wiki_v4_${contentId}_$lang';
 
   bool _isSufficient(WikipediaContent c) =>
       c.hasContent && c.totalContentChars >= _minContentChars;
@@ -63,14 +63,52 @@ class WikipediaService {
       );
 
       if (fbContent != null && _isSufficient(fbContent)) {
-        final tagged = fbContent.copyWith(displayLang: fbLang, isFromCache: false);
-        await _saveToCache(key, tagged);
-        return tagged;
+        // Return fallback content but do NOT cache it under the requesting
+        // language's key — doing so would permanently serve the wrong language.
+        // The fallback content is already cached under its own fbKey.
+        return fbContent.copyWith(displayLang: fbLang, isFromCache: false);
       }
     }
 
     // Return stale cache as last resort (offline scenario)
     return cached;
+  }
+
+  /// Fetches only the thumbnail URL for a content item, using a lightweight
+  /// per-item cache so cards don't re-fetch on every build.
+  Future<String?> fetchThumbnailOnly({
+    required String contentId,
+    required String lang,
+    required Map<String, String> slugMap,
+  }) async {
+    // If full content already cached, reuse its thumbnail
+    final fullCached = await _getFromCache(_cacheKey(contentId, lang));
+    if (fullCached?.thumbnailUrl != null) return fullCached!.thumbnailUrl;
+
+    // Lightweight URL-only cache
+    const thumbVersion = 'v1';
+    final thumbKey = 'thumb_${thumbVersion}_${contentId}_$lang';
+    final prefs = await SharedPreferences.getInstance();
+    final cachedUrl = prefs.getString(thumbKey);
+    if (cachedUrl != null) return cachedUrl.isEmpty ? null : cachedUrl;
+
+    // Try preferred lang → es → en
+    final tryLangs = [lang, 'es', 'en']
+        .where((l) => slugMap.containsKey(l))
+        .toList();
+
+    for (final tryLang in tryLangs) {
+      final slug = slugMap[tryLang];
+      if (slug == null) continue;
+      final url = await _fetchThumbnail(tryLang, slug);
+      if (url != null) {
+        await prefs.setString(thumbKey, url);
+        return url;
+      }
+    }
+
+    await prefs.setString(thumbKey, ''); // cache miss to avoid retries
+    return null;
   }
 
   Future<void> clearCache() async {
@@ -90,7 +128,7 @@ class WikipediaService {
       if (raw == null) return null;
 
       final json = jsonDecode(raw) as Map<String, dynamic>;
-      if ((json['version'] as int?) != 3) {
+      if ((json['version'] as int?) != 4) {
         await prefs.remove(key);
         return null;
       }

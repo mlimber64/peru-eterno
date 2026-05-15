@@ -13,7 +13,10 @@
       "PowerShell(Get-ChildItem \"D:\\\\peru-eterno\\\\android\\\\app\\\\src\\\\main\\\\res\" -Recurse | Where-Object { -not $_.PSIsContainer } | Select-Object FullName, Length | Sort-Object FullName)",
       "Bash(Get-ChildItem -Path \"D:\\\\peru-eterno\\\\lib\" -Recurse -File)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(Sort-Object)"
+      "Bash(Sort-Object)",
+      "Bash(xargs ls -la)",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(flutter build *)"
     ]
   }
 }

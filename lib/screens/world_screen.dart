@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
+import '../core/constants/category_config.dart';
 import '../core/constants/world_config.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
@@ -11,6 +12,7 @@ import '../models/era_model.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/cinematic_card.dart';
+import '../widgets/wiki_cinematic_card.dart';
 import 'content_detail_screen.dart';
 import 'era_detail_screen.dart';
 import 'premium_screen.dart';
@@ -205,42 +207,34 @@ class WorldScreen extends StatelessWidget {
                               orElse: () => null)
                       : null;
                   final isLocked = item.isPremium && !isPremium;
-                  return CinematicCard(
-                    assetImagePath: era != null
-                        ? era.imageAssetPath(era.imageFilenames.first)
-                        : null,
-                    accentColor: era?.accentColor ?? world.accentColor,
-                    title: era != null
-                        ? context
-                            .read<LanguageProvider>()
-                            .t('eras.${era.id}.title')
-                        : item.displayName,
-                    subtitle: era != null
-                        ? context
-                            .read<LanguageProvider>()
-                            .t('eras.${era.id}.period')
-                        : null,
+                  final tapAction = isLocked
+                      ? () => Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => const PremiumScreen()))
+                      : era != null
+                          ? () => Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => EraDetailScreen(era: era)))
+                          : () => Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => ContentDetailScreen(item: item)));
+
+                  if (era != null) {
+                    return CinematicCard(
+                      assetImagePath: era.imageAssetPath(era.imageFilenames.first),
+                      accentColor: era.accentColor,
+                      title: context.read<LanguageProvider>().t('eras.${era.id}.title'),
+                      subtitle: context.read<LanguageProvider>().t('eras.${era.id}.period'),
+                      isPremium: isLocked,
+                      onTap: tapAction,
+                    )
+                        .animate()
+                        .fadeIn(duration: 400.ms, delay: (i * 60).ms)
+                        .scale(begin: const Offset(0.93, 0.93), duration: 400.ms, delay: (i * 60).ms);
+                  }
+
+                  return WikiCinematicCard(
+                    item: item,
+                    subtitle: CategoryConfigs.labelOf(item.category, lang),
                     isPremium: isLocked,
-                    onTap: isLocked
-                        ? () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const PremiumScreen()))
-                        : () {
-                            if (era != null) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          EraDetailScreen(era: era)));
-                            } else {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          ContentDetailScreen(item: item)));
-                            }
-                          },
+                    onTap: tapAction,
                   )
                       .animate()
                       .fadeIn(duration: 400.ms, delay: (i * 60).ms)
