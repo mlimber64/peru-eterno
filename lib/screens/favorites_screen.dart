@@ -203,22 +203,22 @@ class FavoritesScreen extends StatelessWidget {
 
   String _eyebrow(String lang) => switch (lang) {
         'en' => 'MY COLLECTION',
-        'it' => 'LA MIA COLLEZIONE',
-        _ => 'MI COLECCIÓN',
+        'es' => 'MI COLECCIÓN',
+        _ => 'LA MIA COLLEZIONE',
       };
   String _title(String lang) => switch (lang) {
         'en' => 'Saved',
-        'it' => 'Salvati',
-        _ => 'Guardados',
+        'es' => 'Guardados',
+        _ => 'Salvati',
       };
   String _emptyTitle(String lang) => switch (lang) {
         'en' => 'Nothing saved yet',
-        'it' => 'Niente ancora salvato',
-        _ => 'Aún no hay guardados',
+        'es' => 'Aún no hay guardados',
+        _ => 'Niente ancora salvato',
       };
   String _emptySubtitle(String lang) => switch (lang) {
         'en' => 'Tap the heart icon on any\narticle to save it here',
-        'it' => 'Tocca il cuore su qualsiasi\narticolo per salvarlo',
-        _ => 'Toca el corazón en cualquier\nartículo para guardarlo aquí',
+        'es' => 'Toca el corazón en cualquier\nartículo para guardarlo aquí',
+        _ => 'Tocca il cuore su qualsiasi\narticolo per salvarlo',
       };
 }

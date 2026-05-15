@@ -122,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
 
   List<String> _labels(String lang) => switch (lang) {
         'en' => ['Home', 'Explore', 'Saved', 'Settings'],
-        'it' => ['Home', 'Esplora', 'Salvati', 'Impostazioni'],
-        _ => ['Inicio', 'Explorar', 'Guardados', 'Ajustes'],
+        'es' => ['Inicio', 'Explorar', 'Guardados', 'Ajustes'],
+        _ => ['Home', 'Esplora', 'Salvati', 'Impostazioni'],
       };
 }

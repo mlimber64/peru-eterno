@@ -530,7 +530,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
-                'Fuente: Wikipedia $langLabel — ',
+                '${switch (widget.languageCode) { 'en' => 'Source', 'es' => 'Fuente', _ => 'Fonte' }}: Wikipedia $langLabel — ',
                 style: GoogleFonts.lato(
                     fontSize: 11, color: AppColors.textSecondary),
               ),

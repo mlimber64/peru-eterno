@@ -7,14 +7,18 @@ import '../core/constants/category_config.dart';
 import '../core/constants/world_config.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
+import '../data/historia_repository.dart';
 import '../models/content_item.dart';
 import '../models/era_model.dart';
+import '../models/historia_article.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/cinematic_card.dart';
 import '../widgets/wiki_cinematic_card.dart';
 import 'content_detail_screen.dart';
 import 'era_detail_screen.dart';
+import 'historia_article_detail_screen.dart';
+import 'historia_list_screen.dart';
 import 'premium_screen.dart';
 
 class WorldScreen extends StatelessWidget {
@@ -193,6 +197,86 @@ class WorldScreen extends StatelessWidget {
             _sliverLabel(_civilizationsLabel(lang), world.accentColor),
           ],
 
+          // ── Approfondimenti preispanici (solo Historia) ──────────────────
+          if (worldId == 'historia') ...[
+            _sliverLabel(_editorialLabel(lang), world.accentColor),
+            SliverToBoxAdapter(
+              child: FutureBuilder<List<HistoriaArticle>>(
+                future: HistoriaRepository.loadAll(),
+                builder: (context, snap) {
+                  if (snap.connectionState != ConnectionState.done) {
+                    return const SizedBox(
+                      height: 120,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                            color: AppColors.worldHistoria),
+                      ),
+                    );
+                  }
+                  final articles = snap.data ?? [];
+                  if (articles.isEmpty) return const SizedBox.shrink();
+                  return Column(
+                    children: [
+                      // Horizontal preview — first 3 articles
+                      SizedBox(
+                        height: 172,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          itemCount: articles.length > 3 ? 3 : articles.length,
+                          itemBuilder: (context, i) {
+                            final art = articles[i];
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 12),
+                              child: _EditorialMiniCard(
+                                article: art,
+                                allArticles: articles,
+                                lang: lang,
+                              )
+                                  .animate()
+                                  .fadeIn(
+                                      duration: 400.ms,
+                                      delay: (i * 70).ms),
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      // "See all" button
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.worldHistoria,
+                            side: BorderSide(
+                                color: AppColors.worldHistoria.withOpacity(0.4)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            minimumSize: const Size.fromHeight(44),
+                          ),
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const HistoriaListScreen()),
+                          ),
+                          icon: const Icon(Icons.menu_book_rounded, size: 16),
+                          label: Text(
+                            _seeAllLabel(lang),
+                            style: GoogleFonts.lato(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+
           // ── Content grid ─────────────────────────────────────────────────
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
@@ -294,16 +378,135 @@ class WorldScreen extends StatelessWidget {
     };
   }
 
+  String _editorialLabel(String lang) => switch (lang) {
+        'en' => 'In-depth articles',
+        'es' => 'Artículos en profundidad',
+        _ => 'Approfondimenti preispanici',
+      };
+  String _seeAllLabel(String lang) => switch (lang) {
+        'en' => 'See all articles',
+        'es' => 'Ver todos los artículos',
+        _ => 'Vedi tutti gli articoli',
+      };
   String _timelineLabel(String lang) => switch (lang) {
         'en' => 'Timeline',
-        'it' => 'Cronologia',
-        _ => 'Línea de tiempo',
+        'es' => 'Línea de tiempo',
+        _ => 'Cronologia',
       };
   String _civilizationsLabel(String lang) => switch (lang) {
         'en' => 'Civilizations',
-        'it' => 'Civiltà',
-        _ => 'Civilizaciones',
+        'es' => 'Civilizaciones',
+        _ => 'Civiltà',
       };
+}
+
+class _EditorialMiniCard extends StatelessWidget {
+  final HistoriaArticle article;
+  final List<HistoriaArticle> allArticles;
+  final String lang;
+
+  static const _accent = AppColors.worldHistoria;
+
+  const _EditorialMiniCard({
+    required this.article,
+    required this.allArticles,
+    required this.lang,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.marronProfundo,
+      borderRadius: BorderRadius.circular(14),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => HistoriaArticleDetailScreen(
+              article: article,
+              allArticles: allArticles,
+            ),
+          ),
+        ),
+        child: Container(
+          width: 160,
+          height: 172,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: _accent.withOpacity(0.15)),
+          ),
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: _accent.withOpacity(0.15),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: _accent.withOpacity(0.4)),
+                ),
+                child: Center(
+                  child: Text(
+                    '${article.orden}',
+                    style: GoogleFonts.lato(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: _accent,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                article.categoriaFor(lang).toUpperCase(),
+                style: GoogleFonts.lato(
+                  fontSize: 8,
+                  fontWeight: FontWeight.w700,
+                  color: _accent.withOpacity(0.7),
+                  letterSpacing: 1.2,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 4),
+              Expanded(
+                child: Text(
+                  article.tituloFor(lang),
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.cremaPergamino,
+                    height: 1.2,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(Icons.arrow_forward_ios_rounded,
+                      size: 9, color: _accent.withOpacity(0.7)),
+                  const SizedBox(width: 4),
+                  Text(
+                    'Leggi',
+                    style: GoogleFonts.lato(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: _accent.withOpacity(0.7),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _DiagPainter extends CustomPainter {

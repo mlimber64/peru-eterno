@@ -6,6 +6,7 @@ import 'providers/favorites_provider.dart';
 import 'providers/history_provider.dart';
 import 'providers/language_provider.dart';
 import 'providers/premium_provider.dart';
+import 'providers/reading_progress_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,9 @@ void main() async {
   final historyProvider = HistoryProvider();
   await historyProvider.initialize();
 
+  final readingProgressProvider = ReadingProgressProvider();
+  await readingProgressProvider.initialize();
+
   runApp(
     MultiProvider(
       providers: [
@@ -36,6 +40,7 @@ void main() async {
         ChangeNotifierProvider.value(value: premiumProvider),
         ChangeNotifierProvider.value(value: favoritesProvider),
         ChangeNotifierProvider.value(value: historyProvider),
+        ChangeNotifierProvider.value(value: readingProgressProvider),
       ],
       child: const PeruEternoApp(),
     ),

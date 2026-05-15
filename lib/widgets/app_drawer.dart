@@ -109,7 +109,7 @@ class AppDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 12, 24, 16),
               child: Text(
-                'v1.0.0 · Contenido: Wikipedia CC BY-SA',
+                'v1.0.0 · Contenuto: Wikipedia CC BY-SA',
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   color: AppColors.cremaPergamino.withOpacity(0.25),
@@ -131,37 +131,36 @@ class AppDrawer extends StatelessWidget {
 
   String _subtitle(String lang) => switch (lang) {
         'en' => 'Cultural encyclopedia',
-        'it' => 'Enciclopedia culturale',
-        _ => 'Enciclopedia cultural',
+        'es' => 'Enciclopedia cultural',
+        _ => 'Enciclopedia culturale',
       };
   String _langLabel(String lang) => switch (lang) {
         'en' => 'LANGUAGE',
-        'it' => 'LINGUA',
-        _ => 'IDIOMA',
+        'es' => 'IDIOMA',
+        _ => 'LINGUA',
       };
   String _premiumLabel(String lang) => switch (lang) {
-        'en' => 'PREMIUM',
         _ => 'PREMIUM',
       };
   String _cacheLabel(String lang) => switch (lang) {
         'en' => 'STORAGE',
-        'it' => 'ARCHIVIAZIONE',
-        _ => 'ALMACENAMIENTO',
+        'es' => 'ALMACENAMIENTO',
+        _ => 'ARCHIVIAZIONE',
       };
   String _activePremiumLabel(String lang) => switch (lang) {
         'en' => 'Premium active ✓',
-        'it' => 'Premium attivo ✓',
-        _ => 'Premium activo ✓',
+        'es' => 'Premium activo ✓',
+        _ => 'Premium attivo ✓',
       };
   String _upgradePremiumLabel(String lang) => switch (lang) {
         'en' => 'Upgrade to Premium',
-        'it' => 'Passa a Premium',
-        _ => 'Mejorar a Premium',
+        'es' => 'Mejorar a Premium',
+        _ => 'Passa a Premium',
       };
   String _clearCacheLabel(String lang) => switch (lang) {
         'en' => 'Clear Wikipedia cache',
-        'it' => 'Svuota cache Wikipedia',
-        _ => 'Limpiar caché Wikipedia',
+        'es' => 'Limpiar caché Wikipedia',
+        _ => 'Svuota cache Wikipedia',
       };
 }
 

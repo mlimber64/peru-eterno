@@ -178,91 +178,91 @@ class SettingsScreen extends StatelessWidget {
 
   String _eyebrow(String lang) => switch (lang) {
         'en' => 'PREFERENCES',
-        'it' => 'PREFERENZE',
-        _ => 'PREFERENCIAS',
+        'es' => 'PREFERENCIAS',
+        _ => 'PREFERENZE',
       };
   String _title(String lang) => switch (lang) {
         'en' => 'Settings',
-        'it' => 'Impostazioni',
-        _ => 'Ajustes',
+        'es' => 'Ajustes',
+        _ => 'Impostazioni',
       };
   String _langSection(String lang) => switch (lang) {
         'en' => 'LANGUAGE',
-        'it' => 'LINGUA',
-        _ => 'IDIOMA',
+        'es' => 'IDIOMA',
+        _ => 'LINGUA',
       };
   String _storageSection(String lang) => switch (lang) {
         'en' => 'STORAGE',
-        'it' => 'ARCHIVIAZIONE',
-        _ => 'ALMACENAMIENTO',
+        'es' => 'ALMACENAMIENTO',
+        _ => 'ARCHIVIAZIONE',
       };
   String _aboutSection(String lang) => switch (lang) {
         'en' => 'ABOUT',
-        'it' => 'INFO',
-        _ => 'ACERCA DE',
+        'es' => 'ACERCA DE',
+        _ => 'INFO',
       };
   String _activeTitle(String lang) => switch (lang) {
         'en' => 'Premium active',
-        'it' => 'Premium attivo',
-        _ => 'Premium activo',
+        'es' => 'Premium activo',
+        _ => 'Premium attivo',
       };
   String _activeSubtitle(String lang) => switch (lang) {
         'en' => 'All content unlocked',
-        'it' => 'Tutto il contenuto sbloccato',
-        _ => 'Todo el contenido desbloqueado',
+        'es' => 'Todo el contenido desbloqueado',
+        _ => 'Tutto il contenuto sbloccato',
       };
   String _upgradeTitle(String lang) => switch (lang) {
         'en' => 'Upgrade to Premium',
-        'it' => 'Passa a Premium',
-        _ => 'Mejorar a Premium',
+        'es' => 'Mejorar a Premium',
+        _ => 'Passa a Premium',
       };
   String _upgradeSubtitle(String lang) => switch (lang) {
         'en' => 'Unlock all eras and content',
-        'it' => 'Sblocca tutte le ere e i contenuti',
-        _ => 'Desbloquea todas las eras y contenido',
+        'es' => 'Desbloquea todas las eras y contenido',
+        _ => 'Sblocca tutte le ere e i contenuti',
       };
   String _clearCacheTitle(String lang) => switch (lang) {
         'en' => 'Clear Wikipedia cache',
-        'it' => 'Svuota cache Wikipedia',
-        _ => 'Limpiar caché Wikipedia',
+        'es' => 'Limpiar caché Wikipedia',
+        _ => 'Svuota cache Wikipedia',
       };
   String _clearCacheSubtitle(String lang) => switch (lang) {
         'en' => 'Force re-download of all articles',
-        'it' => 'Forza il riscariamento degli articoli',
-        _ => 'Fuerza la re-descarga de artículos',
+        'es' => 'Fuerza la re-descarga de artículos',
+        _ => 'Forza il riscariamento degli articoli',
       };
   String _clearHistoryTitle(String lang) => switch (lang) {
         'en' => 'Clear navigation history',
-        'it' => 'Cancella cronologia',
-        _ => 'Limpiar historial',
+        'es' => 'Limpiar historial',
+        _ => 'Cancella cronologia',
       };
   String _clearHistorySubtitle(String lang) => switch (lang) {
         'en' => 'Remove "continue exploring" items',
-        'it' => 'Rimuovi elementi "continua a esplorare"',
-        _ => 'Elimina elementos de "continuar explorando"',
+        'es' => 'Elimina elementos de "continuar explorando"',
+        _ => 'Rimuovi elementi "continua a esplorare"',
       };
   String _clearFavoritesTitle(String lang) => switch (lang) {
         'en' => 'Clear all favorites',
-        'it' => 'Cancella tutti i preferiti',
-        _ => 'Eliminar todos los guardados',
+        'es' => 'Eliminar todos los guardados',
+        _ => 'Cancella tutti i preferiti',
       };
   String _clearFavoritesSubtitle(String lang) => switch (lang) {
         'en' => 'This cannot be undone',
-        'it' => 'Questa azione non può essere annullata',
-        _ => 'Esta acción no se puede deshacer',
+        'es' => 'Esta acción no se puede deshacer',
+        _ => 'Questa azione non può essere annullata',
       };
   String _cacheClearedMsg(String lang) => switch (lang) {
         'en' => 'Cache cleared',
-        'it' => 'Cache svuotata',
-        _ => 'Caché limpiado',
+        'es' => 'Caché limpiado',
+        _ => 'Cache svuotata',
       };
   String _aboutText(String lang) => switch (lang) {
         'en' =>
           'A cultural encyclopedia about Peru\'s history, traditions, and people. Content powered by Wikipedia (CC BY-SA).',
-        'it' =>
-          'Un\'enciclopedia culturale sulla storia, le tradizioni e le persone del Perù. Contenuto fornito da Wikipedia (CC BY-SA).',
-        _ =>
+        'es' =>
           'Una enciclopedia cultural sobre la historia, tradiciones y personas del Perú. Contenido proveniente de Wikipedia (CC BY-SA).',
+        _ =>
+          'Un\'enciclopedia culturale sulla storia, le tradizioni e le persone del Perù. Contenuto fornito da Wikipedia (CC BY-SA).',
       };
 }
 

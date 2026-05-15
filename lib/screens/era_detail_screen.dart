@@ -306,7 +306,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         ],
 
         // Lead paragraph card
-        if (lead != null) _buildLeadCard(lead.content),
+        if (lead != null) _buildLeadCard(lead.content, lang),
 
         const SizedBox(height: 20),
 
@@ -369,7 +369,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     );
   }
 
-  Widget _buildLeadCard(String text) {
+  Widget _buildLeadCard(String text, String lang) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -393,7 +393,11 @@ class _EraDetailScreenState extends State<EraDetailScreen>
               ),
               const SizedBox(width: 10),
               Text(
-                'RESUMEN',
+                switch (lang) {
+                  'en' => 'OVERVIEW',
+                  'es' => 'RESUMEN',
+                  _ => 'PANORAMICA',
+                },
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
@@ -420,8 +424,8 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   Widget _buildOfflineCard(String lang) {
     final label = switch (lang) {
       'en' => 'Showing cached content — connect to update',
-      'it' => 'Contenuto dalla cache — connettiti per aggiornare',
-      _ => 'Contenido sin conexión — conéctate para actualizar',
+      'es' => 'Contenido sin conexión — conéctate para actualizar',
+      _ => 'Contenuto dalla cache — connettiti per aggiornare',
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -452,8 +456,8 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   Widget _buildReadMoreButton(String url, String lang) {
     final label = switch (lang) {
       'en' => 'Read more on Wikipedia',
-      'it' => 'Leggi di più su Wikipedia',
-      _ => 'Leer más en Wikipedia',
+      'es' => 'Leer más en Wikipedia',
+      _ => 'Leggi di più su Wikipedia',
     };
     return SizedBox(
       width: double.infinity,
@@ -504,7 +508,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
-                'Fuente: Wikipedia $langLabel — ',
+                '${switch (lang) { 'en' => 'Source', 'es' => 'Fuente', _ => 'Fonte' }}: Wikipedia $langLabel — ',
                 style: GoogleFonts.lato(
                     fontSize: 11, color: AppColors.textSecondary),
               ),
@@ -524,7 +528,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
           if (isFallback) ...[
             const SizedBox(height: 3),
             Text(
-              'Contenido disponible en: $langLabel',
+              '${switch (lang) { 'en' => 'Content available in', 'es' => 'Contenido disponible en', _ => 'Contenuto disponibile in' }}: $langLabel',
               style: GoogleFonts.lato(
                 fontSize: 10,
                 color: AppColors.textSecondary,
@@ -734,8 +738,8 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   List<String> _tabLabels(String lang) {
     return switch (lang) {
       'en' => ['OVERVIEW', 'CONTENT', 'GALLERY'],
-      'it' => ['PANORAMICA', 'CONTENUTO', 'GALLERIA'],
-      _ => ['RESUMEN', 'CONTENIDO', 'GALERÍA'],
+      'es' => ['RESUMEN', 'CONTENIDO', 'GALERÍA'],
+      _ => ['PANORAMICA', 'CONTENUTO', 'GALLERIA'],
     };
   }
 }

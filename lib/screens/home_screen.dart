@@ -8,15 +8,20 @@ import '../core/constants/app_colors.dart';
 import '../core/constants/world_config.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
+import '../data/historia_stages_repository.dart';
 import '../models/content_item.dart';
 import '../models/era_model.dart';
+import '../models/historia_article.dart';
+import '../models/historia_stage.dart';
 import '../providers/history_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import '../providers/reading_progress_provider.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/cinematic_card.dart';
 import 'content_detail_screen.dart';
 import 'era_detail_screen.dart';
+import 'historia_article_detail_screen.dart';
 import 'premium_screen.dart';
 import 'world_screen.dart';
 
@@ -62,9 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   ContentItem get _personajeDelDia {
     final personajes = ContentRepository.personajes;
-    final dayOfYear = DateTime.now().difference(
-      DateTime(DateTime.now().year),
-    ).inDays;
+    final dayOfYear = DateTime.now()
+        .difference(
+          DateTime(DateTime.now().year),
+        )
+        .inDays;
     return personajes[dayOfYear % personajes.length];
   }
 
@@ -72,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>().currentLanguage;
     final history = context.watch<HistoryProvider>().recentItems;
+    final rp = context.watch<ReadingProgressProvider>();
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
@@ -82,6 +90,21 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           // ── Hero principal (60% pantalla) ───────────────────────────────
           SliverToBoxAdapter(child: _HeroSection(lang: lang)),
+
+          // ── Continua il tuo viaggio ─────────────────────────────────────
+          if (rp.hasLastArticle) ...[
+            SliverToBoxAdapter(
+              child: _SectionHeader(label: _journeyLabel(lang), lang: lang),
+            ),
+            SliverToBoxAdapter(
+              child: _JourneyCard(
+                articleId: rp.lastArticleId!,
+                stageId: rp.lastStageId ?? '',
+                progress: rp.lastProgress,
+                lang: lang,
+              ),
+            ),
+          ],
 
           // ── Intro Perú ──────────────────────────────────────────────────
           SliverToBoxAdapter(child: _PeruIntroSection(lang: lang)),
@@ -117,15 +140,36 @@ class _HomeScreenState extends State<HomeScreen> {
             child: _SectionHeader(label: _personajeLabel(lang), lang: lang),
           ),
           SliverToBoxAdapter(
-            child: _PersonajeDiaSection(
-                item: _personajeDelDia, lang: lang),
+            child: _PersonajeDiaSection(item: _personajeDelDia, lang: lang),
           ),
+
+          // ── Historial reciente de Historia ───────────────────────────────
+          if (rp.history.length > 1) ...[
+            SliverToBoxAdapter(
+              child: _SectionHeader(label: _recentLabel(lang), lang: lang),
+            ),
+            SliverToBoxAdapter(
+              child: _RecentHistoriaStrip(
+                history: rp.history.skip(1).toList(),
+                lang: lang,
+              ),
+            ),
+          ],
+
+          // ── Progreso histórico ───────────────────────────────────────────
+          if (rp.hasHistory) ...[
+            SliverToBoxAdapter(
+              child: _SectionHeader(label: _histProgressLabel(lang), lang: lang),
+            ),
+            SliverToBoxAdapter(
+              child: _StageProgressSection(lang: lang),
+            ),
+          ],
 
           // ── Continuar explorando ─────────────────────────────────────────
           if (history.isNotEmpty) ...[
             SliverToBoxAdapter(
-              child: _SectionHeader(
-                  label: _continueLabel(lang), lang: lang),
+              child: _SectionHeader(label: _continueLabel(lang), lang: lang),
             ),
             SliverToBoxAdapter(
               child: _ContinueSection(items: history, lang: lang),
@@ -176,23 +220,38 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _worldsLabel(String lang) => switch (lang) {
         'en' => 'Explore worlds',
-        'it' => 'Esplora i mondi',
-        _ => 'Explorar mundos',
+        'es' => 'Explorar mundos',
+        _ => 'Esplora i mondi',
       };
   String _featuredLabel(String lang) => switch (lang) {
         'en' => 'Featured era',
-        'it' => 'Era in evidenza',
-        _ => 'Era destacada',
+        'es' => 'Era destacada',
+        _ => 'Era in evidenza',
       };
   String _personajeLabel(String lang) => switch (lang) {
         'en' => 'Character of the day',
-        'it' => 'Personaggio del giorno',
-        _ => 'Personaje del día',
+        'es' => 'Personaje del día',
+        _ => 'Personaggio del giorno',
       };
   String _continueLabel(String lang) => switch (lang) {
         'en' => 'Continue exploring',
-        'it' => 'Continua a esplorare',
-        _ => 'Continuar explorando',
+        'es' => 'Continuar explorando',
+        _ => 'Continua a esplorare',
+      };
+  String _journeyLabel(String lang) => switch (lang) {
+        'en' => 'Continue your journey',
+        'es' => 'Continúa tu viaje',
+        _ => 'Continua il tuo viaggio',
+      };
+  String _recentLabel(String lang) => switch (lang) {
+        'en' => 'Recent history',
+        'es' => 'Historial reciente',
+        _ => 'Cronologia recente',
+      };
+  String _histProgressLabel(String lang) => switch (lang) {
+        'en' => 'Historical progress',
+        'es' => 'Progreso histórico',
+        _ => 'Progresso storico',
       };
 }
 
@@ -319,9 +378,7 @@ class _HeroSection extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                     color: AppColors.cremaPergamino.withOpacity(0.7),
                   ),
-                )
-                    .animate()
-                    .fadeIn(duration: 800.ms, delay: 480.ms),
+                ).animate().fadeIn(duration: 800.ms, delay: 480.ms),
                 const SizedBox(height: 30),
                 // Buttons
                 Row(
@@ -332,7 +389,8 @@ class _HeroSection extends StatelessWidget {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const WorldScreen(worldId: 'historia'),
+                          builder: (_) =>
+                              const WorldScreen(worldId: 'historia'),
                         ),
                       ),
                     ),
@@ -343,7 +401,8 @@ class _HeroSection extends StatelessWidget {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const WorldScreen(worldId: 'historia'),
+                          builder: (_) =>
+                              const WorldScreen(worldId: 'historia'),
                         ),
                       ),
                     ),
@@ -359,28 +418,28 @@ class _HeroSection extends StatelessWidget {
 
   String _eyebrow(String lang) => switch (lang) {
         'en' => 'PERU · 5,000 YEARS',
-        'it' => 'PERÙ · 5.000 ANNI',
-        _ => 'PERÚ · 5,000 AÑOS',
+        'es' => 'PERÚ · 5,000 AÑOS',
+        _ => 'PERÙ · 5.000 ANNI',
       };
   String _mainTitle(String lang) => switch (lang) {
         'en' => '5,000 years\nof history',
-        'it' => '5.000 anni\ndi storia',
-        _ => '5,000 años\nde historia',
+        'es' => '5,000 años\nde historia',
+        _ => '5.000 anni\ndi storia',
       };
   String _subtitle(String lang) => switch (lang) {
         'en' => 'Discover the soul of Peru',
-        'it' => 'Scopri l\'anima del Perù',
-        _ => 'Descubre el alma del Perú',
+        'es' => 'Descubre el alma del Perú',
+        _ => 'Scopri l\'anima del Perù',
       };
   String _primaryBtn(String lang) => switch (lang) {
         'en' => 'Start journey',
-        'it' => 'Inizia il viaggio',
-        _ => 'Comenzar viaje',
+        'es' => 'Comenzar viaje',
+        _ => 'Inizia il viaggio',
       };
   String _secondaryBtn(String lang) => switch (lang) {
         'en' => 'Explore eras',
-        'it' => 'Esplora le ere',
-        _ => 'Explorar eras',
+        'es' => 'Explorar eras',
+        _ => 'Esplora le ere',
       };
 }
 
@@ -390,9 +449,7 @@ class _HeroButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const _HeroButton(
-      {required this.label,
-      required this.isPrimary,
-      required this.onTap});
+      {required this.label, required this.isPrimary, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -402,8 +459,7 @@ class _HeroButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.ocre,
           foregroundColor: Colors.white,
-          padding:
-              const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -647,73 +703,71 @@ class _PeruIntroSection extends StatelessWidget {
 
   String _capitalLabel(String lang) => switch (lang) {
         'en' => 'Capital',
-        'it' => 'Capitale',
-        _ => 'Capital',
+        'es' => 'Capital',
+        _ => 'Capitale',
       };
   String _areaLabel(String lang) => switch (lang) {
         'en' => 'Area',
-        'it' => 'Superficie',
-        _ => 'Área',
+        'es' => 'Área',
+        _ => 'Superficie',
       };
   String _populationLabel(String lang) => switch (lang) {
         'en' => 'Population',
-        'it' => 'Popolazione',
-        _ => 'Población',
+        'es' => 'Población',
+        _ => 'Popolazione',
       };
   String _regionsLabel(String lang) => switch (lang) {
         'en' => 'Regions',
-        'it' => 'Regioni',
-        _ => 'Regiones',
+        'es' => 'Regiones',
+        _ => 'Regioni',
       };
   String _regionsValue(String lang) => switch (lang) {
         'en' => 'Coast · Highlands · Jungle',
-        'it' => 'Costa · Sierra · Giungla',
-        _ => 'Costa · Sierra · Selva',
+        'es' => 'Costa · Sierra · Selva',
+        _ => 'Costa · Sierra · Giungla',
       };
   String _aboutTitle(String lang) => switch (lang) {
         'en' => 'About Peru',
-        'it' => 'Il Perù',
-        _ => 'Sobre el Perú',
+        'es' => 'Sobre el Perú',
+        _ => 'Il Perù',
       };
   String _aboutText(String lang) => switch (lang) {
-        'en' =>
-          'Peru is one of the world\'s great cradles of civilization. '
-              'Home to the Inca Empire, the sacred city of Machu Picchu, '
-              'and dozens of cultures spanning 5,000 years — from the Norte '
-              'Chico civilization to the Spanish colonial era — Peru\'s history '
-              'is one of the richest on Earth.',
-        'it' =>
-          'Il Perù è una delle più grandi culle della civiltà mondiale. '
-              'Patria dell\'Impero Inca, della sacra città di Machu Picchu e '
-              'di decine di culture che si estendono per 5.000 anni — dalla '
-              'civiltà di Norte Chico all\'era coloniale spagnola — la storia '
-              'del Perù è una delle più ricche del mondo.',
-        _ =>
-          'El Perú es una de las grandes cunas de la civilización mundial. '
-              'Hogar del Imperio Inca, la sagrada ciudad de Machu Picchu y '
-              'decenas de culturas que abarcan 5,000 años — desde la '
-              'civilización de Norte Chico hasta la era colonial española — '
-              'la historia del Perú es una de las más ricas del mundo.',
+        'en' => 'Peru is one of the world\'s great cradles of civilization. '
+            'Home to the Inca Empire, the sacred city of Machu Picchu, '
+            'and dozens of cultures spanning 5,000 years — from the Norte '
+            'Chico civilization to the Spanish colonial era — Peru\'s history '
+            'is one of the richest on Earth.',
+        'es' => 'El Perú es una de las grandes cunas de la civilización mundial. '
+            'Hogar del Imperio Inca, la sagrada ciudad de Machu Picchu y '
+            'decenas de culturas que abarcan 5,000 años — desde la '
+            'civilización de Norte Chico hasta la era colonial española — '
+            'la historia del Perú es una de las más ricas del mundo.',
+        _ => 'Il Perù è una delle più grandi culle della civiltà mondiale. '
+            'Patria dell\'Impero Inca, della sacra città di Machu Picchu e '
+            'di decine di culture che si estendono per 5.000 anni — dalla '
+            'civiltà di Norte Chico all\'era coloniale spagnola — la storia '
+            'del Perù è una delle più ricche del mondo.',
       };
   String _howTitle(String lang) => switch (lang) {
         'en' => 'How to use Peru Eterno',
-        'it' => 'Come usare Peru Eterno',
-        _ => 'Cómo usar Peru Eterno',
+        'es' => 'Cómo usar Peru Eterno',
+        _ => 'Come usare Peru Eterno',
       };
   String _step1(String lang) => switch (lang) {
-        'en' => 'Choose a world (History, Culture, Flavors…) to start exploring',
-        'it' => 'Scegli un mondo (Storia, Cultura, Sapori…) per iniziare',
-        _ => 'Elige un mundo (Historia, Cultura, Sabores…) para explorar',
+        'en' =>
+          'Choose a world (History, Culture, Flavors…) to start exploring',
+        'es' => 'Elige un mundo (Historia, Cultura, Sabores…) para explorar',
+        _ => 'Scegli un mondo (Storia, Cultura, Sapori…) per iniziare',
       };
   String _step2(String lang) => switch (lang) {
         'en' => 'Tap any card to read its full article from Wikipedia',
-        'it' => 'Tocca una scheda per leggere l\'articolo completo da Wikipedia',
-        _ => 'Toca cualquier card para leer su artículo completo de Wikipedia',
+        'es' => 'Toca cualquier card para leer su artículo completo de Wikipedia',
+        _ => 'Tocca una scheda per leggere l\'articolo completo da Wikipedia',
       };
   String _step3(String lang) => switch (lang) {
         'en' => 'Save your favorites with the heart icon to find them later',
-        'it' => 'Salva i preferiti con il cuore per ritrovarli facilmente',
-        _ => 'Guarda tus favoritos con el corazón para encontrarlos después',
+        'es' => 'Guarda tus favoritos con el corazón para encontrarlos después',
+        _ => 'Salva i preferiti con il cuore per ritrovarli facilmente',
       };
 }
 
@@ -917,10 +971,7 @@ class _WorldsSection extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (_) => WorldScreen(worldId: world.id)),
               ),
-            )
-                .animate()
-                .fadeIn(duration: 500.ms, delay: (i * 80).ms)
-                .scale(
+            ).animate().fadeIn(duration: 500.ms, delay: (i * 80).ms).scale(
                   begin: const Offset(0.92, 0.92),
                   end: const Offset(1, 1),
                   duration: 500.ms,
@@ -969,8 +1020,7 @@ class _FeaturedEraSection extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CinematicCard(
-                  assetImagePath:
-                      era.imageAssetPath(era.imageFilenames.first),
+                  assetImagePath: era.imageAssetPath(era.imageFilenames.first),
                   accentColor: era.accentColor,
                   title: t('eras.${era.id}.title'),
                   subtitle: t('eras.${era.id}.period'),
@@ -1010,8 +1060,8 @@ class _FeaturedEraSection extends StatelessWidget {
 
   String _badge(String lang) => switch (lang) {
         'en' => 'FEATURED ERA',
-        'it' => 'ERA IN EVIDENZA',
-        _ => 'ERA DESTACADA',
+        'es' => 'ERA DESTACADA',
+        _ => 'ERA IN EVIDENZA',
       };
 }
 
@@ -1029,8 +1079,7 @@ class _PersonajeDiaSection extends StatelessWidget {
       child: GestureDetector(
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (_) => ContentDetailScreen(item: item)),
+          MaterialPageRoute(builder: (_) => ContentDetailScreen(item: item)),
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -1055,9 +1104,10 @@ class _PersonajeDiaSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                CustomPaint(
-                  painter: _DiagonalPatternPainter(const Color(0xFF8B4513)),
-                  child: const SizedBox.expand(),
+                Positioned.fill(
+                  child: CustomPaint(
+                    painter: _DiagonalPatternPainter(const Color(0xFF8B4513)),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(22),
@@ -1069,8 +1119,7 @@ class _PersonajeDiaSection extends StatelessWidget {
                         height: 72,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color:
-                              const Color(0xFF8B4513).withOpacity(0.4),
+                          color: const Color(0xFF8B4513).withOpacity(0.4),
                           border: Border.all(
                             color: AppColors.ocre.withOpacity(0.5),
                             width: 1.5,
@@ -1143,13 +1192,13 @@ class _PersonajeDiaSection extends StatelessWidget {
 
   String _dailyLabel(String lang) => switch (lang) {
         'en' => 'Character of the day',
-        'it' => 'Personaggio del giorno',
-        _ => 'Personaje del día',
+        'es' => 'Personaje del día',
+        _ => 'Personaggio del giorno',
       };
   String _viewBioLabel(String lang) => switch (lang) {
         'en' => 'View biography',
-        'it' => 'Vedi biografia',
-        _ => 'Ver biografía',
+        'es' => 'Ver biografía',
+        _ => 'Vedi biografia',
       };
 }
 
@@ -1181,8 +1230,7 @@ class _ContinueSection extends StatelessWidget {
               assetImagePath: era != null
                   ? era.imageAssetPath(era.imageFilenames.first)
                   : null,
-              accentColor:
-                  era?.accentColor ?? const Color(0xFF6B4226),
+              accentColor: era?.accentColor ?? const Color(0xFF6B4226),
               title: item.displayName,
               width: 160,
               height: 130,
@@ -1196,8 +1244,7 @@ class _ContinueSection extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) =>
-                              ContentDetailScreen(item: item)));
+                          builder: (_) => ContentDetailScreen(item: item)));
                 }
               },
             ),
@@ -1268,6 +1315,537 @@ class _GlassButton extends StatelessWidget {
             letterSpacing: 1.5,
           ),
         ),
+      ),
+    );
+  }
+}
+
+// ── Journey card (last article opened) ───────────────────────────────────────
+
+class _JourneyCard extends StatefulWidget {
+  final String articleId;
+  final String stageId;
+  final int progress;
+  final String lang;
+
+  const _JourneyCard({
+    required this.articleId,
+    required this.stageId,
+    required this.progress,
+    required this.lang,
+  });
+
+  @override
+  State<_JourneyCard> createState() => _JourneyCardState();
+}
+
+class _JourneyCardState extends State<_JourneyCard> {
+  late Future<(HistoriaArticle?, HistoriaStage?)> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = _load(widget.articleId, widget.stageId);
+  }
+
+  @override
+  void didUpdateWidget(_JourneyCard old) {
+    super.didUpdateWidget(old);
+    if (old.articleId != widget.articleId || old.stageId != widget.stageId) {
+      _future = _load(widget.articleId, widget.stageId);
+    }
+  }
+
+  Future<(HistoriaArticle?, HistoriaStage?)> _load(
+      String articleId, String stageId) async {
+    final stages = await HistoriaStagesRepository.loadStages();
+    final stage = stages.cast<HistoriaStage?>().firstWhere(
+          (s) => s?.id == stageId,
+          orElse: () => null,
+        );
+    if (stage == null) return (null, null);
+    final articles =
+        await HistoriaStagesRepository.loadArticlesForStage(stageId);
+    final article = articles.cast<HistoriaArticle?>().firstWhere(
+          (a) => a?.id == articleId,
+          orElse: () => null,
+        );
+    return (article, stage);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<(HistoriaArticle?, HistoriaStage?)>(
+      future: _future,
+      builder: (context, snap) {
+        if (!snap.hasData) return const SizedBox(height: 120);
+        final (article, stage) = snap.data!;
+        if (article == null) return const SizedBox.shrink();
+        return _buildCard(context, article, stage);
+      },
+    );
+  }
+
+  Widget _buildCard(
+      BuildContext context, HistoriaArticle article, HistoriaStage? stage) {
+    final accent = stage?.accentColor ?? AppColors.ocre;
+    final pct = widget.progress / 100.0;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: GestureDetector(
+        onTap: () async {
+          final allArticles = stage != null
+              ? await HistoriaStagesRepository.loadArticlesForStage(stage.id)
+              : <HistoriaArticle>[];
+          if (!context.mounted) return;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => HistoriaArticleDetailScreen(
+                article: article,
+                allArticles: allArticles,
+                stage: stage,
+                carouselImages: stage != null
+                    ? HistoriaStagesRepository.carouselImagesForStage(stage.id)
+                    : [],
+              ),
+            ),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.lerp(accent, Colors.black, 0.6)!,
+                AppColors.negoCacao,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: accent.withOpacity(0.3)),
+            boxShadow: [
+              BoxShadow(
+                color: accent.withOpacity(0.15),
+                blurRadius: 20,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(width: 24, height: 1.5, color: accent),
+                      const SizedBox(width: 8),
+                      Text(
+                        (stage?.tituloFor(widget.lang) ?? '').toUpperCase(),
+                        style: GoogleFonts.lato(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: accent,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    article.tituloFor(widget.lang),
+                    style: GoogleFonts.playfairDisplay(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.cremaPergamino,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    article.subtituloFor(widget.lang),
+                    style: GoogleFonts.lato(
+                      fontSize: 12,
+                      color: AppColors.cremaPergamino.withOpacity(0.55),
+                      height: 1.4,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: LayoutBuilder(
+                          builder: (ctx, c) => Stack(
+                            children: [
+                              Container(
+                                height: 3,
+                                width: c.maxWidth,
+                                decoration: BoxDecoration(
+                                  color: accent.withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                              ),
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 700),
+                                curve: Curves.easeOut,
+                                height: 3,
+                                width: c.maxWidth * pct,
+                                decoration: BoxDecoration(
+                                  color: accent,
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        '${widget.progress}%',
+                        style: GoogleFonts.lato(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: accent,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Text(
+                        _ctaLabel(widget.lang),
+                        style: GoogleFonts.lato(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: accent,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(Icons.arrow_forward_rounded, size: 14, color: accent),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
+            .animate()
+            .fadeIn(duration: 600.ms)
+            .slideY(begin: 0.08, end: 0),
+      ),
+    );
+  }
+
+  String _ctaLabel(String lang) => switch (lang) {
+        'en' => 'Continue reading →',
+        'es' => 'Continuar leyendo →',
+        _ => 'Continua a leggere →',
+      };
+}
+
+// ── Recent Historia strip ─────────────────────────────────────────────────────
+
+class _RecentHistoriaStrip extends StatefulWidget {
+  final List<ArticleHistoryEntry> history;
+  final String lang;
+
+  const _RecentHistoriaStrip({required this.history, required this.lang});
+
+  @override
+  State<_RecentHistoriaStrip> createState() => _RecentHistoriaStripState();
+}
+
+class _RecentHistoriaStripState extends State<_RecentHistoriaStrip> {
+  late Future<List<(HistoriaArticle, HistoriaStage?)>> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = _load(widget.history);
+  }
+
+  @override
+  void didUpdateWidget(_RecentHistoriaStrip old) {
+    super.didUpdateWidget(old);
+    if (old.history != widget.history) {
+      _future = _load(widget.history);
+    }
+  }
+
+  Future<List<(HistoriaArticle, HistoriaStage?)>> _load(
+      List<ArticleHistoryEntry> entries) async {
+    final stages = await HistoriaStagesRepository.loadStages();
+    final results = <(HistoriaArticle, HistoriaStage?)>[];
+    for (final entry in entries.take(6)) {
+      final stage = stages.cast<HistoriaStage?>().firstWhere(
+            (s) => s?.id == entry.stageId,
+            orElse: () => null,
+          );
+      final articles =
+          await HistoriaStagesRepository.loadArticlesForStage(entry.stageId);
+      final article = articles.cast<HistoriaArticle?>().firstWhere(
+            (a) => a?.id == entry.articleId,
+            orElse: () => null,
+          );
+      if (article != null) results.add((article, stage));
+    }
+    return results;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rp = context.watch<ReadingProgressProvider>();
+    return FutureBuilder<List<(HistoriaArticle, HistoriaStage?)>>(
+      future: _future,
+      builder: (context, snap) {
+        if (!snap.hasData || snap.data!.isEmpty) {
+          return const SizedBox(height: 120);
+        }
+        final items = snap.data!;
+        return SizedBox(
+          height: 120,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            itemCount: items.length,
+            itemBuilder: (context, i) {
+              final (article, stage) = items[i];
+              final accent = stage?.accentColor ?? AppColors.ocre;
+              final pct = rp.progressFor(article.id) / 100.0;
+              return Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: GestureDetector(
+                  onTap: () async {
+                    final allArticles = stage != null
+                        ? await HistoriaStagesRepository.loadArticlesForStage(
+                            stage.id)
+                        : <HistoriaArticle>[];
+                    if (!context.mounted) return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HistoriaArticleDetailScreen(
+                          article: article,
+                          allArticles: allArticles,
+                          stage: stage,
+                          carouselImages: stage != null
+                              ? HistoriaStagesRepository.carouselImagesForStage(
+                                  stage.id)
+                              : [],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 160,
+                    decoration: BoxDecoration(
+                      color: AppColors.marronProfundo,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: accent.withOpacity(0.2)),
+                    ),
+                    padding: const EdgeInsets.all(14),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          article.tituloFor(widget.lang),
+                          style: GoogleFonts.playfairDisplay(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.cremaPergamino,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const Spacer(),
+                        LayoutBuilder(
+                          builder: (ctx, c) => Stack(
+                            children: [
+                              Container(
+                                height: 2,
+                                width: c.maxWidth,
+                                color: accent.withOpacity(0.15),
+                              ),
+                              Container(
+                                height: 2,
+                                width: c.maxWidth * pct,
+                                color: accent,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${rp.progressFor(article.id)}%',
+                          style: GoogleFonts.lato(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            color: accent.withOpacity(0.8),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                      .animate()
+                      .fadeIn(duration: 400.ms, delay: (i * 60).ms)
+                      .slideX(begin: 0.1, end: 0),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+// ── Stage progress section ────────────────────────────────────────────────────
+
+class _StageProgressSection extends StatefulWidget {
+  final String lang;
+  const _StageProgressSection({required this.lang});
+
+  @override
+  State<_StageProgressSection> createState() => _StageProgressSectionState();
+}
+
+class _StageProgressSectionState extends State<_StageProgressSection> {
+  late Future<List<(HistoriaStage, List<HistoriaArticle>)>> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = _load();
+  }
+
+  Future<List<(HistoriaStage, List<HistoriaArticle>)>> _load() async {
+    final stages = await HistoriaStagesRepository.loadStages();
+    final results = <(HistoriaStage, List<HistoriaArticle>)>[];
+    for (final stage in stages) {
+      final articles =
+          await HistoriaStagesRepository.loadArticlesForStage(stage.id);
+      if (articles.isNotEmpty) results.add((stage, articles));
+    }
+    return results;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rp = context.watch<ReadingProgressProvider>();
+    return FutureBuilder<List<(HistoriaStage, List<HistoriaArticle>)>>(
+      future: _future,
+      builder: (context, snap) {
+        if (!snap.hasData) return const SizedBox(height: 80);
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.marronProfundo,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.ocre.withOpacity(0.12)),
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: snap.data!.map((entry) {
+                final (stage, articles) = entry;
+                final done =
+                    articles.where((a) => rp.isCompleted(a.id)).length;
+                return _StageProgressRow(
+                  stage: stage,
+                  done: done,
+                  total: articles.length,
+                  lang: widget.lang,
+                );
+              }).toList(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _StageProgressRow extends StatelessWidget {
+  final HistoriaStage stage;
+  final int done;
+  final int total;
+  final String lang;
+
+  const _StageProgressRow({
+    required this.stage,
+    required this.done,
+    required this.total,
+    required this.lang,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final fraction = total > 0 ? done / total : 0.0;
+    final accent = stage.accentColor;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  stage.tituloFor(lang),
+                  style: GoogleFonts.lato(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.cremaPergamino,
+                  ),
+                ),
+              ),
+              Text(
+                '$done / $total',
+                style: GoogleFonts.lato(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: accent.withOpacity(0.8),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          LayoutBuilder(
+            builder: (ctx, c) => Stack(
+              children: [
+                Container(
+                  height: 4,
+                  width: c.maxWidth,
+                  decoration: BoxDecoration(
+                    color: accent.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.0, end: fraction),
+                  duration: const Duration(milliseconds: 900),
+                  curve: Curves.easeOut,
+                  builder: (ctx, val, _) => Container(
+                    height: 4,
+                    width: c.maxWidth * val,
+                    decoration: BoxDecoration(
+                      color: accent,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
