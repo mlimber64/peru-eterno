@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/category_config.dart';
 import '../core/constants/world_config.dart';
+import '../core/navigation/app_navigation.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_repository.dart';
@@ -13,13 +14,10 @@ import '../models/era_model.dart';
 import '../models/historia_article.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
 import '../widgets/wiki_cinematic_card.dart';
-import 'content_detail_screen.dart';
-import 'era_detail_screen.dart';
-import 'historia_article_detail_screen.dart';
 import 'historia_list_screen.dart';
-import 'premium_screen.dart';
 
 class WorldScreen extends StatelessWidget {
   final String worldId;
@@ -34,7 +32,8 @@ class WorldScreen extends StatelessWidget {
     final isPremium = context.watch<PremiumProvider>().isPremium;
 
     final items = _itemsForWorld(world);
-    final eras = world.category == 'era' ? ErasRepository.allEras : <EraModel>[];
+    final eras =
+        world.category == 'era' ? ErasRepository.allEras : <EraModel>[];
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
@@ -151,7 +150,8 @@ class WorldScreen extends StatelessWidget {
 
           // ── Timeline for Historia ────────────────────────────────────────
           if (eras.isNotEmpty) ...[
-            _sliverLabel(_timelineLabel(lang), world.accentColor),
+            _sliverLabel(context.read<LanguageProvider>().t('world.timeline'),
+                world.accentColor),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 160,
@@ -177,40 +177,34 @@ class WorldScreen extends StatelessWidget {
                         isPremium: isLocked,
                         width: 140,
                         height: 160,
-                        onTap: isLocked
-                            ? () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const PremiumScreen()))
-                            : () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => EraDetailScreen(era: era))),
-                      )
-                          .animate()
-                          .fadeIn(duration: 400.ms, delay: (i * 70).ms),
+                        onTap: () => AppNavigation.openEra(
+                          context,
+                          era,
+                          isLocked: isLocked,
+                        ),
+                      ).animate().fadeIn(duration: 400.ms, delay: (i * 70).ms),
                     );
                   },
                 ),
               ),
             ),
-            _sliverLabel(_civilizationsLabel(lang), world.accentColor),
+            _sliverLabel(
+                context.read<LanguageProvider>().t('world.civilizations'),
+                world.accentColor),
           ],
 
           // ── Approfondimenti preispanici (solo Historia) ──────────────────
           if (worldId == 'historia') ...[
-            _sliverLabel(_editorialLabel(lang), world.accentColor),
+            _sliverLabel(context.read<LanguageProvider>().t('world.editorial'),
+                world.accentColor),
             SliverToBoxAdapter(
               child: FutureBuilder<List<HistoriaArticle>>(
                 future: HistoriaRepository.loadAll(),
                 builder: (context, snap) {
                   if (snap.connectionState != ConnectionState.done) {
-                    return const SizedBox(
+                    return const AppLoadingState(
                       height: 120,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                            color: AppColors.worldHistoria),
-                      ),
+                      color: AppColors.worldHistoria,
                     );
                   }
                   final articles = snap.data ?? [];
@@ -234,9 +228,7 @@ class WorldScreen extends StatelessWidget {
                                 lang: lang,
                               )
                                   .animate()
-                                  .fadeIn(
-                                      duration: 400.ms,
-                                      delay: (i * 70).ms),
+                                  .fadeIn(duration: 400.ms, delay: (i * 70).ms),
                             );
                           },
                         ),
@@ -249,7 +241,8 @@ class WorldScreen extends StatelessWidget {
                           style: OutlinedButton.styleFrom(
                             foregroundColor: AppColors.worldHistoria,
                             side: BorderSide(
-                                color: AppColors.worldHistoria.withOpacity(0.4)),
+                                color:
+                                    AppColors.worldHistoria.withOpacity(0.4)),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)),
                             minimumSize: const Size.fromHeight(44),
@@ -261,7 +254,7 @@ class WorldScreen extends StatelessWidget {
                           ),
                           icon: const Icon(Icons.menu_book_rounded, size: 16),
                           label: Text(
-                            _seeAllLabel(lang),
+                            context.read<LanguageProvider>().t('world.see_all'),
                             style: GoogleFonts.lato(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
@@ -285,33 +278,37 @@ class WorldScreen extends StatelessWidget {
                 (context, i) {
                   final item = items[i];
                   final era = item.category == 'era'
-                      ? ErasRepository.allEras
-                          .cast<EraModel?>()
-                          .firstWhere((e) => e?.id == item.id,
-                              orElse: () => null)
+                      ? ErasRepository.allEras.cast<EraModel?>().firstWhere(
+                          (e) => e?.id == item.id,
+                          orElse: () => null)
                       : null;
                   final isLocked = item.isPremium && !isPremium;
                   final tapAction = isLocked
-                      ? () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => const PremiumScreen()))
+                      ? () => AppNavigation.openPremium(context)
                       : era != null
-                          ? () => Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => EraDetailScreen(era: era)))
-                          : () => Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => ContentDetailScreen(item: item)));
+                          ? () => AppNavigation.openEra(context, era)
+                          : () => AppNavigation.openContent(context, item);
 
                   if (era != null) {
                     return CinematicCard(
-                      assetImagePath: era.imageAssetPath(era.imageFilenames.first),
+                      assetImagePath:
+                          era.imageAssetPath(era.imageFilenames.first),
                       accentColor: era.accentColor,
-                      title: context.read<LanguageProvider>().t('eras.${era.id}.title'),
-                      subtitle: context.read<LanguageProvider>().t('eras.${era.id}.period'),
+                      title: context
+                          .read<LanguageProvider>()
+                          .t('eras.${era.id}.title'),
+                      subtitle: context
+                          .read<LanguageProvider>()
+                          .t('eras.${era.id}.period'),
                       isPremium: isLocked,
                       onTap: tapAction,
                     )
                         .animate()
                         .fadeIn(duration: 400.ms, delay: (i * 60).ms)
-                        .scale(begin: const Offset(0.93, 0.93), duration: 400.ms, delay: (i * 60).ms);
+                        .scale(
+                            begin: const Offset(0.93, 0.93),
+                            duration: 400.ms,
+                            delay: (i * 60).ms);
                   }
 
                   return WikiCinematicCard(
@@ -377,27 +374,6 @@ class WorldScreen extends StatelessWidget {
       _ => [],
     };
   }
-
-  String _editorialLabel(String lang) => switch (lang) {
-        'en' => 'In-depth articles',
-        'es' => 'Artículos en profundidad',
-        _ => 'Approfondimenti preispanici',
-      };
-  String _seeAllLabel(String lang) => switch (lang) {
-        'en' => 'See all articles',
-        'es' => 'Ver todos los artículos',
-        _ => 'Vedi tutti gli articoli',
-      };
-  String _timelineLabel(String lang) => switch (lang) {
-        'en' => 'Timeline',
-        'es' => 'Línea de tiempo',
-        _ => 'Cronologia',
-      };
-  String _civilizationsLabel(String lang) => switch (lang) {
-        'en' => 'Civilizations',
-        'es' => 'Civilizaciones',
-        _ => 'Civiltà',
-      };
 }
 
 class _EditorialMiniCard extends StatelessWidget {
@@ -420,14 +396,10 @@ class _EditorialMiniCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
-        onTap: () => Navigator.push(
+        onTap: () => AppNavigation.openHistoriaArticle(
           context,
-          MaterialPageRoute(
-            builder: (_) => HistoriaArticleDetailScreen(
-              article: article,
-              allArticles: allArticles,
-            ),
-          ),
+          article: article,
+          allArticles: allArticles,
         ),
         child: Container(
           width: 160,

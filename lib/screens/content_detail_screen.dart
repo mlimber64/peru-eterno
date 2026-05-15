@@ -227,8 +227,8 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: color.withOpacity(0.85),
                       borderRadius: BorderRadius.circular(20),
@@ -255,7 +255,8 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    widget.item.displayName,
+                    widget.item
+                        .localizedTitle(context.read<LanguageProvider>().t),
                     style: GoogleFonts.playfairDisplay(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -352,7 +353,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
           ),
           const SizedBox(height: 16),
           Text(
-            widget.item.displayName,
+            widget.item.localizedTitle(context.read<LanguageProvider>().t),
             textAlign: TextAlign.center,
             style: GoogleFonts.playfairDisplay(
               fontSize: 18,
@@ -402,11 +403,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
               Container(width: 28, height: 2, color: color),
               const SizedBox(width: 10),
               Text(
-                switch (lang) {
-                  'en' => 'OVERVIEW',
-                  'es' => 'RESUMEN',
-                  _ => 'PANORAMICA',
-                },
+                context.read<LanguageProvider>().t('wikipedia.overview'),
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
@@ -431,11 +428,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
   }
 
   Widget _buildOfflineCard(String lang) {
-    final label = switch (lang) {
-      'en' => 'Showing cached content — connect to update',
-      'es' => 'Contenido sin conexión — conéctate para actualizar',
-      _ => 'Contenuto dalla cache — connettiti per aggiornare',
-    };
+    final label = context.read<LanguageProvider>().t('wikipedia.cached');
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
@@ -463,11 +456,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
   }
 
   Widget _buildReadMoreButton(String url, String lang, Color color) {
-    final label = switch (lang) {
-      'en' => 'Read more on Wikipedia',
-      'es' => 'Leer más en Wikipedia',
-      _ => 'Leggi di più su Wikipedia',
-    };
+    final label = context.read<LanguageProvider>().t('wikipedia.read_more');
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton.icon(
@@ -515,7 +504,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
-                '${switch (lang) { 'en' => 'Source', 'es' => 'Fuente', _ => 'Fonte' }}: Wikipedia $langLabel — ',
+                ': Wikipedia $langLabel — ',
                 style: GoogleFonts.lato(
                     fontSize: 11, color: AppColors.textSecondary),
               ),
@@ -535,7 +524,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
           if (isFallback) ...[
             const SizedBox(height: 3),
             Text(
-              '${switch (lang) { 'en' => 'Content available in', 'es' => 'Contenido disponible en', _ => 'Contenuto disponibile in' }}: $langLabel',
+              "${context.read<LanguageProvider>().t('wikipedia.content_available_in')}: $langLabel",
               style: GoogleFonts.lato(
                 fontSize: 10,
                 color: AppColors.textSecondary,
@@ -585,7 +574,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
             Icon(icon, size: 64, color: color.withOpacity(0.25)),
             const SizedBox(height: 16),
             Text(
-              widget.item.displayName,
+              widget.item.localizedTitle(context.read<LanguageProvider>().t),
               style: GoogleFonts.playfairDisplay(
                 fontSize: 18,
                 color: AppColors.textSecondary,
@@ -616,8 +605,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
           CachedNetworkImage(
             imageUrl: url,
             fit: BoxFit.cover,
-            placeholder: (_, __) =>
-                Container(color: color.withOpacity(0.1)),
+            placeholder: (_, __) => Container(color: color.withOpacity(0.1)),
             errorWidget: (_, __, ___) => Container(
               color: color.withOpacity(0.1),
               child: const Icon(Icons.image_not_supported_outlined),
@@ -627,8 +615,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
             bottom: 6,
             right: 6,
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.55),
                 borderRadius: BorderRadius.circular(6),
@@ -659,8 +646,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
       transformationController: _txController,
       onInteractionStart: (_) => _baseTextScale = _textScale,
       onInteractionUpdate: (details) {
-        final newScale =
-            (_baseTextScale * details.scale).clamp(0.8, 3.0);
+        final newScale = (_baseTextScale * details.scale).clamp(0.8, 3.0);
         if ((newScale - _textScale).abs() > 0.005) {
           setState(() => _textScale = newScale);
         }
@@ -685,11 +671,11 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
   }
 
   List<String> _tabLabels(String lang) {
-    return switch (lang) {
-      'en' => ['OVERVIEW', 'CONTENT', 'GALLERY'],
-      'es' => ['RESUMEN', 'CONTENIDO', 'GALERÍA'],
-      _ => ['PANORAMICA', 'CONTENUTO', 'GALLERIA'],
-    };
+    return [
+      context.read<LanguageProvider>().t('wikipedia.overview'),
+      context.read<LanguageProvider>().t('wikipedia.content'),
+      context.read<LanguageProvider>().t('wikipedia.gallery')
+    ];
   }
 }
 

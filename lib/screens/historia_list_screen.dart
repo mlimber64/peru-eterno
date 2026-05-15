@@ -3,10 +3,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
+import '../core/navigation/app_navigation.dart';
 import '../data/historia_repository.dart';
 import '../models/historia_article.dart';
 import '../providers/language_provider.dart';
-import 'historia_article_detail_screen.dart';
+import '../widgets/app_state_views.dart';
 
 class HistoriaListScreen extends StatelessWidget {
   const HistoriaListScreen({super.key});
@@ -27,21 +28,13 @@ class HistoriaListScreen extends StatelessWidget {
               future: HistoriaRepository.loadAll(),
               builder: (context, snap) {
                 if (snap.connectionState != ConnectionState.done) {
-                  return const SizedBox(
+                  return const AppLoadingState(
                     height: 300,
-                    child: Center(
-                      child: CircularProgressIndicator(color: _accent),
-                    ),
+                    color: _accent,
                   );
                 }
                 if (snap.hasError || !snap.hasData || snap.data!.isEmpty) {
-                  return const SizedBox(
-                    height: 300,
-                    child: Center(
-                      child: Icon(Icons.error_outline,
-                          color: Colors.white38, size: 48),
-                    ),
-                  );
+                  return const AppErrorState(height: 300);
                 }
                 final articles = snap.data!;
                 return _ArticleListBody(articles: articles, lang: lang);
@@ -119,7 +112,9 @@ class HistoriaListScreen extends StatelessWidget {
                       Icon(Icons.history_edu_rounded, size: 14, color: _accent),
                       const SizedBox(width: 8),
                       Text(
-                        _eyebrow(lang),
+                        context
+                            .read<LanguageProvider>()
+                            .t('historia.editorial_articles'),
                         style: GoogleFonts.lato(
                           fontSize: 9,
                           fontWeight: FontWeight.w800,
@@ -131,7 +126,9 @@ class HistoriaListScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    _title(lang),
+                    context
+                        .read<LanguageProvider>()
+                        .t('historia.prehispanic_peru'),
                     style: GoogleFonts.playfairDisplay(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -141,7 +138,9 @@ class HistoriaListScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    _subtitle(lang),
+                    context
+                        .read<LanguageProvider>()
+                        .t('historia.prehispanic_subtitle'),
                     style: GoogleFonts.lato(
                       fontSize: 13,
                       color: Colors.white.withOpacity(0.65),
@@ -155,22 +154,6 @@ class HistoriaListScreen extends StatelessWidget {
       ),
     );
   }
-
-  String _eyebrow(String lang) => switch (lang) {
-        'en' => 'EDITORIAL ARTICLES',
-        'es' => 'ARTÍCULOS EDITORIALES',
-        _ => 'ARTICOLI EDITORIALI',
-      };
-  String _title(String lang) => switch (lang) {
-        'en' => 'Pre-Hispanic Peru',
-        'es' => 'Perú Prehispánico',
-        _ => 'Perù Preispanico',
-      };
-  String _subtitle(String lang) => switch (lang) {
-        'en' => 'Origins and ancient civilizations',
-        'es' => 'Orígenes y civilizaciones antiguas',
-        _ => 'Origini e civiltà antiche',
-      };
 }
 
 class _ArticleListBody extends StatelessWidget {
@@ -224,14 +207,10 @@ class _ArticleCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () => Navigator.push(
+          onTap: () => AppNavigation.openHistoriaArticle(
             context,
-            MaterialPageRoute(
-              builder: (_) => HistoriaArticleDetailScreen(
-                article: article,
-                allArticles: allArticles,
-              ),
-            ),
+            article: article,
+            allArticles: allArticles,
           ),
           child: Container(
             decoration: BoxDecoration(
@@ -313,7 +292,9 @@ class _ArticleCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            _readLabel(lang),
+                            context
+                                .read<LanguageProvider>()
+                                .t('historia.read_article'),
                             style: GoogleFonts.lato(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
@@ -348,12 +329,6 @@ class _ArticleCard extends StatelessWidget {
     final first = paragraphs.first.trim();
     return first.length > 120 ? '${first.substring(0, 120)}…' : first;
   }
-
-  String _readLabel(String lang) => switch (lang) {
-        'en' => 'Read article',
-        'es' => 'Leer artículo',
-        _ => 'Leggi articolo',
-      };
 }
 
 class _DiagPainter extends CustomPainter {

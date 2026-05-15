@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/category_config.dart';
+import '../core/navigation/app_navigation.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_stages_repository.dart';
@@ -12,13 +13,11 @@ import '../models/era_model.dart';
 import '../models/historia_stage.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
 import '../widgets/historia_timeline.dart';
 import '../widgets/wiki_cinematic_card.dart';
-import 'content_detail_screen.dart';
-import 'era_detail_screen.dart';
-import 'historia_subtopics_screen.dart';
-import 'premium_screen.dart';
+import 'cultural_map_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -33,7 +32,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
   String _activeFilter = 'era';
 
   static const _filters = [
-    'era', 'personaje', 'tradicion', 'gastronomia', 'musica', 'geografia'
+    'era',
+    'personaje',
+    'tradicion',
+    'gastronomia',
+    'musica',
+    'geografia'
   ];
 
   @override
@@ -45,7 +49,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   // Returns true when we show the editorial stages view
   bool get _showStages => _activeFilter == 'era' && _query.isEmpty;
 
-  List<ContentItem> _filtered(String lang) {
+  List<ContentItem> _filtered(String Function(String) t) {
     final allErasAsItems = ErasRepository.allEras.map((e) => ContentItem(
           id: e.id,
           category: 'era',
@@ -68,7 +72,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     if (_query.isNotEmpty) {
       final q = _query.toLowerCase();
       result = result
-          .where((i) => i.displayName.toLowerCase().contains(q))
+          .where((i) => i.localizedTitle(t).toLowerCase().contains(q))
           .toList();
     }
     return result;
@@ -77,8 +81,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>().currentLanguage;
+    final t = context.watch<LanguageProvider>().t;
     final isPremium = context.watch<PremiumProvider>().isPremium;
-    final items = _showStages ? <ContentItem>[] : _filtered(lang);
+    final items = _showStages ? <ContentItem>[] : _filtered(t);
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
@@ -92,7 +97,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _title(lang).toUpperCase(),
+                    t('explore.title').toUpperCase(),
                     style: GoogleFonts.lato(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
@@ -102,7 +107,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    _subtitle(lang),
+                    t('explore.subtitle'),
                     style: GoogleFonts.playfairDisplay(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -127,7 +132,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         fontSize: 15,
                       ),
                       decoration: InputDecoration(
-                        hintText: _hint(lang),
+                        hintText: t('explore.search_hint'),
                         hintStyle: GoogleFonts.lato(
                           color: AppColors.cremaPergamino.withOpacity(0.3),
                           fontSize: 15,
@@ -153,6 +158,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 14),
+                  _CulturalMapEntryCard(lang: lang),
                 ],
               ),
             ),
@@ -168,9 +175,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 itemBuilder: (context, i) {
                   final f = _filters[i];
                   final isActive = _activeFilter == f;
-                  final color = f == 'all'
-                      ? AppColors.ocre
-                      : CategoryConfigs.colorOf(f);
+                  final color =
+                      f == 'all' ? AppColors.ocre : CategoryConfigs.colorOf(f);
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: GestureDetector(
@@ -217,8 +223,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 children: [
                   Text(
                     _showStages
-                        ? '4 ${_stagesCountLabel(lang)}'
-                        : '${items.length} ${_resultsLabel(lang)}',
+                        ? '4 ${t('explore.historical_stages_count')}'
+                        : '${items.length} ${t('explore.results')}',
                     style: GoogleFonts.lato(
                       fontSize: 12,
                       color: AppColors.cremaPergamino.withOpacity(0.4),
@@ -265,14 +271,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
         final isLocked = item.isPremium && !isPremium;
         final t = context.read<LanguageProvider>().t;
         final tapAction = isLocked
-            ? () => Navigator.push(context,
-                MaterialPageRoute(builder: (_) => const PremiumScreen()))
+            ? () => AppNavigation.openPremium(context)
             : era != null
-                ? () => Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => EraDetailScreen(era: era)))
-                : () => Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (_) => ContentDetailScreen(item: item)));
+                ? () => AppNavigation.openEra(context, era)
+                : () => AppNavigation.openContent(context, item);
 
         if (era != null) {
           return CinematicCard(
@@ -282,8 +284,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
             subtitle: t('eras.${era.id}.period'),
             isPremium: isLocked,
             onTap: tapAction,
-          ).animate().fadeIn(
-              duration: 400.ms, delay: Duration(milliseconds: i * 40));
+          )
+              .animate()
+              .fadeIn(duration: 400.ms, delay: Duration(milliseconds: i * 40));
         }
 
         return WikiCinematicCard(
@@ -291,9 +294,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           subtitle: CategoryConfigs.labelOf(item.category, lang),
           isPremium: isLocked,
           onTap: tapAction,
-        )
-            .animate()
-            .fadeIn(
+        ).animate().fadeIn(
               duration: 400.ms,
               delay: Duration(milliseconds: i * 40),
             );
@@ -302,62 +303,114 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   Widget _buildEmptyState(String lang) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.search_off_rounded,
-              size: 56,
-              color: AppColors.cremaPergamino.withOpacity(0.15)),
-          const SizedBox(height: 16),
-          Text(
-            _noResults(lang),
-            style: GoogleFonts.lato(
-              fontSize: 15,
-              color: AppColors.cremaPergamino.withOpacity(0.3),
-            ),
-          ),
-        ],
-      ),
+    return AppEmptyState(
+      icon: Icons.search_off_rounded,
+      title: context.read<LanguageProvider>().t('explore.no_results'),
+      iconColor: AppColors.cremaPergamino.withOpacity(0.15),
+      titleColor: AppColors.cremaPergamino.withOpacity(0.3),
     );
   }
 
   String _filterLabel(String filter, String lang) =>
       CategoryConfigs.labelOf(filter, lang);
-
-  String _title(String lang) => switch (lang) {
-        'en' => 'Explore',
-        'es' => 'Explorar',
-        _ => 'Esplora',
-      };
-  String _subtitle(String lang) => switch (lang) {
-        'en' => 'Discover Peru',
-        'es' => 'Descubre el Perú',
-        _ => 'Scopri il Perù',
-      };
-  String _hint(String lang) => switch (lang) {
-        'en' => 'Search history, people, food...',
-        'es' => 'Buscar historia, personas, comida...',
-        _ => 'Cerca storia, persone, cibo...',
-      };
-  String _resultsLabel(String lang) => switch (lang) {
-        'en' => 'results',
-        'es' => 'resultados',
-        _ => 'risultati',
-      };
-  String _stagesCountLabel(String lang) => switch (lang) {
-        'en' => 'historical stages',
-        'es' => 'etapas históricas',
-        _ => 'fasi storiche',
-      };
-  String _noResults(String lang) => switch (lang) {
-        'en' => 'No results found',
-        'es' => 'Sin resultados',
-        _ => 'Nessun risultato',
-      };
 }
 
 // ── Vista de etapas históricas ────────────────────────────────────────────────
+
+class _CulturalMapEntryCard extends StatelessWidget {
+  final String lang;
+
+  const _CulturalMapEntryCard({required this.lang});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const CulturalMapScreen()),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF4A140B), Color(0xFF2C1810)],
+            ),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: AppColors.ocre.withOpacity(0.24)),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.ocre.withOpacity(0.08),
+                blurRadius: 18,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.ocre.withOpacity(0.14),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.ocre.withOpacity(0.34)),
+                ),
+                child: const Icon(
+                  Icons.map_rounded,
+                  color: AppColors.ocre,
+                  size: 23,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      context
+                          .read<LanguageProvider>()
+                          .t('explore.cultural_map_title'),
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.cremaPergamino,
+                        height: 1.12,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      context
+                          .read<LanguageProvider>()
+                          .t('explore.cultural_map_subtitle'),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.lato(
+                        fontSize: 12,
+                        color: AppColors.cremaPergamino.withOpacity(0.58),
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 10),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: AppColors.ocre.withOpacity(0.82),
+                size: 15,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).animate().fadeIn(duration: 420.ms).slideY(begin: 0.04, end: 0);
+  }
+}
 
 class _HistoriaStagesView extends StatelessWidget {
   final String lang;
@@ -369,15 +422,14 @@ class _HistoriaStagesView extends StatelessWidget {
       future: HistoriaStagesRepository.loadStages(),
       builder: (context, snap) {
         if (snap.connectionState != ConnectionState.done) {
-          return const Center(
-            child: CircularProgressIndicator(color: AppColors.worldHistoria),
+          return const AppLoadingState(
+            color: AppColors.worldHistoria,
+            height: 300,
           );
         }
         final stages = snap.data ?? [];
         if (stages.isEmpty) {
-          return const Center(
-            child: Icon(Icons.error_outline, color: Colors.white38, size: 48),
-          );
+          return const AppErrorState(height: 300);
         }
 
         final stageMap = {for (final s in stages) s.id: s};
@@ -391,17 +443,7 @@ class _HistoriaStagesView extends StatelessWidget {
                 onItemTap: (item) {
                   final stage = stageMap[item.stageId];
                   if (stage == null) return;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => HistoriaSubtopicsScreen(
-                        stage: stage,
-                        carouselImages:
-                            HistoriaStagesRepository.carouselImagesForStage(
-                                stage.id),
-                      ),
-                    ),
-                  );
+                  AppNavigation.openHistoriaStage(context, stage);
                 },
               ),
             ),
@@ -412,10 +454,14 @@ class _HistoriaStagesView extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
                 child: Row(
                   children: [
-                    Container(width: 3, height: 16, color: AppColors.worldHistoria),
+                    Container(
+                        width: 3, height: 16, color: AppColors.worldHistoria),
                     const SizedBox(width: 10),
                     Text(
-                      _stagesLabel(lang).toUpperCase(),
+                      context
+                          .read<LanguageProvider>()
+                          .t('explore.historical_stages')
+                          .toUpperCase(),
                       style: GoogleFonts.lato(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
@@ -446,12 +492,6 @@ class _HistoriaStagesView extends StatelessWidget {
       },
     );
   }
-
-  String _stagesLabel(String lang) => switch (lang) {
-        'en' => 'Historical Stages',
-        'es' => 'Etapas Históricas',
-        _ => 'Fasi Storiche',
-      };
 }
 
 class _StageCard extends StatelessWidget {
@@ -471,16 +511,7 @@ class _StageCard extends StatelessWidget {
     final dark = Color.lerp(accent, Colors.black, 0.5)!;
 
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => HistoriaSubtopicsScreen(
-                stage: stage,
-                carouselImages:
-                    HistoriaStagesRepository.carouselImagesForStage(stage.id),
-              ),
-        ),
-      ),
+      onTap: () => AppNavigation.openHistoriaStage(context, stage),
       child: Container(
         height: 190,
         decoration: BoxDecoration(

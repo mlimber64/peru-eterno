@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../data/historia_stages_repository.dart';
 import '../models/timeline_item.dart';
+import '../providers/language_provider.dart';
+import 'app_state_views.dart';
 
 class HistoriaTimeline extends StatefulWidget {
   final String lang;
@@ -49,8 +52,7 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
   void _onScroll() {
     final count = _items?.length ?? 0;
     if (count == 0) return;
-    final idx =
-        (_scrollCtrl.offset / _kItemW).round().clamp(0, count - 1);
+    final idx = (_scrollCtrl.offset / _kItemW).round().clamp(0, count - 1);
     if (idx != _selectedIdx) setState(() => _selectedIdx = idx);
   }
 
@@ -71,14 +73,10 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
       future: _itemsFuture,
       builder: (context, snap) {
         if (!snap.hasData) {
-          return SizedBox(
+          return const AppLoadingState(
             height: _kScrollH + 52,
-            child: const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.worldHistoria,
-                strokeWidth: 2,
-              ),
-            ),
+            color: AppColors.worldHistoria,
+            strokeWidth: 2,
           );
         }
 
@@ -112,7 +110,10 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _headerLabel(widget.lang).toUpperCase(),
+                        context
+                            .read<LanguageProvider>()
+                            .t('timeline.historical')
+                            .toUpperCase(),
                         style: GoogleFonts.lato(
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
@@ -140,14 +141,10 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: items[_selectedIdx]
-                            .color
-                            .withOpacity(0.15),
+                        color: items[_selectedIdx].color.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: items[_selectedIdx]
-                              .color
-                              .withOpacity(0.35),
+                          color: items[_selectedIdx].color.withOpacity(0.35),
                           width: 1,
                         ),
                       ),
@@ -256,12 +253,6 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
       },
     );
   }
-
-  String _headerLabel(String lang) => switch (lang) {
-        'en' => 'Historical Timeline',
-        'es' => 'Línea del Tiempo',
-        _ => 'Cronologia Storica',
-      };
 }
 
 // ── Single timeline node ──────────────────────────────────────────────────────
@@ -315,8 +306,7 @@ class _TimelineNode extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color:
-                        isSelected ? accent : accent.withOpacity(0.35),
+                    color: isSelected ? accent : accent.withOpacity(0.35),
                     width: isSelected ? 2.5 : 1.0,
                   ),
                   boxShadow: isSelected
@@ -334,8 +324,7 @@ class _TimelineNode extends StatelessWidget {
                       ? Image.asset(
                           item.imagePath!,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) =>
-                              _gradientFill(accent),
+                          errorBuilder: (_, __, ___) => _gradientFill(accent),
                         )
                       : _gradientFill(accent),
                 ),
@@ -401,8 +390,7 @@ class _TimelineNode extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             style: GoogleFonts.playfairDisplay(
               fontSize: isSelected ? 12.5 : 11.0,
-              fontWeight:
-                  isSelected ? FontWeight.bold : FontWeight.w600,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
               color: isSelected
                   ? Colors.white
                   : AppColors.cremaPergamino.withOpacity(0.55),

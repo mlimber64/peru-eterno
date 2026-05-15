@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final lang = context.watch<LanguageProvider>().currentLanguage;
+    final t = context.watch<LanguageProvider>().t;
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
@@ -35,12 +35,17 @@ class _MainScreenState extends State<MainScreen> {
         index: _currentIndex,
         children: _pages,
       ),
-      bottomNavigationBar: _buildBottomNav(lang),
+      bottomNavigationBar: _buildBottomNav(t),
     );
   }
 
-  Widget _buildBottomNav(String lang) {
-    final labels = _labels(lang);
+  Widget _buildBottomNav(String Function(String) t) {
+    final labels = [
+      t('navigation.home'),
+      t('navigation.explore'),
+      t('navigation.saved'),
+      t('navigation.settings'),
+    ];
     return Container(
       decoration: BoxDecoration(
         color: AppColors.marronProfundo,
@@ -91,9 +96,8 @@ class _MainScreenState extends State<MainScreen> {
                           labels[i],
                           style: GoogleFonts.lato(
                             fontSize: 10,
-                            fontWeight: isActive
-                                ? FontWeight.w700
-                                : FontWeight.w400,
+                            fontWeight:
+                                isActive ? FontWeight.w700 : FontWeight.w400,
                             color: isActive
                                 ? AppColors.ocre
                                 : AppColors.cremaPergamino.withOpacity(0.4),
@@ -119,10 +123,4 @@ class _MainScreenState extends State<MainScreen> {
     (Icons.favorite_border_rounded, Icons.favorite_rounded),
     (Icons.settings_outlined, Icons.settings_rounded),
   ];
-
-  List<String> _labels(String lang) => switch (lang) {
-        'en' => ['Home', 'Explore', 'Saved', 'Settings'],
-        'es' => ['Inicio', 'Explorar', 'Guardados', 'Ajustes'],
-        _ => ['Home', 'Esplora', 'Salvati', 'Impostazioni'],
-      };
 }

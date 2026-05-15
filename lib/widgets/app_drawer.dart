@@ -46,7 +46,7 @@ class AppDrawer extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    _subtitle(lang),
+                    context.read<LanguageProvider>().t('app.tagline'),
                     style: GoogleFonts.lato(
                       fontSize: 11,
                       color: AppColors.cremaPergamino.withOpacity(0.45),
@@ -60,7 +60,8 @@ class AppDrawer extends StatelessWidget {
             const SizedBox(height: 8),
 
             // ── Idioma ───────────────────────────────────────────────────────
-            _SectionLabel(_langLabel(lang)),
+            _SectionLabel(
+                context.read<LanguageProvider>().t('settings.language')),
             _LanguageTile(lang: lang),
 
             const SizedBox(height: 12),
@@ -68,17 +69,20 @@ class AppDrawer extends StatelessWidget {
             const SizedBox(height: 8),
 
             // ── Premium ──────────────────────────────────────────────────────
-            _SectionLabel(_premiumLabel(lang)),
+            _SectionLabel(
+                context.read<LanguageProvider>().t('settings.premium')),
             if (isPremium)
               _InfoTile(
                 icon: Icons.workspace_premium_rounded,
-                label: _activePremiumLabel(lang),
+                label: context
+                    .read<LanguageProvider>()
+                    .t('settings.premium_active'),
                 color: AppColors.ocre,
               )
             else
               _ActionTile(
                 icon: Icons.star_rounded,
-                label: _upgradePremiumLabel(lang),
+                label: context.read<LanguageProvider>().t('settings.upgrade'),
                 color: AppColors.ocre,
                 onTap: () {
                   Navigator.pop(context);
@@ -92,10 +96,11 @@ class AppDrawer extends StatelessWidget {
             const SizedBox(height: 8),
 
             // ── Caché ────────────────────────────────────────────────────────
-            _SectionLabel(_cacheLabel(lang)),
+            _SectionLabel(
+                context.read<LanguageProvider>().t('settings.storage')),
             _ActionTile(
               icon: Icons.delete_sweep_rounded,
-              label: _clearCacheLabel(lang),
+              label: context.read<LanguageProvider>().t('settings.clear_cache'),
               color: AppColors.textOnDarkMuted,
               onTap: () async {
                 await WikipediaService.instance.clearCache();
@@ -128,40 +133,6 @@ class AppDrawer extends StatelessWidget {
         indent: 24,
         endIndent: 24,
       );
-
-  String _subtitle(String lang) => switch (lang) {
-        'en' => 'Cultural encyclopedia',
-        'es' => 'Enciclopedia cultural',
-        _ => 'Enciclopedia culturale',
-      };
-  String _langLabel(String lang) => switch (lang) {
-        'en' => 'LANGUAGE',
-        'es' => 'IDIOMA',
-        _ => 'LINGUA',
-      };
-  String _premiumLabel(String lang) => switch (lang) {
-        _ => 'PREMIUM',
-      };
-  String _cacheLabel(String lang) => switch (lang) {
-        'en' => 'STORAGE',
-        'es' => 'ALMACENAMIENTO',
-        _ => 'ARCHIVIAZIONE',
-      };
-  String _activePremiumLabel(String lang) => switch (lang) {
-        'en' => 'Premium active ✓',
-        'es' => 'Premium activo ✓',
-        _ => 'Premium attivo ✓',
-      };
-  String _upgradePremiumLabel(String lang) => switch (lang) {
-        'en' => 'Upgrade to Premium',
-        'es' => 'Mejorar a Premium',
-        _ => 'Passa a Premium',
-      };
-  String _clearCacheLabel(String lang) => switch (lang) {
-        'en' => 'Clear Wikipedia cache',
-        'es' => 'Limpiar caché Wikipedia',
-        _ => 'Svuota cache Wikipedia',
-      };
 }
 
 // ── Language tile ─────────────────────────────────────────────────────────────
@@ -353,8 +324,10 @@ class _MiniSunPainter extends CustomPainter {
       final innerR = radius + 3;
       final outerR = isLong ? radius + 10 : radius + 6;
       canvas.drawLine(
-        Offset(center.dx + innerR * cos(angle), center.dy + innerR * sin(angle)),
-        Offset(center.dx + outerR * cos(angle), center.dy + outerR * sin(angle)),
+        Offset(
+            center.dx + innerR * cos(angle), center.dy + innerR * sin(angle)),
+        Offset(
+            center.dx + outerR * cos(angle), center.dy + outerR * sin(angle)),
         stroke,
       );
     }

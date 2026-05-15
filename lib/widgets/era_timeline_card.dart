@@ -3,10 +3,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
+import '../core/navigation/app_navigation.dart';
 import '../models/era_model.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
-import '../screens/era_detail_screen.dart';
 import 'image_with_fallback.dart';
 import 'premium_lock_overlay.dart';
 
@@ -98,7 +98,7 @@ class EraTimelineCard extends StatelessWidget {
                 child: isLocked
                     ? PremiumLockOverlay(child: _buildCardContent(context, t))
                     : GestureDetector(
-                        onTap: () => _navigateToDetail(context),
+                        onTap: () => AppNavigation.openEra(context, era),
                         child: _buildCardContent(context, t),
                       ),
               ),
@@ -274,24 +274,6 @@ class EraTimelineCard extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  void _navigateToDetail(BuildContext context) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            EraDetailScreen(era: era),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          final tween = Tween(begin: const Offset(1.0, 0.0), end: Offset.zero)
-              .chain(CurveTween(curve: Curves.easeOutCubic));
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 350),
       ),
     );
   }

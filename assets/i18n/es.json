@@ -1,112 +1,374 @@
 {
-  "app": {
-    "name": "Peru Eterno",
-    "tagline": "Un viaje en el tiempo"
-  },
-  "navigation": {
-    "timeline": "Línea de tiempo",
-    "back": "Volver",
-    "gallery": "Galería",
-    "read": "Leer",
-    "discover": "Descubrir",
-    "close": "Cerrar"
-  },
-  "premium": {
-    "title": "Desbloquear Premium",
-    "subtitle": "Toda la historia del Perú",
-    "description": "Descubre el Imperio Inca, la Conquista Española, el Virreinato y la Independencia del Perú en un viaje único a través de los siglos.",
-    "price": "€2,99",
-    "unlock_button": "Desbloquear ahora",
-    "restore_button": "Restaurar compra",
-    "locked_label": "Contenido Premium",
-    "tap_to_unlock": "Toca para desbloquear",
-    "features_title": "Qué incluye Premium",
-    "features": [
-      "Acceso completo a las 7 eras históricas",
-      "Galerías de ilustraciones exclusivas por era",
-      "Descripciones históricas detalladas trilingüe",
-      "Lectura offline completa",
-      "Sin publicidad"
-    ],
-    "free_label": "GRATIS",
-    "premium_label": "PREMIUM"
-  },
-  "language": {
-    "select": "Seleccionar idioma",
-    "it": "Italiano",
-    "es": "Español",
-    "en": "English"
-  },
-  "gallery": {
-    "image_of": "de",
-    "no_images": "Imágenes próximamente",
-    "placeholder_hint": "Reemplaza con tus ilustraciones IA"
-  },
-  "splash": {
-    "loading": "Cargando..."
-  },
-  "home": {
-    "title": "PERU ETERNO",
-    "subtitle": "Siete eras de historia",
-    "free_section": "Eras gratuitas",
-    "premium_section": "Eras premium"
-  },
-  "eras": {
-    "caral": {
-      "title": "Caral",
-      "subtitle": "La civilización más antigua de América",
-      "period": "3000 — 1800 a.C.",
-      "description": "Caral es considerada la civilización más antigua de las Américas, floreciente en el Valle Caral-Supe, a unos 200 km al norte de Lima. Esta extraordinaria cultura prehistórica desarrolló complejas estructuras monumentales sin el uso de cerámica ni escritura. Sus majestuosas pirámides, anfiteatros circulares y plazas ceremoniales atestiguan una organización social avanzada basada en la cooperación y el comercio, no en la guerra. Los instrumentos musicales encontrados —flautas de hueso y trompetas— sugieren una rica vida ritual y artística. Caral fue declarada Patrimonio de la Humanidad por la UNESCO en 2009.",
-      "description_short": "La más antigua civilización de América, construida en el desierto sin cerámica ni escritura.",
-      "highlight": "UNESCO 2009"
-    },
-    "moche": {
-      "title": "Moche",
-      "subtitle": "Maestros de la cerámica y el oro",
-      "period": "100 — 800 d.C.",
-      "description": "La cultura Moche floreció en la costa norte del Perú, dejando un patrimonio artístico extraordinario. Famosos por su cerámica retrato increíblemente detallada, los Moche representaban la vida cotidiana, la guerra y lo sagrado con un realismo sin igual. La Huaca del Sol y la Huaca de la Luna son sus obras más imponentes, erigidas con millones de ladrillos de adobe. El descubrimiento de la Tumba del Señor de Sipán en 1987 reveló invaluables tesoros de oro y plata, confirmando la sofisticación artesanal de esta civilización. Los Moche desarrollaron sistemas de irrigación avanzados para hacer florecer el desierto costero.",
-      "description_short": "Maestros del oro y la cerámica en la costa norte, creadores de la Tumba de Sipán.",
-      "highlight": "Señor de Sipán"
-    },
-    "tiahuanaco": {
-      "title": "Tiahuanaco",
-      "subtitle": "El pueblo de los Andes altos",
-      "period": "500 — 1100 d.C.",
-      "description": "Tiahuanaco (o Tiwanaku) surgió en las orillas del Lago Titicaca, a casi 3.800 metros sobre el nivel del mar, convirtiéndose en uno de los centros urbanos más importantes de la América precolombina. Su obra maestra arquitectónica, la Puerta del Sol, está decorada con figuras misteriosas y símbolos cósmicos que aún son objeto de estudio. Los megalitos de piedra andesita, transportados a gran distancia sin ruedas ni bestias de carga, testimonian técnicas constructivas extraordinarias. Los artefactos Tiwanaku se han encontrado en toda la cuenca del Titicaca, evidenciando una vasta red de intercambio cultural.",
-      "description_short": "Civilización de los altos Andes en el Lago Titicaca, constructores de la misteriosa Puerta del Sol.",
-      "highlight": "Puerta del Sol"
-    },
-    "inca": {
-      "title": "Imperio Inca",
-      "subtitle": "El más grande imperio precolombino",
-      "period": "1438 — 1533 d.C.",
-      "description": "El Tahuantinsuyu —'las cuatro regiones del mundo'— fue el imperio más extenso de las Américas precolombinas, extendiéndose por más de 4.000 km a lo largo de la costa del Pacífico. Bajo el gobierno del Sapa Inca, millones de personas estaban organizadas en un sistema de reciprocidad y trabajo colectivo llamado mita. El Qhapaq Ñan, red vial de 40.000 km, conectaba todo el imperio permitiendo comunicaciones rápidas mediante relevos (chasquis). Machu Picchu, construida como palacio real de Pachacutec en el siglo XV, sigue siendo el símbolo más icónico de esta civilización. Los quipus, cuerdas anudadas, servían para registrar datos ante la ausencia de escritura.",
-      "description_short": "El gran Tahuantinsuyu se extendía por 4.000 km, con Machu Picchu como corona.",
-      "highlight": "Machu Picchu"
-    },
-    "conquista": {
-      "title": "Conquista Española",
-      "subtitle": "La caída de un imperio",
-      "period": "1532 — 1572 d.C.",
-      "description": "El 16 de noviembre de 1532, Francisco Pizarro y 168 conquistadores capturaron al Inca Atahualpa en Cajamarca, marcando el inicio del fin del Tahuantinsuyu. A pesar del pago de un rescate en oro y plata que llenó una habitación entera, Atahualpa fue ejecutado en 1533. La conquista fue facilitada por las luchas internas entre los hermanos Atahualpa y Huáscar, las enfermedades europeas que diezmaron a la población indígena, y la superioridad tecnológica de los españoles. En 1535, Pizarro fundó Lima como nueva capital colonial, iniciando una profunda transformación cultural, religiosa y social del territorio.",
-      "description_short": "168 conquistadores y Francisco Pizarro marcaron el fin del gran Imperio Inca.",
-      "highlight": "1532 Cajamarca"
-    },
-    "virreinato": {
-      "title": "Virreinato del Perú",
-      "subtitle": "Tres siglos de dominio colonial",
-      "period": "1542 — 1821 d.C.",
-      "description": "El Virreinato del Perú, establecido en 1542, fue el principal centro del poder colonial español en Sudamérica durante casi tres siglos. Lima se convirtió en la 'Ciudad de los Reyes', sede del virrey, la Inquisición y cruce del comercio atlántico. Las minas de Potosí producían enormes cantidades de plata, alimentando la economía del imperio español. La fusión entre cultura indígena, africana y española creó una sociedad mestiza con nuevas expresiones artísticas, musicales y culinarias que definieron la identidad peruana. Revueltas como la de Túpac Amaru II (1780) anticiparon las luchas por la independencia.",
-      "description_short": "Lima, la 'Ciudad de los Reyes', dominó tres siglos de historia colonial sudamericana.",
-      "highlight": "Ciudad de los Reyes"
-    },
-    "independencia": {
-      "title": "Independencia",
-      "subtitle": "El nacimiento de una nación",
-      "period": "1821 d.C.",
-      "description": "El 28 de julio de 1821, el general José de San Martín proclamó la Independencia del Perú en Lima, ante una multitud entusiasta que había esperado este momento durante décadas. Tras siglos de dominio colonial y movimientos insurreccionales como la revuelta de Túpac Amaru II, el Perú se emancipaba de la corona española. La victoria definitiva llegó el 9 de diciembre de 1824, con la histórica Batalla de Ayacucho, liderada por Antonio José de Sucre bajo el mando de Simón Bolívar. Esta victoria puso fin definitivo a la dominación española en Sudamérica. El joven Perú independiente se enfrentó a enormes desafíos para construir una identidad nacional.",
-      "description_short": "El 28 de julio de 1821 San Martín proclamó la Independencia. La Batalla de Ayacucho la confirmó.",
-      "highlight": "28 Julio 1821"
-    }
-  }
+    "app":  {
+                "name":  "Peru Eterno",
+                "tagline":  "Un viaje en el tiempo"
+            },
+    "navigation":  {
+                       "timeline":  "Línea de tiempo",
+                       "back":  "Volver",
+                       "gallery":  "Galería",
+                       "read":  "Leer",
+                       "discover":  "Descubrir",
+                       "close":  "Cerrar",
+                       "home":  "Inicio",
+                       "explore":  "Explorar",
+                       "saved":  "Guardados",
+                       "settings":  "Ajustes",
+                       "previous":  "Anterior",
+                       "next":  "Siguiente"
+                   },
+    "premium":  {
+                    "title":  "Desbloquear Premium",
+                    "subtitle":  "Toda la historia del Perú",
+                    "description":  "Descubre el Imperio Inca, la Conquista española, el Virreinato y la Independencia del Perú en un viaje único a través de los siglos.",
+                    "price":  "€2,99",
+                    "unlock_button":  "Desbloquear ahora",
+                    "restore_button":  "Restaurar compra",
+                    "locked_label":  "Contenido Premium",
+                    "tap_to_unlock":  "Toca para desbloquear",
+                    "features_title":  "Qué incluye Premium",
+                    "features":  [
+                                     "Acceso completo a las 7 eras históricas",
+                                     "Galerías de ilustraciones exclusivas por era",
+                                     "Descripciones históricas detalladas trilingüe",
+                                     "Lectura offline completa",
+                                     "Sin publicidad"
+                                 ],
+                    "free_label":  "GRATIS",
+                    "premium_label":  "PREMIUM",
+                    "active_message":  "¡Tienes acceso completo a toda la historia del Perú!"
+                },
+    "language":  {
+                     "select":  "Seleccionar idioma",
+                     "it":  "Italiano",
+                     "es":  "Español",
+                     "en":  "English"
+                 },
+    "gallery":  {
+                    "image_of":  "de",
+                    "no_images":  "Imágenes próximamente",
+                    "placeholder_hint":  "Reemplaza con tus ilustraciones IA"
+                },
+    "splash":  {
+                   "loading":  "Cargando...",
+                   "brand_top":  "PERU",
+                   "brand_bottom":  "ETERNO",
+                   "tagline":  "Un viaje en el tiempo"
+               },
+    "home":  {
+                 "title":  "PERU ETERNO",
+                 "subtitle":  "Siete eras de historia",
+                 "free_section":  "Eras gratuitas",
+                 "premium_section":  "Eras premium",
+                 "worlds":  "Explorar mundos",
+                 "featured":  "Era destacada",
+                 "character_of_day":  "Personaje del día",
+                 "continue_exploring":  "Continuar explorando",
+                 "continue_journey":  "Continúa tu viaje",
+                 "recent_history":  "Historial reciente",
+                 "historical_progress":  "Progreso histórico",
+                 "hero_eyebrow":  "PERÚ - 5,000 AÑOS",
+                 "hero_title":  "5,000 años\nde historia",
+                 "hero_subtitle":  "Descubre el alma del Perú",
+                 "start_journey":  "Comenzar viaje",
+                 "explore_eras":  "Explorar eras",
+                 "capital":  "Capital",
+                 "area":  "Área",
+                 "population":  "Población",
+                 "regions":  "Regiones",
+                 "regions_value":  "Costa - Sierra - Selva",
+                 "about_title":  "Sobre el Perú",
+                 "about_text":  "El Perú es una de las grandes cunas de la civilización mundial. Hogar del Imperio Inca, de la ciudad sagrada de Machu Picchu y de decenas de culturas a lo largo de 5,000 años, la historia del Perú es una de las más ricas del mundo.",
+                 "how_title":  "Cómo usar Peru Eterno",
+                 "step_1":  "Elige un mundo (Historia, Cultura, Sabores...) para explorar",
+                 "step_2":  "Toca cualquier tarjeta para leer su artículo completo de Wikipedia",
+                 "step_3":  "Guarda tus favoritos con el corazón para encontrarlos después",
+                 "featured_badge":  "ERA DESTACADA",
+                 "view_biography":  "Ver biografía",
+                 "continue_reading":  "Continuar leyendo -\u003e"
+             },
+    "eras":  {
+                 "caral":  {
+                               "title":  "Caral",
+                               "subtitle":  "La civilización más antigua de América",
+                               "period":  "3000 — 1800 a.C.",
+                               "description":  "Caral es considerada la civilización más antigua de las Américas, floreciente en el Valle Caral-Supe, a unos 200 km al norte de Lima. Esta extraordinaria cultura prehistórica desarrolló complejas estructuras monumentales sin el uso de cerámica ni escritura. Sus majestuosas pirámides, anfiteatros circulares y plazas ceremoniales atestiguan una organización social avanzada basada en la cooperación y el comercio, no en la guerra. Los instrumentos musicales encontrados —flautas de hueso y trompetas— sugieren una rica vida ritual y artística. Caral fue declarada Patrimonio de la Humanidad por la UNESCO en 2009.",
+                               "description_short":  "La más antigua civilización de América, construida en el desierto sin cerámica ni escritura.",
+                               "highlight":  "UNESCO 2009"
+                           },
+                 "moche":  {
+                               "title":  "Moche",
+                               "subtitle":  "Maestros de la cerámica y el oro",
+                               "period":  "100 — 800 d.C.",
+                               "description":  "La cultura Moche floreció en la costa norte del Perú, dejando un patrimonio artístico extraordinario. Famosos por su cerámica retrato increíblemente detallada, los Moche representaban la vida cotidiana, la guerra y lo sagrado con un realismo sin igual. La Huaca del Sol y la Huaca de la Luna son sus obras más imponentes, erigidas con millones de ladrillos de adobe. El descubrimiento de la Tumba del Señor de Sipán en 1987 reveló invaluables tesoros de oro y plata, confirmando la sofisticación artesanal de esta civilización. Los Moche desarrollaron sistemas de irrigación avanzados para hacer florecer el desierto costero.",
+                               "description_short":  "Maestros del oro y la cerámica en la costa norte, creadores de la Tumba de Sipán.",
+                               "highlight":  "Señor de Sipán"
+                           },
+                 "tiahuanaco":  {
+                                    "title":  "Tiahuanaco",
+                                    "subtitle":  "El pueblo de los Andes altos",
+                                    "period":  "500 — 1100 d.C.",
+                                    "description":  "Tiahuanaco (o Tiwanaku) surgió en las orillas del Lago Titicaca, a casi 3.800 metros sobre el nivel del mar, convirtiéndose en uno de los centros urbanos más importantes de la América precolombina. Su obra maestra arquitectónica, la Puerta del Sol, está decorada con figuras misteriosas y símbolos cósmicos que aún son objeto de estudio. Los megalitos de piedra andesita, transportados a gran distancia sin ruedas ni bestias de carga, testimonian técnicas constructivas extraordinarias. Los artefactos Tiwanaku se han encontrado en toda la cuenca del Titicaca, evidenciando una vasta red de intercambio cultural.",
+                                    "description_short":  "Civilización de los altos Andes en el Lago Titicaca, constructores de la misteriosa Puerta del Sol.",
+                                    "highlight":  "Puerta del Sol"
+                                },
+                 "inca":  {
+                              "title":  "Imperio Inca",
+                              "subtitle":  "El más grande imperio precolombino",
+                              "period":  "1438 — 1533 d.C.",
+                              "description":  "El Tahuantinsuyu —\u0027las cuatro regiones del mundo\u0027— fue el imperio más extenso de las Américas precolombinas, extendiéndose por más de 4.000 km a lo largo de la costa del Pacífico. Bajo el gobierno del Sapa Inca, millones de personas estaban organizadas en un sistema de reciprocidad y trabajo colectivo llamado mita. El Qhapaq Ñan, red vial de 40.000 km, conectaba todo el imperio permitiendo comunicaciones rápidas mediante relevos (chasquis). Machu Picchu, construida como palacio real de Pachacutec en el siglo XV, sigue siendo el símbolo más icónico de esta civilización. Los quipus, cuerdas anudadas, servían para registrar datos ante la ausencia de escritura.",
+                              "description_short":  "El gran Tahuantinsuyu se extendía por 4.000 km, con Machu Picchu como corona.",
+                              "highlight":  "Machu Picchu"
+                          },
+                 "conquista":  {
+                                   "title":  "Conquista española",
+                                   "subtitle":  "La caída de un imperio",
+                                   "period":  "1532 — 1572 d.C.",
+                                   "description":  "El 16 de noviembre de 1532, Francisco Pizarro y 168 conquistadores capturaron al Inca Atahualpa en Cajamarca, marcando el inicio del fin del Tahuantinsuyu. A pesar del pago de un rescate en oro y plata que llenó una habitación entera, Atahualpa fue ejecutado en 1533. La conquista fue facilitada por las luchas internas entre los hermanos Atahualpa y Huáscar, las enfermedades europeas que diezmaron a la población indígena, y la superioridad tecnológica de los españoles. En 1535, Pizarro fundó Lima como nueva capital colonial, iniciando una profunda transformación cultural, religiosa y social del territorio.",
+                                   "description_short":  "168 conquistadores y Francisco Pizarro marcaron el fin del gran Imperio Inca.",
+                                   "highlight":  "1532 Cajamarca"
+                               },
+                 "virreinato":  {
+                                    "title":  "Virreinato del Perú",
+                                    "subtitle":  "Tres siglos de dominio colonial",
+                                    "period":  "1542 — 1821 d.C.",
+                                    "description":  "El Virreinato del Perú, establecido en 1542, fue el principal centro del poder colonial español en Sudamérica durante casi tres siglos. Lima se convirtió en la \u0027Ciudad de los Reyes\u0027, sede del virrey, la Inquisición y cruce del comercio atlántico. Las minas de Potosí producían enormes cantidades de plata, alimentando la economía del imperio español. La fusión entre cultura indígena, africana y española creó una sociedad mestiza con nuevas expresiones artísticas, musicales y culinarias que definieron la identidad peruana. Revueltas como la de Túpac Amaru II (1780) anticiparon las luchas por la independencia.",
+                                    "description_short":  "Lima, la \u0027Ciudad de los Reyes\u0027, dominó tres siglos de historia colonial sudamericana.",
+                                    "highlight":  "Ciudad de los Reyes"
+                                },
+                 "independencia":  {
+                                       "title":  "Independencia",
+                                       "subtitle":  "El nacimiento de una nación",
+                                       "period":  "1821 d.C.",
+                                       "description":  "El 28 de julio de 1821, el general José de San Martín proclamó la Independencia del Perú en Lima, ante una multitud entusiasta que había esperado este momento durante décadas. Tras siglos de dominio colonial y movimientos insurreccionales como la revuelta de Túpac Amaru II, el Perú se emancipaba de la corona española. La victoria definitiva llegó el 9 de diciembre de 1824, con la histórica Batalla de Ayacucho, liderada por Antonio José de Sucre bajo el mando de Simón Bolívar. Esta victoria puso fin definitivo a la dominación española en Sudamérica. El joven Perú independiente se enfrentó a enormes desafíos para construir una identidad nacional.",
+                                       "description_short":  "El 28 de julio de 1821 San Martín proclamó la Independencia. La Batalla de Ayacucho la confirmó.",
+                                       "highlight":  "28 Julio 1821"
+                                   }
+             },
+    "states":  {
+                   "loading":  "Cargando...",
+                   "empty":  "Sin contenido",
+                   "error":  "Algo salió mal",
+                   "retry":  "Reintentar"
+               },
+    "explore":  {
+                    "title":  "Explorar",
+                    "subtitle":  "Descubre el Perú",
+                    "search_hint":  "Buscar historia, personas, comida...",
+                    "results":  "resultados",
+                    "historical_stages_count":  "etapas históricas",
+                    "no_results":  "Sin resultados",
+                    "historical_stages":  "Etapas históricas",
+                    "cultural_map_title":  "Mapa cultural",
+                    "cultural_map_subtitle":  "Explora el Perú desde lugares sagrados y civilizaciones."
+                },
+    "historia":  {
+                     "editorial_articles":  "ARTÍCULOS EDITORIALES",
+                     "prehispanic_peru":  "Perú prehispánico",
+                     "prehispanic_subtitle":  "Orígenes y civilizaciones antiguas",
+                     "articles":  "Artículos",
+                     "read_article":  "Leer artículo",
+                     "sources_title":  "Fuentes y créditos",
+                     "sources_body":  "Contenido editorial creado para Peru Eterno. Basado en fuentes académicas: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Perú, Enciclopedia del Perú.",
+                     "explore_also":  "Explora también",
+                     "read":  "Leer"
+                 },
+    "timeline":  {
+                     "historical":  "Línea de tiempo histórica"
+                 },
+    "cultural_map":  {
+                         "places":  "Lugares culturales",
+                         "todo_article":  "{name} todavía no tiene un artículo dedicado.",
+                         "eyebrow":  "MUSEO DIGITAL",
+                         "title":  "Mapa cultural del Perú",
+                         "subtitle":  "Explora lugares, eras y territorios sagrados.",
+                         "open_story":  "Abrir historia"
+                     },
+    "favorites":  {
+                      "eyebrow":  "MI COLECCIÓN",
+                      "title":  "Guardados",
+                      "empty_title":  "Aún no hay guardados",
+                      "empty_subtitle":  "Toca el corazón en cualquier`nartículo para guardarlo aquí"
+                  },
+    "world":  {
+                  "editorial":  "Artículos en profundidad",
+                  "see_all":  "Ver todos los artículos",
+                  "timeline":  "Línea de tiempo",
+                  "civilizations":  "Civilizaciones"
+              },
+    "settings":  {
+                     "eyebrow":  "PREFERENCIAS",
+                     "title":  "Ajustes",
+                     "language":  "IDIOMA",
+                     "premium":  "PREMIUM",
+                     "storage":  "ALMACENAMIENTO",
+                     "about":  "ACERCA DE",
+                     "premium_active":  "Premium activo",
+                     "premium_active_subtitle":  "Todo el contenido desbloqueado",
+                     "upgrade":  "Mejorar a Premium",
+                     "upgrade_subtitle":  "Desbloquea todas las eras y contenido",
+                     "clear_cache":  "Limpiar caché Wikipedia",
+                     "clear_cache_subtitle":  "Fuerza la descarga de artículos",
+                     "clear_history":  "Limpiar historial",
+                     "clear_history_subtitle":  "Elimina elementos de \"continuar explorando\"",
+                     "clear_favorites":  "Eliminar todos los guardados",
+                     "clear_favorites_subtitle":  "Esta acción no se puede deshacer",
+                     "cache_cleared":  "Caché limpiado",
+                     "about_text":  "Una enciclopedia cultural sobre la historia, tradiciones y personas del Perú. Contenido proveniente de Wikipedia (CC BY-SA)."
+                 },
+    "wikipedia":  {
+                      "overview":  "RESUMEN",
+                      "content":  "CONTENIDO",
+                      "gallery":  "GALERÍA",
+                      "cached":  "Contenido sin conexión - conéctate para actualizar",
+                      "read_more":  "Leer más en Wikipedia",
+                      "source":  "Fuente",
+                      "content_available_in":  "Contenido disponible en",
+                      "section":  "Sección {number}",
+                      "expand":  "Expandir",
+                      "collapse":  "Reducir",
+                      "editorial_source":  "Fuente: contenido editorial",
+                      "no_connection":  "No se pudo cargar el contenido",
+                      "retry":  "Reintentar"
+                  },
+    "content":  {
+                    "items":  {
+                                  "caral":  {
+                                                "title":  "Caral",
+                                                "subtitle":  "Civilización más antigua de América"
+                                            },
+                                  "moche":  {
+                                                "title":  "Moche",
+                                                "subtitle":  "Maestros de la cerámica y el oro"
+                                            },
+                                  "tiahuanaco":  {
+                                                     "title":  "Tiahuanaco",
+                                                     "subtitle":  "El pueblo de los Andes altos"
+                                                 },
+                                  "inca":  {
+                                               "title":  "Imperio Inca",
+                                               "subtitle":  "El más grande imperio precolombino"
+                                           },
+                                  "conquista":  {
+                                                    "title":  "Conquista española",
+                                                    "subtitle":  "La caída de un imperio"
+                                                },
+                                  "virreinato":  {
+                                                     "title":  "Virreinato del Perú",
+                                                     "subtitle":  "Tres siglos de dominio colonial"
+                                                 },
+                                  "independencia":  {
+                                                        "title":  "Independencia",
+                                                        "subtitle":  "El nacimiento de una nación"
+                                                    },
+                                  "cesar_vallejo":  {
+                                                        "title":  "César Vallejo",
+                                                        "subtitle":  "Poeta universal"
+                                                    },
+                                  "chabuca_granda":  {
+                                                         "title":  "Chabuca Granda",
+                                                         "subtitle":  "Voz de la música criolla"
+                                                     },
+                                  "vargas_llosa":  {
+                                                       "title":  "Mario Vargas Llosa",
+                                                       "subtitle":  "Escritor y premio Nobel"
+                                                   },
+                                  "ricardo_palma":  {
+                                                        "title":  "Ricardo Palma",
+                                                        "subtitle":  "Autor de las tradiciones peruanas"
+                                                    },
+                                  "arguedas":  {
+                                                   "title":  "José María Arguedas",
+                                                   "subtitle":  "Escritor del mundo andino"
+                                               },
+                                  "tupac_amaru":  {
+                                                      "title":  "Túpac Amaru II",
+                                                      "subtitle":  "Líder de la rebelión andina"
+                                                  },
+                                  "pachacutec":  {
+                                                     "title":  "Pachacútec",
+                                                     "subtitle":  "Arquitecto del Imperio Inca"
+                                                 },
+                                  "carrion":  {
+                                                  "title":  "Daniel Alcides Carrión",
+                                                  "subtitle":  "Mártir de la medicina peruana"
+                                              },
+                                  "bolognesi":  {
+                                                    "title":  "Francisco Bolognesi",
+                                                    "subtitle":  "Héroe nacional"
+                                                },
+                                  "inti_raymi":  {
+                                                     "title":  "Inti Raymi",
+                                                     "subtitle":  "Fiesta del sol"
+                                                 },
+                                  "marinera":  {
+                                                   "title":  "Marinera",
+                                                   "subtitle":  "Danza nacional del Perú"
+                                               },
+                                  "pachamama":  {
+                                                    "title":  "Pachamama",
+                                                    "subtitle":  "Madre tierra andina"
+                                                },
+                                  "semana_santa_ayacucho":  {
+                                                                "title":  "Semana Santa de Ayacucho",
+                                                                "subtitle":  "Tradición religiosa andina"
+                                                            },
+                                  "ceviche":  {
+                                                  "title":  "Ceviche",
+                                                  "subtitle":  "Ícono de la cocina peruana"
+                                              },
+                                  "lomo_saltado":  {
+                                                       "title":  "Lomo saltado",
+                                                       "subtitle":  "Encuentro criollo y asiático"
+                                                   },
+                                  "aji_de_gallina":  {
+                                                         "title":  "Ají de gallina",
+                                                         "subtitle":  "Clásico cremoso peruano"
+                                                     },
+                                  "chicha_morada":  {
+                                                        "title":  "Chicha morada",
+                                                        "subtitle":  "Bebida de maíz morado"
+                                                    },
+                                  "pisco_sour":  {
+                                                     "title":  "Pisco sour",
+                                                     "subtitle":  "Cóctel emblemático"
+                                                 },
+                                  "pachamanca":  {
+                                                     "title":  "Pachamanca",
+                                                     "subtitle":  "Cocina ceremonial de la tierra"
+                                                 },
+                                  "huayno":  {
+                                                 "title":  "Huayno",
+                                                 "subtitle":  "Música de los Andes"
+                                             },
+                                  "vals_criollo":  {
+                                                       "title":  "Vals criollo",
+                                                       "subtitle":  "Elegancia musical costeña"
+                                                   },
+                                  "festejo":  {
+                                                  "title":  "Festejo",
+                                                  "subtitle":  "Ritmo afroperuano"
+                                              },
+                                  "cajon":  {
+                                                "title":  "Cajón",
+                                                "subtitle":  "Percusión afroperuana"
+                                            },
+                                  "andes":  {
+                                                "title":  "Andes",
+                                                "subtitle":  "Columna vertebral del Perú"
+                                            },
+                                  "amazonia":  {
+                                                   "title":  "Amazonía peruana",
+                                                   "subtitle":  "Bosque vivo y biodiversidad"
+                                               },
+                                  "machu_picchu":  {
+                                                       "title":  "Machu Picchu",
+                                                       "subtitle":  "Ciudad sagrada de los incas"
+                                                   },
+                                  "lago_titicaca":  {
+                                                        "title":  "Lago Titicaca",
+                                                        "subtitle":  "Lago sagrado de los Andes altos"
+                                                    }
+                              }
+                }
 }

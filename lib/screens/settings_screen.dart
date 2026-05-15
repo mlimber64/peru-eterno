@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             // Header
             Text(
-              _eyebrow(lang),
+              context.read<LanguageProvider>().t('settings.eyebrow'),
               style: GoogleFonts.lato(
                 fontSize: 11,
                 fontWeight: FontWeight.w800,
@@ -35,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              _title(lang),
+              context.read<LanguageProvider>().t('settings.title'),
               style: GoogleFonts.playfairDisplay(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -45,24 +45,32 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             // ── Language ─────────────────────────────────────────────────
-            _sectionLabel(_langSection(lang)),
+            _sectionLabel(
+                context.read<LanguageProvider>().t('settings.language')),
             _LanguageSelector(lang: lang),
             const SizedBox(height: 28),
 
             // ── Premium ──────────────────────────────────────────────────
-            _sectionLabel('PREMIUM'),
+            _sectionLabel(
+                context.read<LanguageProvider>().t('settings.premium')),
             if (isPremium)
               _InfoCard(
                 icon: Icons.workspace_premium_rounded,
-                title: _activeTitle(lang),
-                subtitle: _activeSubtitle(lang),
+                title: context
+                    .read<LanguageProvider>()
+                    .t('settings.premium_active'),
+                subtitle: context
+                    .read<LanguageProvider>()
+                    .t('settings.premium_active_subtitle'),
                 color: AppColors.ocre,
               )
             else
               _ActionCard(
                 icon: Icons.star_rounded,
-                title: _upgradeTitle(lang),
-                subtitle: _upgradeSubtitle(lang),
+                title: context.read<LanguageProvider>().t('settings.upgrade'),
+                subtitle: context
+                    .read<LanguageProvider>()
+                    .t('settings.upgrade_subtitle'),
                 color: AppColors.ocre,
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const PremiumScreen())),
@@ -70,18 +78,23 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 28),
 
             // ── Storage ───────────────────────────────────────────────────
-            _sectionLabel(_storageSection(lang)),
+            _sectionLabel(
+                context.read<LanguageProvider>().t('settings.storage')),
             _ActionCard(
               icon: Icons.delete_sweep_rounded,
-              title: _clearCacheTitle(lang),
-              subtitle: _clearCacheSubtitle(lang),
+              title: context.read<LanguageProvider>().t('settings.clear_cache'),
+              subtitle: context
+                  .read<LanguageProvider>()
+                  .t('settings.clear_cache_subtitle'),
               color: AppColors.textOnDarkMuted,
               onTap: () async {
                 await WikipediaService.instance.clearCache();
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(_cacheClearedMsg(lang)),
+                      content: Text(context
+                          .read<LanguageProvider>()
+                          .t('settings.cache_cleared')),
                       backgroundColor: AppColors.marronProfundo,
                     ),
                   );
@@ -91,8 +104,11 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 12),
             _ActionCard(
               icon: Icons.history_toggle_off_rounded,
-              title: _clearHistoryTitle(lang),
-              subtitle: _clearHistorySubtitle(lang),
+              title:
+                  context.read<LanguageProvider>().t('settings.clear_history'),
+              subtitle: context
+                  .read<LanguageProvider>()
+                  .t('settings.clear_history_subtitle'),
               color: AppColors.textOnDarkMuted,
               onTap: () {
                 context.read<HistoryProvider>().clear();
@@ -101,8 +117,12 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 12),
             _ActionCard(
               icon: Icons.favorite_border_rounded,
-              title: _clearFavoritesTitle(lang),
-              subtitle: _clearFavoritesSubtitle(lang),
+              title: context
+                  .read<LanguageProvider>()
+                  .t('settings.clear_favorites'),
+              subtitle: context
+                  .read<LanguageProvider>()
+                  .t('settings.clear_favorites_subtitle'),
               color: AppColors.textOnDarkMuted,
               onTap: () async {
                 // Clear all favorites one by one
@@ -115,7 +135,7 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 28),
 
             // ── About ─────────────────────────────────────────────────────
-            _sectionLabel(_aboutSection(lang)),
+            _sectionLabel(context.read<LanguageProvider>().t('settings.about')),
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
@@ -128,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Perú Eterno',
+                    context.read<LanguageProvider>().t('app.name'),
                     style: GoogleFonts.playfairDisplay(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -145,7 +165,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    _aboutText(lang),
+                    context.read<LanguageProvider>().t('settings.about_text'),
                     style: GoogleFonts.lato(
                       fontSize: 13,
                       color: AppColors.cremaPergamino.withOpacity(0.55),
@@ -175,95 +195,6 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
-
-  String _eyebrow(String lang) => switch (lang) {
-        'en' => 'PREFERENCES',
-        'es' => 'PREFERENCIAS',
-        _ => 'PREFERENZE',
-      };
-  String _title(String lang) => switch (lang) {
-        'en' => 'Settings',
-        'es' => 'Ajustes',
-        _ => 'Impostazioni',
-      };
-  String _langSection(String lang) => switch (lang) {
-        'en' => 'LANGUAGE',
-        'es' => 'IDIOMA',
-        _ => 'LINGUA',
-      };
-  String _storageSection(String lang) => switch (lang) {
-        'en' => 'STORAGE',
-        'es' => 'ALMACENAMIENTO',
-        _ => 'ARCHIVIAZIONE',
-      };
-  String _aboutSection(String lang) => switch (lang) {
-        'en' => 'ABOUT',
-        'es' => 'ACERCA DE',
-        _ => 'INFO',
-      };
-  String _activeTitle(String lang) => switch (lang) {
-        'en' => 'Premium active',
-        'es' => 'Premium activo',
-        _ => 'Premium attivo',
-      };
-  String _activeSubtitle(String lang) => switch (lang) {
-        'en' => 'All content unlocked',
-        'es' => 'Todo el contenido desbloqueado',
-        _ => 'Tutto il contenuto sbloccato',
-      };
-  String _upgradeTitle(String lang) => switch (lang) {
-        'en' => 'Upgrade to Premium',
-        'es' => 'Mejorar a Premium',
-        _ => 'Passa a Premium',
-      };
-  String _upgradeSubtitle(String lang) => switch (lang) {
-        'en' => 'Unlock all eras and content',
-        'es' => 'Desbloquea todas las eras y contenido',
-        _ => 'Sblocca tutte le ere e i contenuti',
-      };
-  String _clearCacheTitle(String lang) => switch (lang) {
-        'en' => 'Clear Wikipedia cache',
-        'es' => 'Limpiar caché Wikipedia',
-        _ => 'Svuota cache Wikipedia',
-      };
-  String _clearCacheSubtitle(String lang) => switch (lang) {
-        'en' => 'Force re-download of all articles',
-        'es' => 'Fuerza la re-descarga de artículos',
-        _ => 'Forza il riscariamento degli articoli',
-      };
-  String _clearHistoryTitle(String lang) => switch (lang) {
-        'en' => 'Clear navigation history',
-        'es' => 'Limpiar historial',
-        _ => 'Cancella cronologia',
-      };
-  String _clearHistorySubtitle(String lang) => switch (lang) {
-        'en' => 'Remove "continue exploring" items',
-        'es' => 'Elimina elementos de "continuar explorando"',
-        _ => 'Rimuovi elementi "continua a esplorare"',
-      };
-  String _clearFavoritesTitle(String lang) => switch (lang) {
-        'en' => 'Clear all favorites',
-        'es' => 'Eliminar todos los guardados',
-        _ => 'Cancella tutti i preferiti',
-      };
-  String _clearFavoritesSubtitle(String lang) => switch (lang) {
-        'en' => 'This cannot be undone',
-        'es' => 'Esta acción no se puede deshacer',
-        _ => 'Questa azione non può essere annullata',
-      };
-  String _cacheClearedMsg(String lang) => switch (lang) {
-        'en' => 'Cache cleared',
-        'es' => 'Caché limpiado',
-        _ => 'Cache svuotata',
-      };
-  String _aboutText(String lang) => switch (lang) {
-        'en' =>
-          'A cultural encyclopedia about Peru\'s history, traditions, and people. Content powered by Wikipedia (CC BY-SA).',
-        'es' =>
-          'Una enciclopedia cultural sobre la historia, tradiciones y personas del Perú. Contenido proveniente de Wikipedia (CC BY-SA).',
-        _ =>
-          'Un\'enciclopedia culturale sulla storia, le tradizioni e le persone del Perù. Contenuto fornito da Wikipedia (CC BY-SA).',
-      };
 }
 
 // ── Language selector ─────────────────────────────────────────────────────────
@@ -351,8 +282,8 @@ class _ActionCard extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-                color: AppColors.cremaPergamino.withOpacity(0.06)),
+            border:
+                Border.all(color: AppColors.cremaPergamino.withOpacity(0.06)),
           ),
           child: Row(
             children: [
@@ -390,8 +321,7 @@ class _ActionCard extends StatelessWidget {
                 ),
               ),
               Icon(Icons.chevron_right_rounded,
-                  size: 18,
-                  color: AppColors.cremaPergamino.withOpacity(0.2)),
+                  size: 18, color: AppColors.cremaPergamino.withOpacity(0.2)),
             ],
           ),
         ),

@@ -6,10 +6,16 @@ class FavoritesService {
 
   Future<Set<String>> load() async {
     final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getString(_key);
-    if (raw == null) return {};
-    final list = (jsonDecode(raw) as List).cast<String>();
-    return list.toSet();
+    try {
+      final raw = prefs.getString(_key);
+      if (raw == null) return {};
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) throw const FormatException('Invalid favorites');
+      return decoded.whereType<String>().toSet();
+    } catch (_) {
+      await prefs.remove(_key);
+      return {};
+    }
   }
 
   Future<bool> toggle(String id) async {

@@ -2,7 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
+import '../providers/language_provider.dart';
 import 'main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -35,6 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.watch<LanguageProvider>().t;
+
     return Scaffold(
       backgroundColor: AppColors.marronOscuro,
       body: Stack(
@@ -60,30 +64,26 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(height: 40),
                 // PERU
                 Text(
-                  'PERU',
+                  t('splash.brand_top'),
                   style: GoogleFonts.playfairDisplay(
                     fontSize: 52,
                     fontWeight: FontWeight.bold,
                     color: AppColors.ocre,
                     letterSpacing: 12,
                   ),
-                )
-                    .animate()
-                    .fadeIn(duration: 700.ms, delay: 500.ms)
-                    .slideY(begin: 0.2, end: 0, duration: 700.ms, delay: 500.ms),
+                ).animate().fadeIn(duration: 700.ms, delay: 500.ms).slideY(
+                    begin: 0.2, end: 0, duration: 700.ms, delay: 500.ms),
                 // ETERNO
                 Text(
-                  'ETERNO',
+                  t('splash.brand_bottom'),
                   style: GoogleFonts.playfairDisplay(
                     fontSize: 52,
                     fontWeight: FontWeight.w300,
                     color: AppColors.cremaPergamino,
                     letterSpacing: 16,
                   ),
-                )
-                    .animate()
-                    .fadeIn(duration: 700.ms, delay: 700.ms)
-                    .slideY(begin: 0.2, end: 0, duration: 700.ms, delay: 700.ms),
+                ).animate().fadeIn(duration: 700.ms, delay: 700.ms).slideY(
+                    begin: 0.2, end: 0, duration: 700.ms, delay: 700.ms),
                 const SizedBox(height: 20),
                 // Decorative line
                 Container(
@@ -94,7 +94,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(height: 16),
                 // Tagline
                 Text(
-                  'Un viaggio nel tempo',
+                  t('splash.tagline'),
                   style: GoogleFonts.lato(
                     fontSize: 14,
                     color: AppColors.cremaPergamino.withOpacity(0.65),
@@ -197,7 +197,8 @@ class _BackgroundPainter extends CustomPainter {
 
     const spacing = 40.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {
-      canvas.drawLine(Offset(i, 0), Offset(i + size.height, size.height), paint);
+      canvas.drawLine(
+          Offset(i, 0), Offset(i + size.height, size.height), paint);
     }
   }
 

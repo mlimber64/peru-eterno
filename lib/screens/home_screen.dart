@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/world_config.dart';
+import '../core/navigation/app_navigation.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_stages_repository.dart';
@@ -19,10 +20,6 @@ import '../providers/premium_provider.dart';
 import '../providers/reading_progress_provider.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/cinematic_card.dart';
-import 'content_detail_screen.dart';
-import 'era_detail_screen.dart';
-import 'historia_article_detail_screen.dart';
-import 'premium_screen.dart';
 import 'world_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -94,7 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
           // ── Continua il tuo viaggio ─────────────────────────────────────
           if (rp.hasLastArticle) ...[
             SliverToBoxAdapter(
-              child: _SectionHeader(label: _journeyLabel(lang), lang: lang),
+              child: _SectionHeader(
+                  label: context
+                      .read<LanguageProvider>()
+                      .t('home.continue_journey'),
+                  lang: lang),
             ),
             SliverToBoxAdapter(
               child: _JourneyCard(
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // ── Mundos ──────────────────────────────────────────────────────
           SliverToBoxAdapter(
             child: _SectionHeader(
-              label: _worldsLabel(lang),
+              label: context.read<LanguageProvider>().t('home.worlds'),
               lang: lang,
             ),
           ),
@@ -121,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // ── Era Destacada ────────────────────────────────────────────────
           SliverToBoxAdapter(
             child: _SectionHeader(
-              label: _featuredLabel(lang),
+              label: context.read<LanguageProvider>().t('home.featured'),
               lang: lang,
             ),
           ),
@@ -137,7 +138,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // ── Personaje del Día ────────────────────────────────────────────
           SliverToBoxAdapter(
-            child: _SectionHeader(label: _personajeLabel(lang), lang: lang),
+            child: _SectionHeader(
+                label:
+                    context.read<LanguageProvider>().t('home.character_of_day'),
+                lang: lang),
           ),
           SliverToBoxAdapter(
             child: _PersonajeDiaSection(item: _personajeDelDia, lang: lang),
@@ -146,7 +150,10 @@ class _HomeScreenState extends State<HomeScreen> {
           // ── Historial reciente de Historia ───────────────────────────────
           if (rp.history.length > 1) ...[
             SliverToBoxAdapter(
-              child: _SectionHeader(label: _recentLabel(lang), lang: lang),
+              child: _SectionHeader(
+                  label:
+                      context.read<LanguageProvider>().t('home.recent_history'),
+                  lang: lang),
             ),
             SliverToBoxAdapter(
               child: _RecentHistoriaStrip(
@@ -159,7 +166,11 @@ class _HomeScreenState extends State<HomeScreen> {
           // ── Progreso histórico ───────────────────────────────────────────
           if (rp.hasHistory) ...[
             SliverToBoxAdapter(
-              child: _SectionHeader(label: _histProgressLabel(lang), lang: lang),
+              child: _SectionHeader(
+                  label: context
+                      .read<LanguageProvider>()
+                      .t('home.historical_progress'),
+                  lang: lang),
             ),
             SliverToBoxAdapter(
               child: _StageProgressSection(lang: lang),
@@ -169,7 +180,11 @@ class _HomeScreenState extends State<HomeScreen> {
           // ── Continuar explorando ─────────────────────────────────────────
           if (history.isNotEmpty) ...[
             SliverToBoxAdapter(
-              child: _SectionHeader(label: _continueLabel(lang), lang: lang),
+              child: _SectionHeader(
+                  label: context
+                      .read<LanguageProvider>()
+                      .t('home.continue_exploring'),
+                  lang: lang),
             ),
             SliverToBoxAdapter(
               child: _ContinueSection(items: history, lang: lang),
@@ -209,50 +224,13 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(right: 4),
             child: _GlassButton(
               label: 'PREMIUM',
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const PremiumScreen())),
+              onTap: () => AppNavigation.openPremium(context),
             ),
           ),
         const SizedBox(width: 8),
       ],
     );
   }
-
-  String _worldsLabel(String lang) => switch (lang) {
-        'en' => 'Explore worlds',
-        'es' => 'Explorar mundos',
-        _ => 'Esplora i mondi',
-      };
-  String _featuredLabel(String lang) => switch (lang) {
-        'en' => 'Featured era',
-        'es' => 'Era destacada',
-        _ => 'Era in evidenza',
-      };
-  String _personajeLabel(String lang) => switch (lang) {
-        'en' => 'Character of the day',
-        'es' => 'Personaje del día',
-        _ => 'Personaggio del giorno',
-      };
-  String _continueLabel(String lang) => switch (lang) {
-        'en' => 'Continue exploring',
-        'es' => 'Continuar explorando',
-        _ => 'Continua a esplorare',
-      };
-  String _journeyLabel(String lang) => switch (lang) {
-        'en' => 'Continue your journey',
-        'es' => 'Continúa tu viaje',
-        _ => 'Continua il tuo viaggio',
-      };
-  String _recentLabel(String lang) => switch (lang) {
-        'en' => 'Recent history',
-        'es' => 'Historial reciente',
-        _ => 'Cronologia recente',
-      };
-  String _histProgressLabel(String lang) => switch (lang) {
-        'en' => 'Historical progress',
-        'es' => 'Progreso histórico',
-        _ => 'Progresso storico',
-      };
 }
 
 // ── Hero section ──────────────────────────────────────────────────────────────
@@ -343,7 +321,7 @@ class _HeroSection extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      _eyebrow(lang),
+                      context.read<LanguageProvider>().t('home.hero_eyebrow'),
                       style: GoogleFonts.lato(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
@@ -359,7 +337,7 @@ class _HeroSection extends StatelessWidget {
                 const SizedBox(height: 14),
                 // Main title
                 Text(
-                  _mainTitle(lang),
+                  context.read<LanguageProvider>().t('home.hero_title'),
                   style: GoogleFonts.playfairDisplay(
                     fontSize: 38,
                     fontWeight: FontWeight.bold,
@@ -372,7 +350,7 @@ class _HeroSection extends StatelessWidget {
                     .slideY(begin: 0.15, end: 0),
                 const SizedBox(height: 10),
                 Text(
-                  _subtitle(lang),
+                  context.read<LanguageProvider>().t('home.hero_subtitle'),
                   style: GoogleFonts.playfairDisplay(
                     fontSize: 17,
                     fontStyle: FontStyle.italic,
@@ -384,7 +362,9 @@ class _HeroSection extends StatelessWidget {
                 Row(
                   children: [
                     _HeroButton(
-                      label: _primaryBtn(lang),
+                      label: context
+                          .read<LanguageProvider>()
+                          .t('home.start_journey'),
                       isPrimary: true,
                       onTap: () => Navigator.push(
                         context,
@@ -396,7 +376,9 @@ class _HeroSection extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     _HeroButton(
-                      label: _secondaryBtn(lang),
+                      label: context
+                          .read<LanguageProvider>()
+                          .t('home.explore_eras'),
                       isPrimary: false,
                       onTap: () => Navigator.push(
                         context,
@@ -415,32 +397,6 @@ class _HeroSection extends StatelessWidget {
       ),
     );
   }
-
-  String _eyebrow(String lang) => switch (lang) {
-        'en' => 'PERU · 5,000 YEARS',
-        'es' => 'PERÚ · 5,000 AÑOS',
-        _ => 'PERÙ · 5.000 ANNI',
-      };
-  String _mainTitle(String lang) => switch (lang) {
-        'en' => '5,000 years\nof history',
-        'es' => '5,000 años\nde historia',
-        _ => '5.000 anni\ndi storia',
-      };
-  String _subtitle(String lang) => switch (lang) {
-        'en' => 'Discover the soul of Peru',
-        'es' => 'Descubre el alma del Perú',
-        _ => 'Scopri l\'anima del Perù',
-      };
-  String _primaryBtn(String lang) => switch (lang) {
-        'en' => 'Start journey',
-        'es' => 'Comenzar viaje',
-        _ => 'Inizia il viaggio',
-      };
-  String _secondaryBtn(String lang) => switch (lang) {
-        'en' => 'Explore eras',
-        'es' => 'Explorar eras',
-        _ => 'Esplora le ere',
-      };
 }
 
 class _HeroButton extends StatelessWidget {
@@ -567,26 +523,35 @@ class _PeruIntroSection extends StatelessWidget {
                           const SizedBox(height: 12),
                           _Stat(
                             icon: Icons.location_city_rounded,
-                            label: _capitalLabel(lang),
+                            label: context
+                                .read<LanguageProvider>()
+                                .t('home.capital'),
                             value: 'Lima',
                           ),
                           const SizedBox(height: 8),
                           _Stat(
                             icon: Icons.map_rounded,
-                            label: _areaLabel(lang),
+                            label:
+                                context.read<LanguageProvider>().t('home.area'),
                             value: '1.285.216 km²',
                           ),
                           const SizedBox(height: 8),
                           _Stat(
                             icon: Icons.people_rounded,
-                            label: _populationLabel(lang),
+                            label: context
+                                .read<LanguageProvider>()
+                                .t('home.population'),
                             value: '33 M',
                           ),
                           const SizedBox(height: 8),
                           _Stat(
                             icon: Icons.terrain_rounded,
-                            label: _regionsLabel(lang),
-                            value: _regionsValue(lang),
+                            label: context
+                                .read<LanguageProvider>()
+                                .t('home.regions'),
+                            value: context
+                                .read<LanguageProvider>()
+                                .t('home.regions_value'),
                           ),
                         ],
                       ),
@@ -620,7 +585,10 @@ class _PeruIntroSection extends StatelessWidget {
                     Container(width: 3, height: 16, color: AppColors.ocre),
                     const SizedBox(width: 10),
                     Text(
-                      _aboutTitle(lang).toUpperCase(),
+                      context
+                          .read<LanguageProvider>()
+                          .t('home.about_title')
+                          .toUpperCase(),
                       style: GoogleFonts.lato(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
@@ -632,7 +600,7 @@ class _PeruIntroSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  _aboutText(lang),
+                  context.read<LanguageProvider>().t('home.about_text'),
                   style: GoogleFonts.lato(
                     fontSize: 13,
                     color: AppColors.cremaPergamino.withOpacity(0.75),
@@ -674,7 +642,10 @@ class _PeruIntroSection extends StatelessWidget {
                         color: AppColors.ocre, size: 16),
                     const SizedBox(width: 8),
                     Text(
-                      _howTitle(lang).toUpperCase(),
+                      context
+                          .read<LanguageProvider>()
+                          .t('home.how_title')
+                          .toUpperCase(),
                       style: GoogleFonts.lato(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
@@ -685,11 +656,17 @@ class _PeruIntroSection extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 14),
-                _HowStep(number: '1', text: _step1(lang)),
+                _HowStep(
+                    number: '1',
+                    text: context.read<LanguageProvider>().t('home.step_1')),
                 const SizedBox(height: 10),
-                _HowStep(number: '2', text: _step2(lang)),
+                _HowStep(
+                    number: '2',
+                    text: context.read<LanguageProvider>().t('home.step_2')),
                 const SizedBox(height: 10),
-                _HowStep(number: '3', text: _step3(lang)),
+                _HowStep(
+                    number: '3',
+                    text: context.read<LanguageProvider>().t('home.step_3')),
               ],
             ),
           )
@@ -700,75 +677,6 @@ class _PeruIntroSection extends StatelessWidget {
       ),
     );
   }
-
-  String _capitalLabel(String lang) => switch (lang) {
-        'en' => 'Capital',
-        'es' => 'Capital',
-        _ => 'Capitale',
-      };
-  String _areaLabel(String lang) => switch (lang) {
-        'en' => 'Area',
-        'es' => 'Área',
-        _ => 'Superficie',
-      };
-  String _populationLabel(String lang) => switch (lang) {
-        'en' => 'Population',
-        'es' => 'Población',
-        _ => 'Popolazione',
-      };
-  String _regionsLabel(String lang) => switch (lang) {
-        'en' => 'Regions',
-        'es' => 'Regiones',
-        _ => 'Regioni',
-      };
-  String _regionsValue(String lang) => switch (lang) {
-        'en' => 'Coast · Highlands · Jungle',
-        'es' => 'Costa · Sierra · Selva',
-        _ => 'Costa · Sierra · Giungla',
-      };
-  String _aboutTitle(String lang) => switch (lang) {
-        'en' => 'About Peru',
-        'es' => 'Sobre el Perú',
-        _ => 'Il Perù',
-      };
-  String _aboutText(String lang) => switch (lang) {
-        'en' => 'Peru is one of the world\'s great cradles of civilization. '
-            'Home to the Inca Empire, the sacred city of Machu Picchu, '
-            'and dozens of cultures spanning 5,000 years — from the Norte '
-            'Chico civilization to the Spanish colonial era — Peru\'s history '
-            'is one of the richest on Earth.',
-        'es' => 'El Perú es una de las grandes cunas de la civilización mundial. '
-            'Hogar del Imperio Inca, la sagrada ciudad de Machu Picchu y '
-            'decenas de culturas que abarcan 5,000 años — desde la '
-            'civilización de Norte Chico hasta la era colonial española — '
-            'la historia del Perú es una de las más ricas del mundo.',
-        _ => 'Il Perù è una delle più grandi culle della civiltà mondiale. '
-            'Patria dell\'Impero Inca, della sacra città di Machu Picchu e '
-            'di decine di culture che si estendono per 5.000 anni — dalla '
-            'civiltà di Norte Chico all\'era coloniale spagnola — la storia '
-            'del Perù è una delle più ricche del mondo.',
-      };
-  String _howTitle(String lang) => switch (lang) {
-        'en' => 'How to use Peru Eterno',
-        'es' => 'Cómo usar Peru Eterno',
-        _ => 'Come usare Peru Eterno',
-      };
-  String _step1(String lang) => switch (lang) {
-        'en' =>
-          'Choose a world (History, Culture, Flavors…) to start exploring',
-        'es' => 'Elige un mundo (Historia, Cultura, Sabores…) para explorar',
-        _ => 'Scegli un mondo (Storia, Cultura, Sapori…) per iniziare',
-      };
-  String _step2(String lang) => switch (lang) {
-        'en' => 'Tap any card to read its full article from Wikipedia',
-        'es' => 'Toca cualquier card para leer su artículo completo de Wikipedia',
-        _ => 'Tocca una scheda per leggere l\'articolo completo da Wikipedia',
-      };
-  String _step3(String lang) => switch (lang) {
-        'en' => 'Save your favorites with the heart icon to find them later',
-        'es' => 'Guarda tus favoritos con el corazón para encontrarlos después',
-        _ => 'Salva i preferiti con il cuore per ritrovarli facilmente',
-      };
 }
 
 class _Stat extends StatelessWidget {
@@ -1024,18 +932,15 @@ class _FeaturedEraSection extends StatelessWidget {
                   accentColor: era.accentColor,
                   title: t('eras.${era.id}.title'),
                   subtitle: t('eras.${era.id}.period'),
-                  badge: _badge(lang),
+                  badge:
+                      context.read<LanguageProvider>().t('home.featured_badge'),
                   isPremium: isLocked,
                   height: 220,
-                  onTap: isLocked
-                      ? () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const PremiumScreen()))
-                      : () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => EraDetailScreen(era: era))),
+                  onTap: () => AppNavigation.openEra(
+                    context,
+                    era,
+                    isLocked: isLocked,
+                  ),
                 ),
               );
             },
@@ -1057,12 +962,6 @@ class _FeaturedEraSection extends StatelessWidget {
       ],
     );
   }
-
-  String _badge(String lang) => switch (lang) {
-        'en' => 'FEATURED ERA',
-        'es' => 'ERA DESTACADA',
-        _ => 'ERA IN EVIDENZA',
-      };
 }
 
 // ── Personaje del día ─────────────────────────────────────────────────────────
@@ -1077,10 +976,7 @@ class _PersonajeDiaSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GestureDetector(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => ContentDetailScreen(item: item)),
-        ),
+        onTap: () => AppNavigation.openContent(context, item),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -1137,7 +1033,10 @@ class _PersonajeDiaSection extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              _dailyLabel(lang).toUpperCase(),
+                              context
+                                  .read<LanguageProvider>()
+                                  .t('home.character_of_day')
+                                  .toUpperCase(),
                               style: GoogleFonts.lato(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w800,
@@ -1147,7 +1046,8 @@ class _PersonajeDiaSection extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              item.displayName,
+                              item.localizedTitle(
+                                  context.read<LanguageProvider>().t),
                               style: GoogleFonts.playfairDisplay(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -1158,7 +1058,9 @@ class _PersonajeDiaSection extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  _viewBioLabel(lang),
+                                  context
+                                      .read<LanguageProvider>()
+                                      .t('home.view_biography'),
                                   style: GoogleFonts.lato(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
@@ -1189,17 +1091,6 @@ class _PersonajeDiaSection extends StatelessWidget {
       ),
     );
   }
-
-  String _dailyLabel(String lang) => switch (lang) {
-        'en' => 'Character of the day',
-        'es' => 'Personaje del día',
-        _ => 'Personaggio del giorno',
-      };
-  String _viewBioLabel(String lang) => switch (lang) {
-        'en' => 'View biography',
-        'es' => 'Ver biografía',
-        _ => 'Vedi biografia',
-      };
 }
 
 // ── Continue exploring ────────────────────────────────────────────────────────
@@ -1231,20 +1122,14 @@ class _ContinueSection extends StatelessWidget {
                   ? era.imageAssetPath(era.imageFilenames.first)
                   : null,
               accentColor: era?.accentColor ?? const Color(0xFF6B4226),
-              title: item.displayName,
+              title: item.localizedTitle(context.read<LanguageProvider>().t),
               width: 160,
               height: 130,
               onTap: () {
                 if (era != null) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => EraDetailScreen(era: era)));
+                  AppNavigation.openEra(context, era);
                 } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => ContentDetailScreen(item: item)));
+                  AppNavigation.openContent(context, item);
                 }
               },
             ),
@@ -1399,18 +1284,11 @@ class _JourneyCardState extends State<_JourneyCard> {
               ? await HistoriaStagesRepository.loadArticlesForStage(stage.id)
               : <HistoriaArticle>[];
           if (!context.mounted) return;
-          Navigator.push(
+          AppNavigation.openHistoriaArticle(
             context,
-            MaterialPageRoute(
-              builder: (_) => HistoriaArticleDetailScreen(
-                article: article,
-                allArticles: allArticles,
-                stage: stage,
-                carouselImages: stage != null
-                    ? HistoriaStagesRepository.carouselImagesForStage(stage.id)
-                    : [],
-              ),
-            ),
+            article: article,
+            allArticles: allArticles,
+            stage: stage,
           );
         },
         child: Container(
@@ -1521,7 +1399,9 @@ class _JourneyCardState extends State<_JourneyCard> {
                   Row(
                     children: [
                       Text(
-                        _ctaLabel(widget.lang),
+                        context
+                            .read<LanguageProvider>()
+                            .t('home.continue_reading'),
                         style: GoogleFonts.lato(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
@@ -1529,26 +1409,18 @@ class _JourneyCardState extends State<_JourneyCard> {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      Icon(Icons.arrow_forward_rounded, size: 14, color: accent),
+                      Icon(Icons.arrow_forward_rounded,
+                          size: 14, color: accent),
                     ],
                   ),
                 ],
               ),
             ),
           ),
-        )
-            .animate()
-            .fadeIn(duration: 600.ms)
-            .slideY(begin: 0.08, end: 0),
+        ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.08, end: 0),
       ),
     );
   }
-
-  String _ctaLabel(String lang) => switch (lang) {
-        'en' => 'Continue reading →',
-        'es' => 'Continuar leyendo →',
-        _ => 'Continua a leggere →',
-      };
 }
 
 // ── Recent Historia strip ─────────────────────────────────────────────────────
@@ -1629,19 +1501,11 @@ class _RecentHistoriaStripState extends State<_RecentHistoriaStrip> {
                             stage.id)
                         : <HistoriaArticle>[];
                     if (!context.mounted) return;
-                    Navigator.push(
+                    AppNavigation.openHistoriaArticle(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => HistoriaArticleDetailScreen(
-                          article: article,
-                          allArticles: allArticles,
-                          stage: stage,
-                          carouselImages: stage != null
-                              ? HistoriaStagesRepository.carouselImagesForStage(
-                                  stage.id)
-                              : [],
-                        ),
-                      ),
+                      article: article,
+                      allArticles: allArticles,
+                      stage: stage,
                     );
                   },
                   child: Container(
@@ -1756,8 +1620,7 @@ class _StageProgressSectionState extends State<_StageProgressSection> {
             child: Column(
               children: snap.data!.map((entry) {
                 final (stage, articles) = entry;
-                final done =
-                    articles.where((a) => rp.isCompleted(a.id)).length;
+                final done = articles.where((a) => rp.isCompleted(a.id)).length;
                 return _StageProgressRow(
                   stage: stage,
                   done: done,

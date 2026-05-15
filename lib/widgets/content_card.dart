@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../core/constants/category_config.dart';
+import '../core/navigation/app_navigation.dart';
 import '../models/content_item.dart';
-import '../screens/content_detail_screen.dart';
+import '../providers/language_provider.dart';
 
 class ContentCard extends StatelessWidget {
   final ContentItem item;
@@ -19,13 +21,10 @@ class ContentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = CategoryConfigs.colorOf(item.category);
     final icon = CategoryConfigs.iconOf(item.category);
+    final t = context.watch<LanguageProvider>().t;
 
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => ContentDetailScreen(item: item),
-        ),
-      ),
+      onTap: () => AppNavigation.openContent(context, item),
       child: Container(
         width: 140,
         margin: const EdgeInsets.only(right: 12),
@@ -78,7 +77,7 @@ class ContentCard extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      item.displayName,
+                      item.localizedTitle(t),
                       style: GoogleFonts.playfairDisplay(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

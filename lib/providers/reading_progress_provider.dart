@@ -47,25 +47,97 @@ class ReadingProgressProvider extends ChangeNotifier {
   Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
 
-    lastArticleId = _prefs!.getString(_kLastArticle);
-    lastStageId = _prefs!.getString(_kLastStage);
-    lastProgress = _prefs!.getInt(_kLastPct) ?? 0;
+    lastArticleId = await _safeGetString(_kLastArticle);
+    lastStageId = await _safeGetString(_kLastStage);
+    lastProgress = await _safeGetInt(_kLastPct) ?? 0;
 
-    final pJson = _prefs!.getString(_kProgress);
-    if (pJson != null) {
-      _progress =
-          Map<String, int>.from(jsonDecode(pJson) as Map);
+    if (lastArticleId != null &&
+        (lastStageId == null ||
+            lastStageId!.isEmpty ||
+            lastStageId == 'unknown')) {
+      lastStageId = 'peru_prehispanico';
     }
 
-    final hJson = _prefs!.getString(_kHistory);
-    if (hJson != null) {
-      _history = (jsonDecode(hJson) as List)
-          .map((e) =>
-              ArticleHistoryEntry.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
+    _progress = await _loadProgress();
+    _history = await _loadHistory();
 
     notifyListeners();
+  }
+
+  Future<String?> _safeGetString(String key) async {
+    final p = _prefs;
+    if (p == null) return null;
+    try {
+      return p.getString(key);
+    } catch (_) {
+      await p.remove(key);
+      return null;
+    }
+  }
+
+  Future<int?> _safeGetInt(String key) async {
+    final p = _prefs;
+    if (p == null) return null;
+    try {
+      return p.getInt(key);
+    } catch (_) {
+      await p.remove(key);
+      return null;
+    }
+  }
+
+  Future<Map<String, int>> _loadProgress() async {
+    final p = _prefs;
+    if (p == null) return {};
+
+    try {
+      final raw = p.getString(_kProgress);
+      if (raw == null) return {};
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map) throw const FormatException('Invalid progress');
+      final progress = <String, int>{};
+      for (final entry in decoded.entries) {
+        final key = entry.key.toString();
+        final value = entry.value;
+        if (value is int) {
+          progress[key] = value.clamp(0, 100);
+        } else if (value is num) {
+          progress[key] = value.round().clamp(0, 100);
+        }
+      }
+      return progress;
+    } catch (_) {
+      await p.remove(_kProgress);
+      return {};
+    }
+  }
+
+  Future<List<ArticleHistoryEntry>> _loadHistory() async {
+    final p = _prefs;
+    if (p == null) return [];
+
+    try {
+      final raw = p.getString(_kHistory);
+      if (raw == null) return [];
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) throw const FormatException('Invalid history');
+      return decoded
+          .whereType<Map>()
+          .map((e) => ArticleHistoryEntry.fromJson(
+                Map<String, dynamic>.from(e),
+              ))
+          .where((e) => e.articleId.isNotEmpty)
+          .map((e) => e.stageId.isEmpty || e.stageId == 'unknown'
+              ? ArticleHistoryEntry(
+                  articleId: e.articleId,
+                  stageId: 'peru_prehispanico',
+                )
+              : e)
+          .toList();
+    } catch (_) {
+      await p.remove(_kHistory);
+      return [];
+    }
   }
 
   Future<void> openArticle(String articleId, String stageId) async {

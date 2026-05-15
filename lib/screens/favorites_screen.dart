@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/category_config.dart';
+import '../core/navigation/app_navigation.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../models/content_item.dart';
@@ -11,10 +12,9 @@ import '../models/era_model.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
 import '../widgets/wiki_cinematic_card.dart';
-import 'content_detail_screen.dart';
-import 'era_detail_screen.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -62,7 +62,7 @@ class FavoritesScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _eyebrow(lang),
+                    context.read<LanguageProvider>().t('favorites.eyebrow'),
                     style: GoogleFonts.lato(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
@@ -72,7 +72,7 @@ class FavoritesScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    _title(lang),
+                    context.read<LanguageProvider>().t('favorites.title'),
                     style: GoogleFonts.playfairDisplay(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class FavoritesScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: items.isEmpty
-                  ? _buildEmptyState(lang)
+                  ? _buildEmptyState(context, lang)
                   : GridView.builder(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 80),
                       gridDelegate:
@@ -106,25 +106,30 @@ class FavoritesScreen extends StatelessWidget {
                             : null;
                         final isLocked = item.isPremium && !isPremium;
                         final t = context.read<LanguageProvider>().t;
+                        final tapAction = isLocked
+                            ? () => AppNavigation.openPremium(context)
+                            : era != null
+                                ? () => AppNavigation.openEra(context, era)
+                                : () => AppNavigation.openContent(
+                                      context,
+                                      item,
+                                    );
                         final card = era != null
                             ? CinematicCard(
-                                assetImagePath:
-                                    era.imageAssetPath(era.imageFilenames.first),
+                                assetImagePath: era
+                                    .imageAssetPath(era.imageFilenames.first),
                                 accentColor: era.accentColor,
                                 title: t('eras.${era.id}.title'),
                                 subtitle: t('eras.${era.id}.period'),
                                 isPremium: isLocked,
-                                onTap: () => Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (_) => EraDetailScreen(era: era))),
+                                onTap: tapAction,
                               )
                             : WikiCinematicCard(
                                 item: item,
-                                subtitle: CategoryConfigs.labelOf(item.category, lang),
+                                subtitle: CategoryConfigs.labelOf(
+                                    item.category, lang),
                                 isPremium: isLocked,
-                                onTap: () => Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (_) => ContentDetailScreen(item: item))),
+                                onTap: tapAction,
                               );
 
                         return Stack(
@@ -153,9 +158,7 @@ class FavoritesScreen extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
-                            .animate()
-                            .fadeIn(
+                        ).animate().fadeIn(
                               duration: 400.ms,
                               delay: Duration(milliseconds: i * 60),
                             );
@@ -168,57 +171,22 @@ class FavoritesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState(String lang) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.favorite_border_rounded,
-            size: 64,
-            color: AppColors.cremaPergamino.withOpacity(0.1),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            _emptyTitle(lang),
-            style: GoogleFonts.playfairDisplay(
-              fontSize: 20,
-              color: AppColors.cremaPergamino.withOpacity(0.4),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            _emptySubtitle(lang),
-            textAlign: TextAlign.center,
-            style: GoogleFonts.lato(
-              fontSize: 13,
-              color: AppColors.cremaPergamino.withOpacity(0.25),
-              height: 1.5,
-            ),
-          ),
-        ],
+  Widget _buildEmptyState(BuildContext context, String lang) {
+    return AppEmptyState(
+      icon: Icons.favorite_border_rounded,
+      title: context.read<LanguageProvider>().t('favorites.empty_title'),
+      subtitle: context.read<LanguageProvider>().t('favorites.empty_subtitle'),
+      iconSize: 64,
+      iconColor: AppColors.cremaPergamino.withOpacity(0.1),
+      titleStyle: GoogleFonts.playfairDisplay(
+        fontSize: 20,
+        color: AppColors.cremaPergamino.withOpacity(0.4),
+      ),
+      subtitleStyle: GoogleFonts.lato(
+        fontSize: 13,
+        color: AppColors.cremaPergamino.withOpacity(0.25),
+        height: 1.5,
       ),
     );
   }
-
-  String _eyebrow(String lang) => switch (lang) {
-        'en' => 'MY COLLECTION',
-        'es' => 'MI COLECCIÓN',
-        _ => 'LA MIA COLLEZIONE',
-      };
-  String _title(String lang) => switch (lang) {
-        'en' => 'Saved',
-        'es' => 'Guardados',
-        _ => 'Salvati',
-      };
-  String _emptyTitle(String lang) => switch (lang) {
-        'en' => 'Nothing saved yet',
-        'es' => 'Aún no hay guardados',
-        _ => 'Niente ancora salvato',
-      };
-  String _emptySubtitle(String lang) => switch (lang) {
-        'en' => 'Tap the heart icon on any\narticle to save it here',
-        'es' => 'Toca el corazón en cualquier\nartículo para guardarlo aquí',
-        _ => 'Tocca il cuore su qualsiasi\narticolo per salvarlo',
-      };
 }

@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/constants/app_colors.dart';
 import '../models/wikipedia_content.dart';
+import '../providers/language_provider.dart';
 
 class WikipediaSectionWidget extends StatefulWidget {
   final WikipediaContent? content;
@@ -60,11 +62,13 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
           content.displayLang != widget.languageCode;
 
       if (!isWrongLanguage) return _buildArticle(content);
-      if (fallback != null && fallback.isNotEmpty) return _buildFallback(fallback);
+      if (fallback != null && fallback.isNotEmpty)
+        return _buildFallback(fallback);
       return _buildArticle(content);
     }
 
-    if (fallback != null && fallback.isNotEmpty) return _buildFallback(fallback);
+    if (fallback != null && fallback.isNotEmpty)
+      return _buildFallback(fallback);
     return const SizedBox.shrink();
   }
 
@@ -114,9 +118,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
         color: AppColors.dividerColor.withOpacity(0.5),
         borderRadius: BorderRadius.circular(4),
       ),
-    )
-        .animate(onPlay: (c) => c.repeat(reverse: true))
-        .fade(
+    ).animate(onPlay: (c) => c.repeat(reverse: true)).fade(
           begin: 0.35,
           end: 0.9,
           duration: 900.ms,
@@ -150,7 +152,8 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
           const SizedBox(height: 20),
           OutlinedButton.icon(
             onPressed: widget.onRetry,
-            icon: Icon(Icons.refresh_rounded, size: 16, color: widget.accentColor),
+            icon: Icon(Icons.refresh_rounded,
+                size: 16, color: widget.accentColor),
             label: Text(
               _retryLabel,
               style: GoogleFonts.lato(
@@ -207,34 +210,31 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
   Widget _buildArticle(WikipediaContent content) {
     final sections = widget.hideLeadSection
         ? content.contentSections
-        : [if (content.leadSection != null) content.leadSection!, ...content.contentSections];
+        : [
+            if (content.leadSection != null) content.leadSection!,
+            ...content.contentSections
+          ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 24),
-
         _buildWikiBadge(content),
         const SizedBox(height: 4),
-
         if (content.isFromCache) ...[
           const SizedBox(height: 10),
           _buildOfflineBadge(),
         ],
-
         const SizedBox(height: 16),
-
         if (!widget.hideLeadSection && content.hasThumbnail) ...[
           _buildThumbnail(content.thumbnailUrl!),
           const SizedBox(height: 20),
         ],
-
         ...sections.asMap().entries.map(
               (e) => e.value.isLead
                   ? _buildLeadText(e.value.content)
                   : _buildSection(e.value, e.key),
             ),
-
         const SizedBox(height: 24),
         _buildReadMoreButton(content.sourceUrl),
         const SizedBox(height: 12),
@@ -395,7 +395,9 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
                 SizedBox(width: isSubSection ? 10 : 12),
                 Expanded(
                   child: Text(
-                    section.title.isEmpty ? _sectionLabel(index) : section.title,
+                    section.title.isEmpty
+                        ? _sectionLabel(index)
+                        : section.title,
                     style: isSubSection
                         ? GoogleFonts.playfairDisplay(
                             fontSize: 16,
@@ -485,7 +487,8 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
       width: double.infinity,
       child: OutlinedButton.icon(
         onPressed: () => _launchUrl(url),
-        icon: Icon(Icons.open_in_new_rounded, size: 16, color: widget.accentColor),
+        icon: Icon(Icons.open_in_new_rounded,
+            size: 16, color: widget.accentColor),
         label: Text(
           _readMoreLabel,
           style: GoogleFonts.lato(
@@ -530,7 +533,11 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
-                '${switch (widget.languageCode) { 'en' => 'Source', 'es' => 'Fuente', _ => 'Fonte' }}: Wikipedia $langLabel — ',
+                '${switch (widget.languageCode) {
+                  'en' => 'Source',
+                  'es' => 'Fuente',
+                  _ => 'Fonte'
+                }}: Wikipedia $langLabel — ',
                 style: GoogleFonts.lato(
                     fontSize: 11, color: AppColors.textSecondary),
               ),
@@ -571,92 +578,31 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
   }
 
   // ── Localized labels ──────────────────────────────────────────────────────
-
   String _sectionLabel(int index) {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'Section ${index + 1}';
-      case 'es':
-        return 'Sección ${index + 1}';
-      default:
-        return 'Sezione ${index + 1}';
-    }
+    return context
+        .read<LanguageProvider>()
+        .t('wikipedia.section')
+        .replaceAll('{number}', '${index + 1}');
   }
 
-  String get _readMoreLabel {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'Read more on Wikipedia';
-      case 'es':
-        return 'Leer más en Wikipedia';
-      default:
-        return 'Leggi di più su Wikipedia';
-    }
-  }
+  String get _readMoreLabel =>
+      context.read<LanguageProvider>().t('wikipedia.read_more');
 
-  String get _expandLabel {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'Show more ↓';
-      case 'es':
-        return 'Mostrar más ↓';
-      default:
-        return 'Mostra di più ↓';
-    }
-  }
+  String get _expandLabel =>
+      "${context.read<LanguageProvider>().t('wikipedia.expand')} ↓";
+  String get _editorialSourceLabel =>
+      context.read<LanguageProvider>().t('wikipedia.editorial_source');
 
-  String get _editorialSourceLabel {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'Source: editorial content';
-      case 'es':
-        return 'Fuente: contenido editorial';
-      default:
-        return 'Fonte: contenuto editoriale';
-    }
-  }
+  String get _noConnectionLabel =>
+      context.read<LanguageProvider>().t('wikipedia.no_connection');
 
-  String get _noConnectionLabel {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'No connection. Check your internet\nand try again.';
-      case 'es':
-        return 'Sin conexión. Verifica tu internet\ne intenta de nuevo.';
-      default:
-        return 'Nessuna connessione. Verifica internet\ne riprova.';
-    }
-  }
+  String get _retryLabel =>
+      context.read<LanguageProvider>().t('wikipedia.retry');
 
-  String get _retryLabel {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'Retry';
-      case 'es':
-        return 'Reintentar';
-      default:
-        return 'Riprova';
-    }
-  }
-
-  String get _offlineCacheLabel {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'Showing cached content';
-      case 'es':
-        return 'Mostrando contenido sin conexión';
-      default:
-        return 'Contenuto dalla cache locale';
-    }
-  }
+  String get _offlineCacheLabel =>
+      context.read<LanguageProvider>().t('wikipedia.cached');
 
   String _fallbackNoteLabel(String lang) {
-    switch (widget.languageCode) {
-      case 'en':
-        return 'Content available in: $lang';
-      case 'es':
-        return 'Contenido disponible en: $lang';
-      default:
-        return 'Contenuto disponibile in: $lang';
-    }
+    return "${context.read<LanguageProvider>().t('wikipedia.content_available_in')}: $lang";
   }
 }

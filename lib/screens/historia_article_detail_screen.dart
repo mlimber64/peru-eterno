@@ -39,6 +39,13 @@ class _HistoriaArticleDetailScreenState
 
   Color get _accent => widget.stage?.accentColor ?? AppColors.worldHistoria;
   bool get _hasCarousel => widget.carouselImages.isNotEmpty;
+  String get _stageId {
+    final stageId = widget.stage?.id ?? widget.article.parentStageId;
+    if (stageId != null && stageId.isNotEmpty && stageId != 'unknown') {
+      return stageId;
+    }
+    return 'peru_prehispanico';
+  }
 
   @override
   void initState() {
@@ -50,7 +57,7 @@ class _HistoriaArticleDetailScreenState
       if (!mounted) return;
       context.read<ReadingProgressProvider>().openArticle(
             widget.article.id,
-            widget.stage?.id ?? 'unknown',
+            _stageId,
           );
     });
     if (widget.carouselImages.length > 1) {
@@ -78,8 +85,7 @@ class _HistoriaArticleDetailScreenState
   void _onScroll() {
     final pos = _scrollCtrl.position;
     if (!pos.hasContentDimensions || pos.maxScrollExtent == 0) return;
-    final pct =
-        (pos.pixels / pos.maxScrollExtent * 100).round().clamp(0, 100);
+    final pct = (pos.pixels / pos.maxScrollExtent * 100).round().clamp(0, 100);
     if ((pct - _lastSavedProgress).abs() >= 5) {
       _lastSavedProgress = pct;
       if (mounted) {
@@ -95,9 +101,10 @@ class _HistoriaArticleDetailScreenState
     final lang = context.watch<LanguageProvider>().currentLanguage;
     final isFav =
         context.watch<FavoritesProvider>().isFavorite(widget.article.id);
-    final readingPct =
-        context.watch<ReadingProgressProvider>().progressFor(widget.article.id) /
-            100.0;
+    final readingPct = context
+            .watch<ReadingProgressProvider>()
+            .progressFor(widget.article.id) /
+        100.0;
 
     final screenHeight = MediaQuery.of(context).size.height;
     final carouselHeight = screenHeight * 0.38;
@@ -107,8 +114,7 @@ class _HistoriaArticleDetailScreenState
         .split('\n\n')
         .where((p) => p.trim().isNotEmpty)
         .toList();
-    final idx =
-        widget.allArticles.indexWhere((a) => a.id == widget.article.id);
+    final idx = widget.allArticles.indexWhere((a) => a.id == widget.article.id);
     final hasPrev = idx > 0;
     final hasNext = idx < widget.allArticles.length - 1;
 
@@ -153,12 +159,9 @@ class _HistoriaArticleDetailScreenState
                       color: AppColors.cremaPergamino.withOpacity(0.85),
                       height: 1.8,
                     ),
-                  )
-                      .animate()
-                      .fadeIn(duration: 500.ms, delay: (pIndex * 90).ms);
+                  ).animate().fadeIn(duration: 500.ms, delay: (pIndex * 90).ms);
                 },
-                childCount:
-                    paragraphs.isEmpty ? 0 : paragraphs.length * 2 - 1,
+                childCount: paragraphs.isEmpty ? 0 : paragraphs.length * 2 - 1,
               ),
             ),
           ),
@@ -183,8 +186,8 @@ class _HistoriaArticleDetailScreenState
 
   // ── SliverAppBar con hero carousel ──────────────────────────────────────────
 
-  SliverAppBar _buildSliverAppBar(
-      BuildContext context, bool isFav, double carouselHeight, double readingPct) {
+  SliverAppBar _buildSliverAppBar(BuildContext context, bool isFav,
+      double carouselHeight, double readingPct) {
     final accent = _accent;
 
     return SliverAppBar(
@@ -220,9 +223,7 @@ class _HistoriaArticleDetailScreenState
       actions: [
         _floatingIconButton(
           icon: Icon(
-            isFav
-                ? Icons.bookmark_rounded
-                : Icons.bookmark_outline_rounded,
+            isFav ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
             size: 18,
             color: isFav ? accent : Colors.white,
           ),
@@ -473,13 +474,11 @@ class _HistoriaArticleDetailScreenState
         runSpacing: 6,
         children: chips.map((label) {
           return Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
             decoration: BoxDecoration(
               color: _accent.withOpacity(0.12),
               borderRadius: BorderRadius.circular(20),
-              border:
-                  Border.all(color: _accent.withOpacity(0.3), width: 1),
+              border: Border.all(color: _accent.withOpacity(0.3), width: 1),
             ),
             child: Text(
               label,
@@ -517,7 +516,10 @@ class _HistoriaArticleDetailScreenState
                     size: 14, color: _accent.withOpacity(0.7)),
                 const SizedBox(width: 8),
                 Text(
-                  _sourcesLabel(lang).toUpperCase(),
+                  context
+                      .read<LanguageProvider>()
+                      .t('historia.sources_title')
+                      .toUpperCase(),
                   style: GoogleFonts.lato(
                     fontSize: 9,
                     fontWeight: FontWeight.w800,
@@ -529,7 +531,7 @@ class _HistoriaArticleDetailScreenState
             ),
             const SizedBox(height: 10),
             Text(
-              _sourcesBody(lang),
+              context.read<LanguageProvider>().t('historia.sources_body'),
               style: GoogleFonts.lato(
                 fontSize: 12,
                 color: AppColors.cremaPergamino.withOpacity(0.5),
@@ -541,21 +543,6 @@ class _HistoriaArticleDetailScreenState
       ),
     );
   }
-
-  String _sourcesLabel(String lang) => switch (lang) {
-        'en' => 'Sources & credits',
-        'es' => 'Fuentes y créditos',
-        _ => 'Fonti e crediti',
-      };
-
-  String _sourcesBody(String lang) => switch (lang) {
-        'en' =>
-          'Editorial content created for Perù Eterno. Based on academic sources: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Perú, Enciclopedia del Perú.',
-        'es' =>
-          'Contenido editorial creado para Perù Eterno. Basado en fuentes académicas: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Perú, Enciclopedia del Perú.',
-        _ =>
-          'Contenuto editoriale creato per Perù Eterno. Basato su fonti accademiche: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Perú, Enciclopedia del Perú.',
-      };
 
   // ── Navegación prev / next ────────────────────────────────────────────────────
 
@@ -579,7 +566,8 @@ class _HistoriaArticleDetailScreenState
             if (hasPrev)
               Expanded(
                 child: _NavButton(
-                  label: _prevLabel(lang),
+                  label:
+                      context.read<LanguageProvider>().t('navigation.previous'),
                   subtitle: widget.allArticles[idx - 1].tituloFor(lang),
                   icon: Icons.arrow_back_ios_rounded,
                   isForward: false,
@@ -605,7 +593,7 @@ class _HistoriaArticleDetailScreenState
             if (hasNext)
               Expanded(
                 child: _NavButton(
-                  label: _nextLabel(lang),
+                  label: context.read<LanguageProvider>().t('navigation.next'),
                   subtitle: widget.allArticles[idx + 1].tituloFor(lang),
                   icon: Icons.arrow_forward_ios_rounded,
                   isForward: true,
@@ -627,17 +615,6 @@ class _HistoriaArticleDetailScreenState
       ),
     );
   }
-
-  String _prevLabel(String lang) => switch (lang) {
-        'en' => 'Previous',
-        'es' => 'Anterior',
-        _ => 'Precedente',
-      };
-  String _nextLabel(String lang) => switch (lang) {
-        'en' => 'Next',
-        'es' => 'Siguiente',
-        _ => 'Successivo',
-      };
 
   // ── Artículos relacionados ────────────────────────────────────────────────────
 
@@ -661,7 +638,10 @@ class _HistoriaArticleDetailScreenState
               Container(width: 3, height: 16, color: accent),
               const SizedBox(width: 10),
               Text(
-                _relatedLabel(lang).toUpperCase(),
+                context
+                    .read<LanguageProvider>()
+                    .t('historia.explore_also')
+                    .toUpperCase(),
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
@@ -744,11 +724,12 @@ class _HistoriaArticleDetailScreenState
                         Row(
                           children: [
                             Icon(Icons.arrow_forward_ios_rounded,
-                                size: 8,
-                                color: Colors.white.withOpacity(0.7)),
+                                size: 8, color: Colors.white.withOpacity(0.7)),
                             const SizedBox(width: 4),
                             Text(
-                              _readLabel(lang),
+                              context
+                                  .read<LanguageProvider>()
+                                  .t('historia.read'),
                               style: GoogleFonts.lato(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w700,
@@ -768,18 +749,6 @@ class _HistoriaArticleDetailScreenState
       ],
     );
   }
-
-  String _relatedLabel(String lang) => switch (lang) {
-        'en' => 'Explore also',
-        'es' => 'Explora también',
-        _ => 'Esplora anche',
-      };
-
-  String _readLabel(String lang) => switch (lang) {
-        'en' => 'Read',
-        'es' => 'Leer',
-        _ => 'Leggi',
-      };
 }
 
 // ── Botón de navegación ───────────────────────────────────────────────────────
@@ -811,13 +780,11 @@ class _NavButton extends StatelessWidget {
               isForward ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: isForward
-                  ? MainAxisAlignment.end
-                  : MainAxisAlignment.start,
+              mainAxisAlignment:
+                  isForward ? MainAxisAlignment.end : MainAxisAlignment.start,
               children: [
                 if (!isForward)
-                  Icon(icon,
-                      size: 12, color: AppColors.ocre.withOpacity(0.6)),
+                  Icon(icon, size: 12, color: AppColors.ocre.withOpacity(0.6)),
                 if (!isForward) const SizedBox(width: 4),
                 Text(
                   label.toUpperCase(),
@@ -830,8 +797,7 @@ class _NavButton extends StatelessWidget {
                 ),
                 if (isForward) const SizedBox(width: 4),
                 if (isForward)
-                  Icon(icon,
-                      size: 12, color: AppColors.ocre.withOpacity(0.6)),
+                  Icon(icon, size: 12, color: AppColors.ocre.withOpacity(0.6)),
               ],
             ),
             const SizedBox(height: 4),
@@ -866,9 +832,7 @@ class _DiagPainter extends CustomPainter {
       ..color = color.withOpacity(0.07)
       ..strokeWidth = 1;
     const spacing = 28.0;
-    for (double i = -size.height;
-        i < size.width + size.height;
-        i += spacing) {
+    for (double i = -size.height; i < size.width + size.height; i += spacing) {
       canvas.drawLine(
           Offset(i, 0), Offset(i + size.height, size.height), paint);
     }

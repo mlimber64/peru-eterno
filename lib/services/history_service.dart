@@ -7,9 +7,16 @@ class HistoryService {
 
   Future<List<String>> load() async {
     final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getString(_key);
-    if (raw == null) return [];
-    return (jsonDecode(raw) as List).cast<String>();
+    try {
+      final raw = prefs.getString(_key);
+      if (raw == null) return [];
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) throw const FormatException('Invalid history');
+      return decoded.whereType<String>().toList();
+    } catch (_) {
+      await prefs.remove(_key);
+      return [];
+    }
   }
 
   Future<void> add(String id) async {

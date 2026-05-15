@@ -95,7 +95,8 @@ class PremiumScreen extends StatelessWidget {
                         fontSize: 13,
                         color: AppColors.cremaPergamino.withOpacity(0.5),
                         decoration: TextDecoration.underline,
-                        decorationColor: AppColors.cremaPergamino.withOpacity(0.3),
+                        decorationColor:
+                            AppColors.cremaPergamino.withOpacity(0.3),
                       ),
                     ),
                   ),
@@ -200,8 +201,7 @@ class PremiumScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFeaturesList(
-      BuildContext context, String Function(String) t) {
+  Widget _buildFeaturesList(BuildContext context, String Function(String) t) {
     final features = context.read<LanguageProvider>().tList('premium.features');
 
     return Column(
@@ -333,7 +333,7 @@ class PremiumScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                'Hai accesso completo a tutta la storia del Perù!',
+                context.read<LanguageProvider>().t('premium.active_message'),
                 style: GoogleFonts.lato(
                   fontSize: 16,
                   color: AppColors.cremaPergamino,

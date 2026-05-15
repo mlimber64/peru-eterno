@@ -10,7 +10,7 @@ import 'cinematic_card.dart';
 /// Shows the gradient placeholder immediately, then crossfades to the image.
 class WikiCinematicCard extends StatefulWidget {
   final ContentItem item;
-  final String? title;      // overrides item.displayName if provided
+  final String? title;
   final String? subtitle;
   final String? badge;
   final bool isPremium;
@@ -61,11 +61,13 @@ class _WikiCinematicCardState extends State<WikiCinematicCard> {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.watch<LanguageProvider>().t;
+
     return CinematicCard(
       networkImageUrl: _thumbnailUrl,
       accentColor: CategoryConfigs.colorOf(widget.item.category),
-      title: widget.title ?? widget.item.displayName,
-      subtitle: widget.subtitle,
+      title: widget.title ?? widget.item.localizedTitle(t),
+      subtitle: widget.subtitle ?? widget.item.localizedSubtitle(t),
       badge: widget.badge,
       isPremium: widget.isPremium,
       onTap: widget.onTap,

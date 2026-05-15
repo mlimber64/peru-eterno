@@ -4,11 +4,12 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
+import '../core/navigation/app_navigation.dart';
 import '../data/historia_stages_repository.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
 import '../providers/language_provider.dart';
-import 'historia_article_detail_screen.dart';
+import '../widgets/app_state_views.dart';
 
 class HistoriaSubtopicsScreen extends StatefulWidget {
   final HistoriaStage stage;
@@ -73,22 +74,13 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
                   widget.stage.id),
               builder: (context, snap) {
                 if (snap.connectionState != ConnectionState.done) {
-                  return SizedBox(
+                  return AppLoadingState(
                     height: 300,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                          color: widget.stage.accentColor),
-                    ),
+                    color: widget.stage.accentColor,
                   );
                 }
                 if (!snap.hasData || snap.data!.isEmpty) {
-                  return const SizedBox(
-                    height: 300,
-                    child: Center(
-                      child: Icon(Icons.error_outline,
-                          color: Colors.white38, size: 48),
-                    ),
-                  );
+                  return const AppErrorState(height: 300);
                 }
                 return _SubtopicsBody(
                   articles: snap.data!,
@@ -279,13 +271,11 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
       children: [
         // Period badge
         Container(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.35),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-                color: Colors.white.withOpacity(0.25), width: 1),
+            border: Border.all(color: Colors.white.withOpacity(0.25), width: 1),
           ),
           child: Text(
             widget.stage.periodoFor(lang),
@@ -349,7 +339,10 @@ class _SubtopicsBody extends StatelessWidget {
               Container(width: 3, height: 16, color: accent),
               const SizedBox(width: 10),
               Text(
-                _sectionLabel(lang).toUpperCase(),
+                context
+                    .read<LanguageProvider>()
+                    .t('historia.articles')
+                    .toUpperCase(),
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
@@ -373,12 +366,6 @@ class _SubtopicsBody extends StatelessWidget {
       ),
     );
   }
-
-  String _sectionLabel(String lang) => switch (lang) {
-        'en' => 'Articles',
-        'es' => 'Artículos',
-        _ => 'Articoli',
-      };
 }
 
 class _SubtopicCard extends StatelessWidget {
@@ -408,15 +395,11 @@ class _SubtopicCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () => Navigator.push(
+          onTap: () => AppNavigation.openHistoriaArticle(
             context,
-            MaterialPageRoute(
-              builder: (_) => HistoriaArticleDetailScreen(
-                article: article,
-                allArticles: allArticles,
-                stage: stage,
-              ),
-            ),
+            article: article,
+            allArticles: allArticles,
+            stage: stage,
           ),
           child: Container(
             decoration: BoxDecoration(
@@ -503,7 +486,9 @@ class _SubtopicCard extends StatelessWidget {
                               size: 9, color: accent),
                           const SizedBox(width: 5),
                           Text(
-                            _readLabel(lang),
+                            context
+                                .read<LanguageProvider>()
+                                .t('historia.read_article'),
                             style: GoogleFonts.lato(
                               fontSize: 10,
                               fontWeight: FontWeight.w700,
@@ -534,12 +519,6 @@ class _SubtopicCard extends StatelessWidget {
     final first = paragraphs.first.trim();
     return first.length > 110 ? '${first.substring(0, 110)}…' : first;
   }
-
-  String _readLabel(String lang) => switch (lang) {
-        'en' => 'Read article',
-        'es' => 'Leer artículo',
-        _ => 'Leggi articolo',
-      };
 }
 
 class _DiagPainter extends CustomPainter {

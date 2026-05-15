@@ -198,8 +198,8 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: widget.era.accentColor.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(20),
@@ -393,11 +393,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
               ),
               const SizedBox(width: 10),
               Text(
-                switch (lang) {
-                  'en' => 'OVERVIEW',
-                  'es' => 'RESUMEN',
-                  _ => 'PANORAMICA',
-                },
+                context.read<LanguageProvider>().t('wikipedia.overview'),
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
@@ -422,11 +418,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   }
 
   Widget _buildOfflineCard(String lang) {
-    final label = switch (lang) {
-      'en' => 'Showing cached content — connect to update',
-      'es' => 'Contenido sin conexión — conéctate para actualizar',
-      _ => 'Contenuto dalla cache — connettiti per aggiornare',
-    };
+    final label = context.read<LanguageProvider>().t('wikipedia.cached');
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
@@ -454,11 +446,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   }
 
   Widget _buildReadMoreButton(String url, String lang) {
-    final label = switch (lang) {
-      'en' => 'Read more on Wikipedia',
-      'es' => 'Leer más en Wikipedia',
-      _ => 'Leggi di più su Wikipedia',
-    };
+    final label = context.read<LanguageProvider>().t('wikipedia.read_more');
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton.icon(
@@ -485,12 +473,11 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   }
 
   Widget _buildSourceAttribution(WikipediaContent content, String lang) {
-    final isFallback = content.displayLang.isNotEmpty &&
-        content.displayLang != lang;
-    final langLabel = (content.displayLang.isNotEmpty
-            ? content.displayLang
-            : lang)
-        .toUpperCase();
+    final isFallback =
+        content.displayLang.isNotEmpty && content.displayLang != lang;
+    final langLabel =
+        (content.displayLang.isNotEmpty ? content.displayLang : lang)
+            .toUpperCase();
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -508,7 +495,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
-                '${switch (lang) { 'en' => 'Source', 'es' => 'Fuente', _ => 'Fonte' }}: Wikipedia $langLabel — ',
+                "${context.read<LanguageProvider>().t('wikipedia.source')}: Wikipedia $langLabel - ",
                 style: GoogleFonts.lato(
                     fontSize: 11, color: AppColors.textSecondary),
               ),
@@ -528,7 +515,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
           if (isFallback) ...[
             const SizedBox(height: 3),
             Text(
-              '${switch (lang) { 'en' => 'Content available in', 'es' => 'Contenido disponible en', _ => 'Contenuto disponibile in' }}: $langLabel',
+              "${context.read<LanguageProvider>().t('wikipedia.content_available_in')}: $langLabel",
               style: GoogleFonts.lato(
                 fontSize: 10,
                 color: AppColors.textSecondary,
@@ -565,8 +552,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
 
   Widget _buildGaleriaTab(BuildContext context) {
     final images = widget.era.imageFilenames;
-    final hasWikiThumb =
-        _wikiContent?.hasThumbnail == true && !_isLoadingWiki;
+    final hasWikiThumb = _wikiContent?.hasThumbnail == true && !_isLoadingWiki;
     final totalItems = images.length + (hasWikiThumb ? 1 : 0);
 
     return GridView.builder(
@@ -612,8 +598,8 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                   left: 0,
                   right: 0,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.bottomCenter,
@@ -625,7 +611,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                       ),
                     ),
                     child: Text(
-                      '${index + 1} / ${images.length}',
+                      '',
                       style: GoogleFonts.lato(
                         fontSize: 10,
                         color: Colors.white.withOpacity(0.85),
@@ -667,14 +653,13 @@ class _EraDetailScreenState extends State<EraDetailScreen>
             bottom: 6,
             right: 6,
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.55),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
-                'Wiki',
+                '',
                 style: GoogleFonts.lato(
                   fontSize: 9,
                   color: Colors.white,
@@ -699,8 +684,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
       transformationController: _txController,
       onInteractionStart: (_) => _baseTextScale = _textScale,
       onInteractionUpdate: (details) {
-        final newScale =
-            (_baseTextScale * details.scale).clamp(0.8, 3.0);
+        final newScale = (_baseTextScale * details.scale).clamp(0.8, 3.0);
         if ((newScale - _textScale).abs() > 0.005) {
           setState(() => _textScale = newScale);
         }
@@ -736,11 +720,11 @@ class _EraDetailScreenState extends State<EraDetailScreen>
   }
 
   List<String> _tabLabels(String lang) {
-    return switch (lang) {
-      'en' => ['OVERVIEW', 'CONTENT', 'GALLERY'],
-      'es' => ['RESUMEN', 'CONTENIDO', 'GALERÍA'],
-      _ => ['PANORAMICA', 'CONTENUTO', 'GALLERIA'],
-    };
+    return [
+      context.read<LanguageProvider>().t('wikipedia.overview'),
+      context.read<LanguageProvider>().t('wikipedia.content'),
+      context.read<LanguageProvider>().t('wikipedia.gallery')
+    ];
   }
 }
 
