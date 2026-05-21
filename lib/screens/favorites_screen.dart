@@ -14,7 +14,7 @@ import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
-import '../widgets/wiki_cinematic_card.dart';
+import '../widgets/local_cinematic_card.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -124,7 +124,7 @@ class FavoritesScreen extends StatelessWidget {
                                 isPremium: isLocked,
                                 onTap: tapAction,
                               )
-                            : WikiCinematicCard(
+                            : LocalCinematicCard(
                                 item: item,
                                 subtitle: CategoryConfigs.labelOf(
                                     item.category, lang),

@@ -16,7 +16,7 @@ import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
-import '../widgets/wiki_cinematic_card.dart';
+import '../widgets/local_cinematic_card.dart';
 import 'historia_list_screen.dart';
 
 class WorldScreen extends StatelessWidget {
@@ -311,7 +311,7 @@ class WorldScreen extends StatelessWidget {
                             delay: (i * 60).ms);
                   }
 
-                  return WikiCinematicCard(
+                  return LocalCinematicCard(
                     item: item,
                     subtitle: CategoryConfigs.labelOf(item.category, lang),
                     isPremium: isLocked,

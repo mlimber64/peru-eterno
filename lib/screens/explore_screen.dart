@@ -16,7 +16,7 @@ import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
 import '../widgets/historia_timeline.dart';
-import '../widgets/wiki_cinematic_card.dart';
+import '../widgets/local_cinematic_card.dart';
 import 'cultural_map_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -289,7 +289,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               .fadeIn(duration: 400.ms, delay: Duration(milliseconds: i * 40));
         }
 
-        return WikiCinematicCard(
+        return LocalCinematicCard(
           item: item,
           subtitle: CategoryConfigs.labelOf(item.category, lang),
           isPremium: isLocked,

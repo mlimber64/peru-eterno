@@ -16,7 +16,29 @@
       "Bash(Sort-Object)",
       "Bash(xargs ls -la)",
       "Bash(awk '{print $5, $9}')",
-      "Bash(flutter build *)"
+      "Bash(flutter build *)",
+      "Bash(Get-ChildItem -Path \"D:\\\\proyecto\\\\peru-eterno\\\\lib\" -Recurse -Filter \"*.dart\")",
+      "Bash(Select-String -Pattern \"wikipedia|Wikipedia\")",
+      "Bash(Select-Object Path -Unique)",
+      "Bash(python -c \"import json,sys; data=json.load\\(open\\('assets/data/editorial_personajes.json','r',encoding='utf-8'\\)\\); ids=[d['id'] for d in data]; print\\(f'JSON valido: {len\\(data\\)} registros'\\); print\\('IDs:', ids\\)\")",
+      "Bash(python -c \"import json; data=json.load\\(open\\('assets/data/editorial_tradiciones.json','r',encoding='utf-8'\\)\\); ids=[d['id'] for d in data]; cats=set\\(d['category'] for d in data\\); print\\(f'JSON valido: {len\\(data\\)} registros, categorias={cats}'\\); print\\('IDs:', ids\\)\")",
+      "Bash(python3 *)",
+      "Bash(xxd)",
+      "Bash(sed -n '84p' assets/i18n/it.json)",
+      "Bash(sed 's/da Wikipedia/REPLACED/' assets/i18n/it.json)",
+      "Bash(sed -i 's|\"step_2\":  \"Tocca una scheda per leggere l\\\\\\\\u0027articolo completo da Wikipedia\"|\"step_2\":  \"Tocca una scheda per leggere il contenuto completo\"|' assets/i18n/it.json)",
+      "Bash(sed -i 's|\"about_text\":  \"Un\\\\\\\\u0027enciclopedia culturale sulla storia, le tradizioni e le persone del Peru. Contenuto fornito da Wikipedia \\(CC BY-SA\\).\"|\"about_text\":  \"Un\\\\x27enciclopedia culturale sulla storia, le tradizioni e le persone del Per\\\\xc3\\\\xb9. Fonti editoriali \\\\xc2\\\\xb7 Dominio pubblico.\"|' assets/i18n/it.json)",
+      "Bash(sed -i 's|\"cache_cleared\":  \"Cache svuotata\",|\"cache_cleared\":  \"Cache svuotata\",\\\\n                     \"footer_credits\":  \"Fonti editoriali \\\\xc2\\\\xb7 Dominio pubblico\",|' assets/i18n/it.json)",
+      "Bash(perl -i -pe 's|\"step_2\":  \"Tocca una scheda per leggere l\\\\\\\\\\\\\\\\u0027articolo completo da Wikipedia\"|\"step_2\":  \"Tocca una scheda per leggere il contenuto completo\"|' assets/i18n/it.json)",
+      "Bash(perl -i -pe 's|\"about_text\":  \"Un\\\\\\\\\\\\\\\\u0027enciclopedia culturale sulla storia, le tradizioni e le persone del Peru\\\\. Contenuto fornito da Wikipedia \\\\\\(CC BY-SA\\\\\\)\\\\.\"|\"about_text\":  \"Un\\\\x27enciclopedia culturale sulla storia, le tradizioni e le persone del Per\\\\x{00f9}. Fonti editoriali \\\\x{00b7} Dominio pubblico.\"|' assets/i18n/it.json)",
+      "Bash(perl -i -pe 's|\"about_text\":  \"Un'\\\\''enciclopedia culturale sulla storia, le tradizioni e le persone del Per[^\\\\.\"]+\\\\. Fonti editoriali [^\\\\.\"]+\\\\. Dominio pubblico\\\\.\"| \"about_text\":  \"Un\\\\x27enciclopedia culturale sulla storia, le tradizioni e le persone del Per\\\\\\\\u00f9. Fonti editoriali \\\\\\\\u00b7 Dominio pubblico.\"|' assets/i18n/it.json)",
+      "Bash(sed -n '218p' assets/i18n/it.json)",
+      "Bash(awk 'NR==218{print \"                     \\\\\"about_text\\\\\":  \\\\\"Un\\\\\\\\u0027enciclopedia culturale sulla storia, le tradizioni e le persone del Per\\\\\\\\u00f9. Fonti editoriali \\\\\\\\u00b7 Dominio pubblico.\\\\\"\"; next}1' assets/i18n/it.json)",
+      "Bash(mv /tmp/it_fixed.json assets/i18n/it.json)",
+      "Bash(perl -i -pe 's/Per\\\\xb9\\\\./Per\\\\xc3\\\\xb9./g' assets/i18n/it.json)",
+      "Bash(Remove-Item *)",
+      "Bash(del *)",
+      "Bash(node -e ' *)"
     ]
   }
 }

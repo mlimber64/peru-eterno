@@ -81,7 +81,7 @@
                  "about_text":  "Il Peru e una delle piu grandi culle della civilta mondiale. Sede dell\u0027Impero Inca, della citta sacra di Machu Picchu e di decine di culture lungo 5.000 anni, la storia del Peru e una delle piu ricche del mondo.",
                  "how_title":  "Come usare Peru Eterno",
                  "step_1":  "Scegli un mondo (Storia, Cultura, Sapori...) per iniziare",
-                 "step_2":  "Tocca una scheda per leggere l\u0027articolo completo da Wikipedia",
+                 "step_2":  "Tocca una scheda per leggere il contenuto completo",
                  "step_3":  "Salva i preferiti con il cuore per ritrovarli facilmente",
                  "featured_badge":  "ERA IN EVIDENZA",
                  "view_biography":  "Vedi biografia",
@@ -207,14 +207,15 @@
                      "premium_active_subtitle":  "Tutto il contenuto sbloccato",
                      "upgrade":  "Passa a Premium",
                      "upgrade_subtitle":  "Sblocca tutte le ere e i contenuti",
-                     "clear_cache":  "Svuota cache Wikipedia",
+                     "clear_cache":  "Cancella cache contenuti",
                      "clear_cache_subtitle":  "Forza il riscaricamento degli articoli",
                      "clear_history":  "Cancella cronologia",
                      "clear_history_subtitle":  "Rimuovi elementi \"continua a esplorare\"",
                      "clear_favorites":  "Cancella tutti i preferiti",
                      "clear_favorites_subtitle":  "Questa azione non puo essere annullata",
                      "cache_cleared":  "Cache svuotata",
-                     "about_text":  "Un\u0027enciclopedia culturale sulla storia, le tradizioni e le persone del Peru. Contenuto fornito da Wikipedia (CC BY-SA)."
+                     "footer_credits":  "Fonti editoriali · Dominio pubblico",
+                     "about_text":  "Un'enciclopedia culturale sulla storia, le tradizioni e le persone del Perù. Fonti editoriali · Dominio pubblico."
                  },
     "wikipedia":  {
                       "overview":  "PANORAMICA",

@@ -5,12 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/constants/app_colors.dart';
+import '../core/constants/app_config.dart';
 import '../core/constants/category_config.dart';
 import '../models/content_item.dart';
 import '../models/wikipedia_content.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/history_provider.dart';
 import '../providers/language_provider.dart';
+import '../data/editorial_repository.dart';
+import '../models/editorial_content.dart';
 import '../services/wikipedia_service.dart';
 import '../widgets/language_selector_button.dart';
 import '../widgets/wikipedia_section_widget.dart';
@@ -32,6 +35,8 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
   bool _isLoadingWiki = false;
   bool _wikiFailed = false;
   String? _lastLoadedLang;
+  bool _isEditorial = false;
+  String? _editorialFuente;
 
   final TransformationController _txController = TransformationController();
   double _textScale = 1.0;
@@ -69,13 +74,46 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
   }
 
   Future<void> _loadWikipediaContent(String lang) async {
-    if (widget.item.wikipediaSlug.isEmpty) return;
-
     setState(() {
       _isLoadingWiki = true;
       _wikiContent = null;
       _wikiFailed = false;
+      _isEditorial = false;
+      _editorialFuente = null;
     });
+
+    // Try local editorial content first; no network needed.
+    final EditorialContent? editorial = await EditorialRepository.findById(
+      widget.item.id,
+      widget.item.category,
+    );
+
+    if (editorial != null) {
+      final sections =
+          WikipediaContent.parseSections(editorial.contenidoFor(lang));
+      if (mounted) {
+        setState(() {
+          _wikiContent = WikipediaContent(
+            title: editorial.tituloFor(lang),
+            sections: sections,
+            sourceUrl: '',
+            cachedAt: DateTime.now(),
+            displayLang: lang,
+          );
+          _isLoadingWiki = false;
+          _isEditorial = true;
+          _editorialFuente = editorial.fuenteFor(lang);
+        });
+      }
+      return;
+    }
+
+    // Fallback: Wikipedia remote fetch.
+    if (!AppConfig.enableWikipediaFallback ||
+        widget.item.wikipediaSlug.isEmpty) {
+      if (mounted) setState(() => _isLoadingWiki = false);
+      return;
+    }
 
     final content = await WikipediaService.instance.fetch(
       contentId: widget.item.id,
@@ -328,9 +366,13 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
         ],
         if (lead != null) _buildLeadCard(lead.content, color, lang),
         const SizedBox(height: 20),
-        _buildReadMoreButton(content.sourceUrl, lang, color),
-        const SizedBox(height: 12),
-        _buildSourceAttribution(content, lang),
+        if (_isEditorial)
+          _buildEditorialAttribution()
+        else ...[
+          _buildReadMoreButton(content.sourceUrl, lang, color),
+          const SizedBox(height: 12),
+          _buildSourceAttribution(content, lang),
+        ],
       ],
     );
   }
@@ -542,19 +584,79 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
   Widget _buildContenidoTab(String lang) {
     final color = CategoryConfigs.colorOf(widget.item.category);
 
+    final child = _isEditorial
+        ? _buildEditorialContenido()
+        : WikipediaSectionWidget(
+            content: _wikiContent,
+            isLoading: _isLoadingWiki,
+            hasFailed: _wikiFailed && _wikiContent == null,
+            onRetry: () => _loadWikipediaContent(lang),
+            accentColor: color,
+            languageCode: lang,
+            hideLeadSection: true,
+            fallbackDescription: null,
+          );
+
     return _wrapWithZoom(
       SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
-        child: WikipediaSectionWidget(
-          content: _wikiContent,
-          isLoading: _isLoadingWiki,
-          hasFailed: _wikiFailed && _wikiContent == null,
-          onRetry: () => _loadWikipediaContent(lang),
-          accentColor: color,
-          languageCode: lang,
-          hideLeadSection: true,
-          fallbackDescription: null,
-        ).animate().fadeIn(duration: 500.ms, delay: 80.ms),
+        child: child.animate().fadeIn(duration: 500.ms, delay: 80.ms),
+      ),
+    );
+  }
+
+  // ── Editorial renderers ───────────────────────────────────────────────────
+
+  Widget _buildEditorialContenido() {
+    final content = _wikiContent;
+    if (content == null || !content.hasContent) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        ...content.contentSections.map(
+          (s) => Padding(
+            padding: const EdgeInsets.only(bottom: 18),
+            child: Text(
+              s.content,
+              style: GoogleFonts.lato(
+                fontSize: 15,
+                color: AppColors.textPrimary,
+                height: 1.8,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        _buildEditorialAttribution(),
+      ],
+    );
+  }
+
+  Widget _buildEditorialAttribution() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.dividerColor.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.dividerColor),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.menu_book_outlined,
+              size: 12, color: AppColors.textSecondary),
+          const SizedBox(width: 6),
+          Flexible(
+            child: Text(
+              _editorialFuente ?? '',
+              style: GoogleFonts.lato(
+                fontSize: 11,
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -81,7 +81,7 @@
                  "about_text":  "Peru is one of the world\u0027s great cradles of civilization. Home to the Inca Empire, the sacred city of Machu Picchu, and dozens of cultures spanning 5,000 years, Peru\u0027s history is one of the richest on Earth.",
                  "how_title":  "How to use Peru Eterno",
                  "step_1":  "Choose a world (History, Culture, Flavors...) to start exploring",
-                 "step_2":  "Tap any card to read its full article from Wikipedia",
+                 "step_2":  "Tap any card to read its full content",
                  "step_3":  "Save your favorites with the heart icon to find them later",
                  "featured_badge":  "FEATURED ERA",
                  "view_biography":  "View biography",
@@ -207,14 +207,15 @@
                      "premium_active_subtitle":  "All content unlocked",
                      "upgrade":  "Upgrade to Premium",
                      "upgrade_subtitle":  "Unlock all eras and content",
-                     "clear_cache":  "Clear Wikipedia cache",
+                     "clear_cache":  "Clear content cache",
                      "clear_cache_subtitle":  "Force re-download of all articles",
                      "clear_history":  "Clear navigation history",
                      "clear_history_subtitle":  "Remove \"continue exploring\" items",
                      "clear_favorites":  "Clear all favorites",
                      "clear_favorites_subtitle":  "This cannot be undone",
                      "cache_cleared":  "Cache cleared",
-                     "about_text":  "A cultural encyclopedia about Peru\u0027s history, traditions, and people. Content powered by Wikipedia (CC BY-SA)."
+                     "footer_credits":  "Editorial sources · Public domain",
+                     "about_text":  "A cultural encyclopedia about Peru\u0027s history, traditions, and people. Editorial sources · Public domain."
                  },
     "wikipedia":  {
                       "overview":  "OVERVIEW",

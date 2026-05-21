@@ -114,7 +114,7 @@ class AppDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 12, 24, 16),
               child: Text(
-                'v1.0.0 · Contenuto: Wikipedia CC BY-SA',
+                'v1.0.0 · ${context.read<LanguageProvider>().t('settings.footer_credits')}',
                 style: GoogleFonts.lato(
                   fontSize: 10,
                   color: AppColors.cremaPergamino.withOpacity(0.25),

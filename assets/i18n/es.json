@@ -81,7 +81,7 @@
                  "about_text":  "El Perú es una de las grandes cunas de la civilización mundial. Hogar del Imperio Inca, de la ciudad sagrada de Machu Picchu y de decenas de culturas a lo largo de 5,000 años, la historia del Perú es una de las más ricas del mundo.",
                  "how_title":  "Cómo usar Peru Eterno",
                  "step_1":  "Elige un mundo (Historia, Cultura, Sabores...) para explorar",
-                 "step_2":  "Toca cualquier tarjeta para leer su artículo completo de Wikipedia",
+                 "step_2":  "Toca cualquier tarjeta para leer su contenido completo",
                  "step_3":  "Guarda tus favoritos con el corazón para encontrarlos después",
                  "featured_badge":  "ERA DESTACADA",
                  "view_biography":  "Ver biografía",
@@ -207,14 +207,15 @@
                      "premium_active_subtitle":  "Todo el contenido desbloqueado",
                      "upgrade":  "Mejorar a Premium",
                      "upgrade_subtitle":  "Desbloquea todas las eras y contenido",
-                     "clear_cache":  "Limpiar caché Wikipedia",
+                     "clear_cache":  "Limpiar caché de contenidos",
                      "clear_cache_subtitle":  "Fuerza la descarga de artículos",
                      "clear_history":  "Limpiar historial",
                      "clear_history_subtitle":  "Elimina elementos de \"continuar explorando\"",
                      "clear_favorites":  "Eliminar todos los guardados",
                      "clear_favorites_subtitle":  "Esta acción no se puede deshacer",
                      "cache_cleared":  "Caché limpiado",
-                     "about_text":  "Una enciclopedia cultural sobre la historia, tradiciones y personas del Perú. Contenido proveniente de Wikipedia (CC BY-SA)."
+                     "footer_credits":  "Fuentes editoriales · Dominio público",
+                     "about_text":  "Una enciclopedia cultural sobre la historia, tradiciones y personas del Perú. Fuentes editoriales · Dominio público."
                  },
     "wikipedia":  {
                       "overview":  "RESUMEN",
