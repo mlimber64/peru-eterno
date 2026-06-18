@@ -14,6 +14,7 @@ import '../providers/language_provider.dart';
 import '../data/editorial_repository.dart';
 import '../models/editorial_content.dart';
 import '../services/wikipedia_service.dart';
+import '../widgets/caral_hero_carousel.dart';
 import '../widgets/image_with_fallback.dart';
 import '../widgets/language_selector_button.dart';
 import '../widgets/wikipedia_section_widget.dart';
@@ -331,6 +332,12 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Hero carousel — solo Caral, solo contenido editorial
+        if (widget.era.id == 'caral' && _isEditorial) ...[
+          const CaralHeroCarousel(),
+          const SizedBox(height: 20),
+        ],
+
         // Offline badge
         if (content.isFromCache) ...[
           _buildOfflineCard(lang),
@@ -600,26 +607,73 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     final content = _wikiContent;
     if (content == null || !content.hasContent) return const SizedBox.shrink();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16),
-        ...content.contentSections.map(
-          (s) => Padding(
-            padding: const EdgeInsets.only(bottom: 18),
-            child: Text(
-              s.content,
-              style: GoogleFonts.lato(
-                fontSize: 15,
-                color: AppColors.textPrimary,
-                height: 1.8,
-              ),
-            ),
+    final sections = content.contentSections;
+    final isCaral = widget.era.id == 'caral';
+
+    final children = <Widget>[const SizedBox(height: 16)];
+
+    for (int i = 0; i < sections.length; i++) {
+      children.add(Padding(
+        padding: const EdgeInsets.only(bottom: 18),
+        child: Text(
+          sections[i].content,
+          style: GoogleFonts.lato(
+            fontSize: 15,
+            color: AppColors.textPrimary,
+            height: 1.8,
           ),
         ),
-        const SizedBox(height: 8),
-        _buildEditorialAttribution(),
-      ],
+      ));
+
+      // Imagen intermedia después del 3er párrafo (índice 2)
+      if (isCaral && i == 2) {
+        children.add(_buildCaralInlineImage(
+          'assets/images/content/caral/plaza_circular_caral.webp',
+        ));
+      }
+    }
+
+    // Imagen final contemplativa (solo Caral)
+    if (isCaral) {
+      children.add(_buildCaralInlineImage(
+        'assets/images/content/caral/caral_atardecer_eterno.webp',
+      ));
+    }
+
+    children.add(const SizedBox(height: 8));
+    children.add(_buildEditorialAttribution());
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: children,
+    );
+  }
+
+  Widget _buildCaralInlineImage(String assetPath) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.35),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(14),
+          child: Image.asset(
+            assetPath,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 220,
+            errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+          ),
+        ),
+      ),
     );
   }
 

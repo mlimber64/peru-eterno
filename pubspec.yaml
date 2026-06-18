@@ -38,6 +38,7 @@ flutter:
     - assets/i18n/
     - assets/data/
     - assets/images/content/
+    - assets/images/content/caral/
     - assets/images/banners/
     - assets/images/timeline/
     - assets/images/historia/
