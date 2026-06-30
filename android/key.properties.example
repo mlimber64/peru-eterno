@@ -1,0 +1,14 @@
+# Plantilla de credenciales de firma — COPIA este archivo a `key.properties`
+# y rellena los valores reales. `key.properties` está en .gitignore y NUNCA
+# debe subirse al repositorio.
+#
+#   cp android/key.properties.example android/key.properties
+#
+# storeFile: ruta al keystore. Recomendado: ruta ABSOLUTA fuera del repo,
+#   p. ej. C:/Users/limber/keys/peru-eterno-upload.jks  (en Windows usa /).
+#   También puede ser relativa a la carpeta android/.
+
+storePassword=TU_PASSWORD_DEL_STORE
+keyPassword=TU_PASSWORD_DE_LA_CLAVE
+keyAlias=upload
+storeFile=/ruta/absoluta/a/peru-eterno-upload.jks

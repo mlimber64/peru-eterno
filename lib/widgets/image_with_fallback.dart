@@ -8,6 +8,11 @@ class ImageWithFallback extends StatelessWidget {
   final BoxFit fit;
   final Widget? fallbackIcon;
 
+  /// Si se proporciona, reemplaza por completo el placeholder por defecto
+  /// (gradiente + icono) cuando el asset no carga. Útil para fallbacks
+  /// artísticos a medida como [CaralPlaceholder].
+  final Widget? fallbackOverride;
+
   const ImageWithFallback({
     super.key,
     required this.assetPath,
@@ -16,6 +21,7 @@ class ImageWithFallback extends StatelessWidget {
     this.height,
     this.fit = BoxFit.cover,
     this.fallbackIcon,
+    this.fallbackOverride,
   });
 
   @override
@@ -26,6 +32,13 @@ class ImageWithFallback extends StatelessWidget {
       height: height,
       fit: fit,
       errorBuilder: (context, error, stackTrace) {
+        if (fallbackOverride != null) {
+          return SizedBox(
+            width: width,
+            height: height,
+            child: fallbackOverride,
+          );
+        }
         return Container(
           width: width,
           height: height,

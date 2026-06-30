@@ -19,6 +19,7 @@ import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../providers/reading_progress_provider.dart';
 import '../widgets/app_drawer.dart';
+import '../widgets/caral_placeholder.dart';
 import '../widgets/cinematic_card.dart';
 import 'world_screen.dart';
 
@@ -777,42 +778,48 @@ class _PeruMapPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
 
-    // Simplified Peru outline (normalized to 100x130 box)
-    final path = Path();
+    // Silueta real del Perú. Los vértices se derivan de coordenadas
+    // geográficas aproximadas (lon/lat) normalizadas a la caja del lienzo:
+    //   x = (81.3 - lon) / 12.7   ·   y = lat_sur / 18.35
+    // Recorrido en sentido horario partiendo del extremo norte (Putumayo).
     final w = size.width;
     final h = size.height;
+    Offset p(double fx, double fy) => Offset(w * fx, h * fy);
 
-    path.moveTo(w * 0.38, h * 0.02); // top-north
-    path.lineTo(w * 0.60, h * 0.04);
-    path.lineTo(w * 0.80, h * 0.10);
-    path.lineTo(w * 0.90, h * 0.18);
-    path.lineTo(w * 0.88, h * 0.30);
-    path.lineTo(w * 0.82, h * 0.42);
-    path.lineTo(w * 0.95, h * 0.50);
-    path.lineTo(w * 0.98, h * 0.62);
-    path.lineTo(w * 0.88, h * 0.72);
-    path.lineTo(w * 0.75, h * 0.78);
-    path.lineTo(w * 0.68, h * 0.92);
-    path.lineTo(w * 0.55, h * 0.98);
-    path.lineTo(w * 0.38, h * 0.90);
-    path.lineTo(w * 0.18, h * 0.85);
-    path.lineTo(w * 0.05, h * 0.72);
-    path.lineTo(w * 0.08, h * 0.55);
-    path.lineTo(w * 0.02, h * 0.40);
-    path.lineTo(w * 0.10, h * 0.25);
-    path.lineTo(w * 0.22, h * 0.12);
-    path.close();
+    final path = Path()
+      ..moveTo(w * 0.50, h * 0.01) // Extremo norte (Putumayo, Loreto)
+      // ── Frontera oriental (Colombia / Brasil), trazo quebrado amazónico ──
+      ..lineTo(w * 0.64, h * 0.05)
+      ..lineTo(w * 0.83, h * 0.14)
+      ..lineTo(w * 0.92, h * 0.30)
+      ..lineTo(w * 1.00, h * 0.52) // Punto más oriental (Madre de Dios)
+      ..lineTo(w * 0.97, h * 0.66)
+      ..lineTo(w * 0.94, h * 0.86) // Zona del Lago Titicaca (frontera Bolivia)
+      // ── Extremo sur ──
+      ..lineTo(w * 0.86, h * 0.99) // Tacna (punto más austral)
+      // ── Costa del Pacífico, ascendiendo (curva suave) ──
+      ..lineTo(w * 0.76, h * 0.94) // Moquegua
+      ..lineTo(w * 0.60, h * 0.87) // Arequipa / Camaná
+      ..lineTo(w * 0.41, h * 0.76) // Península de Paracas (saliente)
+      ..lineTo(w * 0.335, h * 0.66) // Lima / Callao
+      ..lineTo(w * 0.21, h * 0.49) // Chimbote
+      ..lineTo(w * 0.04, h * 0.34) // Sechura (saliente más occidental)
+      ..lineTo(w * 0.02, h * 0.245) // Talara
+      ..lineTo(w * 0.08, h * 0.185) // Tumbes (esquina noroeste)
+      // ── Frontera norte (Ecuador), de vuelta al extremo norte ──
+      ..lineTo(w * 0.22, h * 0.11)
+      ..close();
 
     canvas.drawPath(path, paint);
     canvas.drawPath(path, borderPaint);
 
-    // Lima dot
+    // ── Lima (capital, sobre la costa central) ──
     final limaPaint = Paint()
       ..color = Colors.white.withOpacity(0.9)
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(Offset(w * 0.15, h * 0.50), 3.5, limaPaint);
+    final lima = p(0.335, 0.66);
+    canvas.drawCircle(lima, 3.0, limaPaint);
 
-    // Lima label
     final tp = TextPainter(
       text: TextSpan(
         text: 'Lima',
@@ -824,13 +831,14 @@ class _PeruMapPainter extends CustomPainter {
       ),
       textDirection: TextDirection.ltr,
     )..layout();
-    tp.paint(canvas, Offset(w * 0.18, h * 0.465));
+    tp.paint(canvas, lima + Offset(w * 0.05, -h * 0.03));
 
-    // Cusco dot
+    // ── Cusco (interior sur-andino) ──
     final cuscoPaint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.9)
+      ..color = AppColors.ocre.withOpacity(0.95)
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(Offset(w * 0.55, h * 0.60), 2.5, cuscoPaint);
+    final cusco = p(0.73, 0.74);
+    canvas.drawCircle(cusco, 2.5, cuscoPaint);
 
     final tp2 = TextPainter(
       text: TextSpan(
@@ -843,7 +851,8 @@ class _PeruMapPainter extends CustomPainter {
       ),
       textDirection: TextDirection.ltr,
     )..layout();
-    tp2.paint(canvas, Offset(w * 0.58, h * 0.575));
+    // Etiqueta a la izquierda del punto para no salir de la caja.
+    tp2.paint(canvas, cusco + Offset(-tp2.width - w * 0.04, -h * 0.025));
   }
 
   @override
@@ -936,6 +945,10 @@ class _FeaturedEraSection extends StatelessWidget {
                       context.read<LanguageProvider>().t('home.featured_badge'),
                   isPremium: isLocked,
                   height: 220,
+                  // Caral carece de fotografía: fallback artístico a medida.
+                  imageFallback: era.id == 'caral'
+                      ? CaralPlaceholder(accentColor: era.accentColor)
+                      : null,
                   onTap: () => AppNavigation.openEra(
                     context,
                     era,

@@ -37,17 +37,37 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
   void initState() {
     super.initState();
     _pageCtrl = PageController();
-    if (widget.carouselImages.length > 1) {
-      _timer = Timer.periodic(const Duration(seconds: 7), (_) {
-        if (!mounted) return;
-        final next = (_currentPage + 1) % widget.carouselImages.length;
-        _pageCtrl.animateToPage(
-          next,
-          duration: const Duration(milliseconds: 900),
-          curve: Curves.easeInOut,
-        );
-      });
-    }
+    _startAutoPlay();
+  }
+
+  /// Inicia (o reinicia) el auto-avance. No avanza mientras el usuario
+  /// está deslizando manualmente.
+  void _startAutoPlay() {
+    _timer?.cancel();
+    if (widget.carouselImages.length <= 1) return;
+    _timer = Timer.periodic(const Duration(seconds: 7), (_) {
+      if (!mounted || !_pageCtrl.hasClients) return;
+      final next = (_currentPage + 1) % widget.carouselImages.length;
+      _pageCtrl.animateToPage(
+        next,
+        duration: const Duration(milliseconds: 900),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  /// Va a la página indicada (con límites) y reinicia el auto-avance.
+  void _goToPage(int page) {
+    final n = widget.carouselImages.length;
+    if (n <= 1 || !_pageCtrl.hasClients) return;
+    final target = page.clamp(0, n - 1);
+    if (target == _currentPage) return;
+    _pageCtrl.animateToPage(
+      target,
+      duration: const Duration(milliseconds: 380),
+      curve: Curves.easeOut,
+    );
+    _startAutoPlay(); // reinicia la cuenta tras interacción manual
   }
 
   @override
@@ -60,75 +80,73 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
   @override
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>().currentLanguage;
+    final accent = widget.stage.accentColor;
     final screenHeight = MediaQuery.of(context).size.height;
     final carouselHeight = screenHeight * 0.40;
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
-      body: CustomScrollView(
-        slivers: [
-          _buildAppBar(context, lang, carouselHeight),
-          SliverToBoxAdapter(
-            child: FutureBuilder<List<HistoriaArticle>>(
-              future: HistoriaStagesRepository.loadArticlesForStage(
-                  widget.stage.id),
-              builder: (context, snap) {
-                if (snap.connectionState != ConnectionState.done) {
-                  return AppLoadingState(
-                    height: 300,
-                    color: widget.stage.accentColor,
-                  );
-                }
-                if (!snap.hasData || snap.data!.isEmpty) {
-                  return const AppErrorState(height: 300);
-                }
-                return _SubtopicsBody(
-                  articles: snap.data!,
-                  stage: widget.stage,
-                  lang: lang,
-                );
-              },
+      // El carrusel va como contenido normal del scroll (no dentro de un
+      // FlexibleSpaceBar) para que el PageView reciba los gestos horizontales.
+      // El botón de volver se superpone con un Stack.
+      body: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: carouselHeight,
+                  child: _hasCarousel
+                      ? _buildCarousel(accent, lang)
+                      : _buildGradientFallback(accent, lang),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: FutureBuilder<List<HistoriaArticle>>(
+                  future: HistoriaStagesRepository.loadArticlesForStage(
+                      widget.stage.id),
+                  builder: (context, snap) {
+                    if (snap.connectionState != ConnectionState.done) {
+                      return AppLoadingState(
+                        height: 300,
+                        color: widget.stage.accentColor,
+                      );
+                    }
+                    if (!snap.hasData || snap.data!.isEmpty) {
+                      return const AppErrorState(height: 300);
+                    }
+                    return _SubtopicsBody(
+                      articles: snap.data!,
+                      stage: widget.stage,
+                      lang: lang,
+                    );
+                  },
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 60)),
+            ],
+          ),
+          // Botón volver superpuesto
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 6,
+            left: 10,
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.42),
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Icon(Icons.arrow_back_ios_new_rounded,
+                      size: 16, color: Colors.white),
+                ),
+              ),
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 60)),
         ],
-      ),
-    );
-  }
-
-  SliverAppBar _buildAppBar(
-      BuildContext context, String lang, double carouselHeight) {
-    final accent = widget.stage.accentColor;
-
-    return SliverAppBar(
-      expandedHeight: carouselHeight,
-      pinned: true,
-      backgroundColor: AppColors.negoCacao,
-      foregroundColor: Colors.white,
-      elevation: 0,
-      scrolledUnderElevation: 0,
-      automaticallyImplyLeading: false,
-      leading: GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.42),
-            shape: BoxShape.circle,
-          ),
-          child: const Center(
-            child: Icon(Icons.arrow_back_ios_new_rounded,
-                size: 16, color: Colors.white),
-          ),
-        ),
-      ),
-      flexibleSpace: FlexibleSpaceBar(
-        collapseMode: CollapseMode.pin,
-        background: _hasCarousel
-            ? _buildCarousel(accent, lang)
-            : _buildGradientFallback(accent, lang),
       ),
     );
   }
@@ -146,9 +164,11 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // Imágenes
+          // Imágenes. La física es manejada por el GestureDetector superior
+          // (NeverScrollable evita conflictos con el overlay encima).
           PageView.builder(
             controller: _pageCtrl,
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: widget.carouselImages.length,
             onPageChanged: (i) => setState(() => _currentPage = i),
             itemBuilder: (context, i) {
@@ -214,6 +234,24 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
                     ),
                   ),
                 ),
+              ),
+            ),
+
+          // Capa de gestos (encima de todo): captura el deslizamiento
+          // horizontal del dedo y controla el carrusel. Los gestos verticales
+          // pasan al scroll de la página (translucent).
+          if (widget.carouselImages.length > 1)
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onHorizontalDragEnd: (details) {
+                  final v = details.primaryVelocity ?? 0;
+                  if (v < -80) {
+                    _goToPage(_currentPage + 1); // desliza a la izquierda → siguiente
+                  } else if (v > 80) {
+                    _goToPage(_currentPage - 1); // desliza a la derecha → anterior
+                  }
+                },
               ),
             ),
         ],

@@ -16,6 +16,29 @@ class PremiumScreen extends StatelessWidget {
     final t = context.watch<LanguageProvider>().t;
     final premiumProvider = context.watch<PremiumProvider>();
 
+    // ── Mensajes de compra localizados ──────────────────────────────────────
+    // El provider expone una clave i18n de un solo uso (error o éxito). La
+    // resolvemos con `t(...)` y la mostramos como SnackBar tras el frame
+    // actual, consumiéndola para no repetirla en cada rebuild.
+    final messageKey = premiumProvider.lastError;
+    if (messageKey != null) {
+      final isError = premiumProvider.messageIsError;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        premiumProvider.consumeMessage();
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context)
+          ..clearSnackBars()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(t(messageKey)),
+              backgroundColor:
+                  isError ? AppColors.terracota : AppColors.verdeAndino,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+      });
+    }
+
     if (premiumProvider.isPremium) {
       return _buildAlreadyUnlocked(context, t);
     }
@@ -86,8 +109,9 @@ class PremiumScreen extends StatelessWidget {
                   // Restore purchase
                   TextButton(
                     onPressed: () async {
-                      await premiumProvider.restorePurchase();
-                      if (context.mounted) Navigator.of(context).pop();
+                      // El resultado llega por el purchaseStream; la pantalla
+                      // reacciona sola al cambiar `isPremium`.
+                      await premiumProvider.restorePurchases();
                     },
                     child: Text(
                       t('premium.restore_button'),
@@ -156,7 +180,9 @@ class PremiumScreen extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            t('premium.price'),
+            // Precio localizado real de la tienda si está disponible;
+            // si no, el valor estático de los JSON de i18n.
+            premiumProvider.localizedPrice ?? t('premium.price'),
             style: AppTextStyles.premiumPrice,
           ),
           const SizedBox(height: 4),
@@ -171,29 +197,39 @@ class PremiumScreen extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () async {
-                await premiumProvider.unlockPremium();
-                if (context.mounted) {
-                  Navigator.of(context).pop();
-                }
-              },
+              // Deshabilitado mientras hay un pago en curso o la tienda no
+              // está disponible. El desbloqueo llega por el purchaseStream.
+              onPressed: (premiumProvider.isPurchasePending ||
+                      !premiumProvider.storeAvailable)
+                  ? null
+                  : () => premiumProvider.buyPremium(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.ocre,
                 foregroundColor: Colors.white,
+                disabledBackgroundColor: AppColors.ocre.withOpacity(0.4),
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
                 elevation: 0,
               ),
-              child: Text(
-                t('premium.unlock_button').toUpperCase(),
-                style: GoogleFonts.lato(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 2,
-                ),
-              ),
+              child: premiumProvider.isPurchasePending
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : Text(
+                      t('premium.unlock_button').toUpperCase(),
+                      style: GoogleFonts.lato(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 2,
+                      ),
+                    ),
             ),
           ),
         ],

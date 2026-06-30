@@ -15,6 +15,7 @@ import '../data/editorial_repository.dart';
 import '../models/editorial_content.dart';
 import '../services/wikipedia_service.dart';
 import '../widgets/caral_hero_carousel.dart';
+import '../widgets/caral_placeholder.dart';
 import '../widgets/image_with_fallback.dart';
 import '../widgets/language_selector_button.dart';
 import '../widgets/wikipedia_section_widget.dart';
@@ -215,6 +216,11 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                   widget.era.imageAssetPath(widget.era.imageFilenames.first),
               fallbackColor: widget.era.accentColor,
               fit: BoxFit.cover,
+              // Caral no tiene fotografía: usamos un fallback artístico en
+              // lugar del placeholder genérico para no romper la estética.
+              fallbackOverride: widget.era.id == 'caral'
+                  ? CaralPlaceholder(accentColor: widget.era.accentColor)
+                  : null,
             ),
             DecoratedBox(
               decoration: BoxDecoration(

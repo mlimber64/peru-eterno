@@ -8,7 +8,17 @@ class EuropeanaService {
   EuropeanaService._();
 
   // Register at: https://pro.europeana.eu/page/apis
-  static const String _apiKey = 'hidaterylo';
+  //
+  // La clave NO se hardcodea: se inyecta en tiempo de compilación con
+  // --dart-define=EUROPEANA_API_KEY=xxxx. Así nunca viaja en el repositorio
+  // ni queda visible en el binario como literal de código fuente.
+  static const String _apiKey =
+      String.fromEnvironment('EUROPEANA_API_KEY');
+
+  /// Indica si la app fue compilada con una clave válida. Si es `false`,
+  /// la integración con Europeana se degrada con elegancia (devuelve listas
+  /// vacías) en vez de lanzar peticiones que el servidor rechazará.
+  static bool get isConfigured => _apiKey.isNotEmpty;
 
   static const Duration _requestTimeout = Duration(seconds: 15);
 
@@ -23,6 +33,9 @@ class EuropeanaService {
   };
 
   Future<List<EuropeanaItem>> searchForEra(String eraId) async {
+    // Sin clave configurada no tiene sentido contactar la API.
+    if (!isConfigured) return [];
+
     final query = _eraQueries[eraId];
     if (query == null) return [];
 

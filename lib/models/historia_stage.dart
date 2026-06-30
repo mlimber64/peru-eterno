@@ -30,6 +30,9 @@ class HistoriaStage {
     );
   }
 
+  /// Ruta del asset de imagen de fondo de la etapa (derivada del id).
+  String get imageAssetPath => 'assets/images/stages/$id.webp';
+
   String tituloFor(String lang) => titulo[lang] ?? titulo['it'] ?? id;
   String subtituloFor(String lang) => subtitulo[lang] ?? subtitulo['it'] ?? '';
   String periodoFor(String lang) => periodo[lang] ?? periodo['it'] ?? '';

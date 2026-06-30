@@ -46,6 +46,18 @@ class _LocalCinematicCardState extends State<LocalCinematicCard> {
     _resolveAsset();
   }
 
+  @override
+  void didUpdateWidget(LocalCinematicCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // El GridView reutiliza los State al cambiar de filtro: si el item cambió,
+    // hay que reiniciar la imagen y volver a resolverla para el nuevo contenido.
+    if (oldWidget.item.id != widget.item.id ||
+        oldWidget.item.category != widget.item.category) {
+      _assetPath = null;
+      _resolveAsset();
+    }
+  }
+
   Future<void> _resolveAsset() async {
     final content = await EditorialRepository.findById(
         widget.item.id, widget.item.category);

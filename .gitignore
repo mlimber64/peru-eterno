@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ── Firma de release / secretos (NUNCA versionar) ───────────────────────────
+android/key.properties
+**/*.jks
+**/*.keystore
+# Versionamos solo la plantilla de ejemplo:
+!android/key.properties.example

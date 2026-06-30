@@ -534,16 +534,39 @@ class _StageCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // Diagonal pattern
-              CustomPaint(painter: _DiagPainter(accent)),
-              // Watermark icon
-              Positioned(
-                right: -20,
-                top: -10,
-                child: Icon(
-                  Icons.history_edu_rounded,
-                  size: 180,
-                  color: Colors.white.withOpacity(0.05),
+              // Background image (falls back to the gradient + pattern)
+              Image.asset(
+                stage.imageAssetPath,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    CustomPaint(painter: _DiagPainter(accent)),
+                    Positioned(
+                      right: -20,
+                      top: -10,
+                      child: Icon(
+                        Icons.history_edu_rounded,
+                        size: 180,
+                        color: Colors.white.withOpacity(0.05),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Dark scrim for text legibility
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.15),
+                      Colors.black.withOpacity(0.35),
+                      Colors.black.withOpacity(0.78),
+                    ],
+                    stops: const [0.0, 0.45, 1.0],
+                  ),
                 ),
               ),
               // Stage number

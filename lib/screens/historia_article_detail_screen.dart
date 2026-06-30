@@ -9,6 +9,7 @@ import '../models/historia_stage.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/reading_progress_provider.dart';
+import '../providers/reading_text_scale_provider.dart';
 
 class HistoriaArticleDetailScreen extends StatefulWidget {
   final HistoriaArticle article;
@@ -36,6 +37,12 @@ class _HistoriaArticleDetailScreenState
   Timer? _timer;
   int _currentPage = 0;
   int _lastSavedProgress = 0;
+
+  // ── Pellizco de dos dedos para escalar el texto ──────────────────────────
+  final Map<int, Offset> _pointers = {};
+  double? _baseDistance; // distancia entre dedos al iniciar el pellizco
+  double _baseScale = 1.0; // escala al iniciar el pellizco
+  bool _pinching = false;
 
   Color get _accent => widget.stage?.accentColor ?? AppColors.worldHistoria;
   bool get _hasCarousel => widget.carouselImages.isNotEmpty;
@@ -96,9 +103,41 @@ class _HistoriaArticleDetailScreenState
     }
   }
 
+  // ── Manejo del pellizco con Listener (no compite con el scroll) ──────────
+  void _onPointerDown(PointerDownEvent e) {
+    _pointers[e.pointer] = e.position;
+    if (_pointers.length == 2) {
+      final pts = _pointers.values.toList();
+      _baseDistance = (pts[0] - pts[1]).distance;
+      _baseScale = context.read<ReadingTextScaleProvider>().scale;
+      setState(() => _pinching = true);
+    }
+  }
+
+  void _onPointerMove(PointerMoveEvent e) {
+    if (!_pointers.containsKey(e.pointer)) return;
+    _pointers[e.pointer] = e.position;
+    if (_pointers.length >= 2 && _baseDistance != null && _baseDistance! > 0) {
+      final pts = _pointers.values.toList();
+      final dist = (pts[0] - pts[1]).distance;
+      final factor = dist / _baseDistance!;
+      context.read<ReadingTextScaleProvider>().setScale(_baseScale * factor);
+    }
+  }
+
+  void _onPointerUp(PointerEvent e) {
+    _pointers.remove(e.pointer);
+    if (_pointers.length < 2 && _pinching) {
+      _baseDistance = null;
+      setState(() => _pinching = false);
+      context.read<ReadingTextScaleProvider>().persist();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>().currentLanguage;
+    final textScale = context.watch<ReadingTextScaleProvider>().scale;
     final isFav =
         context.watch<FavoritesProvider>().isFavorite(widget.article.id);
     final readingPct = context
@@ -120,9 +159,16 @@ class _HistoriaArticleDetailScreenState
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
-      body: CustomScrollView(
-        controller: _scrollCtrl,
-        slivers: [
+      body: Listener(
+        onPointerDown: _onPointerDown,
+        onPointerMove: _onPointerMove,
+        onPointerUp: _onPointerUp,
+        onPointerCancel: _onPointerUp,
+        child: Stack(
+          children: [
+            CustomScrollView(
+              controller: _scrollCtrl,
+              slivers: [
           // ── Hero Carousel ────────────────────────────────────────────────
           _buildSliverAppBar(context, isFav, carouselHeight, readingPct),
 
@@ -155,7 +201,7 @@ class _HistoriaArticleDetailScreenState
                   return Text(
                     paragraphs[pIndex].trim(),
                     style: GoogleFonts.lato(
-                      fontSize: 16,
+                      fontSize: 16 * textScale,
                       color: AppColors.cremaPergamino.withOpacity(0.85),
                       height: 1.8,
                     ),
@@ -178,8 +224,33 @@ class _HistoriaArticleDetailScreenState
               child: _buildNavigation(context, lang, hasPrev, hasNext, idx),
             ),
 
-          const SliverToBoxAdapter(child: SizedBox(height: 60)),
-        ],
+              const SliverToBoxAdapter(child: SizedBox(height: 60)),
+              ],
+            ),
+            // Indicador del tamaño de texto durante el pellizco
+            if (_pinching)
+              Center(
+                child: IgnorePointer(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Text(
+                      '${(textScale * 100).round()}%',
+                      style: GoogleFonts.lato(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

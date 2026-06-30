@@ -17,6 +17,11 @@ class CinematicCard extends StatelessWidget {
   final double height;
   final BorderRadius borderRadius;
 
+  /// Fondo a usar cuando NO hay imagen (asset ausente o con error). Si es
+  /// `null` se usa el gradiente de acento por defecto. Permite inyectar un
+  /// fallback artístico como [CaralPlaceholder].
+  final Widget? imageFallback;
+
   const CinematicCard({
     super.key,
     this.assetImagePath,
@@ -30,6 +35,7 @@ class CinematicCard extends StatelessWidget {
     this.width = double.infinity,
     this.height = 200,
     this.borderRadius = const BorderRadius.all(Radius.circular(16)),
+    this.imageFallback,
   });
 
   @override
@@ -155,24 +161,26 @@ class CinematicCard extends StatelessWidget {
   }
 
   Widget _buildBackground() {
-    // Priority: asset image → network image → gradient
+    // Priority: asset image → network image → fallback (custom or gradient)
     if (assetImagePath != null) {
       return Image.asset(
         assetImagePath!,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => _buildGradient(),
+        errorBuilder: (_, __, ___) => _buildFallback(),
       );
     }
     if (networkImageUrl != null && networkImageUrl!.isNotEmpty) {
       return CachedNetworkImage(
         imageUrl: networkImageUrl!,
         fit: BoxFit.cover,
-        errorWidget: (_, __, ___) => _buildGradient(),
-        placeholder: (_, __) => _buildGradient(),
+        errorWidget: (_, __, ___) => _buildFallback(),
+        placeholder: (_, __) => _buildFallback(),
       );
     }
-    return _buildGradient();
+    return _buildFallback();
   }
+
+  Widget _buildFallback() => imageFallback ?? _buildGradient();
 
   Widget _buildGradient() {
     return Container(

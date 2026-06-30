@@ -7,6 +7,7 @@ import '../providers/history_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../services/wikipedia_service.dart';
+import 'credits_screen.dart';
 import 'premium_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -131,6 +132,21 @@ class SettingsScreen extends StatelessWidget {
                   await provider.toggle(id);
                 }
               },
+            ),
+            const SizedBox(height: 28),
+
+            // ── Credits ───────────────────────────────────────────────────
+            _sectionLabel(
+                context.read<LanguageProvider>().t('settings.credits')),
+            _ActionCard(
+              icon: Icons.public_rounded,
+              title: context.read<LanguageProvider>().t('settings.credits'),
+              subtitle: context
+                  .read<LanguageProvider>()
+                  .t('settings.credits_subtitle'),
+              color: AppColors.ocre,
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const CreditsScreen())),
             ),
             const SizedBox(height: 28),
 

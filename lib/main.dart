@@ -7,6 +7,7 @@ import 'providers/history_provider.dart';
 import 'providers/language_provider.dart';
 import 'providers/premium_provider.dart';
 import 'providers/reading_progress_provider.dart';
+import 'providers/reading_text_scale_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,9 @@ void main() async {
   final readingProgressProvider = ReadingProgressProvider();
   await readingProgressProvider.initialize();
 
+  final readingTextScaleProvider = ReadingTextScaleProvider();
+  await readingTextScaleProvider.initialize();
+
   runApp(
     MultiProvider(
       providers: [
@@ -41,6 +45,7 @@ void main() async {
         ChangeNotifierProvider.value(value: favoritesProvider),
         ChangeNotifierProvider.value(value: historyProvider),
         ChangeNotifierProvider.value(value: readingProgressProvider),
+        ChangeNotifierProvider.value(value: readingTextScaleProvider),
       ],
       child: const PeruEternoApp(),
     ),

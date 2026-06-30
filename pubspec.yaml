@@ -18,6 +18,7 @@ dependencies:
   cached_network_image: ^3.3.0
   url_launcher: ^6.2.0
   smooth_page_indicator: ^1.2.0
+  in_app_purchase: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +43,7 @@ flutter:
     - assets/images/banners/
     - assets/images/timeline/
     - assets/images/historia/
+    - assets/images/stages/
     - assets/images/caral/
     - assets/images/moche/
     - assets/images/tiahuanaco/
