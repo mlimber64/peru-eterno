@@ -17,6 +17,7 @@ import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
 import '../widgets/local_cinematic_card.dart';
+import 'gastronomia_screen.dart';
 import 'historia_list_screen.dart';
 
 class WorldScreen extends StatelessWidget {
@@ -25,6 +26,10 @@ class WorldScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 'Sabores' ahora se sirve desde Supabase (offline-first) en su pantalla
+    // dedicada. El resto de mundos sigue con el flujo local actual.
+    if (worldId == 'sabores') return const GastronomiaScreen();
+
     final world = WorldConfig.findById(worldId);
     if (world == null) return const SizedBox.shrink();
 

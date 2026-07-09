@@ -122,7 +122,9 @@
       "Bash(adb -s emulator-5554 shell pidof com.perueternno.peru_eterno)",
       "Bash(adb -s emulator-5554 shell input swipe 540 1600 540 600 300)",
       "Bash(xargs wc -l)",
-      "Bash(flutter install *)"
+      "Bash(flutter install *)",
+      "Bash(ls android/app/src/debug/AndroidManifest.xml)",
+      "Bash(grep \"INTERNET\" android/app/src/debug/AndroidManifest.xml)"
     ]
   }
 }

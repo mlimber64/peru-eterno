@@ -153,7 +153,8 @@
     "loading": "Cargando...",
     "empty": "Sin contenido",
     "error": "Algo salió mal",
-    "retry": "Reintentar"
+    "retry": "Reintentar",
+    "offline_cached": "Estás sin conexión: mostrando contenido guardado."
   },
   "explore": {
     "title": "Explorar",

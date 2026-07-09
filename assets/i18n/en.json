@@ -153,7 +153,8 @@
     "loading": "Loading...",
     "empty": "No content",
     "error": "Something went wrong",
-    "retry": "Retry"
+    "retry": "Retry",
+    "offline_cached": "You're offline: showing saved content."
   },
   "explore": {
     "title": "Explore",

@@ -153,7 +153,8 @@
     "loading": "Caricamento...",
     "empty": "Nessun contenuto",
     "error": "Qualcosa non ha funzionato",
-    "retry": "Riprova"
+    "retry": "Riprova",
+    "offline_cached": "Sei offline: stai vedendo i contenuti salvati."
   },
   "explore": {
     "title": "Esplora",

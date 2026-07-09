@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Requerido para Supabase, Wikipedia y Europeana en builds release.
+         Flutter solo lo añade en debug/profile, no en release. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- Requerido por Google Play Billing / in_app_purchase. Habilita los
          canales de prueba y producción de compras dentro de la app. -->
     <uses-permission android:name="com.android.vending.BILLING" />

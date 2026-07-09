@@ -50,3 +50,6 @@ android/key.properties
 **/*.keystore
 # Versionamos solo la plantilla de ejemplo:
 !android/key.properties.example
+
+# Secretos de compilación (Supabase URL/anon key, Europeana key)
+env.json
