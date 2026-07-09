@@ -1,0 +1,95 @@
+[
+  {
+    "id": "indipendenza_contesto",
+    "parent_stage_id": "indipendenza",
+    "categoria": {
+      "it": "Indipendenza del Perù",
+      "es": "Independencia del Perú",
+      "en": "Peruvian Independence"
+    },
+    "orden": 1,
+    "periodo": {
+      "it": "1808 – 1820 d.C.",
+      "es": "1808 – 1820 d.C.",
+      "en": "1808 – 1820 AD"
+    },
+    "titulo": {
+      "it": "Il contesto dell'indipendenza",
+      "es": "El contexto de la independencia",
+      "en": "The context of independence"
+    },
+    "subtitulo": {
+      "it": "Illuminismo, rivolte e il crollo dell'ordine coloniale",
+      "es": "Ilustración, revueltas y el colapso del orden colonial",
+      "en": "Enlightenment, revolts and the collapse of the colonial order"
+    },
+    "imagen_sugerida": "indipendenza_contesto.png",
+    "contenido": {
+      "it": "All'inizio del XIX secolo, una serie di eventi trasformò radicalmente il panorama politico dell'America Latina. L'invasione napoleonica della Spagna nel 1808 e la deposizione di Carlo IV portarono al trono Giuseppe Bonaparte, creando un vuoto di legittimità che destabilizzò tutto l'impero spagnolo. In America, le élites criollas iniziarono a formare «juntas» di governo in nome del re deposto, avviando un processo che avrebbe portato all'indipendenza.\n\nIl pensiero illuminista europeo aveva già diffuso idee di sovranità popolare, diritti naturali e governo rappresentativo nelle colonie americane. I criollos istruiti leggevano Locke, Rousseau e i philosophes francesi; seguivano con interesse la rivoluzione americana del 1776 e quella francese del 1789. La rivoluzione haitiana del 1791, pur generando timore tra i proprietari di schiavi, aveva mostrato che l'indipendenza era possibile.\n\nIl Perù, tuttavia, era considerato il bastione del lealismo monarchico nell'America del Sud. Lima era sede del viceré e della massima autorità coloniale; la sua élite mercantile ed ecclesiastica aveva molto da perdere da un cambiamento radicale. Mentre Buenos Aires, Caracas, Bogotà e Santiago avviavano processi di indipendenza tra il 1810 e il 1818, il Perù rimase sostanzialmente fedele alla Corona.\n\nLe condizioni sociali si erano però deteriorate. Le riforme borboniche avevano aumentato le tasse, le rivolte indigene e creole erano sempre più frequenti, e le idee liberali circolavano nelle università e nelle logge massoniche. La grande ribellione di Tupac Amaru II nel 1780 aveva dimostrato che la tensione sociale era esplosiva e difficilmente controllabile nel lungo periodo.\n\nFurono le forze esterne a portare l'indipendenza. Il generale José de San Martín, dopo aver liberato il Cile nel 1818, organizzò una spedizione marittima verso il Perù. L'esercito patriota sbarcò a Pisco nel settembre del 1820, avviando una campagna militare e diplomatica che avrebbe portato alla proclamazione dell'indipendenza.",
+      "es": "A comienzos del siglo XIX, una serie de eventos transformó radicalmente el panorama político de América Latina. La invasión napoleónica de España en 1808 y la deposición de Carlos IV crearon un vacío de legitimidad que desestabilizó todo el Imperio español. En América, las élites criollas comenzaron a formar 'juntas' de gobierno en nombre del rey depuesto.\n\nEl pensamiento ilustrado europeo ya había difundido ideas de soberanía popular, derechos naturales y gobierno representativo en las colonias americanas. Los criollos educados leían a Locke, Rousseau y los philosophes franceses; seguían con interés la revolución americana de 1776 y la francesa de 1789.\n\nEl Perú, sin embargo, era considerado el bastión del lealismo monárquico en América del Sur. Lima era sede del virrey; su élite mercantil y eclesiástica tenía mucho que perder con un cambio radical. Mientras Buenos Aires, Caracas, Bogotá y Santiago iniciaban procesos de independencia entre 1810 y 1818, el Perú permaneció sustancialmente fiel a la Corona.\n\nLas condiciones sociales se habían deteriorado. Las reformas borbónicas habían aumentado los impuestos, y las revueltas indígenas eran cada vez más frecuentes. La gran rebelión de Tupac Amaru II en 1780 había demostrado que la tensión social era explosiva.\n\nFueron las fuerzas externas las que trajeron la independencia. El general José de San Martín, tras haber liberado Chile en 1818, organizó una expedición marítima hacia el Perú. El ejército patriota desembarcó en Pisco en septiembre de 1820.",
+      "en": "At the beginning of the 19th century, a series of events radically transformed Latin America's political landscape. Napoleon's invasion of Spain in 1808 and the deposition of Charles IV created a legitimacy vacuum that destabilized the entire Spanish Empire. In America, Creole elites began forming governing 'juntas' in the name of the deposed king, initiating a process that would lead to independence.\n\nEuropean Enlightenment thought had already spread ideas of popular sovereignty, natural rights, and representative government to the American colonies. Educated criollos read Locke, Rousseau, and the French philosophes; they followed with interest the American Revolution of 1776 and the French Revolution of 1789.\n\nPeru, however, was considered the stronghold of monarchical loyalism in South America. Lima was home to the viceroy and the highest colonial authority; its merchant and ecclesiastical elite had much to lose from radical change. While Buenos Aires, Caracas, Bogotá, and Santiago were launching independence processes between 1810 and 1818, Peru remained substantially loyal to the Crown.\n\nSocial conditions had deteriorated. Bourbon reforms had increased taxes, indigenous and Creole revolts were increasingly frequent, and liberal ideas circulated in universities and Masonic lodges. The great Tupac Amaru II rebellion of 1780 had demonstrated that social tension was explosive.\n\nIt was external forces that brought independence. General José de San Martín, after liberating Chile in 1818, organized a maritime expedition toward Peru. The patriot army landed at Pisco in September 1820, launching a military and diplomatic campaign that would lead to the proclamation of independence."
+    }
+  },
+  {
+    "id": "indipendenza_proclamazione",
+    "parent_stage_id": "indipendenza",
+    "categoria": {
+      "it": "Indipendenza del Perù",
+      "es": "Independencia del Perú",
+      "en": "Peruvian Independence"
+    },
+    "orden": 2,
+    "periodo": {
+      "it": "28 luglio 1821",
+      "es": "28 de julio de 1821",
+      "en": "July 28, 1821"
+    },
+    "titulo": {
+      "it": "La proclamazione del 1821",
+      "es": "La proclamación de 1821",
+      "en": "The proclamation of 1821"
+    },
+    "subtitulo": {
+      "it": "San Martín e la nascita della nazione peruviana",
+      "es": "San Martín y el nacimiento de la nación peruana",
+      "en": "San Martín and the birth of the Peruvian nation"
+    },
+    "imagen_sugerida": "indipendenza_proclamazione.png",
+    "contenido": {
+      "it": "Il 28 luglio 1821, José de San Martín proclamò l'indipendenza del Perù dalla Spagna nella Plaza Mayor di Lima. «Dal questo momento il Perù è libero e indipendente per volontà generale dei popoli e per la giustizia della propria causa che Dio difende» — con queste parole il generale argentino annunciava la nascita di una nuova nazione.\n\nSan Martín aveva organizzato la Expedición Libertadora del Perú con cura meticolosa. Dopo aver liberato il Cile con Bernardo O'Higgins, aveva reclutato un esercito di circa 4.500 uomini — argentini, cileni, venezuelani, peruviani — e una flotta comandata dall'ammiraglio lord Thomas Cochrane. Lo sbarco a Pisco, il successivo avanzamento verso Lima e il negoziato con il viceré José de La Serna avevano preceduto la proclamazione.\n\nLima non fu «liberata» militarmente nel senso stretto: la città fu abbandonata dalle forze realiste, che si ritirarono verso le Ande dove avrebbero continuato a resistere per altri tre anni. San Martín entrò in Lima il 12 luglio 1821 e il 28 luglio firmò l'Acta de Independencia. Assunse poi il governo come «Protector del Perù».\n\nIl processo di consolidamento dell'indipendenza fu lungo e difficile. San Martín si incontrò con Simón Bolívar a Guayaquil nel luglio 1822 in un incontro storico di cui non si conosce il contenuto delle conversazioni private. Poco dopo, San Martín si ritirò dalla vita politica e lasciò il Perù, cedendo di fatto il campo a Bolívar.\n\nLa bandiera peruviana, il simbolo della nuova nazione, fu disegnata secondo la tradizione per ispirazione di San Martín alla vista di una stormo di fenicotteri in volo: il bianco delle loro ali e il rosso del loro piumaggio avrebbero dato i colori della bandiera. Che fosse vera o leggenda, quella bandiera bianco-rossa è ancora oggi il simbolo del Perù libero.",
+      "es": "El 28 de julio de 1821, José de San Martín proclamó la independencia del Perú de España en la Plaza Mayor de Lima. 'Desde este momento el Perú es libre e independiente por voluntad general de los pueblos y por la justicia de su causa que Dios defiende' — con estas palabras el general argentino anunciaba el nacimiento de una nueva nación.\n\nSan Martín había organizado la Expedición Libertadora del Perú con meticuloso cuidado. Tras haber liberado Chile con Bernardo O'Higgins, reclutó un ejército de unos 4.500 hombres y una flota comandada por el almirante lord Thomas Cochrane.\n\nLima no fue 'liberada' militarmente en sentido estricto: la ciudad fue abandonada por las fuerzas realistas, que se retiraron hacia los Andes donde continuarían resistiendo por otros tres años. San Martín entró en Lima el 12 de julio de 1821 y el 28 de julio firmó el Acta de Independencia. Asumió luego el gobierno como 'Protector del Perú'.\n\nEl proceso de consolidación de la independencia fue largo y difícil. San Martín se reunió con Simón Bolívar en Guayaquil en julio de 1822 en un encuentro histórico del que no se conoce el contenido de las conversaciones privadas. Poco después, San Martín se retiró de la vida política.\n\nLa bandera peruana, símbolo de la nueva nación, fue diseñada según la tradición por inspiración de San Martín al ver una bandada de flamencos en vuelo: el blanco de sus alas y el rojo de su plumaje habrían dado los colores de la bandera.",
+      "en": "On July 28, 1821, José de San Martín proclaimed Peru's independence from Spain in Lima's Plaza Mayor. 'From this moment Peru is free and independent by the general will of its peoples and by the justice of its cause which God defends' — with these words, the Argentine general announced the birth of a new nation.\n\nSan Martín had organized the Liberating Expedition of Peru with meticulous care. After liberating Chile with Bernardo O'Higgins, he recruited an army of about 4,500 men — Argentines, Chileans, Venezuelans, Peruvians — and a fleet commanded by Admiral Lord Thomas Cochrane.\n\nLima was not 'liberated' militarily in the strict sense: the city was abandoned by royalist forces, who retreated toward the Andes where they would continue resisting for another three years. San Martín entered Lima on July 12, 1821, and on July 28 signed the Act of Independence. He then assumed government as 'Protector of Peru.'\n\nThe process of consolidating independence was long and difficult. San Martín met Simón Bolívar in Guayaquil in July 1822 in a historic meeting whose private conversations remain unknown. Shortly after, San Martín withdrew from political life and left Peru, effectively ceding the field to Bolívar.\n\nThe Peruvian flag, symbol of the new nation, was designed according to tradition by San Martín's inspiration upon seeing a flock of flamingos in flight: the white of their wings and the red of their plumage gave the flag its colors. Whether fact or legend, that red-and-white flag remains today the symbol of a free Peru."
+    }
+  },
+  {
+    "id": "indipendenza_battaglie",
+    "parent_stage_id": "indipendenza",
+    "categoria": {
+      "it": "Indipendenza del Perù",
+      "es": "Independencia del Perú",
+      "en": "Peruvian Independence"
+    },
+    "orden": 3,
+    "periodo": {
+      "it": "1824 d.C.",
+      "es": "1824 d.C.",
+      "en": "1824 AD"
+    },
+    "titulo": {
+      "it": "Le battaglie decisive",
+      "es": "Las batallas decisivas",
+      "en": "The decisive battles"
+    },
+    "subtitulo": {
+      "it": "Junín e Ayacucho: la fine della dominazione spagnola",
+      "es": "Junín y Ayacucho: el fin de la dominación española",
+      "en": "Junín and Ayacucho: the end of Spanish domination"
+    },
+    "imagen_sugerida": "indipendenza_battaglie.png",
+    "contenido": {
+      "it": "Sebbene Lima fosse stata dichiarata indipendente nel 1821, il Perù non era ancora libero. Le forze realiste spagnole controllavano ancora buona parte delle Ande e avevano risorse per prolungare la guerra. Le battaglie decisive si combatterono nel 1824, tre anni dopo la proclamazione.\n\nSimón Bolívar, il libertador venezuelano, era arrivato in Perù nel 1823 dopo aver liberato Venezuela, Colombia ed Ecuador. Assunse il comando delle forze patriote e organizzò una campagna militare sistematica contro le ultime posizioni realiste. Il suo luogotenente, il generale Antonio José de Sucre, fu il protagonista delle battaglie finali.\n\nIl 6 agosto 1824, la battaglia di Junín si concluse con la vittoria delle forze patriote. Significativa perché combattuta quasi interamente a cavallo e con armi bianche, fu una vittoria tattica che aprì la strada all'ultima campagna. Bolívar e Sucre guadagnarono il controllo dell'altopiano centrale.\n\nIl 9 dicembre 1824, la battaglia di Ayacucho pose fine alla guerra di indipendenza dell'America del Sud. Le forze realiste, circa 9.000 uomini comandati dal viceré José de La Serna, furono sconfitte dall'esercito di Sucre di circa 5.800 uomini su un altopiano a 3.400 metri di altitudine. La Capitolazione di Ayacucho, firmata lo stesso giorno, garantì la resa di tutte le forze realiste nel continente.\n\nCon Ayacucho si concludeva la guerra d'indipendenza non solo del Perù ma di tutta l'America del Sud. L'eredità di queste battaglie rimane viva nella memoria peruviana: Ayacucho è sinonimo di libertà, e il 9 dicembre è celebrato come Día de la Batalla de Ayacucho in tutto il Perù. I nomi di Bolívar, Sucre e San Martín restano iscritti nella storia come fondatori di una nazione.",
+      "es": "Aunque Lima había sido declarada independiente en 1821, el Perú aún no era libre. Las fuerzas realistas españolas controlaban buena parte de los Andes y tenían recursos para prolongar la guerra. Las batallas decisivas se libraron en 1824, tres años después de la proclamación.\n\nSimón Bolívar llegó al Perú en 1823 tras haber liberado Venezuela, Colombia y Ecuador. Asumió el mando de las fuerzas patriotas y organizó una campaña militar sistemática. Su lugarteniente, el general Antonio José de Sucre, fue el protagonista de las batallas finales.\n\nEl 6 de agosto de 1824, la batalla de Junín concluyó con la victoria de las fuerzas patriotas. Significativa porque se combatió casi enteramente a caballo y con armas blancas, fue una victoria táctica que abrió el camino a la campaña final.\n\nEl 9 de diciembre de 1824, la batalla de Ayacucho puso fin a la guerra de independencia de América del Sur. Las fuerzas realistas, unos 9.000 hombres comandados por el virrey José de La Serna, fueron derrotadas por el ejército de Sucre de unos 5.800 hombres en un altiplano a 3.400 metros de altitud. La Capitulación de Ayacucho, firmada ese mismo día, garantizó la rendición de todas las fuerzas realistas en el continente.\n\nCon Ayacucho concluía la guerra de independencia no solo del Perú sino de toda América del Sur. El 9 de diciembre se celebra como Día de la Batalla de Ayacucho en todo el Perú.",
+      "en": "Although Lima had been declared independent in 1821, Peru was not yet free. Spanish royalist forces still controlled much of the Andes and had resources to prolong the war. The decisive battles were fought in 1824, three years after the proclamation.\n\nSimón Bolívar, the Venezuelan liberator, had arrived in Peru in 1823 after liberating Venezuela, Colombia, and Ecuador. He assumed command of patriot forces and organized a systematic military campaign against the last royalist positions. His lieutenant, General Antonio José de Sucre, was the protagonist of the final battles.\n\nOn August 6, 1824, the Battle of Junín ended with patriot victory. Significant because it was fought almost entirely on horseback and with bladed weapons, it was a tactical victory that opened the way to the final campaign.\n\nOn December 9, 1824, the Battle of Ayacucho ended the war of independence in South America. The royalist forces, about 9,000 men commanded by Viceroy José de La Serna, were defeated by Sucre's army of about 5,800 men on a plateau at 3,400 meters altitude. The Capitulation of Ayacucho, signed the same day, guaranteed the surrender of all royalist forces on the continent.\n\nWith Ayacucho, the war of independence concluded not only for Peru but for all of South America. Ayacucho is synonymous with freedom, and December 9 is celebrated as the Day of the Battle of Ayacucho throughout Peru. The names of Bolívar, Sucre, and San Martín remain inscribed in history as founders of a nation."
+    }
+  }
+]

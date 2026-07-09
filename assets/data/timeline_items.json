@@ -1,0 +1,189 @@
+[
+  {
+    "id": "caral",
+    "orden": 1,
+    "color": "FFD4A843",
+    "titulo": {
+      "it": "Caral",
+      "es": "Caral",
+      "en": "Caral"
+    },
+    "periodo": {
+      "it": "3000–1800 a.C.",
+      "es": "3000–1800 a.C.",
+      "en": "3000–1800 BC"
+    },
+    "image": "assets/images/timeline/caral.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "chavin",
+    "orden": 2,
+    "color": "FFB5652E",
+    "titulo": {
+      "it": "Chavín",
+      "es": "Chavín",
+      "en": "Chavín"
+    },
+    "periodo": {
+      "it": "900–200 a.C.",
+      "es": "900–200 a.C.",
+      "en": "900–200 BC"
+    },
+    "image": "assets/images/timeline/chavin.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "paracas",
+    "orden": 3,
+    "color": "FF4A9494",
+    "titulo": {
+      "it": "Paracas",
+      "es": "Paracas",
+      "en": "Paracas"
+    },
+    "periodo": {
+      "it": "800–100 a.C.",
+      "es": "800–100 a.C.",
+      "en": "800–100 BC"
+    },
+    "image": "assets/images/timeline/paracas.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "nazca",
+    "orden": 4,
+    "color": "FFD4722A",
+    "titulo": {
+      "it": "Nazca",
+      "es": "Nazca",
+      "en": "Nazca"
+    },
+    "periodo": {
+      "it": "100 a.C.–600 d.C.",
+      "es": "100 a.C.–600 d.C.",
+      "en": "100 BC–600 AD"
+    },
+    "image": "assets/images/timeline/nazca.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "moche",
+    "orden": 5,
+    "color": "FFC4522A",
+    "titulo": {
+      "it": "Moche",
+      "es": "Moche",
+      "en": "Moche"
+    },
+    "periodo": {
+      "it": "100–700 d.C.",
+      "es": "100–700 d.C.",
+      "en": "100–700 AD"
+    },
+    "image": "assets/images/timeline/moche.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "wari",
+    "orden": 6,
+    "color": "FF8B5B8B",
+    "titulo": {
+      "it": "Wari",
+      "es": "Wari",
+      "en": "Wari"
+    },
+    "periodo": {
+      "it": "500–1100 d.C.",
+      "es": "500–1100 d.C.",
+      "en": "500–1100 AD"
+    },
+    "image": "assets/images/timeline/wari.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "chimu",
+    "orden": 7,
+    "color": "FF3B7B9D",
+    "titulo": {
+      "it": "Chimú",
+      "es": "Chimú",
+      "en": "Chimú"
+    },
+    "periodo": {
+      "it": "900–1470 d.C.",
+      "es": "900–1470 d.C.",
+      "en": "900–1470 AD"
+    },
+    "image": "assets/images/timeline/chimu.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "inca",
+    "orden": 8,
+    "color": "FFC8B53B",
+    "titulo": {
+      "it": "Impero Inca",
+      "es": "Imperio Inca",
+      "en": "Inca Empire"
+    },
+    "periodo": {
+      "it": "1438–1533 d.C.",
+      "es": "1438–1533 d.C.",
+      "en": "1438–1533 AD"
+    },
+    "image": "assets/images/timeline/inca.jpg",
+    "stage_id": "peru_prehispanico"
+  },
+  {
+    "id": "conquista",
+    "orden": 9,
+    "color": "FF9B3535",
+    "titulo": {
+      "it": "Conquista",
+      "es": "Conquista",
+      "en": "Conquest"
+    },
+    "periodo": {
+      "it": "1532–1572 d.C.",
+      "es": "1532–1572 d.C.",
+      "en": "1532–1572 AD"
+    },
+    "image": "assets/images/timeline/conquista.jpg",
+    "stage_id": "conquista_spagnola"
+  },
+  {
+    "id": "virreinato",
+    "orden": 10,
+    "color": "FF7B3B8B",
+    "titulo": {
+      "it": "Vicereame",
+      "es": "Virreinato",
+      "en": "Viceroyalty"
+    },
+    "periodo": {
+      "it": "1542–1821 d.C.",
+      "es": "1542–1821 d.C.",
+      "en": "1542–1821 AD"
+    },
+    "image": "assets/images/timeline/virreinato.jpg",
+    "stage_id": "vicereame_peru"
+  },
+  {
+    "id": "independencia",
+    "orden": 11,
+    "color": "FF3B8B4B",
+    "titulo": {
+      "it": "Indipendenza",
+      "es": "Independencia",
+      "en": "Independence"
+    },
+    "periodo": {
+      "it": "1821 d.C.",
+      "es": "1821 d.C.",
+      "en": "1821 AD"
+    },
+    "image": "assets/images/timeline/independencia.jpg",
+    "stage_id": "indipendenza"
+  }
+]
