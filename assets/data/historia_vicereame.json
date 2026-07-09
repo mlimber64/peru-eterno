@@ -1,0 +1,95 @@
+[
+  {
+    "id": "virreinato_fondazione",
+    "parent_stage_id": "vicereame_peru",
+    "categoria": {
+      "it": "Vicereame del Perù",
+      "es": "Virreinato del Perú",
+      "en": "Viceroyalty of Peru"
+    },
+    "orden": 1,
+    "periodo": {
+      "it": "1542 d.C.",
+      "es": "1542 d.C.",
+      "en": "1542 AD"
+    },
+    "titulo": {
+      "it": "La fondazione del vicereame",
+      "es": "La fundación del virreinato",
+      "en": "The founding of the viceroyalty"
+    },
+    "subtitulo": {
+      "it": "Lima, capitale dell'America del Sud spagnola",
+      "es": "Lima, capital de la América del Sur española",
+      "en": "Lima, capital of Spanish South America"
+    },
+    "imagen_sugerida": "virreinato_fondazione.png",
+    "contenido": {
+      "it": "Nel 1542, la Corona spagnola istituì il Vicereame del Perù con le Leyes Nuevas, che stabilivano un quadro giuridico per l'amministrazione delle colonie americane. Il primo viceré, Blasco Núñez Vela, arrivò a Lima nel 1544, ma si trovò immediatamente in conflitto con i conquistadores che si opponevano alle nuove leggi che limitavano le encomiendas. Nucñez Vela fu sconfitto e ucciso nella battaglia di Iñaquito nel 1546 dalla fazione di Gonzalo Pizarro, fratello del conquistatore.\n\nLa stabilità del vicereame fu ristabilita con l'arrivo di Pedro de La Gasca nel 1547. Incaricato dalla Corona con ampi poteri, sconfisse Gonzalo Pizarro nella battaglia di Xaquixaguana nel 1548 e lo fece giustiziare. Il Perù divenne così un territorio amministrato direttamente dalla Corona, con Lima come capitale e centro del potere coloniale nell'America del Sud.\n\nL'organizzazione del vicereame seguiva un sistema complesso di istituzioni: il viceré, massima autorità locale; l'Audiencia, tribunale supremo; il Cabildo, governo municipale nelle città; e la Chiesa, con il suo immenso potere spirituale ed economico. Lima divenne una delle città più ricche e importanti dell'Impero spagnolo grazie alla posizione strategica come porto di smistamento delle ricchezze verso la Spagna.\n\nNel suo assetto originale, il Vicereame del Perù comprendeva quasi tutta l'America del Sud spagnola, dal Panamá alla Tierra del Fuego. Solo nel XVIII secolo, con le riforme borboniche, furono istituite viceregalità separate in Nuova Granada (1717) e nel Río de la Plata (1776), riducendo il territorio peruviano a dimensioni più contenute ma rendendolo ancora più strategico come cuore amministrativo ed economico della regione.\n\nLima fu fondata da Pizarro nel 1535 proprio per il suo accesso al mare. La «Ciudad de los Reyes» crebbe rapidamente: entro il XVII secolo era una delle città più popolose e ricche delle Americhe, con cattedrali, palazzi, università e conventi che riflettevano la grandiosità dell'Impero spagnolo al suo apice.",
+      "es": "En 1542, la Corona española instituyó el Virreinato del Perú con las Leyes Nuevas, que establecían un marco jurídico para la administración de las colonias americanas. El primer virrey, Blasco Núñez Vela, llegó a Lima en 1544, pero se encontró inmediatamente en conflicto con los conquistadores que se oponían a las nuevas leyes. Fue derrotado y muerto en la batalla de Iñaquito en 1546.\n\nLa estabilidad del virreinato fue restablecida con la llegada de Pedro de La Gasca en 1547. Con amplios poderes otorgados por la Corona, derrotó a Gonzalo Pizarro en la batalla de Xaquixaguana en 1548 y lo hizo ejecutar. El Perú se convirtió así en un territorio administrado directamente por la Corona, con Lima como capital.\n\nLa organización del virreinato seguía un sistema complejo de instituciones: el virrey, máxima autoridad local; la Audiencia, tribunal supremo; el Cabildo, gobierno municipal; y la Iglesia, con su inmenso poder espiritual y económico. Lima se convirtió en una de las ciudades más ricas e importantes del Imperio español.\n\nEn su configuración original, el Virreinato del Perú comprendía casi toda la América del Sur española. Solo en el siglo XVIII, con las reformas borbónicas, se establecieron virreinatos separados en Nueva Granada (1717) y el Río de la Plata (1776).\n\nLima fue fundada por Pizarro en 1535 por su acceso al mar. La 'Ciudad de los Reyes' creció rápidamente: hacia el siglo XVII era una de las ciudades más pobladas y ricas de las Américas.",
+      "en": "In 1542, the Spanish Crown established the Viceroyalty of Peru through the New Laws, which set a legal framework for the administration of American colonies. The first viceroy, Blasco Núñez Vela, arrived in Lima in 1544, but immediately found himself in conflict with the conquistadors who opposed the new laws limiting encomiendas. He was defeated and killed at the battle of Iñaquito in 1546.\n\nStability was restored with the arrival of Pedro de La Gasca in 1547. Entrusted with broad powers by the Crown, he defeated Gonzalo Pizarro at the battle of Xaquixaguana in 1548 and had him executed. Peru thus became a territory administered directly by the Crown, with Lima as its capital and center of colonial power in South America.\n\nThe viceroyalty's organization followed a complex system of institutions: the viceroy, the highest local authority; the Audiencia, the supreme court; the Cabildo, municipal government; and the Church, with its immense spiritual and economic power. Lima became one of the richest and most important cities in the Spanish Empire.\n\nIn its original form, the Viceroyalty of Peru encompassed almost all of Spanish South America. Only in the 18th century, with Bourbon reforms, were separate viceroyalties established in New Granada (1717) and the Río de la Plata (1776).\n\nLima was founded by Pizarro in 1535 precisely for its sea access. The 'City of Kings' grew rapidly: by the 17th century it was one of the most populous and wealthiest cities in the Americas."
+    }
+  },
+  {
+    "id": "virreinato_societa",
+    "parent_stage_id": "vicereame_peru",
+    "categoria": {
+      "it": "Vicereame del Perù",
+      "es": "Virreinato del Perú",
+      "en": "Viceroyalty of Peru"
+    },
+    "orden": 2,
+    "periodo": {
+      "it": "XVI – XVIII secolo",
+      "es": "Siglos XVI – XVIII",
+      "en": "16th – 18th century"
+    },
+    "titulo": {
+      "it": "La società coloniale",
+      "es": "La sociedad colonial",
+      "en": "Colonial society"
+    },
+    "subtitulo": {
+      "it": "Gerarchie, cultura e ibridazione nel Perù coloniale",
+      "es": "Jerarquías, cultura e hibridación en el Perú colonial",
+      "en": "Hierarchies, culture and hybridization in colonial Peru"
+    },
+    "imagen_sugerida": "virreinato_societa.png",
+    "contenido": {
+      "it": "La società coloniale del vicereame si strutturò attorno a un rigido sistema di classificazione razziale e sociale. Al vertice c'erano i peninsulares, nati in Spagna; poi i criollos, discendenti di spagnoli nati in America; quindi i mestizos, di origine mista; poi gli indios, sottoposti alla mita e all'encomienda; e infine gli africani ridotti in schiavitù. Questa gerarchia determinava diritti, obblighi, tasse e possibilità di accesso alle professioni e alle cariche pubbliche.\n\nLa vita nelle città coloniali era dominata dalla Chiesa, dalle confraternite religiose e dalle feste del calendario cattolico. Lima fu sede di un'università già nel 1551 — la Real y Pontificia Universidad de San Marcos, una delle più antiche delle Americhe — e di numerose istituzioni ecclesiastiche e culturali. Tuttavia, la ricchezza era distribuita in modo estremamente ineguale: pochi grandi proprietari terrieri e mercanti controllavano le risorse.\n\nLa cultura coloniale fu il risultato di un complesso processo di ibridazione tra tradizioni europee, indigene e africane. In architettura emerse lo stile «barroco andino» o «mestizo», visibile nelle facciate di chiese come quella di San Francisco a Lima o la cattedrale di Cuzco. In letteratura, musica e arte si mescolarono elementi inca, spagnoli e africani in forme originali che ancora oggi caratterizzano l'identità peruviana.\n\nLa violenza strutturale del sistema coloniale non impedì resistenze locali. I «curacas» — capi indigeni — spesso negoziavano con le autorità spagnole per proteggere le proprie comunità. Alcuni crebbero di potere inserendosi nel sistema; altri mantennero forme di resistenza culturale silenziosa, conservando lingue, rituali e tradizioni nonostante la pressione evangelizzatrice.\n\nTra le figure più significative della cultura coloniale peruviana vi fu Inca Garcilaso de la Vega, figlio di un capitano spagnolo e una principessa inca. Nei suoi Comentarios Reales de los Incas (1609) offrì la prima visione letteraria del mondo inca scritta da una prospettiva mestiza, diventando una delle voci fondamentali della letteratura latinoamericana.",
+      "es": "La sociedad colonial del virreinato se estructuró alrededor de un rígido sistema de clasificación racial y social. En la cúspide estaban los peninsulares, nacidos en España; luego los criollos, descendientes de españoles nacidos en América; después los mestizos; los indios, sometidos a la mita y la encomienda; y finalmente los africanos esclavizados. Esta jerarquía determinaba derechos, obligaciones, impuestos y posibilidades de acceso a profesiones y cargos públicos.\n\nLa vida en las ciudades coloniales estaba dominada por la Iglesia, las cofradías religiosas y las fiestas del calendario católico. Lima albergó una universidad ya en 1551 — la Real y Pontificia Universidad de San Marcos — y numerosas instituciones eclesiásticas y culturales. Sin embargo, la riqueza estaba distribuida de manera extremadamente desigual.\n\nLa cultura colonial fue el resultado de un complejo proceso de hibridación entre tradiciones europeas, indígenas y africanas. En arquitectura surgió el estilo 'barroco andino' o 'mestizo', visible en fachadas de iglesias como la de San Francisco en Lima. En literatura, música y arte se mezclaron elementos incas, españoles y africanos en formas originales.\n\nLa violencia estructural del sistema colonial no impidió resistencias locales. Los 'curacas' — jefes indígenas — frecuentemente negociaban con las autoridades españolas para proteger a sus comunidades, conservando lenguas, rituales y tradiciones a pesar de la presión evangelizadora.\n\nEntre las figuras más significativas de la cultura colonial peruana estuvo el Inca Garcilaso de la Vega, hijo de un capitán español y una princesa inca, quien en sus Comentarios Reales de los Incas (1609) ofreció la primera visión literaria del mundo inca desde una perspectiva mestiza.",
+      "en": "Colonial society in the viceroyalty was structured around a rigid system of racial and social classification. At the top were the peninsulares, born in Spain; then criollos, descendants of Spaniards born in America; then mestizos of mixed origin; then indigenous peoples subjected to the mita and encomienda; and finally enslaved Africans. This hierarchy determined rights, obligations, taxes, and access to professions and public office.\n\nLife in colonial cities was dominated by the Church, religious brotherhoods, and Catholic calendar festivals. Lima housed a university as early as 1551 — the Royal and Pontifical University of San Marcos, one of the oldest in the Americas — and numerous ecclesiastical and cultural institutions. However, wealth was distributed extremely unequally.\n\nColonial culture was the result of a complex hybridization process between European, indigenous, and African traditions. In architecture, the 'Andean baroque' or 'mestizo' style emerged, visible in church facades such as San Francisco in Lima or the cathedral in Cuzco. In literature, music, and art, Inca, Spanish, and African elements blended into original forms that still characterize Peruvian identity today.\n\nThe structural violence of the colonial system did not prevent local resistance. 'Curacas' — indigenous chiefs — often negotiated with Spanish authorities to protect their communities, maintaining languages, rituals, and traditions despite evangelization pressure.\n\nAmong the most significant figures of colonial Peruvian culture was Inca Garcilaso de la Vega, son of a Spanish captain and an Inca princess. In his Royal Commentaries of the Incas (1609), he offered the first literary vision of the Inca world from a mestizo perspective, becoming one of the foundational voices of Latin American literature."
+    }
+  },
+  {
+    "id": "virreinato_mita",
+    "parent_stage_id": "vicereame_peru",
+    "categoria": {
+      "it": "Vicereame del Perù",
+      "es": "Virreinato del Perú",
+      "en": "Viceroyalty of Peru"
+    },
+    "orden": 3,
+    "periodo": {
+      "it": "XVI – XVIII secolo",
+      "es": "Siglos XVI – XVIII",
+      "en": "16th – 18th century"
+    },
+    "titulo": {
+      "it": "Economia coloniale e la mita",
+      "es": "Economía colonial y la mita",
+      "en": "Colonial economy and the mita"
+    },
+    "subtitulo": {
+      "it": "Le miniere di Potosí e il lavoro forzato indigeno",
+      "es": "Las minas de Potosí y el trabajo forzado indígena",
+      "en": "The Potosí mines and indigenous forced labor"
+    },
+    "imagen_sugerida": "virreinato_mita.png",
+    "contenido": {
+      "it": "Il motore economico del vicereame era l'estrazione di metalli preziosi, in particolare argento. Le miniere di Potosí, nell'attuale Bolivia, divennero a metà del Cinquecento le più produttive del mondo, alimentando l'economia dell'impero spagnolo per due secoli. L'argento di Potosí fluiva verso la Spagna e da lì in tutta Europa, trasformando le strutture finanziarie del continente e finanziando le guerre degli Asburgo.\n\nIl sistema che rese possibile tale estrazione fu la mita mineraria: un obbligo di lavoro imposto alle comunità indigene, ispirato a un'istituzione andina preesistente ma trasformato in un meccanismo di sfruttamento sistematico. Ogni anno, settima parte degli uomini adulti delle comunità indigene era costretta a lavorare nelle miniere, spesso in condizioni durissime. Migliaia morirono nelle gallerie a causa dell'esposizione al mercurio, della mancanza di aria e degli incidenti.\n\nL'economia coloniale non si basava solo sulle miniere. L'agricoltura su grandi haciendas, il commercio attraverso il porto di Callao, le manifatture tessili nei «obrajes» e le rotte commerciali del Pacifico costituivano un sistema economico complesso. Lima divenne il fulcro di una rete commerciale che collegava le Ande, la costa e le Filippine.\n\nLe riforme borboniche del XVIII secolo cercarono di modernizzare l'economia coloniale, aumentando le tasse e i controlli sulla produzione mineraria. Queste riforme provocarono malcontento sia tra i criollos, che vedevano ridursi la propria autonomia, sia tra le popolazioni indigene, colpite da nuove imposizioni fiscali.\n\nIl malcontento alimentò le grandi rivolte della fine del Settecento, come quella di Tupac Amaru II nel 1780-1781: la più grande ribellione coloniale dell'America del Sud, che coinvolse oltre 100.000 persone e fu soppressa con enorme violenza. Questi eventi furono il preludio dei movimenti di indipendenza che avrebbero trasformato il continente nei decenni successivi.",
+      "es": "El motor económico del virreinato era la extracción de metales preciosos, en particular la plata. Las minas de Potosí, en la actual Bolivia, se convirtieron a mediados del siglo XVI en las más productivas del mundo, alimentando la economía del Imperio español durante dos siglos. La plata de Potosí fluía hacia España y de allí a toda Europa.\n\nEl sistema que hizo posible dicha extracción fue la mita minera: una obligación de trabajo impuesta a las comunidades indígenas, inspirada en una institución andina preexistente pero transformada en un mecanismo de explotación sistemática. Cada año, la séptima parte de los hombres adultos de las comunidades indígenas era obligada a trabajar en las minas. Miles murieron en las galerías a causa de la exposición al mercurio y la falta de aire.\n\nLa economía colonial no se basaba solo en las minas. La agricultura en grandes haciendas, el comercio a través del puerto del Callao, las manufacturas textiles en los 'obrajes' y las rutas comerciales del Pacífico constituían un sistema económico complejo. Lima se convirtió en el eje de una red comercial que conectaba los Andes, la costa y las Filipinas.\n\nLas reformas borbónicas del siglo XVIII buscaron modernizar la economía colonial, aumentando los impuestos y los controles sobre la producción minera. Estas reformas provocaron malestar tanto entre los criollos como entre las poblaciones indígenas.\n\nEste malestar alimentó las grandes rebeliones de finales del siglo XVIII, como la de Tupac Amaru II en 1780-1781: la mayor rebelión colonial de América del Sur, que involucró a más de 100.000 personas y fue aplastada con enorme violencia. Estos eventos fueron el preludio de los movimientos de independencia.",
+      "en": "The economic engine of the viceroyalty was the extraction of precious metals, particularly silver. The Potosí mines in present-day Bolivia became the most productive in the world in the mid-16th century, fueling the Spanish Empire's economy for two centuries. Potosí silver flowed toward Spain and from there throughout Europe, transforming the continent's financial structures.\n\nThe system that made this extraction possible was the mining mita: a labor obligation imposed on indigenous communities, inspired by a pre-existing Andean institution but transformed into a mechanism of systematic exploitation. Each year, one-seventh of adult men from indigenous communities were forced to work in the mines, often in grueling conditions. Thousands died in the galleries from mercury exposure, lack of air, and accidents.\n\nThe colonial economy was not based solely on mines. Agriculture on large haciendas, trade through the port of Callao, textile manufacturing in 'obrajes,' and Pacific trade routes constituted a complex economic system. Lima became the hub of a commercial network linking the Andes, the coast, and the Philippines.\n\nThe Bourbon reforms of the 18th century sought to modernize the colonial economy, increasing taxes and controls on mineral production. These reforms provoked discontent among both criollos, who saw their autonomy reduced, and indigenous populations hit by new fiscal impositions.\n\nThis discontent fueled the great revolts of the late 18th century, such as the Tupac Amaru II rebellion of 1780-1781: the largest colonial rebellion in South America, involving over 100,000 people and crushed with enormous violence. These events were the prelude to the independence movements that would transform the continent in subsequent decades."
+    }
+  }
+]

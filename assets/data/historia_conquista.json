@@ -1,0 +1,95 @@
+[
+  {
+    "id": "conquista_arrivo",
+    "parent_stage_id": "conquista_spagnola",
+    "categoria": {
+      "it": "Conquista spagnola",
+      "es": "Conquista española",
+      "en": "Spanish Conquest"
+    },
+    "orden": 1,
+    "periodo": {
+      "it": "1532 d.C.",
+      "es": "1532 d.C.",
+      "en": "1532 AD"
+    },
+    "titulo": {
+      "it": "L'arrivo degli spagnoli",
+      "es": "La llegada de los españoles",
+      "en": "The arrival of the Spanish"
+    },
+    "subtitulo": {
+      "it": "La spedizione di Pizarro e l'incontro con Atahualpa",
+      "es": "La expedición de Pizarro y el encuentro con Atahualpa",
+      "en": "Pizarro's expedition and the encounter with Atahualpa"
+    },
+    "imagen_sugerida": "conquista_arrivo.png",
+    "contenido": {
+      "it": "Nel novembre del 1532, una spedizione guidata da Francisco Pizarro giunse a Cajamarca, nelle Ande peruviane. Era composta da circa 160 uomini: una forza apparentemente esigua di fronte all'immenso impero che stava per affrontare. Il Tahuantinsuyo, fondato dagli Inca, si estendeva per migliaia di chilometri lungo la costa e le Ande, con una popolazione di diversi milioni di persone e un esercito di decine di migliaia di guerrieri.\n\nL'incontro con il Sapa Inca Atahualpa avvenne in quella piazza storica. L'imperatore si era appena imposto nella guerra civile contro suo fratello Huáscar e si recò all'incontro senza immaginare l'imboscata che lo attendeva. I cavalli, le armi da fuoco e l'armatura in acciaio erano del tutto sconosciuti ai soldati andini, che non avevano mai visto simili creature o udito il fragore dei cannoni.\n\nLo sbarco degli spagnoli non era un episodio isolato. Era il risultato di decenni di espansione europea nelle Americhe, favorita dalla superiorità tecnologica nelle armi e dalle malattie portate dall'Europa che avevano già decimato le popolazioni indigene prima ancora che gli eserciti spagnoli arrivassero. Il vaiolo, la peste e il morbillo si erano diffusi attraverso le rotte commerciali andine anni prima di Pizarro.\n\nPizarro aveva già partecipato ad altre spedizioni in America centrale e nel Pacifico. Le informazioni raccolte su un grande e ricco impero a sud lo avevano spinto a organizzare tre spedizioni prima di quella del 1532. La fortuna giocò un ruolo importante: arrivò in un momento in cui il Tahuantinsuyo era indebolito da una guerra civile fratricida tra i figli del Sapa Inca Huayna Capac, morto di malattia — probabilmente il vaiolo portato dagli europei.\n\nL'impresa di Pizarro fu possibile anche grazie all'aiuto di popoli indigeni che vedevano nell'alleanza con gli spagnoli un'opportunità per liberarsi dal dominio inca. Cañari, Chachapoyas e Huanca fornirono contingenti militari ai conquistadores, diventando alleati indispensabili in una conquista che non fu mai semplicemente uno scontro tra europei e americani, ma un conflitto intrecciato con le tensioni politiche preesistenti nell'impero.",
+      "es": "En noviembre de 1532, una expedición dirigida por Francisco Pizarro llegó a Cajamarca, en los Andes peruanos. Estaba compuesta por unos 160 hombres: una fuerza aparentemente pequeña frente al inmenso imperio que estaba a punto de enfrentar. El Tahuantinsuyo, fundado por los incas, se extendía por miles de kilómetros a lo largo de la costa y los Andes, con una población de varios millones de personas.\n\nEl encuentro con el Sapa Inca Atahualpa ocurrió en esa plaza histórica. El emperador acababa de imponerse en la guerra civil contra su hermano Huáscar y se dirigió al encuentro sin imaginar la emboscada que le esperaba. Los caballos, las armas de fuego y la armadura de acero eran completamente desconocidos para los soldados andinos.\n\nEl desembarco de los españoles no fue un episodio aislado. Fue el resultado de décadas de expansión europea en las Américas, favorecida por la superioridad tecnológica y las enfermedades traídas de Europa que ya habían diezmado las poblaciones indígenas antes de que llegaran los ejércitos españoles.\n\nPizarro había participado en otras expediciones en América Central y el Pacífico. La información recopilada sobre un gran y rico imperio al sur lo impulsó a organizar tres expediciones antes de la de 1532. Llegó en un momento en que el Tahuantinsuyo estaba debilitado por una guerra civil fraticida entre los hijos del Sapa Inca Huayna Capac, muerto de enfermedad — probablemente la viruela traída por los europeos.\n\nLa empresa de Pizarro fue posible también gracias a la ayuda de pueblos indígenas que veían en la alianza con los españoles una oportunidad para liberarse del dominio inca. Cañaris, Chachapoyas y Huancas proporcionaron contingentes militares a los conquistadores, convirtiéndose en aliados indispensables.",
+      "en": "In November 1532, an expedition led by Francisco Pizarro arrived at Cajamarca in the Peruvian Andes. It consisted of around 160 men — an apparently small force against the vast empire they were about to confront. The Tahuantinsuyo, founded by the Incas, stretched thousands of kilometers along the coast and Andes, with a population of several million people and an army of tens of thousands of warriors.\n\nThe encounter with Sapa Inca Atahualpa took place in that historic plaza. The emperor had just prevailed in the civil war against his brother Huáscar and arrived at the meeting with no idea of the ambush awaiting him. Horses, firearms, and steel armor were completely unknown to Andean soldiers, who had never seen such creatures or heard the roar of cannons.\n\nThe Spanish landing was not an isolated event. It was the result of decades of European expansion in the Americas, aided by technological superiority in weapons and European diseases that had already decimated indigenous populations before Spanish armies arrived. Smallpox, plague, and measles had spread through Andean trade routes years before Pizarro.\n\nPizarro had already participated in other expeditions in Central America and the Pacific. Information gathered about a great and wealthy empire to the south prompted him to organize three expeditions before that of 1532. He arrived at a moment when the Tahuantinsuyo was weakened by a fratricidal civil war between the sons of Sapa Inca Huayna Capac, who had died of disease — most likely smallpox brought by Europeans.\n\nPizarro's enterprise was also made possible by the help of indigenous peoples who saw in an alliance with the Spanish an opportunity to free themselves from Inca domination. Cañari, Chachapoyas, and Huanca peoples provided military contingents to the conquistadors, becoming indispensable allies in a conquest that was never simply a clash between Europeans and Americans."
+    }
+  },
+  {
+    "id": "conquista_caduta",
+    "parent_stage_id": "conquista_spagnola",
+    "categoria": {
+      "it": "Conquista spagnola",
+      "es": "Conquista española",
+      "en": "Spanish Conquest"
+    },
+    "orden": 2,
+    "periodo": {
+      "it": "1532 – 1533 d.C.",
+      "es": "1532 – 1533 d.C.",
+      "en": "1532 – 1533 AD"
+    },
+    "titulo": {
+      "it": "La caduta del Tahuantinsuyo",
+      "es": "La caída del Tahuantinsuyo",
+      "en": "The fall of the Tahuantinsuyo"
+    },
+    "subtitulo": {
+      "it": "La cattura di Atahualpa e la presa di Cuzco",
+      "es": "La captura de Atahualpa y la toma de Cuzco",
+      "en": "The capture of Atahualpa and the taking of Cuzco"
+    },
+    "imagen_sugerida": "conquista_caduta.png",
+    "contenido": {
+      "it": "Il 16 novembre del 1532, Atahualpa fu catturato nella Piazza di Cajamarca in un'imboscata orchestrata da Pizarro con precisione militare. Gli spagnoli aprirono il fuoco con i cannoni e caricarono con la cavalleria, causando il panico tra i soldati inca. Migliaia di guerrieri morirono nella confusione; l'imperatore fu preso prigioniero senza che riuscisse a opporre resistenza organizzata.\n\nAtahualpa, consapevole che i conquistadores erano mossi dalla sete d'oro, offrì in cambio della propria libertà di riempire una stanza con oggetti d'oro e due stanze con argento. Fu un riscatto senza precedenti nella storia: tonnellate di metalli preziosi affluirono a Cajamarca da tutto l'impero. Eppure, nonostante il pagamento, Pizarro decise di non liberarlo: accusato di cospirare contro gli spagnoli, Atahualpa fu giustiziato nel 1533.\n\nLa morte del Sapa Inca fu un colpo durissimo per l'impero. Gli spagnoli marciarono verso Cuzco approfittando delle divisioni interne e degli alleati indigeni che non volevano più sottostare al dominio inca. Nel novembre del 1533, Cuzco — la capitale dell'impero, il «navel del mondo» per gli Inca — cadde nelle mani degli spagnoli.\n\nI conquistadores si scontrarono però con resistenze organizzate. Manco Inca, inizialmente presentato come un alleato compiacente, guidò nel 1536 una grande rivolta e assediò Cuzco per diversi mesi con un esercito di decine di migliaia di guerrieri. Sebbene l'assedio fallisse, riuscì a ritirarsi sulle Ande e fondare lo Stato neo-inca di Vilcabamba.\n\nLa caduta del Tahuantinsuyo non fu solo militare: fu una crisi demografica, culturale e spirituale di dimensioni enormi. Le malattie europee avevano già uccidendo milioni di persone. La distruzione dei templi, la proibizione dei rituali e la sostituzione delle strutture politiche inca con l'amministrazione coloniale segnarono la fine di un mondo che aveva impiegato secoli a costruirsi.",
+      "es": "El 16 de noviembre de 1532, Atahualpa fue capturado en la Plaza de Cajamarca en una emboscada orquestada por Pizarro con precisión militar. Los españoles abrieron fuego con los cañones y cargaron con la caballería, causando pánico entre los soldados incas. Miles de guerreros murieron en la confusión; el emperador fue tomado prisionero.\n\nAtahualpa, consciente de que los conquistadores estaban motivados por la sed de oro, ofreció a cambio de su libertad llenar una habitación con objetos de oro y dos habitaciones con plata. Fue un rescate sin precedentes en la historia. Sin embargo, a pesar del pago, Pizarro decidió no liberarlo: acusado de conspirar contra los españoles, Atahualpa fue ejecutado en 1533.\n\nLa muerte del Sapa Inca fue un golpe devastador para el imperio. Los españoles marcharon hacia Cuzco aprovechando las divisiones internas y los aliados indígenas. En noviembre de 1533, Cuzco cayó en manos españolas.\n\nLos conquistadores se enfrentaron sin embargo a resistencias organizadas. Manco Inca lideró en 1536 una gran revuelta y sitió Cuzco durante varios meses. Aunque el sitio fracasó, logró retirarse a los Andes y fundar el Estado neo-inca de Vilcabamba.\n\nLa caída del Tahuantinsuyo no fue solo militar: fue una crisis demográfica, cultural y espiritual de enorme magnitud. Las enfermedades europeas habían matado a millones de personas. La destrucción de los templos y la prohibición de los rituales señalaron el fin de un mundo.",
+      "en": "On November 16, 1532, Atahualpa was captured in the Plaza of Cajamarca in an ambush orchestrated by Pizarro with military precision. The Spanish opened fire with cannons and charged with cavalry, causing panic among Inca soldiers. Thousands of warriors died in the confusion; the emperor was taken prisoner without being able to mount organized resistance.\n\nAtahualpa, aware that the conquistadors were driven by thirst for gold, offered in exchange for his freedom to fill a room with gold objects and two rooms with silver. It was an unprecedented ransom in history. Yet despite the payment, Pizarro decided not to free him: accused of conspiring against the Spanish, Atahualpa was executed in 1533.\n\nThe Sapa Inca's death was a devastating blow to the empire. The Spanish marched toward Cuzco taking advantage of internal divisions and indigenous allies. In November 1533, Cuzco — the empire's capital, the 'navel of the world' for the Incas — fell into Spanish hands.\n\nThe conquistadors encountered organized resistance. Manco Inca led a great revolt in 1536 and besieged Cuzco for several months with an army of tens of thousands of warriors. Although the siege failed, he managed to retreat to the Andes and found the neo-Inca State of Vilcabamba.\n\nThe fall of the Tahuantinsuyo was not only military: it was a demographic, cultural, and spiritual crisis of enormous dimensions. European diseases had already killed millions. The destruction of temples, the prohibition of rituals, and the replacement of Inca political structures with colonial administration marked the end of a world that had taken centuries to build."
+    }
+  },
+  {
+    "id": "conquista_resistenza",
+    "parent_stage_id": "conquista_spagnola",
+    "categoria": {
+      "it": "Conquista spagnola",
+      "es": "Conquista española",
+      "en": "Spanish Conquest"
+    },
+    "orden": 3,
+    "periodo": {
+      "it": "1536 – 1572 d.C.",
+      "es": "1536 – 1572 d.C.",
+      "en": "1536 – 1572 AD"
+    },
+    "titulo": {
+      "it": "La resistenza inca",
+      "es": "La resistencia inca",
+      "en": "Inca resistance"
+    },
+    "subtitulo": {
+      "it": "Manco Inca e lo Stato neo-inca di Vilcabamba",
+      "es": "Manco Inca y el Estado neo-inca de Vilcabamba",
+      "en": "Manco Inca and the neo-Inca State of Vilcabamba"
+    },
+    "imagen_sugerida": "conquista_resistenza.png",
+    "contenido": {
+      "it": "La resistenza al dominio spagnolo non cessò con la presa di Cuzco. Manco Inca Yupanqui, inizialmente trattato come un alleato controllabile, si ribellò nel 1536 organizzando uno dei più grandi assedi della storia delle Americhe. Un esercito di decine di migliaia di guerrieri inca circondò Cuzco e Lima, mettendo a rischio l'intera colonia spagnola nascente.\n\nL'assedio durò quasi un anno. Le fortezze di Sacsayhuamán, appena fuori da Cuzco, furono teatro di violenti combattimenti. Gli spagnoli riuscirono a mantenere le loro posizioni grazie alla superiorità delle armi, ai rinforzi arrivati da Panama e all'aiuto di alleati indigeni nemici degli Inca. Manco Inca, dopo aver perso Sacsayhuamán, si ritirò verso le foreste andine.\n\nFondò allora lo Stato neo-inca di Vilcabamba, nella zona montuosa e selvatica a nord di Cuzco. Da lì continuò a organizzare incursioni contro le posizioni spagnole per anni. Manco Inca morì nel 1544, assassinato da alcuni conquistadores rifugiati che lo avevano accolto come ospiti. La resistenza continuò però con i suoi successori.\n\nTitu Cusi Yupanqui, figlio di Manco, guidò Vilcabamba mantenendo trattative con i viceré spagnoli. Permise l'ingresso di missionari agostiniani e dettò la propria versione degli eventi della conquista — una delle rare fonti inca sulla propria storia. L'ultimo Sapa Inca di Vilcabamba, Tupac Amaru, fu catturato dagli spagnoli nel 1572 e decapitato pubblicamente a Cuzco. Con lui si chiuse formalmente la resistenza inca.\n\nIl ricordo di Tupac Amaru sopravvisse nei secoli. Due secoli dopo, un leader indigeno adottò quel nome per guidare la più grande ribellione coloniale dell'America del Sud, nel 1780. La resistenza inca lasciò un'eredità duratura nella memoria storica del Perù, diventando simbolo di dignità e volontà di sopravvivenza di un popolo di fronte alla conquista.",
+      "es": "La resistencia al dominio español no cesó con la toma de Cuzco. Manco Inca Yupanqui se rebeló en 1536 organizando uno de los más grandes sitios de la historia de las Américas. Un ejército de decenas de miles de guerreros incas rodeó Cuzco y Lima, poniendo en riesgo toda la colonia española naciente.\n\nEl sitio duró casi un año. Las fortalezas de Sacsayhuamán fueron escenario de violentos combates. Los españoles lograron mantener sus posiciones gracias a la superioridad de las armas y los refuerzos llegados de Panamá. Manco Inca, tras perder Sacsayhuamán, se retiró hacia las selvas andinas.\n\nFundó entonces el Estado neo-inca de Vilcabamba, en la zona montañosa y selvática al norte de Cuzco. Desde allí continuó organizando incursiones contra las posiciones españolas durante años. Manco Inca murió en 1544, asesinado por conquistadores que había acogido como huéspedes.\n\nTitu Cusi Yupanqui, hijo de Manco, guió Vilcabamba manteniendo negociaciones con los virreyes españoles y dictó su versión de los eventos de la conquista — una de las raras fuentes incas sobre su propia historia. El último Sapa Inca de Vilcabamba, Tupac Amaru, fue capturado en 1572 y decapitado públicamente en Cuzco.\n\nEl recuerdo de Tupac Amaru sobrevivió durante siglos. Dos siglos después, un líder indígena adoptó ese nombre para dirigir la mayor rebelión colonial de América del Sur, en 1780. La resistencia inca dejó un legado duradero en la memoria histórica del Perú.",
+      "en": "Resistance to Spanish rule did not cease with the taking of Cuzco. Manco Inca Yupanqui rebelled in 1536, organizing one of the greatest sieges in the history of the Americas. An army of tens of thousands of Inca warriors surrounded Cuzco and Lima, threatening the entire nascent Spanish colony.\n\nThe siege lasted almost a year. The fortresses of Sacsayhuamán, just outside Cuzco, were the scene of violent fighting. The Spanish managed to maintain their positions thanks to superior weapons, reinforcements arriving from Panama, and the help of indigenous allies hostile to the Incas. Manco Inca, after losing Sacsayhuamán, retreated toward the Andean forests.\n\nHe then founded the neo-Inca State of Vilcabamba, in the mountainous and forested area north of Cuzco. From there he continued to organize raids against Spanish positions for years. Manco Inca died in 1544, assassinated by conquistadors he had taken in as guests.\n\nTitu Cusi Yupanqui, son of Manco, led Vilcabamba while maintaining negotiations with Spanish viceroys. He allowed Augustinian missionaries to enter and dictated his own version of the conquest events — one of the rare Inca sources on their own history. The last Sapa Inca of Vilcabamba, Tupac Amaru, was captured by the Spanish in 1572 and publicly beheaded in Cuzco.\n\nThe memory of Tupac Amaru survived for centuries. Two centuries later, an indigenous leader adopted that name to lead the largest colonial rebellion in South America in 1780. The Inca resistance left a lasting legacy in Peru's historical memory, becoming a symbol of dignity and a people's will to survive in the face of conquest."
+    }
+  }
+]

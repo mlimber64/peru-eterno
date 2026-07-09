@@ -1,0 +1,82 @@
+[
+  {
+    "id": "peru_prehispanico",
+    "orden": 1,
+    "accent_color": "FFC1440E",
+    "periodo": {
+      "it": "3000 a.C. – 1532 d.C.",
+      "es": "3000 a.C. – 1532 d.C.",
+      "en": "3000 BC – 1532 AD"
+    },
+    "titulo": {
+      "it": "Perù preispanico",
+      "es": "Perú prehispánico",
+      "en": "Pre-Hispanic Peru"
+    },
+    "subtitulo": {
+      "it": "Dalle prime comunità alle grandi civiltà andine",
+      "es": "De las primeras comunidades a las grandes civilizaciones andinas",
+      "en": "From the first communities to the great Andean civilizations"
+    }
+  },
+  {
+    "id": "conquista_spagnola",
+    "orden": 2,
+    "accent_color": "FF7A3B1E",
+    "periodo": {
+      "it": "1532 – 1572 d.C.",
+      "es": "1532 – 1572 d.C.",
+      "en": "1532 – 1572 AD"
+    },
+    "titulo": {
+      "it": "Conquista spagnola",
+      "es": "Conquista española",
+      "en": "Spanish Conquest"
+    },
+    "subtitulo": {
+      "it": "L'arrivo degli europei e la fine del Tahuantinsuyo",
+      "es": "La llegada de los europeos y el fin del Tahuantinsuyo",
+      "en": "The arrival of Europeans and the end of the Tahuantinsuyo"
+    }
+  },
+  {
+    "id": "vicereame_peru",
+    "orden": 3,
+    "accent_color": "FF5C3317",
+    "periodo": {
+      "it": "1542 – 1821 d.C.",
+      "es": "1542 – 1821 d.C.",
+      "en": "1542 – 1821 AD"
+    },
+    "titulo": {
+      "it": "Vicereame del Perù",
+      "es": "Virreinato del Perú",
+      "en": "Viceroyalty of Peru"
+    },
+    "subtitulo": {
+      "it": "La formazione della società coloniale",
+      "es": "La formación de la sociedad colonial",
+      "en": "The formation of the colonial society"
+    }
+  },
+  {
+    "id": "indipendenza",
+    "orden": 4,
+    "accent_color": "FF2D6A4F",
+    "periodo": {
+      "it": "1820 – 1826 d.C.",
+      "es": "1820 – 1826 d.C.",
+      "en": "1820 – 1826 AD"
+    },
+    "titulo": {
+      "it": "Indipendenza",
+      "es": "Independencia",
+      "en": "Independence"
+    },
+    "subtitulo": {
+      "it": "Il cammino verso la libertà repubblicana",
+      "es": "El camino hacia la libertad republicana",
+      "en": "The path toward republican freedom"
+    }
+  }
+]

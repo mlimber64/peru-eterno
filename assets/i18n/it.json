@@ -1,0 +1,406 @@
+{
+  "app": {
+    "name": "Peru Eterno",
+    "tagline": "Un viaggio nel tempo"
+  },
+  "navigation": {
+    "timeline": "Timeline",
+    "back": "Indietro",
+    "gallery": "Galleria",
+    "read": "Leggi",
+    "discover": "Scopri",
+    "close": "Chiudi",
+    "home": "Home",
+    "explore": "Esplora",
+    "saved": "Salvati",
+    "settings": "Impostazioni",
+    "previous": "Precedente",
+    "next": "Successivo"
+  },
+  "premium": {
+    "title": "Sblocca Premium",
+    "subtitle": "Intera storia del Perù",
+    "description": "Scopri l'Impero Inca, la Conquista spagnola, il Vicereame e l'Indipendenza del Perù in un viaggio unico attraverso i secoli.",
+    "price": "€2,99",
+    "unlock_button": "Sblocca ora",
+    "restore_button": "Ripristina acquisto",
+    "locked_label": "Contenuto Premium",
+    "tap_to_unlock": "Tocca per sbloccare",
+    "features_title": "Cosa include Premium",
+    "features": [
+      "Accesso completo a tutte le 7 ere storiche",
+      "Gallerie di illustrazioni esclusive per ogni era",
+      "Descrizioni storiche dettagliate trilingue",
+      "Lettura offline completa",
+      "Nessuna pubblicità"
+    ],
+    "free_label": "GRATUITO",
+    "premium_label": "PREMIUM",
+    "active_message": "Hai accesso completo a tutta la storia del Peru!",
+    "error_canceled": "Acquisto annullato.",
+    "error_failed": "Non è stato possibile completare il pagamento. Riprova.",
+    "error_unavailable": "Negozio non disponibile al momento. Riprova più tardi.",
+    "restore_success": "Acquisto ripristinato con successo."
+  },
+  "language": {
+    "select": "Seleziona lingua",
+    "it": "Italiano",
+    "es": "Español",
+    "en": "English"
+  },
+  "gallery": {
+    "image_of": "di",
+    "no_images": "Immagini in arrivo",
+    "placeholder_hint": "Sostituisci con le tue illustrazioni IA"
+  },
+  "splash": {
+    "loading": "Caricamento...",
+    "brand_top": "PERU",
+    "brand_bottom": "ETERNO",
+    "tagline": "Un viaggio nel tempo"
+  },
+  "home": {
+    "title": "PERU ETERNO",
+    "subtitle": "Sette ere di storia",
+    "free_section": "Ere gratuite",
+    "premium_section": "Ere premium",
+    "worlds": "Esplora i mondi",
+    "featured": "Era in evidenza",
+    "character_of_day": "Personaggio del giorno",
+    "continue_exploring": "Continua a esplorare",
+    "continue_journey": "Continua il tuo viaggio",
+    "recent_history": "Cronologia recente",
+    "historical_progress": "Progresso storico",
+    "hero_eyebrow": "PERU - 5.000 ANNI",
+    "hero_title": "5.000 anni\ndi storia",
+    "hero_subtitle": "Scopri l'anima del Peru",
+    "start_journey": "Inizia il viaggio",
+    "explore_eras": "Esplora le ere",
+    "capital": "Capitale",
+    "area": "Superficie",
+    "population": "Popolazione",
+    "regions": "Regioni",
+    "regions_value": "Costa - Sierra - Giungla",
+    "about_title": "Il Peru",
+    "about_text": "Il Peru e una delle piu grandi culle della civilta mondiale. Sede dell'Impero Inca, della citta sacra di Machu Picchu e di decine di culture lungo 5.000 anni, la storia del Peru e una delle piu ricche del mondo.",
+    "how_title": "Come usare Peru Eterno",
+    "step_1": "Scegli un mondo (Storia, Cultura, Sapori...) per iniziare",
+    "step_2": "Tocca una scheda per leggere il contenuto completo",
+    "step_3": "Salva i preferiti con il cuore per ritrovarli facilmente",
+    "featured_badge": "ERA IN EVIDENZA",
+    "view_biography": "Vedi biografia",
+    "continue_reading": "Continua a leggere ->"
+  },
+  "eras": {
+    "caral": {
+      "title": "Caral",
+      "subtitle": "La civiltà più antica delle Americhe",
+      "period": "3000 — 1800 a.C.",
+      "description": "Caral è la civiltà più antica delle Americhe, fiorita tra il 3000 e il 1800 a.C. nella Valle del Supe, a circa 200 km a nord di Lima. Quasi contemporanea all'antico Egitto e alla Mesopotamia, Caral sorprende per la sua complessità organizzativa: sei grandi piramidi tronche, anfiteatri circolari, piazze cerimoniali e quartieri residenziali erano distribuiti su una superficie di più di 60 ettari.\n\nCiò che rende Caral straordinaria è la totale assenza di ceramica e di armi nelle sue rovine: una civiltà che raggiunse livelli avanzati di urbanizzazione basandosi sul commercio e sulla cooperazione piuttosto che sulla conquista militare. Il commercio con la costa permetteva l'accesso alle acciughe essiccate, fonte proteica fondamentale, in cambio di prodotti agricoli come cotone e zucca.\n\nGli archeologi hanno trovato quipu — cordicelle annodate usate per registrare informazioni — che potrebbero essere i più antichi del continente. Tra i reperti spiccano anche flauti intagliati in ossa di pellicano e di cervo, testimonianza di una ricca vita rituale e musicale. La civiltà di Caral si estinse verso il 1800 a.C., forse a causa di cambiamenti climatici e siccità prolungate. Nel 2009 l'UNESCO l'ha dichiarata Patrimonio dell'Umanità.",
+      "description_short": "La più antica civiltà delle Americhe, costruita nel deserto senza ceramica né scrittura.",
+      "highlight": "UNESCO 2009"
+    },
+    "moche": {
+      "title": "Moche",
+      "subtitle": "Maestri della ceramica e dell'oro",
+      "period": "100 — 800 d.C.",
+      "description": "La cultura Moche fiorì tra il 100 e l'800 d.C. sulla costa settentrionale del Perù, nelle valli dei fiumi Moche, Chicama e Jequetepeque. Senza un sistema di scrittura, i Moche lasciarono la loro storia incisa nella ceramica: vasi ritratto di straordinario realismo umano, scene di battaglia, rituali religiosi e vita quotidiana raccontati in terracotta dipinta con il caratteristico ocre e crema.\n\nI loro monumenti più imponenti sono la Huaca del Sole e la Huaca della Luna, costruite ad Huacas de Moche con decine di milioni di mattoni di adobe. La Huaca del Sole era probabilmente il centro amministrativo, mentre la Huaca della Luna era il tempio cerimoniale, con murali policromi che raffigurano il dio Ai Apaec — il «Tagliatore di Teste» — e scene di sacrifici rituali.\n\nLa scoperta più sensazionale avvenne nel 1987 a Sipán: la tomba intatta del «Señor de Sipán», un sovrano-sacerdote sepolto con una quantità straordinaria di gioielli in oro, argento e rame, armature cerimoniali e otto persone sacrificate. Considerata la tomba reale più ricca mai trovata in America, rivaleggia per splendore con quella di Tutankhamon. I Moche svilupparono anche avanzati sistemi di irrigazione che trasformarono le valli desertiche in terre fertili, e la loro influenza si estese per centinaia di chilometri lungo la costa.",
+      "description_short": "Maestri dell'oro e della ceramica sulla costa nord, creatori della Tomba di Sipán.",
+      "highlight": "Signore di Sipán"
+    },
+    "tiahuanaco": {
+      "title": "Tiahuanaco",
+      "subtitle": "Il popolo delle alte Ande",
+      "period": "500 — 1100 d.C.",
+      "description": "Tiahuanaco (o Tiwanaku) nacque sulle rive meridionali del Lago Titicaca, a 3.842 metri sul livello del mare, nella Bolivia odierna. Tra il 500 e il 1100 d.C. divenne uno dei grandi centri religiosi e politici dell'America precolombiana, con una popolazione stimata tra i 10.000 e i 20.000 abitanti al suo apice — un dato straordinario per quelle altitudini.\n\nIl complesso monumentale di Tiwanaku comprende alcune delle costruzioni più enigmatiche delle Ande. La Porta del Sole, ricavata da un unico blocco di andesite di dieci tonnellate, è sormontata da un fregio in bassorilievo con 48 figure alate che convergono verso una divinità centrale con raggi solari — interpretata da molti studiosi come il dio Viracocha. La Piramide di Akapana, alta 18 metri, era un centro rituale con canali per drenare l'acqua piovana in modo controllato.\n\nCiò che stupisce è la lavorazione della pietra: blocchi di andesite e arenaria del peso di decine di tonnellate venivano trasportati dal Lago Titicaca usando zattere di canne e rampe di terra, e poi lavorati con una precisione millimetrica. Le giunzioni tra i blocchi non lasciano passare la lama di un coltello.\n\nL'influenza di Tiwanaku si diffuse in tutto il bacino del Titicaca e oltre, attraverso reti di scambio commerciale e culturale che anticiparono le strategie imperiali dell'Impero Inca. Verso il 1100 d.C. una grave siccità pluridecennale segnò il declino della civiltà.",
+      "description_short": "Civiltà delle alte Ande sul Lago Titicaca, costruttori della misteriosa Porta del Sole.",
+      "highlight": "Porta del Sole"
+    },
+    "inca": {
+      "title": "Impero Inca",
+      "subtitle": "Il più grande impero precolombiano",
+      "period": "1438 — 1533 d.C.",
+      "description": "Il Tahuantinsuyu — 'le quattro regioni del mondo' — fu l'impero più esteso delle Americhe precolombiane, estendendosi per oltre 4.000 km lungo la costa del Pacifico. Sotto il governo del Sapa Inca, milioni di persone erano organizzate in un sistema di reciprocità e lavoro collettivo chiamato mita. Il Qhapaq Ñan, rete stradale di 40.000 km, connetteva l'intero impero permettendo comunicazioni rapide tramite staffette (chasquis). Machu Picchu, costruita come palazzo reale di Pachacutec nel XV secolo, rimane il simbolo più iconico di questa civiltà. I quipu, cordicelle annodate, servivano per registrare dati in assenza di scrittura.",
+      "description_short": "Il grande Tahuantinsuyu si estendeva per 4.000 km, con Machu Picchu come corona.",
+      "highlight": "Machu Picchu"
+    },
+    "conquista": {
+      "title": "Conquista spagnola",
+      "subtitle": "La caduta di un impero",
+      "period": "1532 — 1572 d.C.",
+      "description": "Il 16 novembre 1532, Francisco Pizarro e 168 conquistadores catturarono l'Inca Atahualpa a Cajamarca, segnando l'inizio della fine del Tahuantinsuyu. Nonostante il pagamento di un riscatto in oro e argento che riempì una stanza intera, Atahualpa fu giustiziato nel 1533. La conquista fu facilitata dalle lotte intestine tra i fratelli Atahualpa e Huáscar, dalle malattie europee che decimarono la popolazione indigena, e dalla superiorità tecnologica degli spagnoli. Nel 1535, Pizarro fondò Lima come nuova capitale coloniale, iniziando una profonda trasformazione culturale, religiosa e sociale del territorio.",
+      "description_short": "168 conquistadores e Francisco Pizarro segnarono la fine del grande Impero Inca.",
+      "highlight": "1532 Cajamarca"
+    },
+    "virreinato": {
+      "title": "Vicereame del Perù",
+      "subtitle": "Tre secoli di dominio coloniale",
+      "period": "1542 — 1821 d.C.",
+      "description": "Il Vicereame del Perù, istituito nel 1542, fu il principale centro del potere coloniale spagnolo in Sud America per quasi tre secoli. Lima divenne la 'Ciudad de los Reyes', sede del viceré, dell'Inquisizione e crocevia del commercio atlantico. Le miniere di Potosí producevano quantità enormi di argento, alimentando l'economia dell'impero spagnolo e finanziando le guerre europee. La fusione tra cultura indigena, africana e spagnola creò una società meticcia con nuove espressioni artistiche, musicali e culinarie che definirono l'identità peruana. Rivolte come quella di Túpac Amaru II (1780) anticiparono le lotte per l'indipendenza.",
+      "description_short": "Lima, la 'Ciudad de los Reyes', dominò tre secoli di storia coloniale sudamericana.",
+      "highlight": "Ciudad de los Reyes"
+    },
+    "independencia": {
+      "title": "Indipendenza",
+      "subtitle": "La nascita di una nazione",
+      "period": "1821 d.C.",
+      "description": "Il 28 luglio 1821, il generale José de San Martín proclamò l'Indipendenza del Perù a Lima, davanti a una folla entusiasta che aveva atteso questo momento per decenni. Dopo secoli di dominio coloniale e movimenti insurrezionali come la rivolta di Túpac Amaru II, il Perù si emancipava dalla corona spagnola. La vittoria definitiva arrivò il 9 dicembre 1824, con la storica Battaglia di Ayacucho, guidata da Antonio José de Sucre sotto il comando di Simón Bolívar. Questa vittoria pose fine definitivamente alla dominazione spagnola in Sud America. Il giovane Perù indipendente si confrontò con enormi sfide: costruire un'identità nazionale che integrasse le diverse etnie e culture.",
+      "description_short": "Il 28 luglio 1821 San Martín proclamò l'Indipendenza. La Battaglia di Ayacucho la consacrò.",
+      "highlight": "28 Luglio 1821"
+    }
+  },
+  "states": {
+    "loading": "Caricamento...",
+    "empty": "Nessun contenuto",
+    "error": "Qualcosa non ha funzionato",
+    "retry": "Riprova",
+    "offline_cached": "Sei offline: stai vedendo i contenuti salvati."
+  },
+  "explore": {
+    "title": "Esplora",
+    "subtitle": "Scopri il Peru",
+    "search_hint": "Cerca storia, persone, cibo...",
+    "results": "risultati",
+    "historical_stages_count": "fasi storiche",
+    "no_results": "Nessun risultato",
+    "historical_stages": "Fasi storiche",
+    "cultural_map_title": "Mappa culturale",
+    "cultural_map_subtitle": "Esplora il Perù tra luoghi sacri e civiltà."
+  },
+  "historia": {
+    "editorial_articles": "ARTICOLI EDITORIALI",
+    "prehispanic_peru": "Perù preispanico",
+    "prehispanic_subtitle": "Origini e civilta antiche",
+    "articles": "Articoli",
+    "read_article": "Leggi articolo",
+    "sources_title": "Fonti e crediti",
+    "sources_body": "Contenuto editoriale creato per Peru Eterno. Basato su fonti accademiche: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Peru, Enciclopedia del Peru.",
+    "explore_also": "Esplora anche",
+    "read": "Leggi"
+  },
+  "timeline": {
+    "historical": "Cronologia storica"
+  },
+  "cultural_map": {
+    "places": "Luoghi culturali",
+    "todo_article": "{name} non ha ancora un articolo dedicato.",
+    "eyebrow": "MUSEO DIGITALE",
+    "title": "Mappa culturale del Perù",
+    "subtitle": "Esplora luoghi, epoche e territori sacri.",
+    "open_story": "Apri storia"
+  },
+  "favorites": {
+    "eyebrow": "LA MIA COLLEZIONE",
+    "title": "Salvati",
+    "empty_title": "Niente ancora salvato",
+    "empty_subtitle": "Tocca il cuore su qualsiasi`narticolo per salvarlo"
+  },
+  "world": {
+    "editorial": "Approfondimenti preispanici",
+    "see_all": "Vedi tutti gli articoli",
+    "timeline": "Cronologia",
+    "civilizations": "Civilta"
+  },
+  "settings": {
+    "eyebrow": "PREFERENZE",
+    "title": "Impostazioni",
+    "language": "LINGUA",
+    "premium": "PREMIUM",
+    "storage": "ARCHIVIAZIONE",
+    "about": "INFO",
+    "premium_active": "Premium attivo",
+    "premium_active_subtitle": "Tutto il contenuto sbloccato",
+    "upgrade": "Passa a Premium",
+    "upgrade_subtitle": "Sblocca tutte le ere e i contenuti",
+    "clear_cache": "Cancella cache contenuti",
+    "clear_cache_subtitle": "Forza il riscaricamento degli articoli",
+    "clear_history": "Cancella cronologia",
+    "clear_history_subtitle": "Rimuovi elementi \"continua a esplorare\"",
+    "clear_favorites": "Cancella tutti i preferiti",
+    "clear_favorites_subtitle": "Questa azione non puo essere annullata",
+    "cache_cleared": "Cache svuotata",
+    "footer_credits": "Fonti editoriali · Dominio pubblico",
+    "about_text": "Un'enciclopedia culturale sulla storia, le tradizioni e le persone del Perù. Fonti editoriali · Dominio pubblico.",
+    "credits": "Fonti e crediti",
+    "credits_subtitle": "Licenze di immagini e contenuti"
+  },
+  "wikipedia": {
+    "overview": "PANORAMICA",
+    "content": "CONTENUTO",
+    "gallery": "GALLERIA",
+    "cached": "Contenuto dalla cache - connettiti per aggiornare",
+    "read_more": "Leggi di piu su Wikipedia",
+    "source": "Fonte",
+    "content_available_in": "Contenuto disponibile in",
+    "section": "Sezione {number}",
+    "expand": "Espandi",
+    "collapse": "Riduci",
+    "editorial_source": "Fonte: contenuto editoriale",
+    "no_connection": "Impossibile caricare il contenuto",
+    "retry": "Riprova"
+  },
+  "content": {
+    "items": {
+      "caral": {
+        "title": "Caral",
+        "subtitle": "Civilta piu antica delle Americhe"
+      },
+      "moche": {
+        "title": "Moche",
+        "subtitle": "Maestri della ceramica e dell'oro"
+      },
+      "tiahuanaco": {
+        "title": "Tiahuanaco",
+        "subtitle": "Il popolo delle alte Ande"
+      },
+      "inca": {
+        "title": "Impero Inca",
+        "subtitle": "Il piu grande impero precolombiano"
+      },
+      "conquista": {
+        "title": "Conquista spagnola",
+        "subtitle": "La caduta di un impero"
+      },
+      "virreinato": {
+        "title": "Vicereame del Perù",
+        "subtitle": "Tre secoli di dominio coloniale"
+      },
+      "independencia": {
+        "title": "Indipendenza",
+        "subtitle": "La nascita di una nazione"
+      },
+      "cesar_vallejo": {
+        "title": "Cesar Vallejo",
+        "subtitle": "Poeta universale"
+      },
+      "chabuca_granda": {
+        "title": "Chabuca Granda",
+        "subtitle": "Voce della musica criolla"
+      },
+      "vargas_llosa": {
+        "title": "Mario Vargas Llosa",
+        "subtitle": "Scrittore e premio Nobel"
+      },
+      "ricardo_palma": {
+        "title": "Ricardo Palma",
+        "subtitle": "Autore delle tradizioni peruviane"
+      },
+      "arguedas": {
+        "title": "Jose Maria Arguedas",
+        "subtitle": "Scrittore del mondo andino"
+      },
+      "tupac_amaru": {
+        "title": "Tupac Amaru II",
+        "subtitle": "Leader della ribellione andina"
+      },
+      "pachacutec": {
+        "title": "Pachacutec",
+        "subtitle": "Architetto dell'Impero Inca"
+      },
+      "carrion": {
+        "title": "Daniel Alcides Carrion",
+        "subtitle": "Martire della medicina peruviana"
+      },
+      "bolognesi": {
+        "title": "Francisco Bolognesi",
+        "subtitle": "Eroe nazionale"
+      },
+      "inti_raymi": {
+        "title": "Inti Raymi",
+        "subtitle": "Festa del sole"
+      },
+      "marinera": {
+        "title": "Marinera",
+        "subtitle": "Danza nazionale del Peru"
+      },
+      "pachamama": {
+        "title": "Pachamama",
+        "subtitle": "Madre terra andina"
+      },
+      "semana_santa_ayacucho": {
+        "title": "Settimana Santa di Ayacucho",
+        "subtitle": "Tradizione religiosa andina"
+      },
+      "ceviche": {
+        "title": "Ceviche",
+        "subtitle": "Icona della cucina peruviana"
+      },
+      "lomo_saltado": {
+        "title": "Lomo saltado",
+        "subtitle": "Incontro criollo e asiatico"
+      },
+      "aji_de_gallina": {
+        "title": "Aji de gallina",
+        "subtitle": "Classico cremoso peruviano"
+      },
+      "chicha_morada": {
+        "title": "Chicha morada",
+        "subtitle": "Bevanda di mais viola"
+      },
+      "pisco_sour": {
+        "title": "Pisco sour",
+        "subtitle": "Cocktail emblematico"
+      },
+      "pachamanca": {
+        "title": "Pachamanca",
+        "subtitle": "Cucina cerimoniale della terra"
+      },
+      "huayno": {
+        "title": "Huayno",
+        "subtitle": "Musica delle Ande"
+      },
+      "vals_criollo": {
+        "title": "Valzer criollo",
+        "subtitle": "Eleganza musicale costiera"
+      },
+      "festejo": {
+        "title": "Festejo",
+        "subtitle": "Ritmo afroperuviano"
+      },
+      "cajon": {
+        "title": "Cajon",
+        "subtitle": "Percussione afroperuviana"
+      },
+      "andes": {
+        "title": "Ande",
+        "subtitle": "Spina dorsale del Peru"
+      },
+      "amazonia": {
+        "title": "Amazzonia peruviana",
+        "subtitle": "Foresta viva e biodiversita"
+      },
+      "machu_picchu": {
+        "title": "Machu Picchu",
+        "subtitle": "Citta sacra degli Inca"
+      },
+      "lago_titicaca": {
+        "title": "Lago Titicaca",
+        "subtitle": "Lago sacro delle alte Ande"
+      }
+    }
+  },
+  "credits": {
+    "eyebrow": "TRASPARENZA",
+    "title": "Fonti e crediti",
+    "intro": "Perú Eterno raccoglie informazioni da fonti pubbliche. Le immagini sono di pubblico dominio o con licenza libera, oppure generate con intelligenza artificiale.",
+    "images_title": "Immagini · Personaggi",
+    "images_intro": "Ritratti e fotografie storiche da Wikimedia Commons.",
+    "stages_title": "Immagini delle ere storiche",
+    "stages_intro": "Illustrazioni generate con intelligenza artificiale.",
+    "text_title": "Contenuti testuali",
+    "text_intro": "I testi sono redazione propria basata su fonti storiche pubbliche.",
+    "view_source": "Vedi fonte",
+    "license_publicDomain": "Dominio pubblico",
+    "license_ccBySa4": "CC BY-SA 4.0",
+    "license_aiGenerated": "Generata con IA",
+    "food_title": "Immagini · Gastronomia",
+    "food_intro": "Fotografie di piatti da Wikimedia Commons.",
+    "license_ccBySa3": "CC BY-SA 3.0",
+    "license_ccBy3": "CC BY 3.0",
+    "geo_title": "Immagini · Geografia",
+    "geo_intro": "Fotografie di paesaggi da Wikimedia Commons.",
+    "license_ccBySa2": "CC BY-SA 2.0",
+    "music_title": "Immagini · Musica",
+    "music_intro": "Foto del cajón da Wikimedia Commons; scene dei generi generate con IA."
+  }
+}
