@@ -10,6 +10,7 @@ import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
 import '../providers/language_provider.dart';
 import '../widgets/app_state_views.dart';
+import '../widgets/historia_rich_text.dart';
 
 class HistoriaSubtopicsScreen extends StatefulWidget {
   final HistoriaStage stage;
@@ -554,7 +555,7 @@ class _SubtopicCard extends StatelessWidget {
     final paragraphs =
         content.split('\n\n').where((p) => p.trim().isNotEmpty).toList();
     if (paragraphs.isEmpty) return '';
-    final first = paragraphs.first.trim();
+    final first = HistoriaParagraph.stripMarkdown(paragraphs.first.trim());
     return first.length > 110 ? '${first.substring(0, 110)}…' : first;
   }
 }

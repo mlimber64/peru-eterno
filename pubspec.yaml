@@ -41,6 +41,7 @@ flutter:
   assets:
     - assets/i18n/
     - assets/data/
+    - assets/data-refactor/peru-prehispanico/
     - assets/images/content/
     - assets/images/content/caral/
     - assets/images/banners/

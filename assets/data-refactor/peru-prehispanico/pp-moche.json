@@ -1,0 +1,33 @@
+{
+  "id": "moche",
+  "parent_stage_id": "peru_prehispanico",
+  "orden": 5,
+  "categoria": {
+    "es": "Desarrollos Regionales",
+    "it": "Sviluppi Regionali",
+    "en": "Regional Developments"
+  },
+  "titulo": {
+    "es": "Moche: Oro, sangre y maestría en la costa norte",
+    "it": "Moche: Oro, sangue e maestria sulla costa nord",
+    "en": "Moche: Gold, Blood, and Mastery on the Northern Coast"
+  },
+  "subtitulo": {
+    "es": "Los señores del desierto que inmortalizaron el alma humana en barro y dominaron la alquimia del metal.",
+    "it": "I signori del deserto che immortalarono l'anima umana nell'argilla e dominarono l'alchimia dei metalli.",
+    "en": "The lords of the desert who immortalized the human soul in clay and mastered metal alchemy."
+  },
+  "contenido": {
+    "es": "En los valles fértiles que irrigan el desierto norteño del Perú, entre los años 100 y 800 d.C., floreció una de las culturas más poderosas, dramáticas y sofisticadas de América del Sur: los Moche. Gobernados por reyes-sacerdotes que encarnaban a los mismos dioses, los Mochicas construyeron gigantescas pirámides de adobe, como la Huaca del Sol y la Huaca de la Luna, transformándose en maestros indiscutibles de la guerra ritual y de las artes plásticas.\n\nA diferencia de otras culturas antiguas que representaban figuras abstractas, los artistas Moche inmortalizaban la realidad con un realismo conmovedor. Sus famosos 'huacos retratos' no son vasijas comunes: son esculturas cerámicas que capturan con precisión quirúrgica el rostro humano, transmitiendo alegrías, dolores, orgullo, vejez y serenidad. Además, sus vasijas pictóricas relatan escenas complejas de cacerías, combate cuerpo a cuerpo y sacrificios sagrados destinados a aplacar la furia de su deidad principal: Ai Apaec, el Dios Decapitador.\n\nEl alcance de su riqueza quedó al descubierto en 1987, cuando el arqueólogo peruano Walter Alva desenterró la tumba intacta del 'Señor de Sipán'. Comparado por la ciencia con el descubrimiento de Tutankamón en Egipto, el hallazgo reveló a un soberano enterrado con deslumbrantes cetros de oro, pectorales de concha Spondylus, orejeras de turquesa y tocados de plumas. Sin embargo, lo más asombroso para la ingeniería no fue la cantidad de metal, sino la técnica utilizada para crearlo.\n\nSiglos antes de que en Europa se inventara la galvanoplastia industrial, los Moche desarrollaron la 'doradura por reemplazo electroquímico'. Utilizando soluciones ácidas minerales y sales de oro disueltas, lograban depositar una capa microscópica de oro puro sobre objetos de cobre. Para cualquiera que mirara sus ornamentos, la pieza parecía ser de oro macizo. Los Mochicas no solo moldeaban la tierra: dominaban la alquimia del metal.\n\n**[¿SABÍAS QUÉ?]**\nEl poder en el mundo Moche no era exclusivo de los hombres. El descubrimiento de la 'Sra. de Cao' en el complejo El Brujo revolucionó la historia andina al revelar la tumba de una joven gobernante tatuada con serpientes y arañas sagradas, enterrada con coronas y porras de guerra, demostrando que las mujeres ejercían el máximo poder político y religioso en la costa norte.\n\n*Créditos de investigación y agradecimientos especiales al Museo Tumbas Reales de Sipán, al Complejo Arqueológico El Brujo y al Museo Larco.*",
+
+    "it": "Nelle fertili valli della costa nord del Perù, tra il 100 e l'800 d.C., fiorì una delle culture più potenti e affascinanti del Sud America: i Moche. Governati da re-sacerdoti, i Mochica costruirono gigantesche piramidi di mattoni crudi, come la Huaca del Sol e la Huaca de la Luna, eccellendo nella guerra rituale e nell'arte.\n\nI loro famosi 'huacos retratos' sono sculture in ceramica che catturano con incredibile realismo le emozioni umane: gioia, dolore, orgoglio e vecchiaia. Nel 1987, l'archeologo Walter Alva scoprì la tomba intatta del 'Signore di Sipán', rivelando un sovrano sepolto con scettri d'oro, pettorali di conchiglie e gioielli in turchese.\n\nI Moche svilupparono anche la 'doratura elettrochimica' secoli prima dell'Europa, riuscendo a rivestire oggetti in rame con un sottile strato d'oro puro attraverso soluzioni minerali acide.\n\n**[CURIOSITÀ]**\nNel mondo Moche il potere apparteneva anche alle donne. La scoperta della 'Dama di Cao' ha rivelato la mummia di una giovane sovrana tatuata con serpenti sacri, sepolta con corone e mazze da guerra.\n\n*Crediti di ricerca e ringraziamenti al Museo Tumbas Reales de Sipán, al Complejo Arqueológico El Brujo e al Museo Larco.*",
+
+    "en": "In the fertile northern coastal valleys of Peru, between 100 and 800 AD, one of South America's most powerful and dramatic cultures flourished: the Moche. Ruled by warrior-priests, they built massive adobe pyramids like the Sun and Moon Huacas, mastering ritual warfare and fine arts.\n\nTheir famous 'portrait vessels' captured human emotion with startling realism—depicting joy, pain, pride, and aging. In 1987, archaeologist Walter Alva unearthed the intact tomb of the 'Lord of Sipán,' revealing a ruler buried with gold scepters, turquoise jewelry, and elaborate feather headdresses.\n\nThe Moche also mastered 'electrochemical replacement gilding' centuries before Europe, using acid solutions to coat copper objects with a microscopic layer of pure gold.\n\n**[FUN FACT]**\nPower was not exclusive to men in the Moche world. The discovery of the 'Lady of Cao' revealed a young female ruler tattooed with sacred snakes and spiders, buried with crowns and war clubs.\n\n*Research credits and special thanks to the Royal Tombs of Sipán Museum, El Brujo Archaeological Complex, and the Larco Museum.*"
+  },
+  "periodo": {
+    "es": "100 d.C. - 800 d.C.",
+    "it": "100 d.C. - 800 d.C.",
+    "en": "100 AD - 800 AD"
+  },
+  "imagen_sugerida": "assets/images/moche/moche_1.jpg"
+}

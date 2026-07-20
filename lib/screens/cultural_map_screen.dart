@@ -245,7 +245,7 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/banners/caral-desertico.jpg',
     position: Offset(0.38, 0.55),
     accentColor: Color(0xFFD8A64A),
-    // TODO: Add a dedicated Nazca article route or ContentItem.
+    historiaArticleId: 'nazca',
   ),
   CulturalMapPoint(
     id: 'moche',
@@ -281,7 +281,7 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/moche/moche_3.jpg',
     position: Offset(0.33, 0.16),
     accentColor: Color(0xFFB86F35),
-    // TODO: Add a Chan Chan / Chimu article route or ContentItem.
+    historiaArticleId: 'chimu',
   ),
   CulturalMapPoint(
     id: 'machu_picchu',

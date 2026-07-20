@@ -10,6 +10,7 @@ import '../providers/favorites_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/reading_progress_provider.dart';
 import '../providers/reading_text_scale_provider.dart';
+import '../widgets/historia_rich_text.dart';
 
 class HistoriaArticleDetailScreen extends StatefulWidget {
   final HistoriaArticle article;
@@ -189,6 +190,15 @@ class _HistoriaArticleDetailScreenState
               delegate: SliverChildBuilderDelegate(
                 (context, i) {
                   if (i.isOdd) {
+                    // Separador entre párrafos. Se omite el divisor cuando
+                    // alguno de los párrafos adyacentes es un callout
+                    // ("¿Sabías qué?"), que ya trae su propio recuadro.
+                    final before = paragraphs[(i - 1) ~/ 2];
+                    final after = paragraphs[(i + 1) ~/ 2];
+                    if (HistoriaParagraph.isCallout(before) ||
+                        HistoriaParagraph.isCallout(after)) {
+                      return const SizedBox(height: 20);
+                    }
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       child: Divider(
@@ -198,13 +208,10 @@ class _HistoriaArticleDetailScreenState
                     );
                   }
                   final pIndex = i ~/ 2;
-                  return Text(
-                    paragraphs[pIndex].trim(),
-                    style: GoogleFonts.lato(
-                      fontSize: 16 * textScale,
-                      color: AppColors.cremaPergamino.withOpacity(0.85),
-                      height: 1.8,
-                    ),
+                  return HistoriaParagraph(
+                    text: paragraphs[pIndex].trim(),
+                    accent: _accent,
+                    textScale: textScale,
                   ).animate().fadeIn(duration: 500.ms, delay: (pIndex * 90).ms);
                 },
                 childCount: paragraphs.isEmpty ? 0 : paragraphs.length * 2 - 1,

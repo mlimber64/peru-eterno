@@ -46,8 +46,12 @@ class HistoriaArticle {
   String contenidoFor(String lang) => contenido[lang] ?? contenido['it'] ?? '';
   String? periodoFor(String lang) => periodo?[lang] ?? periodo?['it'];
 
-  // Ruta de imagen local (en assets/images/historia/)
-  String get imagenAssetPath => 'assets/images/historia/$imagenSugerida';
+  // Ruta de imagen local. Los datos enriquecidos (assets/data-refactor/) ya
+  // traen la ruta completa (p. ej. "assets/images/caral/caral_1.jpg"); los
+  // datos antiguos solo el nombre de archivo dentro de assets/images/historia/.
+  String get imagenAssetPath => imagenSugerida.startsWith('assets/')
+      ? imagenSugerida
+      : 'assets/images/historia/$imagenSugerida';
 
   static Map<String, String> _toStringMap(dynamic raw) {
     if (raw is Map) {

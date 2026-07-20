@@ -1,0 +1,33 @@
+{
+  "id": "wari",
+  "parent_stage_id": "peru_prehispanico",
+  "orden": 6,
+  "categoria": {
+    "es": "Horizonte Medio",
+    "it": "Orizzonte Medio",
+    "en": "Middle Horizon"
+  },
+  "titulo": {
+    "es": "Wari: El primer imperio de América del Sur",
+    "it": "Wari: Il primo impero del Sud America",
+    "en": "Wari: The First Empire of South America"
+  },
+  "subtitulo": {
+    "es": "Los estrategas urbanos que conectaron los Andes con murallas de piedra y la primera gran red de caminos.",
+    "it": "Gli strateghi urbani che connettero le Ande con mura di pietra e la prima grande rete stradale.",
+    "en": "The urban strategists who connected the Andes with stone walls and the first great road network."
+  },
+  "contenido": {
+    "es": "Siglos antes de que los Incas trazaran sus legendarios caminos o construyeran sus ciudadelas en las cumbres, un poder militar e industrial sin precedentes nació en las áridas cordilleras de Ayacucho. Entre los años 600 y 1000 d.C., los Wari consolidaron el primer imperio panandino de la historia de Sudamérica, extendiendo sus dominios desde Cajamarca y La Libertad por el norte, hasta Arequipa y Cusco por el sur.\n\nA diferencia de las culturas previas, que basaban su influencia principalmente en la religión o el comercio local, los Wari ejercieron un control estatal estricto apoyado en el urbanismo militarizado. Fueron los grandes arquitectos de las ciudades amuralladas. Diseñaron metrópolis planificadas en cuadrículas como Pikillacta en Cusco o Pikillaqta y Pachacámac en la costa, construyendo complejos administrativos de varios pisos con muros de piedra blanca recubiertos de yeso que resplandecían bajo el sol andino.\n\nPara administrar un territorio tan vasto y diverso, los Wari crearon la infraestructura que cambiaría los Andes para siempre: el prototipo del Qhapaq Ñan. Trazaron una red de caminos empedrados, puentes y depósitos estatales (colcas) que permitían el movimiento veloz de tropas, mensajeros e información tributaria. Además, perfeccionaron el uso de los 'Quipus' —los complejos sistemas de cuerdas anudadas— como herramienta de contabilidad imperial para registrar cosechas, censos y producción textil.\n\nSu diplomacia también se servía del banquete y la fiesta ritual. Los gobernantes Wari organizaban masivas reuniones políticas donde ofrecían toneladas de comida y servían chicha de molle en keros (vasos sagrados) gigantescos de cerámica polícroma, integrando a las élites locales sometidas en una red de alianzas y obligaciones mutuas.\n\n**[¿SABÍAS QUÉ?]**\nLos textiles Wari son considerados por los historiadores del arte como los precursores del cubismo y la abstracción moderna. En sus tapices de lana de vicuña, los artesanos comprimían figuras complejas del 'Dios de los Báculos' y jaguares en patrones geométricos tan estilizados y codificados que solo los iniciados de la élite imperial podían leer su significado político y religioso.\n\n*Créditos de investigación y agradecimientos al Proyecto Arqueológico Wari, al Ministerio de Cultura del Perú y al Museo de Arte de Lima (MALI).*",
+
+    "it": "Secoli prima che gli Inca tracciassero i loro leggendari sentieri, un potere militare senza precedenti nacque sulle montagne di Ayacucho. Tra il 600 e il 1000 d.C., i Wari consolidarono il primo impero panandino del Sud America, estendendo il loro controllo dalla costa alle altitudini delle Ande.\n\nI Wari esercitarono un controllo statale basato sull'urbanistica militarizzata. Progettarono metropoli fortificate a griglia come Pikillacta a Cusco, costruendo complessi amministrativi a più piani rivestiti di gesso bianco.\n\nPer gestire un territorio così vasto, crearono la prima grande rete stradale in pietra —il prototipo del Qhapaq Ñan— e perfezionarono l'uso dei 'Quipus' (corde annodate) per la contabilità imperiale di tributi e raccolti.\n\n**[CURIOSITÀ]**\nI tessuti Wari sono considerati i precursori dell'astrazione moderna. Nei loro arazzi in lana di vigogna, gli artigiani codificavano figure sacre e simboli di potere in schemi geometrici così complessi che solo le élite imperiali sapevano decifrarne il significato.\n\n*Crediti di ricerca e ringraziamenti al Progetto Archeologico Wari, al Ministero della Cultura del Perù e al Museo d'Arte di Lima (MALI).*",
+
+    "en": "Centuries before the Incas carved their legendary trails, an unprecedented military power was born in the mountains of Ayacucho. Between 600 and 1000 AD, the Wari forged South America's first pan-Andean empire, expanding control across vast coastal and mountain territories.\n\nThe Wari enforced state control through militarized urban planning. They designed grid-planned fortified cities like Pikillacta in Cusco, constructing multi-story administrative complexes coated in gleaming white plaster.\n\nTo govern this domain, they built the first massive stone road network—the prototype of the Qhapaq Ñan—and perfected the 'Quipus' (knotted cords) for imperial record-keeping of crops and taxes.\n\n**[FUN FACT]**\nWari textiles are viewed by art historians as precursors to modern abstract art. Artisans compressed sacred figures and power symbols into geometric patterns so highly stylized that only the imperial elite could decipher their meaning.\n\n*Research credits and special thanks to the Wari Archaeological Project, the Ministry of Culture of Peru, and the Lima Art Museum (MALI).*"
+  },
+  "periodo": {
+    "es": "600 d.C. - 1000 d.C.",
+    "it": "600 d.C. - 1000 d.C.",
+    "en": "600 AD - 1000 AD"
+  },
+  "imagen_sugerida": "assets/images/banners/sacerdote-ceremonial-andino.jpg"
+}
