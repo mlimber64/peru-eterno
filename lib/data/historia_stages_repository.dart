@@ -3,12 +3,15 @@ import 'package:flutter/services.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
 import '../models/timeline_item.dart';
+import 'historia_repository.dart';
 
 class HistoriaStagesRepository {
   static const _stagesPath = 'assets/data/historia_stages.json';
 
+  // La etapa prehispánica ('peru_prehispanico') NO figura aquí: su contenido
+  // enriquecido y multilenguaje se carga desde los archivos individuales
+  // gestionados por [HistoriaRepository] (assets/data-refactor/peru-prehispanico/).
   static const _articlesPaths = {
-    'peru_prehispanico': 'assets/data/historia_prehispanica.json',
     'conquista_spagnola': 'assets/data/historia_conquista.json',
     'vicereame_peru': 'assets/data/historia_vicereame.json',
     'indipendenza': 'assets/data/historia_indipendenza.json',
@@ -31,6 +34,15 @@ class HistoriaStagesRepository {
   static Future<List<HistoriaArticle>> loadArticlesForStage(
       String stageId) async {
     if (_articlesCache.containsKey(stageId)) return _articlesCache[stageId]!;
+
+    // Prehispánico: hitos enriquecidos (Caral, Chavín, Paracas, Nazca, Moche,
+    // Wari, Chimú, Incas) desde assets/data-refactor/peru-prehispanico/.
+    if (stageId == 'peru_prehispanico') {
+      final articles = await HistoriaRepository.loadAll();
+      _articlesCache[stageId] = articles;
+      return articles;
+    }
+
     final path = _articlesPaths[stageId];
     if (path == null) return [];
     final raw = await rootBundle.loadString(path);

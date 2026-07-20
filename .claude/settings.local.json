@@ -124,7 +124,27 @@
       "Bash(xargs wc -l)",
       "Bash(flutter install *)",
       "Bash(ls android/app/src/debug/AndroidManifest.xml)",
-      "Bash(grep \"INTERNET\" android/app/src/debug/AndroidManifest.xml)"
+      "Bash(grep \"INTERNET\" android/app/src/debug/AndroidManifest.xml)",
+      "PowerShell(flutter run *)",
+      "Bash(adb -s emulator-5554 shell monkey -p com.perueternno.peru_eterno -c android.intent.category.LAUNCHER 1)",
+      "Bash(rm -f run2.log)",
+      "Bash(nohup flutter run -d emulator-5554 --pid-file=/tmp/peru.pid)",
+      "Bash(echo \"launched pid $!\")",
+      "Bash(adb -s emulator-5554 logcat -d -t 500)",
+      "Bash(rm -f run3.log /tmp/frin)",
+      "Bash(mkfifo /tmp/frin)",
+      "Bash(sleep 100000)",
+      "Bash(pkill -f 'sleep 100000')",
+      "Bash(rm -f /tmp/frin)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(flutter build *)",
+      "Bash(adb -s emulator-5554 install -r -d build/app/outputs/flutter-apk/app-release.apk)",
+      "Bash(adb -s emulator-5554 shell dumpsys activity activities)",
+      "Bash(adb -s emulator-5554 logcat -c)",
+      "Bash(adb -s emulator-5554 logcat -d)",
+      "Bash(unzip -l build/app/outputs/flutter-apk/app-release.apk)",
+      "Bash(adb -s emulator-5554 shell pm list packages)",
+      "Bash(adb -s emulator-5554 shell am start -W -n com.perueternno.peru_eterno/.MainActivity)"
     ]
   }
 }

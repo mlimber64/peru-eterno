@@ -8,6 +8,7 @@ import '../data/historia_repository.dart';
 import '../models/historia_article.dart';
 import '../providers/language_provider.dart';
 import '../widgets/app_state_views.dart';
+import '../widgets/historia_rich_text.dart';
 
 class HistoriaListScreen extends StatelessWidget {
   const HistoriaListScreen({super.key});
@@ -326,7 +327,7 @@ class _ArticleCard extends StatelessWidget {
     final paragraphs =
         content.split('\n\n').where((p) => p.trim().isNotEmpty).toList();
     if (paragraphs.isEmpty) return '';
-    final first = paragraphs.first.trim();
+    final first = HistoriaParagraph.stripMarkdown(paragraphs.first.trim());
     return first.length > 120 ? '${first.substring(0, 120)}…' : first;
   }
 }

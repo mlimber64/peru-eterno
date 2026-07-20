@@ -1,0 +1,33 @@
+{
+  "id": "chimu",
+  "parent_stage_id": "peru_prehispanico",
+  "orden": 7,
+  "categoria": {
+    "es": "Intermedio Tardío",
+    "it": "Intermedio Tardo",
+    "en": "Late Intermediate"
+  },
+  "titulo": {
+    "es": "Chimú: Los arquitectos de barro y la sombra del Tumi",
+    "it": "Chimú: Gli architetti di fango e l'ombra del Tumi",
+    "en": "Chimú: The Mud Architects and the Shadow of the Tumi"
+  },
+  "subtitulo": {
+    "es": "La metrópoli de barro más grande de América y los legendarios orfebres que moldearon el oro del reino de Chimor.",
+    "it": "La più grande metropoli di fango d'America e i leggendari orafi che modellarono l'oro del regno di Chimor.",
+    "en": "The largest mud metropolis in the Americas and the legendary goldsmiths who shaped the gold of the Chimor kingdom."
+  },
+  "contenido": {
+    "es": "Tras la caída del Imperio Wari, las costas del norte peruano presenciaron el surgimiento de un reino próspero y deslumbrante: el Reino de Chimor. Entre los años 1000 y 1470 d.C., los Chimú erigieron en las afueras de la actual ciudad de Trujillo su tesoro más colosal: Chan Chan, una capital imperial de 20 kilómetros cuadrados hecha enteramente de barro, adobe y caña, consolidada como la ciudad de tierra más grande de América precolombina.\n\nChan Chan no era una urbe común; estaba dividida en diez ciudadelas o palacios reales amurallados por imponentes muros de barro de hasta 12 metros de altura. Cada gobernante Chimú construía su propio palacio durante su reinado. Al morir, el palacio se convertía en su mausoleo sagrado, custodiado por sus servidores, mientras que el nuevo soberano debía erigir un palacio completamente nuevo desde cero. Las paredes de Chan Chan destacaban por sus extraordinarios relieves esculpidos en el barro con motivos marinos: peces, nutrias, redes de pesca y aves submarinas que rendían culto al Océano Pacífico, su principal fuente de vida.\n\nPara hacer florecer el árido desierto, los ingenieros Chimú desarrollaron complejos canales de irrigación intervalle, como el canal La Cumbre de más de 80 kilómetros, desafiando la topografía para llevar agua desde los ríos lejanos hasta sus campos de cultivo y huertos hundidos (puquiales).\n\nPero si algo inmortalizó a los Chimú fue su maestría con los metales preciosos. Herederos de las técnicas Moche, los orfebres Chimú crearon las piezas más icónicas del Perú antiguo, entre ellas el célebre 'Tumi de Illimo': un cuchillo ceremonial de oro puro incrustado con turquesas que representaba a Naylamp, el héroe fundador mitológico que emergió del mar. Su fama como metalúrgicos era tan grande que, cuando los Incas finalmente conquistaron el reino Chimú tras un prolongado asedio, trasladaron a los mejores artesanos de Chan Chan directamente al Cusco para decorar el Coricancha y los palacios imperiales.\n\n**[¿SABÍAS QUÉ?]**\nPara proteger los secretos de su riqueza y comercio, los Chimú crearon un código penal inflexible. El robo se castigaba con la muerte, pero el delito más grave e insólita en su código era el descuido de los canales de agua: si un agricultor permitía por negligencia que el agua de irrigación se desbordara o se desperdiciara en el desierto, pagaba la falta con su propia vida.\n\n*Créditos de investigación y agradecimientos especiales al Complejo Arqueológico Chan Chan, al Ministerio de Cultura del Perú y al Museo Banco Central de Reserva del Perú (MUCEN).*",
+
+    "it": "Dopo la caduta dell'Impero Wari, la costa nord del Perù vide la nascita di un regno glorioso: il Regno di Chimor. Tra il 1000 e il 1470 d.C., i Chimú eressero Chan Chan, una capitale imperiale di 20 chilometri quadrati fatta interamente di mattoni crudi, fango e canne: la più grande città di terra dell'America precolombiana.\n\nChan Chan era divisa in dieci cittadelle fortificate con mura alte fino a 12 metri. Ogni sovrano costruiva il proprio palazzo, che alla sua morte diventava il suo mausoleo sacro. Le pareti in fango mostravano splendidi rilievi con motivi marini: pesci, lontre e uccelli acquatici in onore dell'Oceano Pacifico.\n\nI Chimú furono anche maestri orafi insuperabili. Creatori del celebre 'Tumi' (coltello cerimoniale d'oro incastonato di turchesi), la loro abilità era così famosa che, quando gli Inca conquistarono il regno, deportarono i migliori artigiani a Cusco per decorare i palazzi imperiali.\n\n**[CURIOSITÀ]**\nNel regno Chimú l'acqua era sacra. Il reato più grave nel loro codice penale era il danneggiamento o la negligenza verso i canali d'irrigazione: chi sprecava l'acqua nel deserto veniva punito con la morte.\n\n*Crediti di ricerca e ringraziamenti al Complejo Arqueológico Chan Chan e al Ministero della Cultura del Perù.*",
+
+    "en": "Following the fall of the Wari Empire, the northern coast of Peru witnessed the rise of a dazzling realm: the Kingdom of Chimor. Between 1000 and 1470 AD, the Chimú built Chan Chan—a 20-square-kilometer imperial capital made entirely of mud, adobe, and reed, making it the largest earthen city in pre-Columbian America.\n\nChan Chan was divided into ten walled citadels with mud walls standing up to 12 meters high. Each ruler built his own palace, which became his sacred mausoleum upon death. The earthen walls featured intricate bas-reliefs of marine life, honoring the Pacific Ocean.\n\nThe Chimú were also master goldsmiths, famous for creating the iconic gold ceremonial knife known as the 'Tumi.' Their metalworking renown was so vast that when the Incas conquered the Chimú kingdom, they relocated Chan Chan's finest artisans to Cusco to adorn imperial temples.\n\n**[FUN FACT]**\nWater was sacred in the Chimú realm. Their strict legal code treated the wastage or neglect of irrigation canals as a capital crime, punishable by death.\n\n*Research credits and special thanks to the Chan Chan Archaeological Complex and the Ministry of Culture of Peru.*"
+  },
+  "periodo": {
+    "es": "1000 d.C. - 1470 d.C.",
+    "it": "1000 d.C. - 1470 d.C.",
+    "en": "1000 AD - 1470 AD"
+  },
+  "imagen_sugerida": "assets/images/moche/moche_3.jpg"
+}
