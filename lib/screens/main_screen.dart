@@ -6,6 +6,7 @@ import '../providers/language_provider.dart';
 import 'explore_screen.dart';
 import 'favorites_screen.dart';
 import 'home_screen.dart';
+import 'map_timeline_screen.dart';
 import 'settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = const [
     HomeScreen(),
     ExploreScreen(),
+    MapTimelineScreen(),
     FavoritesScreen(),
     SettingsScreen(),
   ];
@@ -43,6 +45,7 @@ class _MainScreenState extends State<MainScreen> {
     final labels = [
       t('navigation.home'),
       t('navigation.explore'),
+      t('navigation.map'),
       t('navigation.saved'),
       t('navigation.settings'),
     ];
@@ -61,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
         child: SizedBox(
           height: 60,
           child: Row(
-            children: List.generate(4, (i) {
+            children: List.generate(_navItems.length, (i) {
               final isActive = _currentIndex == i;
               final item = _navItems[i];
               return Expanded(
@@ -120,6 +123,7 @@ class _MainScreenState extends State<MainScreen> {
   static const List<(IconData, IconData)> _navItems = [
     (Icons.home_outlined, Icons.home_rounded),
     (Icons.explore_outlined, Icons.explore_rounded),
+    (Icons.map_outlined, Icons.map_rounded),
     (Icons.favorite_border_rounded, Icons.favorite_rounded),
     (Icons.settings_outlined, Icons.settings_rounded),
   ];

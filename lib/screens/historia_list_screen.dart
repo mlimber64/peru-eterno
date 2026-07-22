@@ -6,7 +6,9 @@ import '../core/constants/app_colors.dart';
 import '../core/navigation/app_navigation.dart';
 import '../data/historia_repository.dart';
 import '../models/historia_article.dart';
+import '../providers/daily_story_provider.dart';
 import '../providers/language_provider.dart';
+import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/historia_rich_text.dart';
 
@@ -200,6 +202,10 @@ class _ArticleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final preview = _previewText();
+    final isPremium = context.watch<PremiumProvider>().isPremium;
+    final isDaily =
+        context.watch<DailyStoryProvider>().dailyArticle?.id == article.id;
+    final isLocked = !isPremium && !isDaily;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
@@ -222,7 +228,7 @@ class _ArticleCard extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Orden badge
+                // Orden badge (o candado si el artículo está bloqueado)
                 Container(
                   width: 36,
                   height: 36,
@@ -232,14 +238,16 @@ class _ArticleCard extends StatelessWidget {
                     border: Border.all(color: _accent.withOpacity(0.4)),
                   ),
                   child: Center(
-                    child: Text(
-                      '${article.orden}',
-                      style: GoogleFonts.lato(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w800,
-                        color: _accent,
-                      ),
-                    ),
+                    child: isLocked
+                        ? Icon(Icons.lock_rounded, size: 15, color: _accent)
+                        : Text(
+                            '${article.orden}',
+                            style: GoogleFonts.lato(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              color: _accent,
+                            ),
+                          ),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -293,9 +301,11 @@ class _ArticleCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            context
-                                .read<LanguageProvider>()
-                                .t('historia.read_article'),
+                            context.read<LanguageProvider>().t(
+                                  isLocked
+                                      ? 'premium.locked_label'
+                                      : 'historia.read_article',
+                                ),
                             style: GoogleFonts.lato(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
@@ -304,8 +314,13 @@ class _ArticleCard extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 4),
-                          Icon(Icons.arrow_forward_ios_rounded,
-                              size: 10, color: _accent),
+                          Icon(
+                            isLocked
+                                ? Icons.lock_rounded
+                                : Icons.arrow_forward_ios_rounded,
+                            size: 10,
+                            color: _accent,
+                          ),
                         ],
                       ),
                     ],

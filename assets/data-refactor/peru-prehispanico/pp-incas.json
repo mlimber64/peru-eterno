@@ -29,5 +29,61 @@
     "it": "1438 d.C. - 1532 d.C.",
     "en": "1438 AD - 1532 AD"
   },
-  "imagen_sugerida": "assets/images/incas/incas_1.jpg"
+  "imagen_sugerida": "assets/images/incas/incas_1.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Quién tomó el nombre de Pachacútec y fundó el imperio Tahuantinsuyo?",
+        "it": "Chi prese il nome di Pachacútec e fondò l'impero Tahuantinsuyo?",
+        "en": "Who took the name Pachacútec and founded the Tahuantinsuyo empire?"
+      },
+      "opciones": {
+        "es": ["Huayna Cápac", "Cusi Yupanqui", "Manco Inca", "Atahualpa"],
+        "it": ["Huayna Cápac", "Cusi Yupanqui", "Manco Inca", "Atahualpa"],
+        "en": ["Huayna Cápac", "Cusi Yupanqui", "Manco Inca", "Atahualpa"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Tras vencer a los Chancas en 1438, el príncipe Cusi Yupanqui adoptó el nombre Pachacútec.",
+        "it": "Dopo aver sconfitto i Chanca nel 1438, il principe Cusi Yupanqui adottò il nome Pachacútec.",
+        "en": "After defeating the Chancas in 1438, prince Cusi Yupanqui adopted the name Pachacútec."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿En qué se basaba la economía del imperio inca, sin uso de dinero?",
+        "it": "Su cosa si basava l'economia dell'impero inca, senza uso di denaro?",
+        "en": "What was the Inca economy based on, without the use of money?"
+      },
+      "opciones": {
+        "es": ["El trueque internacional", "La reciprocidad y el trabajo comunitario (Mita y Minka)", "Los impuestos en oro", "El comercio marítimo"],
+        "it": ["Il baratto internazionale", "La reciprocità e il lavoro comunitario (Mita e Minka)", "Le tasse in oro", "Il commercio marittimo"],
+        "en": ["International bartering", "Reciprocity and communal labor (Mita and Minka)", "Gold taxes", "Maritime trade"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El sistema de Mita y Minka organizaba el trabajo comunitario y la reciprocidad entre el estado y el pueblo.",
+        "it": "Il sistema di Mita e Minka organizzava il lavoro comunitario e la reciprocità tra stato e popolo.",
+        "en": "The Mita and Minka system organized communal labor and reciprocity between the state and the people."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué función cumplía el 'Intihuatana' en Machu Picchu?",
+        "it": "Che funzione svolgeva l''Intihuatana' a Machu Picchu?",
+        "en": "What function did the 'Intihuatana' serve at Machu Picchu?"
+      },
+      "opciones": {
+        "es": ["Almacenar agua", "Medir el tiempo y predecir las épocas de siembra", "Guardar momias reales", "Defender la ciudadela"],
+        "it": ["Immagazzinare acqua", "Misurare il tempo e prevedere le stagioni di semina", "Custodire mummie reali", "Difendere la cittadella"],
+        "en": ["Storing water", "Measuring time and predicting planting seasons", "Housing royal mummies", "Defending the citadel"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Permitía a los astrónomos incas medir solsticios y equinoccios para planificar la siembra.",
+        "it": "Permetteva agli astronomi inca di misurare solstizi ed equinozi per pianificare la semina.",
+        "en": "It allowed Inca astronomers to measure solstices and equinoxes to plan planting."
+      }
+    }
+  ]
 }

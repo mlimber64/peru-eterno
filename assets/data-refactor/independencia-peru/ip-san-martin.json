@@ -1,0 +1,89 @@
+{
+  "id": "corriente_libertadora_sur",
+  "parent_stage_id": "indipendenza",
+  "orden": 2,
+  "categoria": {
+    "es": "Campañas de Independencia",
+    "it": "Campagne di Indipendenza",
+    "en": "Independence Campaigns"
+  },
+  "titulo": {
+    "es": "San Martín y la Corriente Libertadora del Sur: El nacimiento de la República",
+    "it": "San Martín e la Corrente Liberatrice del Sud: La nascita della Repubblica",
+    "en": "San Martín and the Southern Liberation: The Birth of the Republic"
+  },
+  "subtitulo": {
+    "es": "El desembarco en Paracas, la estrategia diplomática y la emblemática Proclamación del 28 de julio de 1821.",
+    "it": "Lo sbarco a Paracas, la strategia diplomatica e la Proclamazione del 28 luglio 1821.",
+    "en": "The landing at Paracas, diplomatic strategy, and the historic Proclamation of July 28, 1821."
+  },
+  "contenido": {
+    "es": "Hacia 1820 d.C., la causa patriota hispanoamericana comprendió una verdad estratégica fundamental: mientras el Virreinato del Perú —el bastión militar más poderoso de España— permaneciera bajo control realista, la libertad de todo el continente corría peligro. Con esa visión, el general argentino **Don José de San Martín**, tras liberar Chile, organizó la Expedición Libertadora del Sur y desembarcó en las playas de Paracas el 8 de septiembre de 1820.\n\nEn lugar de una invasión sangrienta, San Martín ejecutó una brillante estrategia de cerco político y propaganda ideológica. Estableció su cuartel en Huaura, envió expediciones a la sierra central encabezadas por el general Álvarez de Arenales para armar a las montoneras (guerrillas compuestas por campesinos e indígenas) e impulsó negociaciones diplomáticas para convencer a las élites criollas de la inevitabilidad de la independencia.\n\nAsediada por el bloqueo marítimo del almirante Lord Cochrane y el avance de las guerrillas patriotas, la Lima realista se quedó sin alimentos. El virrey José de la Serna abandonó la capital para replegar sus tropas a los Andes. San Martín ingresó pacíficamente a Lima y, el **28 de julio de 1821**, ante una multitud fervorosa en la Plaza Mayor, proclamó la Independencia del Perú pronunciando las inmortales palabras: *'El Perú es, desde este momento, libre e independiente por la voluntad general de los pueblos y por la justicia de su causa que Dios defiende'*\n\nSan Martín asumió el mando como Protector del Perú, creando la primera bandera, el himno nacional, la Biblioteca Nacional y aboliendo la mita indígena y la esclavitud para los nacidos a partir de esa fecha.\n\n**[¿SABÍAS QUÉ?]**\nLa tradición literaria creada por Ricardo Palma cuenta que los colores rojo y blanco de la bandera peruana fueron inspirados por un sueño de San Martín en Pisco. Al quedarse dormido bajo una palmera, vio volar en el cielo un grupo de 'parihuanas' (flamencos andinos con alas rojas y pecho blanco). Al despertar exclamó: *'¡He aquí la bandera de la libertad!'*.\n\n*Créditos de investigación y agradecimientos especiales al Instituto Nacional Sanmartiniano y al Centro de Estudios Histórico Militares del Perú (CEHMP).*",
+
+    "it": "Nel 1820, il generale argentino **Don José de San Martín** capì che la libertà dell'America dipendeva dalla liberazione del Perù, roccaforte spagnola. Sbarcò a Paracas l'8 settembre 1820 con la spedizione liberatrice.\n\nSan Martín applicò una strategia di blocco e propaganda, alleandosi con le *montoneras* (guerriglie contadine). Di fronte all'avanzata patriota, il vicerè abbandonò Lima.\n\nIl **28 luglio 1821**, San Martín proclamò l'Indipendenza del Perù nella Piazza Maggiore di Lima, assumendo il governo come Protettore e creando i primi simboli della patria.\n\n**[CURIOSITÀ]**\nLa leggenda narra che i colori rosso e bianco della bandiera furono ispirati da un sogno di San Martín a Pisco, dove vide volare dei fenicotteri andini (*parihuanas*) dalle ali rosse e il petto bianco.\n\n*Crediti di ricerca e ringraziamenti all'Istituto Sanmartiniano e al Centro di Studi Storico-Militari del Perù (CEHMP).*",
+
+    "en": "By 1820, Argentine General **Don José de San Martín** recognized that continental freedom required liberating Peru, Spain's power base. He landed at Paracas on September 8, 1820, launching the Southern Liberation Expedition.\n\nSan Martín employed a strategy of naval blockades and alliances with native guerrilla forces (*montoneras*). Forced by supplies shortages, the Viceroy retreated to the Andes.\n\nOn **July 28, 1821**, San Martín declared Peruvian Independence in Lima's main square, assuming leadership as Protector of Peru and establishing the nation's first symbols.\n\n**[FUN FACT]**\nLegend holds that the red and white flag colors were inspired by San Martín's dream in Pisco, where he saw Andean flamingos (*parihuanas*) with red wings and white chests soaring overhead.\n\n*Research credits and special thanks to the Sanmartiniano National Institute and the Center for Military Historical Studies of Peru (CEHMP).*"
+  },
+  "periodo": {
+    "es": "1820 d.C. - 1822 d.C.",
+    "it": "1820 d.C. - 1822 d.C.",
+    "en": "1820 AD - 1822 AD"
+  },
+  "imagen_sugerida": "assets/images/independencia/independencia_2.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Dónde desembarcó José de San Martín para iniciar la liberación del Perú?",
+        "it": "Dove sbarcò José de San Martín per iniziare la liberazione del Perù?",
+        "en": "Where did José de San Martín land to begin the liberation of Peru?"
+      },
+      "opciones": {
+        "es": ["El Callao", "Paracas", "Trujillo", "Arequipa"],
+        "it": ["Il Callao", "Paracas", "Trujillo", "Arequipa"],
+        "en": ["Callao", "Paracas", "Trujillo", "Arequipa"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "San Martín desembarcó en las playas de Paracas el 8 de septiembre de 1820.",
+        "it": "San Martín sbarcò sulle spiagge di Paracas l'8 settembre 1820.",
+        "en": "San Martín landed on the beaches of Paracas on September 8, 1820."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿En qué fecha se proclamó la Independencia del Perú?",
+        "it": "In quale data fu proclamata l'Indipendenza del Perù?",
+        "en": "On what date was the Independence of Peru proclaimed?"
+      },
+      "opciones": {
+        "es": ["28 de julio de 1821", "9 de diciembre de 1824", "24 de junio de 1821", "6 de agosto de 1824"],
+        "it": ["28 luglio 1821", "9 dicembre 1824", "24 giugno 1821", "6 agosto 1824"],
+        "en": ["July 28, 1821", "December 9, 1824", "June 24, 1821", "August 6, 1824"]
+      },
+      "respuesta_correcta": 0,
+      "explicacion": {
+        "es": "San Martín proclamó la independencia en Lima el 28 de julio de 1821.",
+        "it": "San Martín proclamò l'indipendenza a Lima il 28 luglio 1821.",
+        "en": "San Martín proclaimed independence in Lima on July 28, 1821."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué título asumió San Martín tras la proclamación de la independencia?",
+        "it": "Quale titolo assunse San Martín dopo la proclamazione dell'indipendenza?",
+        "en": "What title did San Martín assume after the proclamation of independence?"
+      },
+      "opciones": {
+        "es": ["Virrey del Perú", "Protector del Perú", "Emperador del Perú", "Presidente del Congreso"],
+        "it": ["Vicerè del Perù", "Protettore del Perù", "Imperatore del Perù", "Presidente del Congresso"],
+        "en": ["Viceroy of Peru", "Protector of Peru", "Emperor of Peru", "President of Congress"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "San Martín gobernó como Protector del Perú, creando la bandera, el himno y aboliendo la mita.",
+        "it": "San Martín governò come Protettore del Perù, creando la bandiera, l'inno e abolendo la mita.",
+        "en": "San Martín ruled as Protector of Peru, creating the flag, the anthem, and abolishing the mita."
+      }
+    }
+  ]
+}

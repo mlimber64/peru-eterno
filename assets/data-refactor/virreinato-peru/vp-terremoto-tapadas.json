@@ -1,0 +1,89 @@
+{
+  "id": "terremoto_tapadas_limeñas",
+  "parent_stage_id": "vicereame_peru",
+  "orden": 3,
+  "categoria": {
+    "es": "Misterios y Leyendas",
+    "it": "Misteri e Leggende",
+    "en": "Mysteries and Legends"
+  },
+  "titulo": {
+    "es": "Catástrofe y Misterio: El terremoto de 1746 y las Tapadas Limeñas",
+    "it": "Catastrofe e Mistero: Il terremoto del 1746 e le 'Tapadas Limeñas'",
+    "en": "Catastrophe and Mystery: The 1746 Earthquake and the 'Tapadas Limeñas'"
+  },
+  "subtitulo": {
+    "es": "La mayor tragedia sísmica de Lima y el enigmático ícono femenino que desafió las normas virreinales.",
+    "it": "La più grande tragedia sismica di Lima e l'enigmatico simbolo femminile che sfidò le regole vicereali.",
+    "en": "Lima's greatest seismic disaster and the enigmatic female icon that defied viceregal norms."
+  },
+  "contenido": {
+    "es": "La noche del 28 de octubre de 1746, a las 10:30 p.m., la tierra bajo Lima se desgarró en uno de los terremotos más pavorosos jamás registrados en la costa del Pacífico. Con un estimado de 8.6 a 8.8 grados de magnitud, el sismo destruyó casi la totalidad de las iglesias, palacios y viviendas de adobe de la Ciudad de los Reyes. Media hora después, un tsunami gigantesco con olas de más de 15 metros arrasó por completo el puerto del Callao, tragándose barcos e instalaciones y dejando apenas a un centenar de sobrevivientes de una población de más de 5,000 habitantes.\n\nTras la devastación, el Virrey José Antonio Manso de Velasco (nombrado por el rey como el 'Conde de Superunda' por su labor) emprendió la reconstrucción de la capital. Se ordenaron muros más bajos, se popularizó el uso del quincha (caña con barro flexible antisísmico) y se erigieron las murallas de Lima y la Fortaleza del Real Felipe en el Callao para proteger el puerto de corsarios y piratas.\n\nEn medio de esta Lima dieciochista resurgió con más fuerza una costumbre social fascinante y única: las **Tapadas Limeñas**. Las mujeres de Lima adoptaron el uso de la 'saya y el manto', un vestido ajustado a la cintura acompañado por un manto de seda negra que cubría completamente la cabeza y el rostro, dejando al descubierto **únicamente un solo ojo**.\n\nEsta vestimenta no era un acto de recato religioso, sino una hábil estrategia de libertad social. Ocultas tras el anonimato del manto, las mujeres limeñas de todas las clases sociales caminaban solas por las calles, coqueteaban, asistían a bailes de teatro y opinaban abiertamente sobre política virreinal sin ser reconocidas por sus maridos, padres o las autoridades, desafiando las estrictas leyes de la época.\n\n**[¿SABÍAS QUÉ?]**\nEl atuendo de las Tapadas Limeñas causó tanto revuelo que las autoridades virreinales y la Iglesia intentaron prohibirlo en más de cuatro ocasiones imponiendo severas multas y excomuniones. Sin embargo, las mujeres de la capital se negaron rotundamente a abandonar el manto, logrando mantener viva esta misteriosa tradición durante más de tres siglos hasta mediados del siglo XIX.\n\n*Créditos de investigación y agradecimientos al Museo de Historia Natural de la UNMSM, al Archivo Histórico de la Municipalidad de Lima y a los relatos de viajeros como Flora Tristán.*",
+
+    "it": "La notte del 28 ottobre 1746, un terremoto catastrofico (magnitudo 8,6) distrusse quasi interamente Lima. Mezz'ora dopo, un maremoto devastante con onde di 15 metri rase al suolo il porto del Callao, lasciando pochissimi superstiti.\n\nLa ricostruzione guidata dal Vicerè Manso de Velasco introdusse la 'quincha' (struttura antisismica in canna e fango) e la Fortezza del Real Felipe.\n\nIn questa Lima rinata si affermò la moda delle **Tapadas Limeñas**: donne vestite con la 'saya y manto', un abito scuro che copriva il volto lasciando scoperto **un solo occhio**.\n\nQuesto abito non era religioso, ma un simbolo di libertà: nel completo anonimato, le donne passeggiavano liberamente, civettavano e discutevano di politica senza essere riconosciute.\n\n**[CURIOSITÀ]**\nI vicerè e la Chiesa cercarono di proibire l'uso del manto più volte sotto pena di excommunicatione, ma le donne di Lima si ribellarono mantenendo viva la tradizione per tre secoli.\n\n*Crediti di ricerca e ringraziamenti all'Archivio Storico del Comune di Lima e alle cronache di Flora Tristán.*",
+
+    "en": "On the night of October 28, 1746, a massive earthquake (magnitude 8.6) devastated Lima. Half an hour later, a 15-meter tsunami wiped out the port of Callao, leaving only a handful of survivors.\n\nReconstruction led by Viceroy Manso de Velasco introduced quake-resistant 'quincha' building techniques and built the Real Felipe Fortress.\n\nDuring this era, the trend of the **Tapadas Limeñas** gained renown: women wore the 'saya y manto', a garment covering the head and face, exposing **only a single eye**.\n\nFar from a pious veil, it offered social freedom: under full anonymity, women walked freely, debated politics, and skirted rigid societal constraints.\n\n**[FUN FACT]**\nBoth viceroys and the Church attempted to ban the veil multiple times under threat of excommunication, but Lima's women refused, preserving the iconic tradition across three centuries.\n\n*Research credits and special thanks to the Historic Archive of the Municipality of Lima and the writings of Flora Tristán.*"
+  },
+  "periodo": {
+    "es": "1746 d.C. - 1850 d.C.",
+    "it": "1746 d.C. - 1850 d.C.",
+    "en": "1746 AD - 1850 AD"
+  },
+  "imagen_sugerida": "assets/images/virreinato/virreinato_3.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué ocurrió en Lima la noche del 28 de octubre de 1746?",
+        "it": "Cosa accadde a Lima la notte del 28 ottobre 1746?",
+        "en": "What happened in Lima on the night of October 28, 1746?"
+      },
+      "opciones": {
+        "es": ["Una invasión pirata", "Un terremoto seguido de un tsunami", "Una epidemia de viruela", "Un incendio masivo"],
+        "it": ["Un'invasione di pirati", "Un terremoto seguito da uno tsunami", "Un'epidemia di vaiolo", "Un incendio di massa"],
+        "en": ["A pirate invasion", "An earthquake followed by a tsunami", "A smallpox epidemic", "A massive fire"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Un terremoto de 8.6-8.8 de magnitud y un posterior tsunami devastaron Lima y el Callao.",
+        "it": "Un terremoto di magnitudo 8,6-8,8 e il conseguente tsunami devastarono Lima e il Callao.",
+        "en": "An earthquake of magnitude 8.6-8.8 and a subsequent tsunami devastated Lima and Callao."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué técnica antisísmica se popularizó tras el terremoto de 1746?",
+        "it": "Quale tecnica antisismica si diffuse dopo il terremoto del 1746?",
+        "en": "What earthquake-resistant technique became popular after the 1746 earthquake?"
+      },
+      "opciones": {
+        "es": ["El adobe reforzado", "La quincha (caña con barro flexible)", "Los cimientos de piedra", "El concreto armado"],
+        "it": ["I mattoni crudi rinforzati", "La quincha (canna con fango flessibile)", "Le fondamenta in pietra", "Il cemento armato"],
+        "en": ["Reinforced adobe", "Quincha (flexible cane and mud)", "Stone foundations", "Reinforced concrete"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "La quincha, más flexible que el adobe, se usó para reconstruir Lima con mayor resistencia sísmica.",
+        "it": "La quincha, più flessibile dei mattoni crudi, fu usata per ricostruire Lima con maggiore resistenza sismica.",
+        "en": "Quincha, more flexible than adobe, was used to rebuild Lima with greater earthquake resistance."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué parte del rostro dejaban al descubierto las 'Tapadas Limeñas' con su saya y manto?",
+        "it": "Quale parte del viso lasciavano scoperta le 'Tapadas Limeñas' con la loro saya y manto?",
+        "en": "What part of the face did the 'Tapadas Limeñas' leave uncovered with their saya y manto?"
+      },
+      "opciones": {
+        "es": ["La boca", "Un solo ojo", "La frente", "Ambos ojos"],
+        "it": ["La bocca", "Un solo occhio", "La fronte", "Entrambi gli occhi"],
+        "en": ["The mouth", "A single eye", "The forehead", "Both eyes"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El manto cubría todo el rostro dejando ver solamente un ojo, lo que les permitía el anonimato.",
+        "it": "Il manto copriva tutto il viso lasciando scoperto solo un occhio, permettendo loro l'anonimato.",
+        "en": "The veil covered the whole face, leaving only one eye visible, allowing them anonymity."
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import '../screens/collectibles_album_screen.dart';
 import '../screens/premium_screen.dart';
 import '../services/wikipedia_service.dart';
 
@@ -90,6 +91,25 @@ class AppDrawer extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => const PremiumScreen()));
                 },
               ),
+
+            const SizedBox(height: 12),
+            _divider(),
+            const SizedBox(height: 8),
+
+            // ── Coleccionables ───────────────────────────────────────────────
+            _SectionLabel(context.read<LanguageProvider>().t('settings.collectibles')),
+            _ActionTile(
+              icon: Icons.style_rounded,
+              label: context.read<LanguageProvider>().t('collectibles.title'),
+              color: AppColors.ocre,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CollectiblesAlbumScreen()),
+                );
+              },
+            ),
 
             const SizedBox(height: 12),
             _divider(),

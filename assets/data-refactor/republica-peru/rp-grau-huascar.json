@@ -1,0 +1,89 @@
+{
+  "id": "guerra_pacifico_grau",
+  "parent_stage_id": "republica_peru",
+  "orden": 2,
+  "categoria": {
+    "es": "Guerra del Pacífico",
+    "it": "Guerra del Pacifico",
+    "en": "War of the Pacific"
+  },
+  "titulo": {
+    "es": "Miguel Grau y el Huáscar: El Caballero de los Mares",
+    "it": "Miguel Grau e l'Huáscar: Il Cavaliere dei Mari",
+    "en": "Miguel Grau and the Huáscar: The Knight of the Seas"
+  },
+  "subtitulo": {
+    "es": "La hazaña naval que contuvo a toda una flota enemiga y convirtió al héroe peruano en leyenda universal de caballerosidad.",
+    "it": "L'impresa navale che mantenne in scacco l'intera flotta nemica ed eresse Grau a leggenda di cavalleria.",
+    "en": "The naval saga that held an entire enemy fleet at bay and made Grau a universal legend of chivalry."
+  },
+  "contenido": {
+    "es": "En abril de 1879 d.C. estalló la Guerra del Pacífico, un conflicto armado provocado por la disputa territorial y fiscal sobre los ricos yacimientos de salitre en el desierto de Atacama. Ante la aplastante superioridad militar de la armada chilena, el destino de la campaña naval recayó sobre los hombros del Almirante **Miguel Grau Seminario** y la tripulación del pequeño blindado **Huáscar**.\n\nDurante seis meses consecutivos, en una de las epopeyas navales más deslumbrantes de la historia militar, Grau convirtió al Huáscar en una pesadilla insuperable para el mando enemigo. Evadiendo acorazados más pesados y rápidos, el Huáscar capturó transportes de tropas, destruyó instalaciones portuarias de abastecimiento y paralizó por completo los planes de invasión terrestre.\n\nPero lo que elevó a Grau a la inmortalidad no fue solo su destreza táctica, sino su profunda humanidad en medio del horror de la guerra. Tras el Combate Naval de Iquique, donde el Huáscar hundió a la corbeta chilena *Esmeralda*, Grau ordenó rescatar del mar a los marineros enemigos sobrevivientes. Días después, envió una carta de condolencias llena de hidalguía y las pertenencias personales a la viuda del capitán caído Arturo Prat, gesto que le valió el título eterno de **'El Caballero de los Mares'**.\n\nEl final de la campaña naval ocurrió el **8 de octubre de 1879** en el **Combate de Angamos**. Rodeado y emboscado por la totalidad de la escuadra chilena, el Huáscar presentó batalla sin rendirse jamás. Una bomba del acorazado *Cochrane* impactó de lleno en la torre de mando, quitándole la vida al Almirante Grau. Sus oficiales y marineros continuaron la lucha sangrienta hasta el último aliento, intentando hundir la nave antes de caer prisioneros.\n\n**[¿SABÍAS QUÉ?]**\nMiguel Grau es reconocido universalmente por historiadores militares como un modelo absoluto de ética militar. En el Perú fue proclamado por votación popular como 'El Peruano del Milenio' y en el Congreso de la República se mantiene una curul con su nombre, donde se pasa lista en su honor en cada sesión parlamentaria.\n\n*Créditos de investigación y agradecimientos a la Marina de Guerra del Perú, la Asociación de Historia Naval y al Museo Naval del Callao.*",
+
+    "it": "Nell'aprile 1879 scoppiò la Guerra del Pacifico per il controllo dei giacimenti di nitrato nel deserto. Di fronte a una flotta nemica superiore, l'Ammiraglio **Miguel Grau** e il piccolo monitor **Huáscar** tennero in scacco l'intera marina cilena per sei mesi.\n\nGrau si distinse per la sua straordinaria umanità: dopo il combattimento di Iquique, salvò i naufraghi nemici e inviò una lettera di condoglianze con le personalia alla vedova del capitano avversario Arturo Prat, guadagnandosi il titolo di **'Il Cavaliere dei Mari'**.\n\nIl **8 ottobre 1879**, nella **Battaglia di Angamos**, circondato dalla flotta avversaria, Grau morì nella torre di comando. L'equipaggio continuò a combattere fino all'ultimo respiro.\n\n**[CURIOSITÀ]**\nMiguel Grau è stato votato 'Il Peruviano del Millennio'. Nel Parlamento del Perù c'è ancora uno scranno permanente con il suo nome, dove viene chiamato presente a ogni seduta.\n\n*Crediti di ricerca e ringraziamenti alla Marina Militare del Perù e al Museo Navale del Callao.*",
+
+    "en": "In April 1879, the War of the Pacific erupted over nitrate fields in the Atacama Desert. Facing a superior adversary, Admiral **Miguel Grau** aboard the ironclad **Huáscar** held off the entire enemy fleet for six months.\n\nGrau earned international renown for chivalry: after sinking the enemy ship *Esmeralda*, he rescued drowning sailors and returned personal effects to the widow of fallen Captain Arturo Prat, earning the title **'Knight of the Seas'**.\n\nOn **October 8, 1879**, at the **Battle of Angamos**, surrounded by enemy ironclads, Grau was killed when a shell hit his command tower. His crew fought relentlessly until the ship was captured.\n\n**[FUN FACT]**\nGrau was voted 'Peruvian of the Millennium.' A permanent seat in Peru's Congress bears his name, and his presence is solemnly called in parliamentary roll calls.\n\n*Research credits and special thanks to the Peruvian Navy and Callao Naval Museum.*"
+  },
+  "periodo": {
+    "es": "1879 d.C.",
+    "it": "1879 d.C.",
+    "en": "1879 AD"
+  },
+  "imagen_sugerida": "assets/images/republica/republica_2.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué apodo recibió el Almirante Miguel Grau por su nobleza en batalla?",
+        "it": "Quale soprannome ricevette l'Ammiraglio Miguel Grau per la sua nobiltà in battaglia?",
+        "en": "What nickname did Admiral Miguel Grau receive for his nobility in battle?"
+      },
+      "opciones": {
+        "es": ["El Brujo de los Andes", "El Caballero de los Mares", "El Libertador del Pacífico", "El León de Tarapacá"],
+        "it": ["Il Stregone delle Ande", "Il Cavaliere dei Mari", "Il Liberatore del Pacifico", "Il Leone di Tarapacá"],
+        "en": ["The Wizard of the Andes", "The Knight of the Seas", "The Liberator of the Pacific", "The Lion of Tarapacá"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Tras rescatar marineros enemigos y honrar a la viuda del capitán Prat, Grau ganó ese título.",
+        "it": "Dopo aver salvato marinai nemici e onorato la vedova del capitano Prat, Grau guadagnò questo titolo.",
+        "en": "After rescuing enemy sailors and honoring the widow of Captain Prat, Grau earned this title."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿En qué combate murió Miguel Grau?",
+        "it": "In quale combattimento morì Miguel Grau?",
+        "en": "In which battle did Miguel Grau die?"
+      },
+      "opciones": {
+        "es": ["Combate de Iquique", "Combate de Angamos", "Batalla de Tarapacá", "Batalla de Arica"],
+        "it": ["Combattimento di Iquique", "Combattimento di Angamos", "Battaglia di Tarapacá", "Battaglia di Arica"],
+        "en": ["Battle of Iquique", "Battle of Angamos", "Battle of Tarapacá", "Battle of Arica"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Grau murió el 8 de octubre de 1879 en el Combate de Angamos, rodeado por la escuadra chilena.",
+        "it": "Grau morì l'8 ottobre 1879 nel Combattimento di Angamos, circondato dalla squadra cilena.",
+        "en": "Grau died on October 8, 1879, at the Battle of Angamos, surrounded by the Chilean fleet."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué gesto de Grau tras hundir a la corbeta chilena Esmeralda lo hizo célebre mundialmente?",
+        "it": "Quale gesto di Grau dopo aver affondato la corvetta cilena Esmeralda lo rese celebre nel mondo?",
+        "en": "What gesture by Grau after sinking the Chilean corvette Esmeralda made him world-famous?"
+      },
+      "opciones": {
+        "es": ["Capturó a la tripulación enemiga", "Rescató a los sobrevivientes y honró al capitán caído", "Se rindió sin luchar", "Pidió refuerzos a Bolivia"],
+        "it": ["Catturò l'equipaggio nemico", "Salvò i sopravvissuti e onorò il capitano caduto", "Si arrese senza combattere", "Chiese rinforzi alla Bolivia"],
+        "en": ["He captured the enemy crew", "He rescued the survivors and honored the fallen captain", "He surrendered without fighting", "He requested reinforcements from Bolivia"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Rescató a los marineros chilenos sobrevivientes y envió las pertenencias del capitán Prat a su viuda.",
+        "it": "Salvò i marinai cileni sopravvissuti e inviò gli effetti personali del capitano Prat alla vedova.",
+        "en": "He rescued the surviving Chilean sailors and sent Captain Prat's belongings to his widow."
+      }
+    }
+  ]
+}

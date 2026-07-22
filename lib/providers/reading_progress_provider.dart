@@ -27,6 +27,7 @@ class ReadingProgressProvider extends ChangeNotifier {
   static const _kLastPct = 'rp_last_pct';
   static const _kProgress = 'rp_progress';
   static const _kHistory = 'rp_history';
+  static const _kRead = 'rp_read';
 
   SharedPreferences? _prefs;
 
@@ -36,6 +37,7 @@ class ReadingProgressProvider extends ChangeNotifier {
 
   Map<String, int> _progress = {};
   List<ArticleHistoryEntry> _history = [];
+  Set<String> _read = {};
 
   bool get hasLastArticle => lastArticleId != null;
   bool get hasHistory => _history.isNotEmpty;
@@ -43,6 +45,24 @@ class ReadingProgressProvider extends ChangeNotifier {
 
   int progressFor(String articleId) => _progress[articleId] ?? 0;
   bool isCompleted(String articleId) => progressFor(articleId) >= 90;
+
+  /// ¿El usuario marcó (manualmente o al llegar al final) este artículo como
+  /// leído? A diferencia de [isCompleted] (derivado del % de scroll, que
+  /// fluctúa si el usuario vuelve a subir), esto es un estado explícito y
+  /// no retrocede solo.
+  bool isRead(String articleId) => _read.contains(articleId);
+
+  /// Marca o desmarca un artículo como leído explícitamente (botón "Marcar
+  /// como leído" del lector).
+  Future<void> setRead(String articleId, bool read) async {
+    if (read) {
+      _read.add(articleId);
+    } else {
+      _read.remove(articleId);
+    }
+    notifyListeners();
+    await _save();
+  }
 
   Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
@@ -60,6 +80,7 @@ class ReadingProgressProvider extends ChangeNotifier {
 
     _progress = await _loadProgress();
     _history = await _loadHistory();
+    _read = await _loadRead();
 
     notifyListeners();
   }
@@ -108,6 +129,22 @@ class ReadingProgressProvider extends ChangeNotifier {
       return progress;
     } catch (_) {
       await p.remove(_kProgress);
+      return {};
+    }
+  }
+
+  Future<Set<String>> _loadRead() async {
+    final p = _prefs;
+    if (p == null) return {};
+
+    try {
+      final raw = p.getString(_kRead);
+      if (raw == null) return {};
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) throw const FormatException('Invalid read set');
+      return decoded.whereType<String>().toSet();
+    } catch (_) {
+      await p.remove(_kRead);
       return {};
     }
   }
@@ -162,6 +199,10 @@ class ReadingProgressProvider extends ChangeNotifier {
 
     _progress[articleId] = pct;
     if (articleId == lastArticleId) lastProgress = pct;
+    // Llegar al final del artículo lo marca como leído automáticamente. No se
+    // desmarca si el usuario vuelve a subir: eso solo lo hace el usuario
+    // explícitamente con [setRead].
+    if (pct >= 90) _read.add(articleId);
 
     notifyListeners();
     await _save();
@@ -181,5 +222,6 @@ class ReadingProgressProvider extends ChangeNotifier {
       _kHistory,
       jsonEncode(_history.map((e) => e.toJson()).toList()),
     );
+    await p.setString(_kRead, jsonEncode(_read.toList()));
   }
 }

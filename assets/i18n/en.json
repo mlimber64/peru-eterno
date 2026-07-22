@@ -12,6 +12,7 @@
     "close": "Close",
     "home": "Home",
     "explore": "Explore",
+    "map": "Map",
     "saved": "Saved",
     "settings": "Settings",
     "previous": "Previous",
@@ -21,19 +22,34 @@
     "title": "Unlock Premium",
     "subtitle": "Full Peruvian history",
     "description": "Discover the Inca Empire, the Spanish Conquest, the Viceroyalty and the Independence of Peru in a unique journey through the centuries.",
+    "hero_title": "Unlock the full Perú Eterno experience",
+    "hero_subtitle": "Audio-stories, the complete 20-chapter archive, legendary cards and offline reading.",
     "price": "€2.99",
     "unlock_button": "Unlock now",
-    "restore_button": "Restore purchase",
+    "restore_button": "Restore purchases",
     "locked_label": "Premium Content",
     "tap_to_unlock": "Tap to unlock",
     "features_title": "What Premium includes",
     "features": [
-      "Full access to all 7 historical eras",
-      "Exclusive illustration galleries per era",
-      "Detailed trilingual historical descriptions",
-      "Complete offline reading",
-      "No ads"
+      "Unlimited audio-stories, narrated in your language",
+      "Full historical archive: all 20 chapters, no waiting for the day",
+      "Epic and legendary collectible cards",
+      "Complete offline reading and unlimited streak freezes"
     ],
+    "trial_banner": "Try free for 7 days. Cancel anytime.",
+    "plan_weekly_label": "Weekly",
+    "plan_weekly_price": "€2.99/week",
+    "plan_weekly_badge": "Most popular",
+    "plan_annual_label": "Annual",
+    "plan_annual_price": "€59.99/year",
+    "plan_annual_badge": "Save 60%",
+    "cta_trial": "Start my 7-day free trial",
+    "cta_subscribe": "Subscribe",
+    "legal_terms": "Terms of service",
+    "legal_privacy": "Privacy policy",
+    "legal_coming_soon": "Coming soon.",
+    "trial_active_prefix": "You have",
+    "trial_active_suffix": "free trial days left",
     "free_label": "FREE",
     "premium_label": "PREMIUM",
     "active_message": "You have full access to all Peruvian history!",
@@ -41,6 +57,11 @@
     "error_failed": "We couldn't complete the payment. Please try again.",
     "error_unavailable": "The store is currently unavailable. Please try again later.",
     "restore_success": "Purchase restored successfully."
+  },
+  "audio": {
+    "listen_button": "Listen",
+    "now_playing": "Now playing",
+    "error": "We couldn't play audio on this device. Try another language or again later."
   },
   "language": {
     "select": "Select language",
@@ -90,6 +111,46 @@
     "featured_badge": "FEATURED ERA",
     "view_biography": "View biography",
     "continue_reading": "Continue reading ->"
+  },
+  "daily_story": {
+    "banner_label": "TODAY'S STORY",
+    "streak_unit": "days",
+    "streak_start": "Start your streak!",
+    "completed_title": "Today's streak complete!",
+    "pending_title": "Read today's story to keep your streak",
+    "read_now": "Read now",
+    "streak_increased": "Streak increased!",
+    "streak_saved": "Today's streak saved!",
+    "streak_frozen": "You missed a day, but we used a freeze to save your streak!"
+  },
+  "quiz": {
+    "title": "Chapter quiz",
+    "start_cta": "Test what you've learned",
+    "start_button": "Start Quiz",
+    "best_score": "Best score:",
+    "next": "Next",
+    "see_results": "See results",
+    "score_perfect": "Perfect score!",
+    "score_good": "Well done!",
+    "score_low": "Keep practicing",
+    "claim_card": "Claim Collectible Card!",
+    "claim_card_locked": "Premium Card — Unlock",
+    "already_claimed": "You already have this card",
+    "card_claimed": "Card unlocked!",
+    "view_album": "View album",
+    "close": "Close"
+  },
+  "collectibles": {
+    "title": "Collectibles Album",
+    "progress_label": "cards unlocked",
+    "locked_prefix": "Complete the quiz for",
+    "locked_suffix": "to unlock it",
+    "go_to_chapter": "Go to chapter",
+    "unlocked_on": "Unlocked on",
+    "rarity_common": "Common",
+    "rarity_rare": "Rare",
+    "rarity_epic": "Epic",
+    "rarity_legendary": "Legendary"
   },
   "eras": {
     "caral": {
@@ -176,7 +237,10 @@
     "sources_title": "Sources & credits",
     "sources_body": "Editorial content created for Peru Eterno. Based on academic sources: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Perú, Enciclopedia del Perú.",
     "explore_also": "Explore also",
-    "read": "Read"
+    "read": "Read",
+    "read_time_unit": "min read",
+    "mark_as_read": "Mark as read",
+    "completed": "Completed"
   },
   "timeline": {
     "historical": "Historical timeline"
@@ -187,7 +251,10 @@
     "eyebrow": "DIGITAL MUSEUM",
     "title": "Cultural map of Peru",
     "subtitle": "Explore places, eras, and sacred territories.",
-    "open_story": "Open story"
+    "open_story": "Open story",
+    "view_map": "Map",
+    "view_timeline": "Timeline",
+    "filter_all": "All"
   },
   "favorites": {
     "eyebrow": "MY COLLECTION",
@@ -206,6 +273,7 @@
     "title": "Settings",
     "language": "LANGUAGE",
     "premium": "PREMIUM",
+    "collectibles": "COLLECTIBLES",
     "storage": "STORAGE",
     "about": "ABOUT",
     "premium_active": "Premium active",

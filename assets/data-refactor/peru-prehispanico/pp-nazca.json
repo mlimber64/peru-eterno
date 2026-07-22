@@ -29,5 +29,61 @@
     "it": "100 d.C. - 800 d.C.",
     "en": "100 AD - 800 AD"
   },
-  "imagen_sugerida": "assets/images/banners/caral-desertico.jpg"
+  "imagen_sugerida": "assets/images/banners/caral-desertico.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Quién dedicó su vida a investigar el origen matemático de las Líneas de Nazca?",
+        "it": "Chi dedicò la propria vita a studiare l'origine matematica delle Linee di Nazca?",
+        "en": "Who dedicated her life to researching the mathematical origin of the Nazca Lines?"
+      },
+      "opciones": {
+        "es": ["Julio C. Tello", "María Reiche", "Ruth Shady", "Walter Alva"],
+        "it": ["Julio C. Tello", "María Reiche", "Ruth Shady", "Walter Alva"],
+        "en": ["Julio C. Tello", "María Reiche", "Ruth Shady", "Walter Alva"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "La investigadora alemana María Reiche reveló los principios geométricos usados para trazar los geoglifos.",
+        "it": "La ricercatrice tedesca María Reiche rivelò i principi geometrici usati per tracciare i geoglifi.",
+        "en": "German researcher María Reiche revealed the geometric principles used to draw the geoglyphs."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cuál era el propósito ritual de caminar sobre las líneas y figuras de Nazca?",
+        "it": "Qual era lo scopo rituale di camminare sulle linee e figure di Nazca?",
+        "en": "What was the ritual purpose of walking along the Nazca lines and figures?"
+      },
+      "opciones": {
+        "es": ["Entrenamiento militar", "Procesiones para pedir lluvia", "Carreras deportivas", "Rutas comerciales"],
+        "it": ["Addestramento militare", "Processioni per invocare la pioggia", "Gare sportive", "Rotte commerciali"],
+        "en": ["Military training", "Processions to request rain", "Sporting races", "Trade routes"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Las familias caminaban en procesión sobre los trazos para implorar lluvias a los dioses del agua.",
+        "it": "Le famiglie camminavano in processione sui tracciati per implorare la pioggia agli dei dell'acqua.",
+        "en": "Families walked in procession along the lines to implore rain from the water deities."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué son los 'puquios' construidos por los Nazca?",
+        "it": "Cosa sono i 'puquios' costruiti dai Nazca?",
+        "en": "What are the 'puquios' built by the Nazca?"
+      },
+      "opciones": {
+        "es": ["Templos subterráneos", "Acueductos en espiral para captar agua", "Tumbas reales", "Silos de maíz"],
+        "it": ["Templi sotterranei", "Acquedotti a spirale per captare l'acqua", "Tombe reali", "Silos di mais"],
+        "en": ["Underground temples", "Spiral aqueducts to capture water", "Royal tombs", "Corn silos"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Una red de acueductos en espiral que capta agua filtrada de las montañas, funcional hasta hoy.",
+        "it": "Una rete di acquedotti a spirale che capta l'acqua filtrata dalle montagne, ancora funzionante oggi.",
+        "en": "A network of spiral aqueducts that captures filtered mountain water, still functioning today."
+      }
+    }
+  ]
 }

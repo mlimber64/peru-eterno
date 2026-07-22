@@ -133,57 +133,211 @@
       "en": "1438–1533 AD"
     },
     "image": "assets/images/timeline/inca.jpg",
-    "stage_id": "peru_prehispanico"
+    "stage_id": "peru_prehispanico",
+    "article_id": "incas"
   },
   {
-    "id": "conquista",
+    "id": "guerra_civil_inca",
     "orden": 9,
-    "color": "FF9B3535",
+    "color": "FF7A3B1E",
     "titulo": {
-      "it": "Conquista",
-      "es": "Conquista",
-      "en": "Conquest"
+      "it": "Guerra civile inca",
+      "es": "Guerra civil inca",
+      "en": "Inca civil war"
     },
     "periodo": {
-      "it": "1532–1572 d.C.",
-      "es": "1532–1572 d.C.",
-      "en": "1532–1572 AD"
+      "it": "1527 d.C. - 1532 d.C.",
+      "es": "1527 d.C. - 1532 d.C.",
+      "en": "1527 AD - 1532 AD"
     },
-    "image": "assets/images/timeline/conquista.jpg",
+    "image": "assets/images/incas/incas_2.jpg",
     "stage_id": "conquista_spagnola"
   },
   {
-    "id": "virreinato",
+    "id": "captura_cajamarca",
     "orden": 10,
-    "color": "FF7B3B8B",
+    "color": "FF7A3B1E",
     "titulo": {
-      "it": "Vicereame",
-      "es": "Virreinato",
-      "en": "Viceroyalty"
+      "it": "Cajamarca",
+      "es": "Cajamarca",
+      "en": "Cajamarca"
     },
     "periodo": {
-      "it": "1542–1821 d.C.",
-      "es": "1542–1821 d.C.",
-      "en": "1542–1821 AD"
+      "it": "1532 d.C. - 1533 d.C.",
+      "es": "1532 d.C. - 1533 d.C.",
+      "en": "1532 AD - 1533 AD"
     },
-    "image": "assets/images/timeline/virreinato.jpg",
+    "image": "assets/images/incas/incas_1.jpg",
+    "stage_id": "conquista_spagnola"
+  },
+  {
+    "id": "resistencia_vilcabamba",
+    "orden": 11,
+    "color": "FF7A3B1E",
+    "titulo": {
+      "it": "Vilcabamba",
+      "es": "Vilcabamba",
+      "en": "Vilcabamba"
+    },
+    "periodo": {
+      "it": "1536 d.C. - 1572 d.C.",
+      "es": "1536 d.C. - 1572 d.C.",
+      "en": "1536 AD - 1572 AD"
+    },
+    "image": "assets/images/incas/incas_2.jpg",
+    "stage_id": "conquista_spagnola"
+  },
+  {
+    "id": "lima_virreinal",
+    "orden": 12,
+    "color": "FF5C3317",
+    "titulo": {
+      "it": "Lima virreale",
+      "es": "Lima virreinal",
+      "en": "Viceregal Lima"
+    },
+    "periodo": {
+      "it": "1535 d.C. - 1750 d.C.",
+      "es": "1535 d.C. - 1750 d.C.",
+      "en": "1535 AD - 1750 AD"
+    },
+    "image": "assets/images/banners/sacerdote-ceremonial-andino.jpg",
     "stage_id": "vicereame_peru"
   },
   {
-    "id": "independencia",
-    "orden": 11,
-    "color": "FF3B8B4B",
+    "id": "sincretismo_escuela_cusquena",
+    "orden": 13,
+    "color": "FF5C3317",
     "titulo": {
-      "it": "Indipendenza",
-      "es": "Independencia",
-      "en": "Independence"
+      "it": "Escuela Cusqueña",
+      "es": "Escuela Cusqueña",
+      "en": "Cusco School"
     },
     "periodo": {
-      "it": "1821 d.C.",
-      "es": "1821 d.C.",
-      "en": "1821 AD"
+      "it": "1600 d.C. - 1780 d.C.",
+      "es": "1600 d.C. - 1780 d.C.",
+      "en": "1600 AD - 1780 AD"
     },
-    "image": "assets/images/timeline/independencia.jpg",
+    "image": "assets/images/banners/caral-desertico.jpg",
+    "stage_id": "vicereame_peru"
+  },
+  {
+    "id": "terremoto_tapadas_limeñas",
+    "orden": 14,
+    "color": "FF5C3317",
+    "titulo": {
+      "it": "Terremoto e tapadas",
+      "es": "Terremoto y tapadas",
+      "en": "Earthquake and tapadas"
+    },
+    "periodo": {
+      "it": "1746 d.C. - 1850 d.C.",
+      "es": "1746 d.C. - 1850 d.C.",
+      "en": "1746 AD - 1850 AD"
+    },
+    "image": "assets/images/virreinato/virreinato_3.jpg",
+    "stage_id": "vicereame_peru"
+  },
+  {
+    "id": "rebelion_tupac_amaru",
+    "orden": 15,
+    "color": "FF2D6A4F",
+    "titulo": {
+      "it": "Túpac Amaru II",
+      "es": "Túpac Amaru II",
+      "en": "Túpac Amaru II"
+    },
+    "periodo": {
+      "it": "1780 d.C. - 1781 d.C.",
+      "es": "1780 d.C. - 1781 d.C.",
+      "en": "1780 AD - 1781 AD"
+    },
+    "image": "assets/images/independencia/independencia_1.jpg",
     "stage_id": "indipendenza"
+  },
+  {
+    "id": "corriente_libertadora_sur",
+    "orden": 16,
+    "color": "FF2D6A4F",
+    "titulo": {
+      "it": "Spedizione del sud",
+      "es": "Expedición del Sur",
+      "en": "Southern Expedition"
+    },
+    "periodo": {
+      "it": "1820 d.C. - 1822 d.C.",
+      "es": "1820 d.C. - 1822 d.C.",
+      "en": "1820 AD - 1822 AD"
+    },
+    "image": "assets/images/independencia/independencia_2.jpg",
+    "stage_id": "indipendenza"
+  },
+  {
+    "id": "batallas_junin_ayacucho",
+    "orden": 17,
+    "color": "FF2D6A4F",
+    "titulo": {
+      "it": "Junín e Ayacucho",
+      "es": "Junín y Ayacucho",
+      "en": "Junín and Ayacucho"
+    },
+    "periodo": {
+      "it": "1824 d.C.",
+      "es": "1824 d.C.",
+      "en": "1824 AD"
+    },
+    "image": "assets/images/independencia/independencia_3.jpg",
+    "stage_id": "indipendenza"
+  },
+  {
+    "id": "era_guano_dos_mayo",
+    "orden": 18,
+    "color": "FF8B2E2E",
+    "titulo": {
+      "it": "Guano e 2 maggio",
+      "es": "Guano y 2 de Mayo",
+      "en": "Guano and May 2nd"
+    },
+    "periodo": {
+      "it": "1840 d.C. - 1866 d.C.",
+      "es": "1840 d.C. - 1866 d.C.",
+      "en": "1840 AD - 1866 AD"
+    },
+    "image": "assets/images/republica/republica_1.jpg",
+    "stage_id": "republica_peru"
+  },
+  {
+    "id": "guerra_pacifico_grau",
+    "orden": 19,
+    "color": "FF8B2E2E",
+    "titulo": {
+      "it": "Grau e il Pacifico",
+      "es": "Grau y el Pacífico",
+      "en": "Grau and the Pacific"
+    },
+    "periodo": {
+      "it": "1879 d.C.",
+      "es": "1879 d.C.",
+      "en": "1879 AD"
+    },
+    "image": "assets/images/republica/republica_2.jpg",
+    "stage_id": "republica_peru"
+  },
+  {
+    "id": "resistencia_bolognesi_caceres",
+    "orden": 20,
+    "color": "FF8B2E2E",
+    "titulo": {
+      "it": "Bolognesi e Cáceres",
+      "es": "Bolognesi y Cáceres",
+      "en": "Bolognesi and Cáceres"
+    },
+    "periodo": {
+      "it": "1880 d.C. - 1884 d.C.",
+      "es": "1880 d.C. - 1884 d.C.",
+      "en": "1880 AD - 1884 AD"
+    },
+    "image": "assets/images/republica/republica_3.jpg",
+    "stage_id": "republica_peru"
   }
 ]

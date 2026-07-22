@@ -1,0 +1,89 @@
+{
+  "id": "era_guano_dos_mayo",
+  "parent_stage_id": "republica_peru",
+  "orden": 1,
+  "categoria": {
+    "es": "Siglo XIX y Soberanía",
+    "it": "XIX Secolo e Sovranità",
+    "en": "19th Century and Sovereignty"
+  },
+  "titulo": {
+    "es": "La Era del Guano y el Combate del Dos de Mayo",
+    "it": "L'Era del Guano e il Combattimento del Due Maggio",
+    "en": "The Guano Era and the Battle of Callao"
+  },
+  "subtitulo": {
+    "es": "La bonanza económica del fertilizante milenario y la gloriosa defensa definitiva de la independencia en 1866.",
+    "it": "La prosperità economica del fertilizzante e la difesa definitiva dell'indipendenza nel 1866.",
+    "en": "The economic boom of ancient fertilizer and the definitive defense of independence in 1866."
+  },
+  "contenido": {
+    "es": "A mediados del siglo XIX, las islas guaneras del litoral peruano se convirtieron en la fuente de riqueza más codiciada del planeta. Acumulado durante milenios por millones de aves marinas como el guanay, el guano se consolidó como el fertilizante natural más potente del mundo, indispensable para revitalizar los desgastados campos agrícolas de Europa y Estados Unidos durante la Revolución Industrial.\n\nBajo los gobiernos del mariscal **Ramón Castilla**, el Perú vivió una época de prosperidad sin precedentes. La enorme bonanza fiscal permitió cancelar la deuda externa, construir el primer ferrocarril de América del Sur (Lima-Callao), abolir definitivamente el tributo indígena y la esclavitud de la población afrodescendiente, e instalar el alumbrado de gas y el telégrafo.\n\nSin embargo, la incalculable riqueza despertó las ambiciones de la antigua metrópoli. En 1864, bajo la excusa de una 'Escuadra Científica', España ocupó militarmente las prósperas Islas de Chincha. La agresión unió a las repúblicas sudamericanas (Perú, Chile, Ecuador y Bolivia) en una alianza defensiva.\n\nEl punto culminante ocurrió el **2 de mayo de 1866** en el puerto del Callao. Una potente flota de guerra española bombardeó las defensas del puerto. Tropas peruanas, civiles y bomberos combatieron codo a codo en los baluartes y torres blindadas. Tras horas de cruento intercambio de artillería —donde pereció heroicamente el ministro de Guerra José Gálvez—, la flota española sufrió graves daños y debió retirarse definitivamente del Pacífico, sellando para siempre la independencia de América del Sur.\n\n**[¿SABÍAS QUÉ?]**\nDurante la Era del Guano, los agricultores peruanos del siglo XIX redescubrieron lo que los Incas y Mochicas ya sabían miles de años atrás: el guano de las islas era un recurso sagrado. En la época incaica, matar a un ave guanera o ingresar a las islas sin autorización se castigaba con la pena de muerte.\n\n*Créditos de investigación y agradecimientos al Centro de Estudios Histórico Militares del Perú (CEHMP) y al Museo de Sitio Real Felipe.*",
+
+    "it": "A metà del XIX secolo, le isole del litorale peruviano diventarono la fonte di ricchezza più ambita al mondo grazie al guano, un fertilizzante naturale unico accumulato da milioni di uccelli marini per millenni.\n\nSotto il governo di **Ramón Castilla**, il Perù visse un'era di grande prosperità: fu costruito il primo treno del Sud America, fu abolita la schiavitù e fu cancellato il debito estero.\n\nTuttavia, nel 1864 la Spagna occupò le isole del guano. La risposta sfociò nel **Combattimento del Due Maggio (1866)** al Callao. Dopo ore di fuoco tra le difese di terra e le navi spagnole, la flotta europea fu respinta, sancendo definitivamente la sovranità sudamericana.\n\n**[CURIOSITÀ]**\nI Moche e gli Inca consideravano il guano una risorsa sacra. Nel codice incaico, uccidere un uccello marino o danneggiare i loro nidi sulle isole era un reato punito con la morte.\n\n*Crediti di ricerca e ringraziamenti al Centro di Studi Storico-Militari del Perù (CEHMP).*",
+
+    "en": "In the mid-19th century, Peru's coastal islands became globally coveted due to guano—an extraordinary natural fertilizer accumulated over millennia by seabirds, crucial for European industrial agriculture.\n\nUnder President **Ramón Castilla**, Peru experienced an economic boom, building South America's first railway and abolishing slavery and indigenous tributes.\n\nSpain attempted to reclaim control by occupying the Guano Islands in 1864. This led to the historic **Battle of Callao on May 2, 1866**, where Peruvian shore batteries repelled the Spanish fleet, securing South American independence once and for all.\n\n**[FUN FACT]**\nThe Incas protected guano islands vigorously centuries before: harming seabirds or trespassing on nesting islands carried the death penalty under Inca law.\n\n*Research credits and special thanks to the Center for Military Historical Studies of Peru (CEHMP).*"
+  },
+  "periodo": {
+    "es": "1840 d.C. - 1866 d.C.",
+    "it": "1840 d.C. - 1866 d.C.",
+    "en": "1840 AD - 1866 AD"
+  },
+  "imagen_sugerida": "assets/images/republica/republica_1.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué producto convirtió a las islas peruanas en una fuente de riqueza mundial en el siglo XIX?",
+        "it": "Quale prodotto trasformò le isole peruviane in una fonte di ricchezza mondiale nel XIX secolo?",
+        "en": "What product turned Peru's islands into a source of global wealth in the 19th century?"
+      },
+      "opciones": {
+        "es": ["El salitre", "El guano", "La plata", "El caucho"],
+        "it": ["Il salnitro", "Il guano", "L'argento", "Il caucciù"],
+        "en": ["Saltpeter", "Guano", "Silver", "Rubber"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El guano, acumulado durante milenios por aves marinas, era un fertilizante natural muy codiciado por Europa y EE.UU.",
+        "it": "Il guano, accumulato per millenni dagli uccelli marini, era un fertilizzante naturale molto ambito da Europa e USA.",
+        "en": "Guano, accumulated over millennia by seabirds, was a natural fertilizer highly coveted by Europe and the US."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué logro alcanzó el gobierno de Ramón Castilla gracias a la riqueza del guano?",
+        "it": "Quale traguardo raggiunse il governo di Ramón Castilla grazie alla ricchezza del guano?",
+        "en": "What did Ramón Castilla's government achieve thanks to guano wealth?"
+      },
+      "opciones": {
+        "es": ["La construcción del primer ferrocarril de Sudamérica y la abolición de la esclavitud", "La independencia de Bolivia", "La fundación de Lima", "La conquista de Chile"],
+        "it": ["La costruzione della prima ferrovia del Sud America e l'abolizione della schiavitù", "L'indipendenza della Bolivia", "La fondazione di Lima", "La conquista del Cile"],
+        "en": ["Building South America's first railway and abolishing slavery", "Bolivia's independence", "The founding of Lima", "The conquest of Chile"]
+      },
+      "respuesta_correcta": 0,
+      "explicacion": {
+        "es": "Con la bonanza fiscal se construyó el ferrocarril Lima-Callao y se abolió la esclavitud y el tributo indígena.",
+        "it": "Con la prosperità fiscale fu costruita la ferrovia Lima-Callao e furono abolite la schiavitù e il tributo indigeno.",
+        "en": "With the fiscal boom, the Lima-Callao railway was built and slavery and indigenous tribute were abolished."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué ocurrió el 2 de mayo de 1866 en el Callao?",
+        "it": "Cosa accadde il 2 maggio 1866 al Callao?",
+        "en": "What happened on May 2, 1866, in Callao?"
+      },
+      "opciones": {
+        "es": ["Una firma de tratado con España", "El Combate del Dos de Mayo contra la flota española", "Un terremoto", "La proclamación de la República"],
+        "it": ["La firma di un trattato con la Spagna", "Il Combattimento del Due Maggio contro la flotta spagnola", "Un terremoto", "La proclamazione della Repubblica"],
+        "en": ["The signing of a treaty with Spain", "The Battle of Callao against the Spanish fleet", "An earthquake", "The proclamation of the Republic"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Perú repelió el ataque de la flota española, sellando definitivamente la independencia sudamericana.",
+        "it": "Il Perù respinse l'attacco della flotta spagnola, sancendo definitivamente l'indipendenza sudamericana.",
+        "en": "Peru repelled the Spanish fleet's attack, definitively sealing South American independence."
+      }
+    }
+  ]
+}

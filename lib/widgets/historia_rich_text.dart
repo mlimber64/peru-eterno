@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/constants/app_colors.dart';
+import '../models/historia_article.dart';
+import 'did_you_know_card.dart';
 
 /// Renderiza un párrafo del contenido editorial de Historia soportando el
 /// markdown ligero que traen los datos enriquecidos
@@ -44,7 +46,6 @@ class HistoriaParagraph extends StatelessWidget {
     if (isCallout(trimmed)) {
       return _CalloutBlock(
         raw: trimmed,
-        accent: accent,
         textScale: textScale,
       );
     }
@@ -102,70 +103,32 @@ class HistoriaParagraph extends StatelessWidget {
   }
 }
 
-/// Bloque destacado para las curiosidades "¿Sabías qué?".
+/// Bloque destacado para las curiosidades "¿Sabías qué?". Delega el diseño
+/// en [DidYouKnowCard] (única implementación visual, reusable fuera del
+/// flujo de párrafos).
 class _CalloutBlock extends StatelessWidget {
   final String raw;
-  final Color accent;
   final double textScale;
 
   const _CalloutBlock({
     required this.raw,
-    required this.accent,
     required this.textScale,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Separa el encabezado `**[...]**` del cuerpo.
-    final headerMatch = RegExp(r'^\*\*\[(.+?)\]\*\*', dotAll: true).firstMatch(raw);
+    final headerMatch =
+        RegExp(r'^\*\*\[(.+?)\]\*\*', dotAll: true).firstMatch(raw);
     final header = headerMatch?.group(1)?.trim() ?? '';
     final body = headerMatch != null
         ? raw.substring(headerMatch.end).trim()
         : raw.trim();
 
-    final bodyStyle = GoogleFonts.lato(
-      fontSize: 15 * textScale,
-      color: AppColors.cremaPergamino.withOpacity(0.88),
-      height: 1.7,
-    );
-
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
-      decoration: BoxDecoration(
-        color: accent.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: accent.withOpacity(0.3)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.lightbulb_outline_rounded, size: 16, color: accent),
-              const SizedBox(width: 8),
-              Flexible(
-                child: Text(
-                  header,
-                  style: GoogleFonts.lato(
-                    fontSize: 11 * textScale,
-                    fontWeight: FontWeight.w800,
-                    color: accent,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          RichText(
-            text: TextSpan(
-              style: bodyStyle,
-              children: HistoriaParagraph.buildInlineSpans(body, bodyStyle, accent),
-            ),
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: DidYouKnowCard(
+        callout: ArticleCallout(header: header, body: body),
+        textScale: textScale,
       ),
     );
   }

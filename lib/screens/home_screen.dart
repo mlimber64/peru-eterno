@@ -14,6 +14,7 @@ import '../models/content_item.dart';
 import '../models/era_model.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
+import '../providers/daily_story_provider.dart';
 import '../providers/history_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
@@ -73,11 +74,35 @@ class _HomeScreenState extends State<HomeScreen> {
     return personajes[dayOfYear % personajes.length];
   }
 
+  /// Muestra una única vez el aviso de "racha congelada" (ver
+  /// `DailyStoryProvider._reconcileStreak`) — mismo patrón de mensaje de un
+  /// solo uso que usa `PremiumProvider.lastError`/`consumeMessage`.
+  void _maybeShowStreakFrozenSnackBar(BuildContext context) {
+    final daily = context.read<DailyStoryProvider>();
+    if (!daily.justUsedStreakFreeze) return;
+    daily.consumeStreakFreezeFlag();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              context.read<LanguageProvider>().t('daily_story.streak_frozen'),
+            ),
+            backgroundColor: AppColors.ocre,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>().currentLanguage;
     final history = context.watch<HistoryProvider>().recentItems;
     final rp = context.watch<ReadingProgressProvider>();
+    _maybeShowStreakFrozenSnackBar(context);
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
@@ -88,6 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           // ── Hero principal (60% pantalla) ───────────────────────────────
           SliverToBoxAdapter(child: _HeroSection(lang: lang)),
+
+          // ── Historia del Día & Racha ─────────────────────────────────────
+          SliverToBoxAdapter(child: _DailyStoryStreakSection(lang: lang)),
 
           // ── Continua il tuo viaggio ─────────────────────────────────────
           if (rp.hasLastArticle) ...[
@@ -469,6 +497,242 @@ class _HeroTexturePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter old) => false;
+}
+
+// ── Historia del Día & Racha ───────────────────────────────────────────────────
+
+class _DailyStoryStreakSection extends StatelessWidget {
+  final String lang;
+  const _DailyStoryStreakSection({required this.lang});
+
+  @override
+  Widget build(BuildContext context) {
+    final daily = context.watch<DailyStoryProvider>();
+    final article = daily.dailyArticle;
+    if (article == null) return const SizedBox.shrink();
+
+    final stage = daily.dailyStage;
+    final accent = stage?.accentColor ?? AppColors.ocre;
+    final t = context.read<LanguageProvider>().t;
+    final completed = daily.isCompletedToday;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+      child: GestureDetector(
+        onTap: () => AppNavigation.openHistoriaArticle(
+          context,
+          article: article,
+          allArticles: daily.dailyStageArticles,
+          stage: stage,
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            gradient: LinearGradient(
+              colors: [
+                Color.lerp(accent, Colors.black, 0.4)!,
+                AppColors.negoCacao,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            border: Border.all(color: accent.withOpacity(0.35)),
+            boxShadow: [
+              BoxShadow(
+                color: accent.withOpacity(0.2),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(22),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Opacity(
+                    opacity: 0.2,
+                    child: Image.asset(
+                      article.imagenAssetPath,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                    ),
+                  ),
+                ),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.negoCacao.withOpacity(0.1),
+                        AppColors.negoCacao.withOpacity(0.88),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Container(width: 22, height: 1.5, color: accent),
+                                const SizedBox(width: 8),
+                                Text(
+                                  t('daily_story.banner_label'),
+                                  style: GoogleFonts.lato(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800,
+                                    color: accent,
+                                    letterSpacing: 1.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _StreakBadge(streak: daily.currentStreak),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      Text(
+                        article.tituloFor(lang),
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          height: 1.2,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        article.subtituloFor(lang),
+                        style: GoogleFonts.lato(
+                          fontSize: 12,
+                          color: AppColors.cremaPergamino.withOpacity(0.6),
+                          height: 1.4,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 14),
+                      Row(
+                        children: [
+                          Icon(Icons.schedule_rounded,
+                              size: 13, color: accent.withOpacity(0.8)),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${article.estimatedReadTimeMinutes(lang)} min',
+                            style: GoogleFonts.lato(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: accent.withOpacity(0.8),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Icon(
+                            completed
+                                ? Icons.check_circle_rounded
+                                : Icons.local_fire_department_outlined,
+                            size: 13,
+                            color: completed
+                                ? const Color(0xFFFF7A1A)
+                                : AppColors.cremaPergamino.withOpacity(0.5),
+                          ),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            child: Text(
+                              completed
+                                  ? t('daily_story.completed_title')
+                                  : t('daily_story.pending_title'),
+                              style: GoogleFonts.lato(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: completed
+                                    ? const Color(0xFFFF7A1A)
+                                    : AppColors.cremaPergamino.withOpacity(0.55),
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      Row(
+                        children: [
+                          Text(
+                            t('daily_story.read_now'),
+                            style: GoogleFonts.lato(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: accent,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Icon(Icons.arrow_forward_rounded,
+                              size: 14, color: accent),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.08, end: 0),
+      ),
+    );
+  }
+}
+
+class _StreakBadge extends StatelessWidget {
+  final int streak;
+  const _StreakBadge({required this.streak});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.read<LanguageProvider>().t;
+    final active = streak > 0;
+    final color = active ? const Color(0xFFFF7A1A) : AppColors.cremaPergamino.withOpacity(0.4);
+
+    Widget badge = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.16),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: color.withOpacity(0.5)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.local_fire_department_rounded, size: 16, color: color),
+          const SizedBox(width: 5),
+          Text(
+            '$streak ${t('daily_story.streak_unit')}',
+            style: GoogleFonts.lato(
+              fontSize: 11,
+              fontWeight: FontWeight.w800,
+              color: color,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (active) {
+      badge = badge
+          .animate(onPlay: (c) => c.repeat(reverse: true))
+          .scaleXY(begin: 1.0, end: 1.07, duration: 900.ms, curve: Curves.easeInOut);
+    }
+    return badge;
+  }
 }
 
 // ── Peru intro section ────────────────────────────────────────────────────────

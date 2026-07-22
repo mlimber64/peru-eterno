@@ -7,12 +7,18 @@ import '../core/constants/app_colors.dart';
 class LanguageSelectorButton extends StatelessWidget {
   const LanguageSelectorButton({super.key});
 
+  /// Abre el selector de idioma (ES/IT/EN) como bottom sheet. Reusable desde
+  /// cualquier pantalla (p. ej. botón flotante sobre una imagen de cabecera).
+  static void show(BuildContext context) {
+    _showLanguageDialog(context, context.read<LanguageProvider>());
+  }
+
   @override
   Widget build(BuildContext context) {
     final langProvider = context.watch<LanguageProvider>();
 
     return IconButton(
-      onPressed: () => _showLanguageDialog(context, langProvider),
+      onPressed: () => show(context),
       icon: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -33,7 +39,8 @@ class LanguageSelectorButton extends StatelessWidget {
     );
   }
 
-  void _showLanguageDialog(BuildContext context, LanguageProvider langProvider) {
+  static void _showLanguageDialog(
+      BuildContext context, LanguageProvider langProvider) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.cremaPergamino,

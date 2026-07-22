@@ -78,5 +78,25 @@
       "es": "El camino hacia la libertad republicana",
       "en": "The path toward republican freedom"
     }
+  },
+  {
+    "id": "republica_peru",
+    "orden": 5,
+    "accent_color": "FF8B2C2C",
+    "periodo": {
+      "it": "1840 – 1884 d.C.",
+      "es": "1840 – 1884 d.C.",
+      "en": "1840 – 1884 AD"
+    },
+    "titulo": {
+      "it": "La Repubblica del Perù",
+      "es": "La República del Perú",
+      "en": "The Republic of Peru"
+    },
+    "subtitulo": {
+      "it": "Tempeste e glorie: il guano, la Guerra del Pacifico e la resistenza eroica",
+      "es": "Tempestades y glorias: el guano, la Guerra del Pacífico y la resistencia heroica",
+      "en": "Storms and glories: the guano era, the War of the Pacific, and heroic resistance"
+    }
   }
 ]

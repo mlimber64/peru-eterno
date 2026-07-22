@@ -1,0 +1,89 @@
+{
+  "id": "sincretismo_escuela_cusquena",
+  "parent_stage_id": "vicereame_peru",
+  "orden": 2,
+  "categoria": {
+    "es": "Cultura y Sociedad",
+    "it": "Cultura e Società",
+    "en": "Culture and Society"
+  },
+  "titulo": {
+    "es": "El Arte Mestizo: La Escuela Cusqueña y la resistencia sagrada",
+    "it": "L'Arte Meticcia: La Scuola Cusqueña e la resistenza sacra",
+    "en": "Mestizo Art: The Cusco School and Sacred Resistance"
+  },
+  "subtitulo": {
+    "es": "Cómo los pintores indígenas adaptaron el arte europeo para ocultar sus divinidades andinas en los lienzos.",
+    "it": "Come i pittori indigeni adattarono l'arte europea per nascondere le divinità andine nei dipinti.",
+    "en": "How indigenous painters adapted European art to conceal Andean deities within canvas paintings."
+  },
+  "contenido": {
+    "es": "Durante los siglos XVII y XVIII, mientras el barroco europeo influenciaba la arquitectura y la religión colonial, en los Andes ocurrió un fenómeno artístico único en el mundo: el nacimiento de la **Escuela Cusqueña de Pintura**. Impulsada por la necesidad de evangelizar a la población autóctona, esta corriente artística fue asumida por pintores indígenas y mestizos como Diego Quispe Tito y Marcos Zapata, quienes transformaron los cánones europeos en una poderosa forma de resistencia cultural simbólica.\n\nLos artistas cusqueños fusionaron las técnicas del claroscuro y la perspectiva occidental con la sensibilidad y mitología andina. Al no poder adorar abiertamente a sus antiguas deidades (los Apus y la Pachamama), plasmaron sus creencias dentro del arte sacro católico de forma sutil. Pintaron a la Virgen María con mantos triangulares acampanados que reproducían exactamente la silueta de los sagrados cerros andinos, vistieron a los ángeles con arcabuces y ropajes aristocráticos virreinales (los célebres Ángeles Arcabuceros), y utilizaron colores vibrantes y pan de oro aplicado con la técnica del brocateado.\n\nEsta identidad mestiza no solo se reflejó en la pintura, sino en la gastronomía, la música y las festividades. En las iglesias y procesiones como el Corpus Christi en el Cusco, las imágenes religiosas eran acompañadas por danzas ancestrales, flautas de pan y tambores, creando el rico sincretismo cultural que define al Perú contemporáneo.\n\n**[¿SABÍAS QUÉ?]**\nEn la famosa pintura de la 'Última Cena' de Marcos Zapata (1753), ubicada en la nave central de la Catedral del Cusco, Jesús y sus doce apóstoles no están cenando pan ni cordero pascual: sobre la mesa central servida en una fuente se encuentra un jugoso **cuy asado** (cobayo) servido patas arriba, acompañado de ajíes rojos, choclo y chicha de jora.\n\n*Créditos de investigación y agradecimientos a la Catedral del Cusco, al Museo de Arte Religioso del Cusco y al Museo Pedro de Osma.*",
+
+    "it": "Nei secoli XVII e XVIII, nei rilievi andini si sviluppò un fenomeno artistico straordinario: la **Scuola Cusqueña di Pittura**. Pittori indigeni e meticci come Diego Quispe Tito fusero l'arte barocca europea con la mitologia andina in una forma di resistenza simbolica.\n\nI pittori dipinsero la Vergine Maria con manti triangolari che richiamavano la forma delle montagne sacre (Apus) e raffigurarono angeli armati di archibugi (gli *Ángeles Arcabuceros*).\n\nQuesto sincretismo si estese alla musica e al cibo, definendo l'identità meticcia del Perù.\n\n**[CURIOSITÀ]**\nNel celebre dipinto dell' 'Ultima Cena' di Marcos Zapata (1753), situato nella Cattedrale di Cusco, Gesù e gli apostoli non mangiano il pane o l'agnello: al centro della tavola è servito un **cuy arrostito** (porcellino d'India) accompagnato da mais e peperoncino.\n\n*Crediti di ricerca e ringraziamenti alla Cattedrale di Cusco e al Museo Pedro de Osma.*",
+
+    "en": "During the 17th and 18th centuries, a unique artistic tradition emerged in the Andes: the **Cusco School of Painting**. Indigenous and mestizo painters like Diego Quispe Tito blended European baroque techniques with Andean spiritual symbols.\n\nUnallowed to worship their native deities openly, painters cleverly depicted the Virgin Mary wearing triangular skirts mimicking sacred mountain peaks (Apus) and created gun-wielding angels (*Ángeles Arcabuceros*).\n\nThis synthesis extended to music and festivals, forging the rich mestizo identity of modern Peru.\n\n**[FUN FACT]**\nIn Marcos Zapata's 1753 'Last Supper' painting in the Cusco Cathedral, Jesus and his disciples feast not on bread or lamb, but on a roasted **cuy** (guinea pig) accompanied by Andean corn and chili peppers.\n\n*Research credits and special thanks to the Cusco Cathedral and the Pedro de Osma Museum.*"
+  },
+  "periodo": {
+    "es": "1600 d.C. - 1780 d.C.",
+    "it": "1600 d.C. - 1780 d.C.",
+    "en": "1600 AD - 1780 AD"
+  },
+  "imagen_sugerida": "assets/images/banners/caral-desertico.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué es la Escuela Cusqueña de Pintura?",
+        "it": "Cos'è la Scuola Cusqueña di Pittura?",
+        "en": "What is the Cusco School of Painting?"
+      },
+      "opciones": {
+        "es": ["Un estilo de arquitectura militar", "Una corriente artística que fusionó el barroco europeo con la mitología andina", "Una técnica de tejido inca", "Un sistema de escritura colonial"],
+        "it": ["Uno stile di architettura militare", "Una corrente artistica che fuse il barocco europeo con la mitologia andina", "Una tecnica di tessitura inca", "Un sistema di scrittura coloniale"],
+        "en": ["A style of military architecture", "An artistic movement blending European baroque with Andean mythology", "An Inca weaving technique", "A colonial writing system"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Pintores indígenas y mestizos combinaron técnicas europeas con símbolos y creencias andinas.",
+        "it": "Pittori indigeni e meticci combinarono tecniche europee con simboli e credenze andine.",
+        "en": "Indigenous and mestizo painters combined European techniques with Andean symbols and beliefs."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cómo representaban a la Virgen María los pintores cusqueños para evocar a las montañas sagradas?",
+        "it": "Come rappresentavano la Vergine Maria i pittori cusqueños per evocare le montagne sacre?",
+        "en": "How did Cusco painters depict the Virgin Mary to evoke the sacred mountains?"
+      },
+      "opciones": {
+        "es": ["Con alas de cóndor", "Con mantos triangulares acampanados", "Con una corona de oro", "Rodeada de llamas"],
+        "it": ["Con ali di condor", "Con manti triangolari a campana", "Con una corona d'oro", "Circondata da lama"],
+        "en": ["With condor wings", "With bell-shaped triangular robes", "With a gold crown", "Surrounded by llamas"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Los mantos triangulares imitaban la silueta de los Apus, las montañas sagradas andinas.",
+        "it": "I manti triangolari imitavano la sagoma degli Apus, le montagne sacre andine.",
+        "en": "The triangular robes mimicked the silhouette of the Apus, the sacred Andean mountains."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué inusual detalle presenta la 'Última Cena' de Marcos Zapata en la Catedral del Cusco?",
+        "it": "Quale insolito dettaglio presenta l' 'Ultima Cena' di Marcos Zapata nella Cattedrale di Cusco?",
+        "en": "What unusual detail appears in Marcos Zapata's 'Last Supper' in the Cusco Cathedral?"
+      },
+      "opciones": {
+        "es": ["Los apóstoles visten trajes incas", "Se sirve un cuy asado en la mesa", "Jesús tiene rasgos andinos", "La escena ocurre en Machu Picchu"],
+        "it": ["Gli apostoli indossano abiti inca", "Sulla tavola è servito un cuy arrostito", "Gesù ha tratti andini", "La scena si svolge a Machu Picchu"],
+        "en": ["The apostles wear Inca clothing", "A roasted guinea pig is served on the table", "Jesus has Andean features", "The scene takes place at Machu Picchu"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Sobre la mesa se representa un cuy asado en lugar del cordero pascual tradicional.",
+        "it": "Sulla tavola è raffigurato un cuy arrostito al posto del tradizionale agnello pasquale.",
+        "en": "The table shows a roasted guinea pig instead of the traditional Passover lamb."
+      }
+    }
+  ]
+}

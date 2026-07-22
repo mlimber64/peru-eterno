@@ -1,0 +1,89 @@
+{
+  "id": "resistencia_vilcabamba",
+  "parent_stage_id": "conquista_spagnola",
+  "orden": 3,
+  "categoria": {
+    "es": "Resistencia Andina",
+    "it": "Resistenza Andina",
+    "en": "Andean Resistance"
+  },
+  "titulo": {
+    "es": "Vilcabamba: La rebelión de los Incas indomables",
+    "it": "Vilcabamba: La ribellione degli Inca indomabili",
+    "en": "Vilcabamba: The Rebellion of the Unconquered Incas"
+  },
+  "subtitulo": {
+    "es": "La epopeya de Manco Inca y sus sucesores, quienes lucharon durante 40 años desde el último bastión en la selva.",
+    "it": "L'epopea di Manco Inca e dei suoi successori, che lottarono per 40 anni dall'ultima roccaforte nella giungla.",
+    "en": "The epic of Manco Inca and his successors, who fought for 40 years from their last jungle stronghold."
+  },
+  "contenido": {
+    "es": "La caída de Atahualpa no significó la conquista inmediata del Perú. En 1536 d.C., **Manco Inca** —inicialmente aliado de Francisco Pizarro— comprendió las verdaderas intenciones de los conquistadores y organizó la rebelión armada más grande de América precolombina. Con un ejército de más de 100,000 guerreros andinos, Manco Inca cercó simultáneamente las ciudades del Cusco y Lima, poniendo al dominio español al borde del colapso.\n\nDurante el sitio del Cusco, los guerreros incas aprendieron a contrarrestar la caballería enemiga mediante el uso de boleadoras, inundaciones de campos y la captura de armas de fuego. Tras feroces batallas como la toma de la fortaleza de Sacsayhuamán —donde el héroe inca Cahuide prefirió lanzarse desde lo alto de una torre antes que rendirse—, Manco Inca decidió replegar sus tropas hacia la vertiente oriental de los Andes para iniciar una prolongada guerra de guerrillas.\n\nEn las frondosas selvas de la convención cusqueña, fundó el Reino Rebelde de **Vilcabamba**. Durante casi cuatro décadas, Vilcabamba funcionó como un estado incaico independiente con sus propios templos, administración y fuerzas militares que realizaban emboscadas sistemáticas a las caravanas españolas que transitaban entre Lima y el Cusco.\n\nLa resistencia continuó bajo el mando de los hijos de Manco Inca: Sayri Túpac, Titu Cusi Yupanqui y finalmente **Túpac Amaru I**. En 1572 d.C., el Virrey Francisco de Toledo lanzó una campaña militar masiva contra el reducto selvático. Tras semanas de combate, Vilcabamba fue capturada y Túpac Amaru I fue conducido a la Plaza Mayor del Cusco para ser ejecutado públicamente, poniendo fin al último vestigio de la dinastía imperial incaica.\n\n**[¿SABÍAS QUÉ?]**\nDurante la guerra de resistencia, Manco Inca aprendió a montar a caballo, vestir armaduras de acero europeas y utilizar espadas y arcabuces capturados en batalla. En la batalla de Ollantaytambo, sorprendió a las tropas españolas comandando la carga militar montado a caballo y vistiendo la armadura de un capitán conquistador.\n\n*Créditos de investigación y agradecimientos especiales al Instituto de Investigaciones Arqueológicas de la Universidad Nacional de San Antonio Abad del Cusco (UNSAAC) y al historiador Juan José Vega.*",
+
+    "it": "La caduta di Atahualpa non segnò la conquista immediata del Perù. Nel 1536, **Manco Inca** organizzò la più grande ribellione armata delle Americhe. Con oltre 100.000 guerrieri, assediò contemporaneamente Cusco e Lima, mettendo in pericolo il dominio spagnolo.\n\nDopo battaglie epiche come la presa della fortezza di Sacsayhuamán, Manco Inca si ritirò nella selva e fondò il regno di **Vilcabamba**: uno stato inca indipendente che resistette per quasi quattro decenni.\n\nLa resistenza si concluse nel 1572, quando il vicerè Francisco de Toledo catturò Vilcabamba ed eseguì pubblicamente l'ultimo sovrano, **Túpac Amaru I**, nella piazza di Cusco.\n\n**[CURIOSITÀ]**\nManco Inca imparò a cavalcare e ad adoperare le armature in acciaio e le armi da fuoco catturate. Nella battaglia di Ollantaytambo, guidò la carica delle sue truppe a cavallo indossando l'armatura di un capitano spagnolo.\n\n*Crediti di ricerca e ringraziamenti all'Università UNSAAC di Cusco e allo storico Juan José Vega.*",
+
+    "en": "Atahualpa's fall did not secure Peru. In 1536, **Manco Inca** organized the largest armed revolt in the Americas, sieging Cusco and Lima with over 100,000 warriors and pushing Spanish forces to the brink.\n\nAfter fierce battles such as Sacsayhuamán, Manco Inca retreated into the high jungle to establish **Vilcabamba**: an independent Inca state that launched guerrilla resistance for nearly 40 years.\n\nThe resistance ended in 1572 when Viceroy Francisco de Toledo captured Vilcabamba and publicly executed the final monarch, **Túpac Amaru I**, in Cusco's main plaza.\n\n**[FUN FACT]**\nManco Inca learned to ride horses, wear steel armor, and wield captured firearms. During the Battle of Ollantaytambo, he led cavalry charges dressed in full conquistador armor.\n\n*Research credits and special thanks to the UNSAAC University of Cusco and historian Juan José Vega.*"
+  },
+  "periodo": {
+    "es": "1536 d.C. - 1572 d.C.",
+    "it": "1536 d.C. - 1572 d.C.",
+    "en": "1536 AD - 1572 AD"
+  },
+  "imagen_sugerida": "assets/images/incas/incas_2.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Quién organizó la rebelión armada más grande de la América precolombina en 1536?",
+        "it": "Chi organizzò la più grande ribellione armata dell'America precolombiana nel 1536?",
+        "en": "Who organized the largest armed rebellion in pre-Columbian America in 1536?"
+      },
+      "opciones": {
+        "es": ["Atahualpa", "Manco Inca", "Túpac Amaru I", "Sayri Túpac"],
+        "it": ["Atahualpa", "Manco Inca", "Túpac Amaru I", "Sayri Túpac"],
+        "en": ["Atahualpa", "Manco Inca", "Túpac Amaru I", "Sayri Túpac"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Manco Inca, inicialmente aliado de Pizarro, lideró un ejército de más de 100,000 guerreros contra los españoles.",
+        "it": "Manco Inca, inizialmente alleato di Pizarro, guidò un esercito di oltre 100.000 guerrieri contro gli spagnoli.",
+        "en": "Manco Inca, initially Pizarro's ally, led an army of over 100,000 warriors against the Spanish."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cuánto tiempo resistió el reino rebelde de Vilcabamba como estado inca independiente?",
+        "it": "Per quanto tempo resistette il regno ribelle di Vilcabamba come stato inca indipendente?",
+        "en": "How long did the rebel kingdom of Vilcabamba survive as an independent Inca state?"
+      },
+      "opciones": {
+        "es": ["Unos meses", "Casi cuatro décadas", "Dos siglos", "Un año"],
+        "it": ["Alcuni mesi", "Quasi quattro decenni", "Due secoli", "Un anno"],
+        "en": ["A few months", "Nearly four decades", "Two centuries", "One year"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Vilcabamba funcionó como estado independiente desde 1536 hasta su caída en 1572, casi 40 años.",
+        "it": "Vilcabamba funzionò come stato indipendente dal 1536 fino alla sua caduta nel 1572, quasi 40 anni.",
+        "en": "Vilcabamba functioned as an independent state from 1536 until its fall in 1572, nearly 40 years."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Quién fue el último gobernante de Vilcabamba, ejecutado en 1572?",
+        "it": "Chi fu l'ultimo sovrano di Vilcabamba, giustiziato nel 1572?",
+        "en": "Who was the last ruler of Vilcabamba, executed in 1572?"
+      },
+      "opciones": {
+        "es": ["Manco Inca", "Sayri Túpac", "Titu Cusi Yupanqui", "Túpac Amaru I"],
+        "it": ["Manco Inca", "Sayri Túpac", "Titu Cusi Yupanqui", "Túpac Amaru I"],
+        "en": ["Manco Inca", "Sayri Túpac", "Titu Cusi Yupanqui", "Túpac Amaru I"]
+      },
+      "respuesta_correcta": 3,
+      "explicacion": {
+        "es": "Túpac Amaru I fue capturado y ejecutado públicamente en el Cusco, poniendo fin a la dinastía inca.",
+        "it": "Túpac Amaru I fu catturato e giustiziato pubblicamente a Cusco, ponendo fine alla dinastia inca.",
+        "en": "Túpac Amaru I was captured and publicly executed in Cusco, ending the Inca dynasty."
+      }
+    }
+  ]
+}
