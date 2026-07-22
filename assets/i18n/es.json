@@ -12,6 +12,7 @@
     "close": "Cerrar",
     "home": "Inicio",
     "explore": "Explorar",
+    "map": "Mapa",
     "saved": "Guardados",
     "settings": "Ajustes",
     "previous": "Anterior",
@@ -21,19 +22,34 @@
     "title": "Desbloquear Premium",
     "subtitle": "Toda la historia del Perú",
     "description": "Descubre el Imperio Inca, la Conquista española, el Virreinato y la Independencia del Perú en un viaje único a través de los siglos.",
+    "hero_title": "Desbloquea la experiencia completa de Perú Eterno",
+    "hero_subtitle": "Audio-historias, el archivo completo de 20 capítulos, tarjetas legendarias y lectura offline.",
     "price": "€2,99",
     "unlock_button": "Desbloquear ahora",
-    "restore_button": "Restaurar compra",
+    "restore_button": "Restaurar compras",
     "locked_label": "Contenido Premium",
     "tap_to_unlock": "Toca para desbloquear",
     "features_title": "Qué incluye Premium",
     "features": [
-      "Acceso completo a las 7 eras históricas",
-      "Galerías de ilustraciones exclusivas por era",
-      "Descripciones históricas detalladas trilingüe",
-      "Lectura offline completa",
-      "Sin publicidad"
+      "Audio-historias ilimitadas, narradas en tu idioma",
+      "Archivo histórico completo: los 20 capítulos, sin esperar al día",
+      "Tarjetas coleccionables épicas y legendarias",
+      "Lectura offline completa y congeladores de racha ilimitados"
     ],
+    "trial_banner": "Prueba gratis por 7 días. Cancela cuando quieras.",
+    "plan_weekly_label": "Semanal",
+    "plan_weekly_price": "€2,99/semana",
+    "plan_weekly_badge": "Más popular",
+    "plan_annual_label": "Anual",
+    "plan_annual_price": "€59,99/año",
+    "plan_annual_badge": "Ahorra 60%",
+    "cta_trial": "Comenzar mi prueba de 7 días gratis",
+    "cta_subscribe": "Suscribirme",
+    "legal_terms": "Términos de servicio",
+    "legal_privacy": "Política de privacidad",
+    "legal_coming_soon": "Disponible próximamente.",
+    "trial_active_prefix": "Te quedan",
+    "trial_active_suffix": "días de prueba gratis",
     "free_label": "GRATIS",
     "premium_label": "PREMIUM",
     "active_message": "¡Tienes acceso completo a toda la historia del Perú!",
@@ -41,6 +57,11 @@
     "error_failed": "No se pudo completar el pago. Inténtalo de nuevo.",
     "error_unavailable": "La tienda no está disponible en este momento. Inténtalo más tarde.",
     "restore_success": "Compra restaurada correctamente."
+  },
+  "audio": {
+    "listen_button": "Escuchar",
+    "now_playing": "Reproduciendo",
+    "error": "No se pudo reproducir el audio en este dispositivo. Prueba con otro idioma o inténtalo más tarde."
   },
   "language": {
     "select": "Seleccionar idioma",
@@ -90,6 +111,46 @@
     "featured_badge": "ERA DESTACADA",
     "view_biography": "Ver biografía",
     "continue_reading": "Continuar leyendo ->"
+  },
+  "daily_story": {
+    "banner_label": "HISTORIA DE HOY",
+    "streak_unit": "días",
+    "streak_start": "¡Comienza tu racha!",
+    "completed_title": "¡Racha del día completada!",
+    "pending_title": "Lee la historia de hoy para mantener tu racha",
+    "read_now": "Leer ahora",
+    "streak_increased": "¡Racha aumentada!",
+    "streak_saved": "¡Racha del día guardada!",
+    "streak_frozen": "¡Faltaste un día, pero usamos un congelador para salvar tu racha!"
+  },
+  "quiz": {
+    "title": "Quiz del capítulo",
+    "start_cta": "Pon a prueba lo aprendido",
+    "start_button": "Iniciar Quiz",
+    "best_score": "Mejor puntaje:",
+    "next": "Siguiente",
+    "see_results": "Ver resultados",
+    "score_perfect": "¡Puntaje perfecto!",
+    "score_good": "¡Bien hecho!",
+    "score_low": "Sigue practicando",
+    "claim_card": "¡Reclamar Tarjeta Coleccionable!",
+    "claim_card_locked": "Tarjeta Premium — Desbloquear",
+    "already_claimed": "Ya tienes esta tarjeta",
+    "card_claimed": "¡Tarjeta desbloqueada!",
+    "view_album": "Ver álbum",
+    "close": "Cerrar"
+  },
+  "collectibles": {
+    "title": "Álbum de Coleccionables",
+    "progress_label": "tarjetas desbloqueadas",
+    "locked_prefix": "Completa el quiz de",
+    "locked_suffix": "para desbloquear",
+    "go_to_chapter": "Ir al capítulo",
+    "unlocked_on": "Desbloqueada el",
+    "rarity_common": "Común",
+    "rarity_rare": "Rara",
+    "rarity_epic": "Épica",
+    "rarity_legendary": "Legendaria"
   },
   "eras": {
     "caral": {
@@ -176,7 +237,10 @@
     "sources_title": "Fuentes y créditos",
     "sources_body": "Contenido editorial creado para Peru Eterno. Basado en fuentes académicas: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Perú, Enciclopedia del Perú.",
     "explore_also": "Explora también",
-    "read": "Leer"
+    "read": "Leer",
+    "read_time_unit": "min de lectura",
+    "mark_as_read": "Marcar como leído",
+    "completed": "Completado"
   },
   "timeline": {
     "historical": "Línea de tiempo histórica"
@@ -187,7 +251,10 @@
     "eyebrow": "MUSEO DIGITAL",
     "title": "Mapa cultural del Perú",
     "subtitle": "Explora lugares, eras y territorios sagrados.",
-    "open_story": "Abrir historia"
+    "open_story": "Abrir historia",
+    "view_map": "Mapa",
+    "view_timeline": "Línea de tiempo",
+    "filter_all": "Todos"
   },
   "favorites": {
     "eyebrow": "MI COLECCIÓN",
@@ -206,6 +273,7 @@
     "title": "Ajustes",
     "language": "IDIOMA",
     "premium": "PREMIUM",
+    "collectibles": "COLECCIONABLES",
     "storage": "ALMACENAMIENTO",
     "about": "ACERCA DE",
     "premium_active": "Premium activo",

@@ -29,5 +29,61 @@
     "it": "600 d.C. - 1000 d.C.",
     "en": "600 AD - 1000 AD"
   },
-  "imagen_sugerida": "assets/images/banners/sacerdote-ceremonial-andino.jpg"
+  "imagen_sugerida": "assets/images/banners/sacerdote-ceremonial-andino.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué logro histórico se atribuye a los Wari entre los años 600 y 1000 d.C.?",
+        "it": "Quale traguardo storico si attribuisce ai Wari tra il 600 e il 1000 d.C.?",
+        "en": "What historic achievement is credited to the Wari between 600 and 1000 AD?"
+      },
+      "opciones": {
+        "es": ["La primera escritura andina", "El primer imperio panandino de Sudamérica", "La domesticación de la llama", "El descubrimiento del oro"],
+        "it": ["La prima scrittura andina", "Il primo impero panandino del Sud America", "La domesticazione del lama", "La scoperta dell'oro"],
+        "en": ["The first Andean writing system", "South America's first pan-Andean empire", "The domestication of the llama", "The discovery of gold"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Los Wari consolidaron el primer imperio que unificó gran parte de los Andes antes que los Incas.",
+        "it": "I Wari consolidarono il primo impero che unificò gran parte delle Ande prima degli Inca.",
+        "en": "The Wari built the first empire to unify much of the Andes before the Incas."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué infraestructura de los Wari fue precursora del famoso Qhapaq Ñan inca?",
+        "it": "Quale infrastruttura Wari fu precursore del famoso Qhapaq Ñan inca?",
+        "en": "What Wari infrastructure was a precursor to the famous Inca Qhapaq Ñan?"
+      },
+      "opciones": {
+        "es": ["Los puquios", "La red de caminos, puentes y depósitos (colcas)", "Las murallas de Chan Chan", "Los canales de Nazca"],
+        "it": ["I puquios", "La rete di strade, ponti e depositi (colcas)", "Le mura di Chan Chan", "I canali di Nazca"],
+        "en": ["The puquios", "The network of roads, bridges, and storehouses (colcas)", "The walls of Chan Chan", "The Nazca canals"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Trazaron caminos empedrados y depósitos estatales que luego perfeccionarían los Incas.",
+        "it": "Tracciarono strade lastricate e depositi statali che gli Inca in seguito perfezionarono.",
+        "en": "They laid stone roads and state storehouses that the Incas would later perfect."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué se considera hoy a los textiles Wari en la historia del arte?",
+        "it": "Cosa si considerano oggi i tessuti Wari nella storia dell'arte?",
+        "en": "What are Wari textiles considered in art history today?"
+      },
+      "opciones": {
+        "es": ["Los primeros tapices religiosos", "Precursores del cubismo y la abstracción moderna", "Copias del arte Moche", "Obras sin valor simbólico"],
+        "it": ["I primi arazzi religiosi", "Precursori del cubismo e dell'astrazione moderna", "Copie dell'arte Moche", "Opere senza valore simbolico"],
+        "en": ["The first religious tapestries", "Precursors of cubism and modern abstraction", "Copies of Moche art", "Works without symbolic value"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Sus patrones geométricos codificados anticipan estilos que el arte occidental adoptaría siglos después.",
+        "it": "I loro motivi geometrici codificati anticipano stili che l'arte occidentale avrebbe adottato secoli dopo.",
+        "en": "Their coded geometric patterns anticipate styles Western art would adopt centuries later."
+      }
+    }
+  ]
 }

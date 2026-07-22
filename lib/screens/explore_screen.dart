@@ -15,9 +15,7 @@ import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
-import '../widgets/historia_timeline.dart';
 import '../widgets/local_cinematic_card.dart';
-import 'cultural_map_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -158,8 +156,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 14),
-                  _CulturalMapEntryCard(lang: lang),
                 ],
               ),
             ),
@@ -223,7 +219,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 children: [
                   Text(
                     _showStages
-                        ? '4 ${t('explore.historical_stages_count')}'
+                        ? '5 ${t('explore.historical_stages_count')}'
                         : '${items.length} ${t('explore.results')}',
                     style: GoogleFonts.lato(
                       fontSize: 12,
@@ -317,101 +313,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
 // ── Vista de etapas históricas ────────────────────────────────────────────────
 
-class _CulturalMapEntryCard extends StatelessWidget {
-  final String lang;
-
-  const _CulturalMapEntryCard({required this.lang});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(18),
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const CulturalMapScreen()),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFF4A140B), Color(0xFF2C1810)],
-            ),
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: AppColors.ocre.withOpacity(0.24)),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.ocre.withOpacity(0.08),
-                blurRadius: 18,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: AppColors.ocre.withOpacity(0.14),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.ocre.withOpacity(0.34)),
-                ),
-                child: const Icon(
-                  Icons.map_rounded,
-                  color: AppColors.ocre,
-                  size: 23,
-                ),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context
-                          .read<LanguageProvider>()
-                          .t('explore.cultural_map_title'),
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.cremaPergamino,
-                        height: 1.12,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      context
-                          .read<LanguageProvider>()
-                          .t('explore.cultural_map_subtitle'),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.lato(
-                        fontSize: 12,
-                        color: AppColors.cremaPergamino.withOpacity(0.58),
-                        height: 1.35,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 10),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: AppColors.ocre.withOpacity(0.82),
-                size: 15,
-              ),
-            ],
-          ),
-        ),
-      ),
-    ).animate().fadeIn(duration: 420.ms).slideY(begin: 0.04, end: 0);
-  }
-}
-
 class _HistoriaStagesView extends StatelessWidget {
   final String lang;
   const _HistoriaStagesView({required this.lang});
@@ -432,26 +333,12 @@ class _HistoriaStagesView extends StatelessWidget {
           return const AppErrorState(height: 300);
         }
 
-        final stageMap = {for (final s in stages) s.id: s};
-
         return CustomScrollView(
           slivers: [
-            // ── Interactive timeline ──────────────────────────────────
-            SliverToBoxAdapter(
-              child: HistoriaTimeline(
-                lang: lang,
-                onItemTap: (item) {
-                  final stage = stageMap[item.stageId];
-                  if (stage == null) return;
-                  AppNavigation.openHistoriaStage(context, stage);
-                },
-              ),
-            ),
-
             // ── Section divider ───────────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
                 child: Row(
                   children: [
                     Container(

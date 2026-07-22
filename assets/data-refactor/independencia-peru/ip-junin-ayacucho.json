@@ -1,0 +1,89 @@
+{
+  "id": "batallas_junin_ayacucho",
+  "parent_stage_id": "indipendenza",
+  "orden": 3,
+  "categoria": {
+    "es": "Campañas de Independencia",
+    "it": "Campagne di Indipendenza",
+    "en": "Independence Campaigns"
+  },
+  "titulo": {
+    "es": "Junín y Ayacucho: El sello final de la libertad americana",
+    "it": "Junín e Ayacucho: Il sigillo finale della libertà americana",
+    "en": "Junín and Ayacucho: The Final Seal of American Freedom"
+  },
+  "subtitulo": {
+    "es": "Las épicas batallas en los Andes centrales donde Bolívar y Sucre sellaron para siempre la independencia de América Latina en 1824.",
+    "it": "Le epiche battaglie nelle Ande dove Bolívar e Sucre sigillarono l'indipendenza dell'America Latina nel 1824.",
+    "en": "The epic Andean battles where Bolívar and Sucre sealed Latin America's freedom in 1824."
+  },
+  "contenido": {
+    "es": "Tras la retirada de San Martín luego de la célebre Entrevista de Guayaquil, el Virreinato del Perú no estaba completamente derrotado. Un ejército realista de más de 18,000 soldados veteranos controlaba aún la sierra sur y central. Para culminar la gesta, el Congreso peruano otorgó la dictadura militar al Libertador **Simón Bolívar**, quien organizó en Trujillo el Ejército Unido Libertador, compuesto por soldados peruanos, colombianos, venezolanos, chilenos y argentinos.\n\nEl 6 de agosto de 1824, en la meseta de Bombon a más de 4,000 metros de altitud, se libró la **Batalla de Junín**. Fue un choque cruento y singular conocido como 'La Batalla de los Sables', librado exclusivamente a punta de lanzas y espadas, sin escucharse un solo disparo de fuego. Cuando la vanguardia patriota parecía derrotada, la irrupción sorpresiva del escuadrón de los *Húsares del Perú* al mando de Isidoro Suárez cambió el rumbo de la contienda en minutos, logrando una victoria épica.\n\nEl desenlace final ocurrió el **9 de diciembre de 1824** en la pampa de la Quinua, al pie del cerro Condorcunca en Ayacucho. Bajo el mando del joven e imperturbable general **Antonio José de Sucre**, un ejército patriota de 6,000 hombres enfrentó a 9,300 soldados realistas dirigidos por el propio Virrey La Serna.\n\nTras horas de combate encarnizado, la carga de la caballería y el heroísmo de las guerrillas indígenas destrozaron las líneas realistas. Al atardecer, el Virrey herido firmó la **Capitulación de Ayacucho**, el documento histórico que puso fin definitivo a más de 300 años de dominio colonial español en América del Sur.\n\n**[¿SABÍAS QUÉ?]**\nEn reconocimiento a su valentía decisiva durante la batalla, Simón Bolívar rebautizó inmediatamente al regimiento peruano responsable del triunfo como los **'Húsares de Junín'**. Este legendario regimiento se convirtió desde entonces en la guardia de honor histórica del Presidente de la República del Perú.\n\n*Créditos de investigación y agradecimientos al Archivo General de la Nación (AGN), al Museo Nacional de Arqueología, Antropología e Historia del Perú y al Ministerio de Defensa.*",
+
+    "it": "Dopo la partenza di San Martín, le forze spagnole controllavano ancora le montagne meridionali. Il Congresso peruviano affidò il comando supremo a **Simón Bolívar**, che organizzò l'Esercito Unito Liberatore.\n\nIl 6 agosto 1824 si combatté la **Battaglia di Junín**, conosciuta come 'La Battaglia delle Sciabole', vinta senza sparare un solo colpo grazie alla carica decisiva degli *Húsares del Perù*.\n\nIl sigillo finale avvenne il **9 dicembre 1824** nella **Battaglia di Ayacucho**. Il generale **Antonio José de Sucre** sconfisse l'esercito del vicerè La Serna. Con la Capitolazione di Ayacucho, si conclusero oltre 300 anni di dominio spagnolo in Sud America.\n\n**[CURIOSITÀ]**\nIn omaggio al loro coraggio a Junín, Bolívar ribattezzò il reggimento peruviano come **'Húsares de Junín'**, diventati poi la guardia d'onore del Presidente della Repubblica del Perù.\n\n*Crediti di ricerca e ringraziamenti all'Archivio Generale della Nazione e al Ministero della Difesa del Perù.*",
+
+    "en": "Following San Martín's departure, royalist forces retained control over the southern highlands. Congress granted supreme command to **Simón Bolívar**, who assembled the United Liberation Army.\n\nOn August 6, 1824, forces clashed at the **Battle of Junín**, known as the 'Battle of the Sabers'—won without firing a shot due to a surprise cavalry charge by the *Hussars of Peru*.\n\nThe final triumph arrived on **December 9, 1824**, at the **Battle of Ayacucho**. General **Antonio José de Sucre** defeated Viceroy La Serna's army. The Capitulation of Ayacucho ended over 300 years of Spanish rule in South America.\n\n**[FUN FACT]**\nIn honor of their bravery at Junín, Bolívar renamed the regiment the **'Hussars of Junín'**, which served for generations as the presidential guard of honor in Peru.\n\n*Research credits and special thanks to the General Archive of the Nation and the Ministry of Defense of Peru.*"
+  },
+  "periodo": {
+    "es": "1824 d.C.",
+    "it": "1824 d.C.",
+    "en": "1824 AD"
+  },
+  "imagen_sugerida": "assets/images/independencia/independencia_3.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Por qué se conoce a la Batalla de Junín como 'La Batalla de los Sables'?",
+        "it": "Perché la Battaglia di Junín è conosciuta come 'La Battaglia delle Sciabole'?",
+        "en": "Why is the Battle of Junín known as 'The Battle of the Sabers'?"
+      },
+      "opciones": {
+        "es": ["Se usaron solo cañones", "Se combatió con lanzas y espadas sin disparos de fuego", "Duró solo unos minutos", "Participaron solo caballerías europeas"],
+        "it": ["Furono usati solo cannoni", "Si combatté con lance e spade senza sparare un colpo", "Durò solo pochi minuti", "Parteciparono solo cavallerie europee"],
+        "en": ["Only cannons were used", "It was fought with lances and sabers without a single shot fired", "It lasted only a few minutes", "Only European cavalry took part"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El combate del 6 de agosto de 1824 se libró exclusivamente cuerpo a cuerpo, sin un solo disparo.",
+        "it": "Il combattimento del 6 agosto 1824 fu combattuto esclusivamente corpo a corpo, senza sparare un colpo.",
+        "en": "The August 6, 1824 battle was fought entirely hand-to-hand, without a single shot fired."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué general selló definitivamente la independencia americana en la Batalla de Ayacucho?",
+        "it": "Quale generale sigillò definitivamente l'indipendenza americana nella Battaglia di Ayacucho?",
+        "en": "Which general definitively sealed American independence at the Battle of Ayacucho?"
+      },
+      "opciones": {
+        "es": ["Simón Bolívar", "Antonio José de Sucre", "José de San Martín", "Andrés Avelino Cáceres"],
+        "it": ["Simón Bolívar", "Antonio José de Sucre", "José de San Martín", "Andrés Avelino Cáceres"],
+        "en": ["Simón Bolívar", "Antonio José de Sucre", "José de San Martín", "Andrés Avelino Cáceres"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El general Antonio José de Sucre venció al Virrey La Serna en Ayacucho el 9 de diciembre de 1824.",
+        "it": "Il generale Antonio José de Sucre sconfisse il vicerè La Serna ad Ayacucho il 9 dicembre 1824.",
+        "en": "General Antonio José de Sucre defeated Viceroy La Serna at Ayacucho on December 9, 1824."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué documento puso fin a más de 300 años de dominio español en Sudamérica?",
+        "it": "Quale documento pose fine a oltre 300 anni di dominio spagnolo in Sud America?",
+        "en": "What document ended over 300 years of Spanish rule in South America?"
+      },
+      "opciones": {
+        "es": ["El Acta de Independencia", "La Capitulación de Ayacucho", "El Tratado de Paracas", "La Constitución de Cádiz"],
+        "it": ["L'Atto di Indipendenza", "La Capitolazione di Ayacucho", "Il Trattato di Paracas", "La Costituzione di Cadice"],
+        "en": ["The Act of Independence", "The Capitulation of Ayacucho", "The Treaty of Paracas", "The Cádiz Constitution"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "La Capitulación de Ayacucho, firmada tras la batalla, terminó el dominio colonial español en Sudamérica.",
+        "it": "La Capitolazione di Ayacucho, firmata dopo la battaglia, pose fine al dominio coloniale spagnolo in Sud America.",
+        "en": "The Capitulation of Ayacucho, signed after the battle, ended Spanish colonial rule in South America."
+      }
+    }
+  ]
+}

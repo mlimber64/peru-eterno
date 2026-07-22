@@ -3,16 +3,21 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app.dart';
+import 'core/navigation/app_navigation.dart';
 import 'data/content_repository_remote.dart';
 import 'data/local/local_content_cache.dart';
 import 'data/remote/supabase_content_api.dart';
+import 'providers/audio_player_provider.dart';
+import 'providers/collectibles_provider.dart';
 import 'providers/content_provider.dart';
+import 'providers/daily_story_provider.dart';
 import 'providers/favorites_provider.dart';
 import 'providers/history_provider.dart';
 import 'providers/language_provider.dart';
 import 'providers/premium_provider.dart';
 import 'providers/reading_progress_provider.dart';
 import 'providers/reading_text_scale_provider.dart';
+import 'services/home_widget_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +65,18 @@ void main() async {
   final readingTextScaleProvider = ReadingTextScaleProvider();
   await readingTextScaleProvider.initialize();
 
+  final dailyStoryProvider = DailyStoryProvider();
+  await dailyStoryProvider.initialize(
+    premiumProvider.isPremium,
+    languageProvider.currentLanguage,
+  );
+
+  final collectiblesProvider = CollectiblesProvider();
+  await collectiblesProvider.initialize();
+
+  final audioPlayerProvider = AudioPlayerProvider();
+  await audioPlayerProvider.initialize();
+
   runApp(
     MultiProvider(
       providers: [
@@ -70,8 +87,16 @@ void main() async {
         ChangeNotifierProvider.value(value: readingProgressProvider),
         ChangeNotifierProvider.value(value: readingTextScaleProvider),
         ChangeNotifierProvider.value(value: contentProvider),
+        ChangeNotifierProvider.value(value: dailyStoryProvider),
+        ChangeNotifierProvider.value(value: collectiblesProvider),
+        ChangeNotifierProvider.value(value: audioPlayerProvider),
       ],
       child: const PeruEternoApp(),
     ),
+  );
+
+  await HomeWidgetService.initialize(
+    navigatorKey: AppNavigation.navigatorKey,
+    dailyStoryProvider: dailyStoryProvider,
   );
 }

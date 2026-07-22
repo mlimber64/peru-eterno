@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/historia_stages_repository.dart';
 import '../../models/content_item.dart';
 import '../../models/era_model.dart';
 import '../../models/historia_article.dart';
 import '../../models/historia_stage.dart';
+import '../../providers/daily_story_provider.dart';
+import '../../providers/premium_provider.dart';
 import '../../screens/content_detail_screen.dart';
 import '../../screens/era_detail_screen.dart';
 import '../../screens/historia_article_detail_screen.dart';
@@ -12,6 +15,12 @@ import '../../screens/historia_subtopics_screen.dart';
 import '../../screens/premium_screen.dart';
 
 class AppNavigation {
+  /// Navigator raíz de la app. Necesario para navegar desde fuera del árbol
+  /// de widgets (p. ej. el listener de clic del Home Screen Widget nativo,
+  /// que no tiene un `BuildContext` propio). Conectado en `app.dart` vía
+  /// `MaterialApp(navigatorKey: ...)`.
+  static final navigatorKey = GlobalKey<NavigatorState>();
+
   static Future<void> openEra(
     BuildContext context,
     EraModel era, {
@@ -71,6 +80,18 @@ class AppNavigation {
     List<String>? carouselImages,
     bool replace = false,
   }) async {
+    // Punto único de bloqueo del archivo histórico: los usuarios free solo
+    // pueden abrir la "Historia del Día"; cualquier otro capítulo cae al
+    // paywall. Cubre todos los caminos de navegación al lector (home,
+    // subtemas, lista prehispánica, álbum de coleccionables, prev/next y
+    // "explora también" dentro del propio lector), que pasan todos por aquí.
+    final isPremium = context.read<PremiumProvider>().isPremium;
+    final isDailyArticle =
+        context.read<DailyStoryProvider>().dailyArticle?.id == article.id;
+    if (!isPremium && !isDailyArticle) {
+      return openPremium(context);
+    }
+
     final resolvedStage = stage ?? await _resolveStage(article.parentStageId);
     if (!context.mounted) return;
 

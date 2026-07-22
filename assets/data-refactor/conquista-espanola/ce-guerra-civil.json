@@ -1,0 +1,89 @@
+{
+  "id": "guerra_civil_inca",
+  "parent_stage_id": "conquista_spagnola",
+  "orden": 1,
+  "categoria": {
+    "es": "Colapso del Tahuantinsuyo",
+    "it": "Crollo del Tahuantinsuyo",
+    "en": "Collapse of Tahuantinsuyo"
+  },
+  "titulo": {
+    "es": "La Guerra Civil Inca: La fractura del Imperio",
+    "it": "La Guerra Civile Inca: La frattura dell'Impero",
+    "en": "The Inca Civil War: The Empire Divided"
+  },
+  "subtitulo": {
+    "es": "El sangriento enfrentamiento entre Huáscar y Atahualpa que debilitó al imperio justo antes de la llegada española.",
+    "it": "Lo scontro cruento tra Huáscar e Atahualpa che indebolì l'impero prima dell'arrivo spagnolo.",
+    "en": "The bloody clash between Huáscar and Atahualpa that weakened the empire on the eve of the Spanish arrival."
+  },
+  "contenido": {
+    "es": "A comienzos del siglo XVI, el Tahuantinsuyo se encontraba en la cima de su gloria territorial. Sin embargo, alrededor del año 1527 d.C., una misteriosa y devastadora epidemia de viruela —llegada desde el Caribe antes que los propios conquistadores— provocó la muerte repentina del Inca Huayna Cápac y de su heredero designado, Ninan Cuyuchi. La ausencia de un sucesor indiscutible desató una crisis de poder sin precedentes que fracturó al imperio en dos bandos irreconciliables.\n\nEn el Cusco, la nobleza tradicional y el clero del Sol coronaron a **Huáscar**, quien buscaba consolidar el control desde la capital sagrada. Mientras tanto, en el norte, **Atahualpa** lideraba a los experimentados ejércitos veteranos que habían combatido en las campañas de Quito. Lo que comenzó como una disputa dinástica derivó en una sangrienta guerra civil que duró casi cinco años, caracterizada por masivas batallas en los Andes centrales y crueles purgas políticas entre las panacas (familias reales) rivales.\n\nAtahualpa, apoyado por generales brillantes como Quizquiz y Chalcuchímac, logró imponerse militarmente. Sus tropas tomaron la ciudad del Cusco y capturaron a Huáscar. Sin embargo, la victoria tuvo un costo catastrófico: las redes agrícolas quedaron desmanteladas, las alianzas entre etnias locales se rompieron y la población andina quedó exhausta y diezmada por la guerra fratricida. Atahualpa se dirigió hacia las aguas termales de Cajamarca para celebrar su triunfo, sin saber que un pequeño grupo de hombres armados al mando de Francisco Pizarro acababa de desembarcar en las costas de Tumbes.\n\n**[¿SABÍAS QUÉ?]**\nLa división del imperio no fue solo entre dos hermanos, sino entre decenas de etnias sometidas (como los Huancas, Cañaris y Chachapoyas). Muchas de estas poblaciones vieron en la guerra civil —y posteriormente en la llegada de los españoles— una oportunidad estratégica para rebelarse contra el dominio cusqueño y recuperar su independencia regional.\n\n*Créditos de investigación y agradecimientos a la Academia Nacional de la Historia del Perú y a los estudios del historiador Franklin Pease.*",
+
+    "it": "All'inizio del XVI secolo, il Tahuantinsuyo era al culmine della sua espansione. Tuttavia, intorno al 1527 d.C., un'epidemia di vaiolo causò la morte improvvisa dell'Inca Huayna Cápac e del suo erede Ninan Cuyuchi. La mancanza di un successore scatenò una crisi che divise l'impero tra due fratelli: Huáscar a Cusco e Atahualpa al nord.\n\nCiò che iniziò come una disputa ereditaria diventò una sanguinosa guerra civile durata quasi cinque anni. Atahualpa, sostenuto da generali esperti come Chalcuchímac, prevalse militarmente e catturò Huáscar a Cusco. Tuttavia, il conflitto lasciò l'impero esausto, con le reti agricole distrutte e la popolazione decimata.\n\nAtahualpa si diresse a Cajamarca per festeggiare la vittoria, ignaro che un piccolo gruppo di spagnoli guidato da Francisco Pizarro era appena sbarcato sulla costa.\n\n**[CURIOSITÀ]**\nMolte popolazioni sottomesse dagli Inca (come Huancas e Cañaris) videro nella guerra civile e nell'arrivo degli spagnoli un'opportunità per ribellarsi al dominio di Cusco e riacquistare l'indipendenza.\n\n*Crediti di ricerca e ringraziamenti all'Accademia Nazionale di Storia del Perù.*",
+
+    "en": "In the early 16th century, the Inca Empire stood at its territorial peak. However, around 1527 AD, a smallpox epidemic killed Inca Huayna Cápac and his heir Ninan Cuyuchi. The succession void sparked a succession crisis between two brothers: Huáscar in Cusco and Atahualpa in the north.\n\nThe dispute turned into a five-year civil war. Atahualpa, backed by seasoned generals, defeated Huáscar's forces and captured Cusco. Yet, victory left the empire exhausted, with agricultural networks shattered and population lines depleted.\n\nAtahualpa traveled to Cajamarca to celebrate, unaware that Francisco Pizarro and a small band of Spanish conquistadors had just landed on the northern coast.\n\n**[FUN FACT]**\nSubjected ethnic groups (such as the Huancas and Cañaris) viewed the civil war and the Spanish arrival as a chance to revolt against Cusco's rule and reclaim regional independence.\n\n*Research credits and special thanks to the National Academy of History of Peru.*"
+  },
+  "periodo": {
+    "es": "1527 d.C. - 1532 d.C.",
+    "it": "1527 d.C. - 1532 d.C.",
+    "en": "1527 AD - 1532 AD"
+  },
+  "imagen_sugerida": "assets/images/incas/incas_2.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué provocó la crisis de sucesión que desató la Guerra Civil Inca?",
+        "it": "Cosa provocò la crisi di successione che scatenò la Guerra Civile Inca?",
+        "en": "What triggered the succession crisis that sparked the Inca Civil War?"
+      },
+      "opciones": {
+        "es": ["Una invasión española", "Una epidemia de viruela que mató a Huayna Cápac y su heredero", "Una rebelión de los Chancas", "Un terremoto en Cusco"],
+        "it": ["Un'invasione spagnola", "Un'epidemia di vaiolo che uccise Huayna Cápac e il suo erede", "Una ribellione dei Chanca", "Un terremoto a Cusco"],
+        "en": ["A Spanish invasion", "A smallpox epidemic that killed Huayna Cápac and his heir", "A Chanca rebellion", "An earthquake in Cusco"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "La viruela, llegada desde el Caribe antes que los españoles, mató a Huayna Cápac y a su sucesor designado.",
+        "it": "Il vaiolo, arrivato dai Caraibi prima degli spagnoli, uccise Huayna Cápac e il suo successore designato.",
+        "en": "Smallpox, which arrived from the Caribbean before the Spanish, killed Huayna Cápac and his designated heir."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Quiénes se enfrentaron en la guerra civil por el trono del Tahuantinsuyo?",
+        "it": "Chi si scontrò nella guerra civile per il trono del Tahuantinsuyo?",
+        "en": "Who clashed in the civil war for the throne of Tahuantinsuyo?"
+      },
+      "opciones": {
+        "es": ["Pachacútec y Manco Inca", "Huáscar y Atahualpa", "Túpac Amaru y Sayri Túpac", "Huayna Cápac y Atahualpa"],
+        "it": ["Pachacútec e Manco Inca", "Huáscar e Atahualpa", "Túpac Amaru e Sayri Túpac", "Huayna Cápac e Atahualpa"],
+        "en": ["Pachacútec and Manco Inca", "Huáscar and Atahualpa", "Túpac Amaru and Sayri Túpac", "Huayna Cápac and Atahualpa"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Huáscar, coronado en Cusco, y Atahualpa, con los ejércitos veteranos del norte, se disputaron el imperio.",
+        "it": "Huáscar, incoronato a Cusco, e Atahualpa, con gli eserciti veterani del nord, si contesero l'impero.",
+        "en": "Huáscar, crowned in Cusco, and Atahualpa, backed by veteran armies from the north, fought over the empire."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cuánto duró aproximadamente la guerra civil entre los dos bandos?",
+        "it": "Quanto durò circa la guerra civile tra le due fazioni?",
+        "en": "About how long did the civil war between the two factions last?"
+      },
+      "opciones": {
+        "es": ["Unos meses", "Casi cinco años", "Veinte años", "Una década completa"],
+        "it": ["Alcuni mesi", "Quasi cinque anni", "Vent'anni", "Un decennio intero"],
+        "en": ["A few months", "Almost five years", "Twenty years", "A full decade"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El conflicto dinástico se extendió casi cinco años, debilitando al imperio justo antes de la llegada española.",
+        "it": "Il conflitto dinastico durò quasi cinque anni, indebolendo l'impero proprio prima dell'arrivo spagnolo.",
+        "en": "The dynastic conflict lasted nearly five years, weakening the empire right before the Spanish arrival."
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "resistencia_bolognesi_caceres",
+  "parent_stage_id": "republica_peru",
+  "orden": 3,
+  "categoria": {
+    "es": "Guerra del Pacífico",
+    "it": "Guerra del Pacifico",
+    "en": "War of the Pacific"
+  },
+  "titulo": {
+    "es": "La Resistencia Heroica: El juramento de Arica y el Brujo de los Andes",
+    "it": "La Resistenza Eroica: Il giuramento di Arica e il Brujo de los Andes",
+    "en": "The Heroic Resistance: The Oath of Arica and the Wizard of the Andes"
+  },
+  "subtitulo": {
+    "es": "El inmortal 'Hasta quemar el último cartucho' de Bolognesi y la legendaria Campaña de la Breña liderada por Andrés Avelino Cáceres.",
+    "it": "L'immortale giuramento di Bolognesi e la leggendaria Campagna della Breña guidata da Cáceres.",
+    "en": "Bolognesi's immortal oath and the legendary Breña Campaign led by Andrés Avelino Cáceres."
+  },
+  "contenido": {
+    "es": "Tras la pérdida del dominio marítimo y la ocupación del sur peruano, la plaza militar de Arica quedó completamente aislada. En junio de 1880, una guarnición peruana de apenas 1,900 hombres bajo el mando del coronel **Francisco Bolognesi** (de 63 años) se encontró rodeada por más de 5,000 soldados enemigos apoyados por artillería pesante y barcos de guerra.\n\nCuando un emisario enviado para pedir la rendición le ofreció capitular para evitar un derramamiento de sangre, Bolognesi respondió con palabras que quedaron grabadas a fuego en la historia patria: *'Tengo deberes sagrados que cumplir y los cumpliré hasta quemar el último cartucho'*. En la gloriosa **Batalla del Morro de Arica**, el 7 de junio de 1880, Bolognesi y sus oficiales —entre ellos Alfonso Ugarte, quien prefirió arrojarse al abismo del mar montado en su caballo junto a la bandera nacional— entregaron sus vidas en defensa del honor nacional.\n\nTras la caída de Lima en 1881, la guerra no concluyó. En las agrestes cordilleras de la sierra central, el general **Andrés Avelino Cáceres** organizó la épica **Campaña de la Breña**. Apodado 'El Brujo de los Andes' por su asombrosa capacidad para desaparecer entre los cerros y reaparecer de sorpresa, Cáceres armó a campesinos e indígenas con lanzas, hoces y escasos fusiles.\n\nDurante más de tres años de guerra de guerrillas a más de 3,500 metros de altitud, las fuerzas de Cáceres infligieron dolorosas derrotas al ejército invasor en Pucará, Marcavalle y Concepción. Cáceres y las heroicas 'rabonas' (mujeres campesinas que acompañaban al ejército abasteciendo y curando a los soldados) demostraron que el indomable espíritu de resistencia andino continuaba más vivo que nunca.\n\n**[¿SABÍAS QUÉ?]**\nPara engañar a las tropas enemigas en la sierra, Cáceres ordenaba calzar a los caballos con las herraduras al revés, haciendo creer a los exploradores adversarios que las tropas huían cuando en realidad se preparaban para una emboscada. Además, vestía a las llamas con ponchos y chullos en las cumbres para simular batallones masivos a la distancia.\n\n*Créditos de investigación y agradecimientos al Ejército del Perú, al Instituto de Estudios Histórico-Patrióticos y al Museo de la Nación.*",
+
+    "it": "Nel giugno 1880, la guarnigione di Arica, con soli 1.900 uomini al comando del colonnello **Francisco Bolognesi**, si trovò accerchiata da forze nemici superiori. Di fronte alla richiesta di resa, Bolognesi pronunciò la celebre frase: *'Ho doveri sacri da compiere e li compirò fino a bruciare l'ultimo cartuccia'*.\n\nNella **Battaglia del Morro di Arica** (7 giugno 1880), Bolognesi e i suoi ufficiali persero la vita combattendo fino alla fine.\n\nDopo la caduta di Lima, il generale **Andrés Avelino Cáceres** guidò la **Campagna della Breña** nelle Ande. Soprannominato 'Il Stregone delle Ande', Cáceres organizzò contadini e popolazioni indigene in una guerriglia che resistette per oltre tre anni sulle vette andine.\n\n**[CURIOSITÀ]**\nCáceres usava tattiche geniali: metteva i ferri dei cavalli al contrario per depistare le tracce e vestiva i lama con ponchos sulle cime per far credere al nemico di avere un esercito enorme.\n\n*Crediti di ricerca e ringraziamenti all'Esercito del Perù e all'Istituto di Studi Storico-Patriottici.*",
+
+    "en": "In June 1880, Arica's small Peruvian garrison of 1,900 men under 63-year-old Colonel **Francisco Bolognesi** stood surrounded by overwhelming enemy forces. Demanded to surrender, Bolognesi uttered his historic response: *'I have sacred duties to fulfill, and I will fulfill them until the last cartridge is burned.'*\n\nAt the **Battle of Arica** on June 7, 1880, Bolognesi and his officers fought to the death.\n\nFollowing the fall of Lima, General **Andrés Avelino Cáceres** organized the **Breña Campaign** in the central Andes. Known as the 'Wizard of the Andes' for his guerrilla tactics, he led native peasants in a three-year resistance across high mountain peaks.\n\n**[FUN FACT]**\nCáceres deceived enemy scouts by shoeing horses backward so tracks pointed in the opposite direction, and dressing llamas in ponchos along ridges to fake massive troop numbers.\n\n*Research credits and special thanks to the Peruvian Army and the Institute of Historical-Patriotic Studies.*"
+  },
+  "periodo": {
+    "es": "1880 d.C. - 1884 d.C.",
+    "it": "1880 d.C. - 1884 d.C.",
+    "en": "1880 AD - 1884 AD"
+  },
+  "imagen_sugerida": "assets/images/republica/republica_3.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué célebre frase pronunció Francisco Bolognesi en Arica antes de la batalla final?",
+        "it": "Quale celebre frase pronunciò Francisco Bolognesi ad Arica prima della battaglia finale?",
+        "en": "What famous phrase did Francisco Bolognesi say in Arica before the final battle?"
+      },
+      "opciones": {
+        "es": ["'Venceremos o moriremos'", "'Tengo deberes sagrados que cumplir y los cumpliré hasta quemar el último cartucho'", "'Perú vencerá'", "'No hay rendición posible'"],
+        "it": ["'Vinceremo o moriremo'", "'Ho doveri sacri da compiere e li compirò fino a bruciare l'ultima cartuccia'", "'Il Perù vincerà'", "'Non c'è resa possibile'"],
+        "en": ["'We shall win or die'", "'I have sacred duties to fulfill, and I will fulfill them until the last cartridge is burned'", "'Peru will prevail'", "'There is no possible surrender'"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Bolognesi respondió así ante la exigencia de rendición en el Morro de Arica, el 7 de junio de 1880.",
+        "it": "Bolognesi rispose così alla richiesta di resa sul Morro di Arica, il 7 giugno 1880.",
+        "en": "Bolognesi responded this way to the demand for surrender at the Morro de Arica, on June 7, 1880."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cómo se conoció a Andrés Avelino Cáceres por su estrategia de guerrillas en los Andes?",
+        "it": "Come fu conosciuto Andrés Avelino Cáceres per la sua strategia di guerriglia sulle Ande?",
+        "en": "What was Andrés Avelino Cáceres known as for his guerrilla strategy in the Andes?"
+      },
+      "opciones": {
+        "es": ["El Cóndor de los Andes", "El Brujo de los Andes", "El Águila de Junín", "El Jaguar de la Breña"],
+        "it": ["Il Condor delle Ande", "Il Stregone delle Ande", "L'Aquila di Junín", "Il Giaguaro della Breña"],
+        "en": ["The Condor of the Andes", "The Wizard of the Andes", "The Eagle of Junín", "The Jaguar of the Breña"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Su habilidad para aparecer y desaparecer entre los cerros le dio el apodo de 'El Brujo de los Andes'.",
+        "it": "La sua abilità nell'apparire e scomparire tra i monti gli valse il soprannome di 'Il Stregone delle Ande'.",
+        "en": "His ability to appear and disappear among the mountains earned him the nickname 'The Wizard of the Andes'."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Quién se lanzó al mar montado en su caballo junto a la bandera antes de rendirse en Arica?",
+        "it": "Chi si gettò in mare a cavallo con la bandiera prima di arrendersi ad Arica?",
+        "en": "Who rode his horse off a cliff into the sea with the flag rather than surrender at Arica?"
+      },
+      "opciones": {
+        "es": ["Andrés Avelino Cáceres", "Alfonso Ugarte", "Miguel Grau", "Ramón Castilla"],
+        "it": ["Andrés Avelino Cáceres", "Alfonso Ugarte", "Miguel Grau", "Ramón Castilla"],
+        "en": ["Andrés Avelino Cáceres", "Alfonso Ugarte", "Miguel Grau", "Ramón Castilla"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Alfonso Ugarte prefirió arrojarse al abismo con la bandera nacional antes que entregarla al enemigo.",
+        "it": "Alfonso Ugarte preferì gettarsi nell'abisso con la bandiera nazionale piuttosto che consegnarla al nemico.",
+        "en": "Alfonso Ugarte chose to plunge off the cliff with the national flag rather than surrender it to the enemy."
+      }
+    }
+  ]
+}

@@ -29,5 +29,61 @@
     "it": "700 a.C. - 200 d.C.",
     "en": "700 BC - 200 AD"
   },
-  "imagen_sugerida": "assets/images/banners/caral-desertico.jpg"
+  "imagen_sugerida": "assets/images/banners/caral-desertico.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué descubrió el arqueólogo Julio C. Tello en la península de Paracas en los años 1920?",
+        "it": "Cosa scoprì l'archeologo Julio C. Tello nella penisola di Paracas negli anni '20?",
+        "en": "What did archaeologist Julio C. Tello discover on the Paracas peninsula in the 1920s?"
+      },
+      "opciones": {
+        "es": ["Ciudades amuralladas", "Necrópolis con fardos funerarios momificados", "Minas de oro", "Puentes colgantes"],
+        "it": ["Città fortificate", "Necropoli con fardi funerari mummificati", "Miniere d'oro", "Ponti sospesi"],
+        "en": ["Walled cities", "Necropolises with mummified funerary bundles", "Gold mines", "Suspension bridges"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Tello halló cámaras funerarias subterráneas con cientos de momias envueltas en mantos finamente bordados.",
+        "it": "Tello trovò camere funerarie sotterranee con centinaia di mummie avvolte in manti finemente ricamati.",
+        "en": "Tello found underground burial chambers with hundreds of mummies wrapped in finely embroidered textiles."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿En qué campo médico destacaron sorprendentemente los Paracas?",
+        "it": "In quale campo medico eccelsero sorprendentemente i Paracas?",
+        "en": "In what medical field did the Paracas surprisingly excel?"
+      },
+      "opciones": {
+        "es": ["La odontología", "Las trepanaciones craneanas", "Las cesáreas", "La acupuntura"],
+        "it": ["L'odontoiatria", "Le trapanazioni craniche", "I parti cesarei", "L'agopuntura"],
+        "en": ["Dentistry", "Cranial trepanation", "Cesarean sections", "Acupuncture"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Realizaban cirugías craneales con bisturís de obsidiana, con altas tasas de supervivencia comprobadas.",
+        "it": "Eseguivano interventi cranici con bisturi di ossidiana, con alti tassi di sopravvivenza comprovati.",
+        "en": "They performed cranial surgery with obsidian scalpels, with proven high survival rates."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué práctica marcaba el estatus social entre la élite Paracas?",
+        "it": "Quale pratica segnava lo status sociale tra l'élite Paracas?",
+        "en": "What practice marked social status among the Paracas elite?"
+      },
+      "opciones": {
+        "es": ["Tatuajes faciales", "La deformación craneana artificial", "El uso de máscaras de oro", "Perforaciones en las orejas"],
+        "it": ["Tatuaggi facciali", "La deformazione cranica artificiale", "L'uso di maschere d'oro", "Perforazioni alle orecchie"],
+        "en": ["Facial tattoos", "Artificial cranial deformation", "The use of gold masks", "Ear piercings"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Desde bebés, alargaban el cráneo de los niños de élite con tablillas para marcar su linaje sagrado.",
+        "it": "Fin da neonati, allungavano il cranio dei bambini d'élite con stecche per segnarne il lignaggio sacro.",
+        "en": "From infancy, elite children's skulls were elongated with boards to mark their sacred lineage."
+      }
+    }
+  ]
 }

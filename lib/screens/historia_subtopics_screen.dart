@@ -8,7 +8,9 @@ import '../core/navigation/app_navigation.dart';
 import '../data/historia_stages_repository.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
+import '../providers/daily_story_provider.dart';
 import '../providers/language_provider.dart';
+import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/historia_rich_text.dart';
 
@@ -426,6 +428,10 @@ class _SubtopicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final accent = stage.accentColor;
     final preview = _previewText();
+    final isPremium = context.watch<PremiumProvider>().isPremium;
+    final isDaily =
+        context.watch<DailyStoryProvider>().dailyArticle?.id == article.id;
+    final isLocked = !isPremium && !isDaily;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -449,7 +455,7 @@ class _SubtopicCard extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Orden badge
+                // Orden badge (o candado si el capítulo está bloqueado)
                 Container(
                   width: 34,
                   height: 34,
@@ -459,14 +465,16 @@ class _SubtopicCard extends StatelessWidget {
                     border: Border.all(color: accent.withOpacity(0.4)),
                   ),
                   child: Center(
-                    child: Text(
-                      '${article.orden}',
-                      style: GoogleFonts.lato(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w800,
-                        color: accent,
-                      ),
-                    ),
+                    child: isLocked
+                        ? Icon(Icons.lock_rounded, size: 14, color: accent)
+                        : Text(
+                            '${article.orden}',
+                            style: GoogleFonts.lato(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                              color: accent,
+                            ),
+                          ),
                   ),
                 ),
                 const SizedBox(width: 14),
@@ -521,13 +529,20 @@ class _SubtopicCard extends StatelessWidget {
                       const SizedBox(height: 10),
                       Row(
                         children: [
-                          Icon(Icons.arrow_forward_ios_rounded,
-                              size: 9, color: accent),
+                          Icon(
+                            isLocked
+                                ? Icons.lock_rounded
+                                : Icons.arrow_forward_ios_rounded,
+                            size: 9,
+                            color: accent,
+                          ),
                           const SizedBox(width: 5),
                           Text(
-                            context
-                                .read<LanguageProvider>()
-                                .t('historia.read_article'),
+                            context.read<LanguageProvider>().t(
+                                  isLocked
+                                      ? 'premium.locked_label'
+                                      : 'historia.read_article',
+                                ),
                             style: GoogleFonts.lato(
                               fontSize: 10,
                               fontWeight: FontWeight.w700,

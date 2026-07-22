@@ -29,5 +29,61 @@
     "it": "1200 a.C. - 400 a.C.",
     "en": "1200 BC - 400 BC"
   },
-  "imagen_sugerida": "assets/images/banners/sacerdote-ceremonial-andino.jpg"
+  "imagen_sugerida": "assets/images/banners/sacerdote-ceremonial-andino.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué sustancia consumían los peregrinos antes de entrar a las galerías de Chavín?",
+        "it": "Quale sostanza consumavano i pellegrini prima di entrare nelle gallerie di Chavín?",
+        "en": "What substance did pilgrims consume before entering Chavín's galleries?"
+      },
+      "opciones": {
+        "es": ["Chicha de jora", "El cactus San Pedro", "Hojas de coca", "Vino de palma"],
+        "it": ["Chicha di jora", "Il cactus San Pedro", "Foglie di coca", "Vino di palma"],
+        "en": ["Jora chicha", "The San Pedro cactus", "Coca leaves", "Palm wine"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Los iniciados consumían el cactus alucinógeno San Pedro en ritos secretos antes de entrar en trance.",
+        "it": "Gli iniziati consumavano il cactus allucinogeno San Pedro in riti segreti prima di entrare in trance.",
+        "en": "Initiates consumed the hallucinogenic San Pedro cactus in secret rites before entering a trance."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cómo lograban los sacerdotes de Chavín crear el rugido que atemorizaba a los peregrinos?",
+        "it": "Come riuscivano i sacerdoti di Chavín a creare il ruggito che spaventava i pellegrini?",
+        "en": "How did Chavín's priests create the roar that terrified pilgrims?"
+      },
+      "opciones": {
+        "es": ["Con tambores gigantes", "Canalizando agua a presión por conductos de piedra", "Con trompetas de caracol", "Con cánticos corales"],
+        "it": ["Con tamburi giganti", "Incanalando acqua a pressione in condotti di pietra", "Con trombe di conchiglia", "Con canti corali"],
+        "en": ["With giant drums", "By channeling pressurized water through stone conduits", "With conch shell trumpets", "With choral chants"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El agua fluía a presión por conductos bajo las galerías, produciendo un bramido similar al rugido de un jaguar.",
+        "it": "L'acqua scorreva a pressione in condotti sotto le gallerie, producendo un ruggito simile a quello di un giaguaro.",
+        "en": "Water flowed under pressure through conduits beneath the galleries, producing a roar like a jaguar's growl."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué representan las 'Cabezas Clavas' en las fachadas del templo de Chavín?",
+        "it": "Cosa rappresentano le 'Cabezas Clavas' sulle facciate del tempio di Chavín?",
+        "en": "What do the 'Tenoned Heads' on Chavín's temple facades represent?"
+      },
+      "opciones": {
+        "es": ["A los enemigos derrotados", "La metamorfosis del sacerdote en jaguar", "A los dioses del agua", "El árbol genealógico real"],
+        "it": ["I nemici sconfitti", "La metamorfosi del sacerdote in giaguaro", "Gli dei dell'acqua", "L'albero genealogico reale"],
+        "en": ["Defeated enemies", "The priest's metamorphosis into a jaguar", "The water gods", "The royal family tree"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Muestran, paso a paso, la transformación del rostro humano en rasgos felinos de jaguar durante el trance.",
+        "it": "Mostrano, passo dopo passo, la trasformazione del volto umano in tratti felini di giaguaro durante la trance.",
+        "en": "They show, step by step, the transformation of the human face into feline jaguar features during the trance."
+      }
+    }
+  ]
 }

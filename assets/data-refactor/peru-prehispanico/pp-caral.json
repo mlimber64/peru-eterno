@@ -14,7 +14,7 @@
   },
   "subtitulo": {
     "es": "La civilización que desafió al tiempo sin conocer la guerra.",
-    "it": "La civiltà que sfidò il tempo senza conoscere la guerra.",
+    "it": "La civiltà che sfidò il tempo senza conoscere la guerra.",
     "en": "The civilization that defied time without ever knowing war."
   },
   "contenido": {
@@ -29,5 +29,61 @@
     "it": "3000 a.C. - 1800 a.C.",
     "en": "3000 BC - 1800 BC"
   },
-  "imagen_sugerida": "assets/images/caral/caral_1.jpg"
+  "imagen_sugerida": "assets/images/caral/caral_1.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué NO encontraron los arqueólogos en Caral, a diferencia de otras civilizaciones antiguas?",
+        "it": "Cosa NON hanno trovato gli archeologi a Caral, a differenza di altre civiltà antiche?",
+        "en": "What did archaeologists NOT find at Caral, unlike other ancient civilizations?"
+      },
+      "opciones": {
+        "es": ["Pirámides", "Anfiteatros circulares", "Murallas o armas de guerra", "Canales de irrigación"],
+        "it": ["Piramidi", "Anfiteatri circolari", "Mura o armi da guerra", "Canali di irrigazione"],
+        "en": ["Pyramids", "Circular amphitheaters", "Walls or weapons of war", "Irrigation canals"]
+      },
+      "respuesta_correcta": 2,
+      "explicacion": {
+        "es": "Caral prosperó sin ejércitos ni fortificaciones: no se hallaron murallas, armas ni cuerpos con signos de batalla.",
+        "it": "Caral prosperò senza eserciti né fortificazioni: non furono trovate mura, armi né corpi con segni di battaglia.",
+        "en": "Caral thrived without armies or fortifications: no walls, weapons, or bodies showing signs of battle were found."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué instrumentos musicales hallaron los arqueólogos en los altares subterráneos de Caral?",
+        "it": "Quali strumenti musicali hanno trovato gli archeologi negli altari sotterranei di Caral?",
+        "en": "What musical instruments did archaeologists find in Caral's underground altars?"
+      },
+      "opciones": {
+        "es": ["Tambores de cerámica", "32 flautas de hueso de cóndor y pelícano", "Trompetas de caracol", "Campanas de cobre"],
+        "it": ["Tamburi di ceramica", "32 flauti in osso di condor e pellicano", "Trombe di conchiglia", "Campane di rame"],
+        "en": ["Ceramic drums", "32 flutes made from condor and pelican bone", "Conch shell trumpets", "Copper bells"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Se hallaron 32 flautas talladas en huesos de aves, decoradas con figuras de monos y serpientes.",
+        "it": "Furono trovati 32 flauti intagliati in ossa di uccelli, decorati con figure di scimmie e serpenti.",
+        "en": "32 flutes carved from bird bones were found, decorated with figures of monkeys and snakes."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué fenómeno natural provocó el abandono de Caral hacia el año 1800 a.C.?",
+        "it": "Quale fenomeno naturale provocò l'abbandono di Caral intorno al 1800 a.C.?",
+        "en": "What natural phenomenon caused Caral to be abandoned around 1800 BC?"
+      },
+      "opciones": {
+        "es": ["Una erupción volcánica", "Una plaga de langostas", "Megaterremotos y El Niño", "Una guerra civil"],
+        "it": ["Un'eruzione vulcanica", "Un'invasione di locuste", "Mega-terremoti ed El Niño", "Una guerra civile"],
+        "en": ["A volcanic eruption", "A locust plague", "Mega-earthquakes and El Niño", "A civil war"]
+      },
+      "respuesta_correcta": 2,
+      "explicacion": {
+        "es": "Una serie de megaterremotos seguidos por El Niño sepultó los campos en arena y secó sus canales.",
+        "it": "Una serie di mega-terremoti seguiti da El Niño seppellì i campi di sabbia e prosciugò i canali.",
+        "en": "A series of mega-earthquakes followed by El Niño buried the fields in sand and dried up the canals."
+      }
+    }
+  ]
 }

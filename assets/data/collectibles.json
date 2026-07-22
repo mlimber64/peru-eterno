@@ -1,0 +1,22 @@
+[
+  { "id": "caral", "stage_id": "peru_prehispanico", "rareza": "comun" },
+  { "id": "chavin", "stage_id": "peru_prehispanico", "rareza": "rara" },
+  { "id": "paracas", "stage_id": "peru_prehispanico", "rareza": "comun" },
+  { "id": "nazca", "stage_id": "peru_prehispanico", "rareza": "comun" },
+  { "id": "moche", "stage_id": "peru_prehispanico", "rareza": "rara" },
+  { "id": "wari", "stage_id": "peru_prehispanico", "rareza": "comun" },
+  { "id": "chimu", "stage_id": "peru_prehispanico", "rareza": "rara" },
+  { "id": "incas", "stage_id": "peru_prehispanico", "rareza": "legendaria" },
+  { "id": "guerra_civil_inca", "stage_id": "conquista_spagnola", "rareza": "epica" },
+  { "id": "captura_cajamarca", "stage_id": "conquista_spagnola", "rareza": "epica" },
+  { "id": "resistencia_vilcabamba", "stage_id": "conquista_spagnola", "rareza": "rara" },
+  { "id": "lima_virreinal", "stage_id": "vicereame_peru", "rareza": "epica" },
+  { "id": "sincretismo_escuela_cusquena", "stage_id": "vicereame_peru", "rareza": "rara" },
+  { "id": "terremoto_tapadas_limeñas", "stage_id": "vicereame_peru", "rareza": "comun" },
+  { "id": "rebelion_tupac_amaru", "stage_id": "indipendenza", "rareza": "epica" },
+  { "id": "corriente_libertadora_sur", "stage_id": "indipendenza", "rareza": "legendaria" },
+  { "id": "batallas_junin_ayacucho", "stage_id": "indipendenza", "rareza": "rara" },
+  { "id": "era_guano_dos_mayo", "stage_id": "republica_peru", "rareza": "comun" },
+  { "id": "guerra_pacifico_grau", "stage_id": "republica_peru", "rareza": "legendaria" },
+  { "id": "resistencia_bolognesi_caceres", "stage_id": "republica_peru", "rareza": "epica" }
+]

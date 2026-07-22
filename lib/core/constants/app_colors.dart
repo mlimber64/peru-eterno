@@ -22,6 +22,7 @@ class AppColors {
   static const Color conquistaColor    = Color(0xFF7A3B1E);
   static const Color virreinatoColor   = Color(0xFF5C3317);
   static const Color independenciaColor= Color(0xFF2D6A4F);
+  static const Color republicaColor    = Color(0xFF8B2E2E);
 
   // ── World accent colors ───────────────────────────────────────────────────
   static const Color worldHistoria   = Color(0xFFC1440E);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/constants/app_colors.dart';
+import 'core/navigation/app_navigation.dart';
 import 'screens/splash_screen.dart';
 
 class PeruEternoApp extends StatelessWidget {
@@ -8,6 +9,7 @@ class PeruEternoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: AppNavigation.navigatorKey,
       title: 'Perú Eterno',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

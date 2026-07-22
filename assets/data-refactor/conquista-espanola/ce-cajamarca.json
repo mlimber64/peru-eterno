@@ -1,0 +1,89 @@
+{
+  "id": "captura_cajamarca",
+  "parent_stage_id": "conquista_spagnola",
+  "orden": 2,
+  "categoria": {
+    "es": "Colapso del Tahuantinsuyo",
+    "it": "Crollo del Tahuantinsuyo",
+    "en": "Collapse of Tahuantinsuyo"
+  },
+  "titulo": {
+    "es": "Cajamarca: La emboscada y el rescate de oro",
+    "it": "Cajamarca: L'imboscata e il riscatto d'oro",
+    "en": "Cajamarca: The Ambush and the Gold Ransom"
+  },
+  "subtitulo": {
+    "es": "El encuentro fatal entre Atahualpa y Pizarro que cambió para siempre el destino del continente americano.",
+    "it": "Il fatale incontro tra Atahualpa e Pizarro che cambiò per sempre il destino del continente.",
+    "en": "The fateful meeting between Atahualpa and Pizarro that altered the course of the Americas forever."
+  },
+  "contenido": {
+    "es": "El 16 de noviembre de 1532 d.C., la plaza de Cajamarca fue escenario de uno de los acontecimientos más dramáticos de la historia universal. El Inca Atahualpa ingresó a la ciudad rodeado por miles de servidores y guerreros en una litera dorada, confiado en la superioridad numérica de sus tropas campadas en los alrededores. Frente a él avanzó el fraile Vicente de Valverde portando una biblia para realizar el 'Requerimiento', el acto formal que exigía al monarca someterse a la corona española y abrazar la fe cristiana.\n\nAtahualpa, al no comprender el significado del libro sagrado ni el idioma de los forasteros, arrojó la biblia al suelo. Esa acción desencadenó el ataque: los conquistadores, ocultos en los edificios de la plaza, abrieron fuego con cañones y arcabuces mientras la caballería arremetía contra la multitud aterrorizada. En medio del caos, Pizarro capturó personalmente a Atahualpa, logrando desarticular el mando del imperio en cuestión de horas.\n\nConsciente del valor que los españoles daban a los metales preciosos, Atahualpa propuso un trato extraordinario a cambio de su libertad: llenar la habitación donde se encontraba prisionero —el famoso 'Cuarto del Rescate'— una vez de oro y dos veces de plata hasta donde alcanzara la altura de su mano alzada. Durante meses, caravanas de llamas cargadas de artefactos sagrados, vajillas reales y láminas de templos llegaron a Cajamarca desde los rincones más lejanos del Tahuantinsuyo.\n\nA pesar de que el rescate acumulado representó la mayor suma de metales preciosos recolectada en la historia antigua, los conquistadores no cumplieron su promesa. Ante el temor de un contraataque liderado por los generales atahualpistas, Pizarro sometió a juicio al Inca y lo condenó a muerte. Atahualpa fue ejecutado el 26 de julio de 1533 d.C., marcando el fin oficial del gobierno incaico centralizado.\n\n**[¿SABÍAS QUÉ?]**\nEl 'Cuarto del Rescate' aún se conserva en el centro histórico de Cajamarca y es la única construcción Inca que sobrevive en esa ciudad. En una de sus paredes de piedra se aprecia la marca roja restaurada que señala la altura histórica alcanzada por la mano levantada de Atahualpa (aproximadamente 2.45 metros de alto).\n\n*Créditos de investigación y agradecimientos a la Dirección Desconcentrada de Cultura de Cajamarca y al archivo histórico de las Crónicas de Indias.*",
+
+    "it": "Il 16 novembre 1532, la piazza di Cajamarca fu teatro di uno degli eventi più drammatici della storia. L'Inca Atahualpa entrò in città su una lettiga dorata, circondato da migliaia di servitori. Il frate Vicente de Valverde si avvicinò con una bibbia per esigere la sottomissione al re di Spagna e al cristianesimo.\n\nAtahualpa, non comprendendo il libro, lo gettò a terra. Gli spagnoli risposero aprendo il fuoco con cannoni e lanciando la cavalleria. Pizarro catturò Atahualpa, paralizzando il comando dell'impero.\n\nAtahualpa offrì in cambio della libertà di riempire una stanza d'oro e due d'argento fino all'altezza della sua mano. Nonostante le carovane portassero enormi tesori, gli spagnoli non mantennero la promessa e giustiziarono l'Inca il 26 luglio 1533.\n\n**[CURIOSITÀ]**\nIl 'Cuarto del Rescate' esiste ancora oggi a Cajamarca ed è l'unica struttura Inca rimasta in città. Su una delle pareti è visibile il segno che indica l'altezza raggiunta dalla mano di Atahualpa (circa 2,45 metri).\n\n*Crediti di ricerca e ringraziamenti alla Direzione della Cultura di Cajamarca e alle Cronache delle Indie.*",
+
+    "en": "On November 16, 1532, Cajamarca's plaza became the stage for a historic clash. Inca Atahualpa entered on a golden litter, flanked by thousands. Friar Vicente de Valverde approached with a Bible, demanding submission to the Spanish Crown and Christianity.\n\nNot understanding the book, Atahualpa cast it aside. The Spanish opened fire with cannons and cavalry. Pizarro captured Atahualpa, paralyzing imperial leadership in hours.\n\nAtahualpa offered to fill his prison room—the famous 'Ransom Room'—once with gold and twice with silver up to his reached hand. Although caravans brought vast treasures, the conquistadors broke faith and executed Atahualpa on July 26, 1533.\n\n**[FUN FACT]**\nThe 'Ransom Room' still stands in Cajamarca's historic center. A mark on the stone wall indicates the height reached by Atahualpa's raised hand (roughly 2.45 meters high).\n\n*Research credits and special thanks to the Cajamarca Cultural Directorate and the Chronicles of the Indies archives.*"
+  },
+  "periodo": {
+    "es": "1532 d.C. - 1533 d.C.",
+    "it": "1532 d.C. - 1533 d.C.",
+    "en": "1532 AD - 1533 AD"
+  },
+  "imagen_sugerida": "assets/images/incas/incas_1.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué hizo Atahualpa que los españoles usaron como pretexto para atacar en Cajamarca?",
+        "it": "Cosa fece Atahualpa che gli spagnoli usarono come pretesto per attaccare a Cajamarca?",
+        "en": "What did Atahualpa do that the Spanish used as a pretext to attack in Cajamarca?"
+      },
+      "opciones": {
+        "es": ["Atacó primero a los españoles", "Arrojó la biblia al suelo", "Se negó a entrar a la plaza", "Escapó con su ejército"],
+        "it": ["Attaccò per primo gli spagnoli", "Gettò la bibbia a terra", "Si rifiutò di entrare nella piazza", "Fuggì con il suo esercito"],
+        "en": ["He attacked the Spanish first", "He threw the Bible to the ground", "He refused to enter the plaza", "He fled with his army"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Al no comprender el significado del libro sagrado, Atahualpa lo arrojó al suelo, lo que desencadenó el ataque.",
+        "it": "Non comprendendo il significato del libro sacro, Atahualpa lo gettò a terra, scatenando l'attacco.",
+        "en": "Not understanding the sacred book's meaning, Atahualpa threw it down, which triggered the attack."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué ofreció Atahualpa a cambio de su libertad?",
+        "it": "Cosa offrì Atahualpa in cambio della sua libertà?",
+        "en": "What did Atahualpa offer in exchange for his freedom?"
+      },
+      "opciones": {
+        "es": ["Ejércitos y territorios", "Llenar una habitación de oro y dos de plata", "La ciudad del Cusco", "Un tratado de paz eterno"],
+        "it": ["Eserciti e territori", "Riempire una stanza d'oro e due d'argento", "La città di Cusco", "Un trattato di pace eterna"],
+        "en": ["Armies and territories", "Filling one room with gold and two with silver", "The city of Cusco", "An eternal peace treaty"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Propuso llenar el 'Cuarto del Rescate' una vez de oro y dos veces de plata hasta la altura de su mano alzada.",
+        "it": "Propose di riempire il 'Cuarto del Rescate' una volta d'oro e due d'argento fino all'altezza della sua mano.",
+        "en": "He proposed filling the 'Ransom Room' once with gold and twice with silver up to his raised hand."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué ocurrió finalmente con Atahualpa a pesar del pago del rescate?",
+        "it": "Cosa accadde infine ad Atahualpa nonostante il pagamento del riscatto?",
+        "en": "What ultimately happened to Atahualpa despite the ransom payment?"
+      },
+      "opciones": {
+        "es": ["Fue liberado como se prometió", "Fue juzgado y ejecutado en 1533", "Escapó a Vilcabamba", "Fue coronado virrey"],
+        "it": ["Fu liberato come promesso", "Fu processato e giustiziato nel 1533", "Fuggì a Vilcabamba", "Fu incoronato vicerè"],
+        "en": ["He was freed as promised", "He was tried and executed in 1533", "He escaped to Vilcabamba", "He was crowned viceroy"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Pese al enorme rescate entregado, Pizarro lo sometió a juicio y lo condenó a muerte el 26 de julio de 1533.",
+        "it": "Nonostante l'enorme riscatto consegnato, Pizarro lo sottopose a processo e lo condannò a morte il 26 luglio 1533.",
+        "en": "Despite the enormous ransom paid, Pizarro put him on trial and sentenced him to death on July 26, 1533."
+      }
+    }
+  ]
+}

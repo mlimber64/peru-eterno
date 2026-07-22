@@ -29,5 +29,61 @@
     "it": "100 d.C. - 800 d.C.",
     "en": "100 AD - 800 AD"
   },
-  "imagen_sugerida": "assets/images/moche/moche_1.jpg"
+  "imagen_sugerida": "assets/images/moche/moche_1.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Qué reveló el hallazgo del 'Señor de Sipán' en 1987?",
+        "it": "Cosa rivelò la scoperta del 'Signore di Sipán' nel 1987?",
+        "en": "What did the 1987 discovery of the 'Lord of Sipán' reveal?"
+      },
+      "opciones": {
+        "es": ["Una ciudad amurallada", "Una tumba real intacta con ornamentos de oro", "Un campo de batalla", "Un observatorio astronómico"],
+        "it": ["Una città fortificata", "Una tomba reale intatta con ornamenti d'oro", "Un campo di battaglia", "Un osservatorio astronomico"],
+        "en": ["A walled city", "An intact royal tomb with gold ornaments", "A battlefield", "An astronomical observatory"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El arqueólogo Walter Alva descubrió la tumba intacta de un soberano Moche con cetros y pectorales de oro.",
+        "it": "L'archeologo Walter Alva scoprì la tomba intatta di un sovrano Moche con scettri e pettorali d'oro.",
+        "en": "Archaeologist Walter Alva discovered the intact tomb of a Moche ruler with gold scepters and pectorals."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué técnica metalúrgica avanzada dominaban los Moche siglos antes que Europa?",
+        "it": "Quale avanzata tecnica metallurgica padroneggiavano i Moche secoli prima dell'Europa?",
+        "en": "What advanced metallurgical technique did the Moche master centuries before Europe?"
+      },
+      "opciones": {
+        "es": ["La fundición a la cera perdida", "El dorado por reemplazo electroquímico", "La forja del acero", "El vidriado cerámico"],
+        "it": ["La fusione a cera persa", "La doratura per sostituzione elettrochimica", "La forgiatura dell'acciaio", "L'invetriatura ceramica"],
+        "en": ["Lost-wax casting", "Electrochemical replacement gilding", "Steel forging", "Ceramic glazing"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Depositaban una capa microscópica de oro sobre objetos de cobre usando soluciones ácidas minerales.",
+        "it": "Depositavano un sottile strato d'oro su oggetti di rame usando soluzioni acide minerali.",
+        "en": "They deposited a microscopic layer of gold onto copper objects using mineral acid solutions."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué reveló el descubrimiento de la 'Señora de Cao'?",
+        "it": "Cosa rivelò la scoperta della 'Signora di Cao'?",
+        "en": "What did the discovery of the 'Lady of Cao' reveal?"
+      },
+      "opciones": {
+        "es": ["Que los Moche comerciaban con Europa", "Que las mujeres ejercían poder político y religioso", "Que los Moche no tenían jerarquías", "Que practicaban la momificación egipcia"],
+        "it": ["Che i Moche commerciavano con l'Europa", "Che le donne esercitavano potere politico e religioso", "Che i Moche non avevano gerarchie", "Che praticavano la mummificazione egizia"],
+        "en": ["That the Moche traded with Europe", "That women held political and religious power", "That the Moche had no hierarchies", "That they practiced Egyptian mummification"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Se halló la tumba de una joven gobernante tatuada, enterrada con símbolos del máximo poder.",
+        "it": "Fu trovata la tomba di una giovane sovrana tatuata, sepolta con simboli del massimo potere.",
+        "en": "The tomb of a young tattooed female ruler was found, buried with symbols of supreme power."
+      }
+    }
+  ]
 }
