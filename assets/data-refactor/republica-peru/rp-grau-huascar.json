@@ -4,7 +4,7 @@
   "orden": 2,
   "categoria": {
     "es": "Guerra del Pacífico",
-    "it": "Guerra del Pacifico",
+    "it": "Guerra del Pacífico",
     "en": "War of the Pacific"
   },
   "titulo": {
@@ -39,7 +39,7 @@
       },
       "opciones": {
         "es": ["El Brujo de los Andes", "El Caballero de los Mares", "El Libertador del Pacífico", "El León de Tarapacá"],
-        "it": ["Il Stregone delle Ande", "Il Cavaliere dei Mari", "Il Liberatore del Pacifico", "Il Leone di Tarapacá"],
+        "it": ["Il Stregone delle Ande", "Il Cavaliere dei Mari", "Il Liberatore del Pacífico", "Il Leone di Tarapacá"],
         "en": ["The Wizard of the Andes", "The Knight of the Seas", "The Liberator of the Pacific", "The Lion of Tarapacá"]
       },
       "respuesta_correcta": 1,
