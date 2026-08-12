@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/utils/localized_map.dart';
+
 class TimelineItem {
   final String id;
   final int orden;
@@ -27,8 +29,8 @@ class TimelineItem {
       id: json['id'] as String,
       orden: json['orden'] as int,
       color: Color(int.parse(colorHex, radix: 16)),
-      titulo: Map<String, String>.from(json['titulo'] as Map),
-      periodo: Map<String, String>.from(json['periodo'] as Map),
+      titulo: LocalizedMapX.parse(json['titulo']),
+      periodo: LocalizedMapX.parse(json['periodo']),
       imagePath: json['image'] as String?,
       stageId: json['stage_id'] as String?,
       articleId: json['article_id'] as String?,
@@ -39,6 +41,6 @@ class TimelineItem {
   /// dado que la mayoría de los nodos comparten el mismo id que su capítulo).
   String get articleId => _articleId ?? id;
 
-  String tituloFor(String lang) => titulo[lang] ?? titulo['it'] ?? id;
-  String periodoFor(String lang) => periodo[lang] ?? periodo['it'] ?? '';
+  String tituloFor(String lang) => titulo.localizedFor(lang, fallback: id);
+  String periodoFor(String lang) => periodo.localizedFor(lang);
 }

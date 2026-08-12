@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/historia_stages_repository.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
 import '../services/home_widget_service.dart';
+import '../services/user_progress_sync_service.dart';
 
 /// Selecciona la "Historia del Día" (determinista, uniforme sobre los 20
 /// capítulos de `assets/data-refactor/`) y gestiona la racha de lectura
@@ -39,6 +42,12 @@ class DailyStoryProvider extends ChangeNotifier {
 
   int get currentStreak => _currentStreak;
   int get longestStreak => _longestStreak;
+
+  /// Fecha ('yyyy-MM-dd') de la última vez que se completó la historia del
+  /// día, o `null` si nunca. Expuesto (además de [currentStreak]/
+  /// [longestStreak]) para que [UserProgressSyncService] pueda leer y
+  /// fusionar la racha con Supabase sin acceder a campos privados.
+  String? get lastReadDate => _lastReadDate;
 
   /// ¿Ya se leyó la historia del día hoy?
   bool get isCompletedToday => _lastReadDate == _dateKey(DateTime.now());
@@ -125,7 +134,28 @@ class DailyStoryProvider extends ChangeNotifier {
 
     notifyListeners();
     await _save();
+    unawaited(UserProgressSyncService.instance?.pushStreak());
     return true;
+  }
+
+  /// Aplica una racha ya fusionada (máximo entre local y remoto, resuelto
+  /// por [UserProgressSyncService]) y la persiste. No dispara push de vuelta
+  /// a Supabase — el propio servicio de sync ya hizo ese lado.
+  Future<void> applySyncedStreak({
+    required int currentStreak,
+    required int longestStreak,
+    required String? lastCompletedDate,
+  }) async {
+    if (currentStreak == _currentStreak &&
+        longestStreak == _longestStreak &&
+        lastCompletedDate == _lastReadDate) {
+      return; // Sin cambios: evita un notifyListeners de más.
+    }
+    _currentStreak = currentStreak;
+    _longestStreak = longestStreak;
+    _lastReadDate = lastCompletedDate;
+    notifyListeners();
+    await _save();
   }
 
   Future<void> _save() async {

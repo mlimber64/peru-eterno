@@ -1,36 +1,22 @@
 import '../models/content_item.dart';
+import '../models/era_model.dart';
+import 'eras_repository.dart';
 
 class ContentRepository {
-  // ── Historia ──────────────────────────────────────────────────────────────
-  static const List<ContentItem> eras = [
-    ContentItem(id: 'caral', category: 'era', wikipediaSlug: {
-      'es': 'Caral', 'en': 'Caral', 'it': 'Caral',
-    }),
-    ContentItem(id: 'moche', category: 'era', wikipediaSlug: {
-      'es': 'Cultura_moche', 'en': 'Moche_culture', 'it': 'Cultura_mochica',
-    }),
-    ContentItem(id: 'tiahuanaco', category: 'era', wikipediaSlug: {
-      'es': 'Tiahuanaco', 'en': 'Tiwanaku', 'it': 'Tiwanaku',
-    }),
-    ContentItem(id: 'inca', category: 'era', isPremium: true, wikipediaSlug: {
-      'es': 'Imperio_incaico', 'en': 'Inca_Empire', 'it': 'Impero_inca',
-    }),
-    ContentItem(id: 'conquista', category: 'era', isPremium: true, wikipediaSlug: {
-      'es': 'Conquista_del_Perú',
-      'en': 'Spanish_conquest_of_the_Inca_Empire',
-      'it': 'Conquista_del_Perù',
-    }),
-    ContentItem(id: 'virreinato', category: 'era', isPremium: true, wikipediaSlug: {
-      'es': 'Virreinato_del_Perú',
-      'en': 'Viceroyalty_of_Peru',
-      'it': 'Vicereame_del_Perù',
-    }),
-    ContentItem(id: 'independencia', category: 'era', isPremium: true, wikipediaSlug: {
-      'es': 'Independencia_del_Perú',
-      'en': 'Peruvian_War_of_Independence',
-      'it': 'Indipendenza_del_Perù',
-    }),
-  ];
+  // ── Historia (eras) ──────────────────────────────────────────────────────
+  // Las eras viven únicamente en ErasRepository (fuente única de verdad).
+  // `_eraAsContentItem` es el único puente restante: existe solo para que
+  // `all`/`findById` sigan resolviendo ids de era como ContentItem genérico,
+  // que es lo que aún necesitan consumidores fuera de este refactor (p. ej.
+  // CulturalMapScreen, que abre ContentDetailScreen para algunos puntos de
+  // era). La UI que arma listas mixtas usa ErasRepository.allEras
+  // directamente (ver ContentRef) y ya no pasa por aquí.
+  static ContentItem _eraAsContentItem(EraModel era) => ContentItem(
+        id: era.id,
+        category: 'era',
+        wikipediaSlug: era.wikipediaSlug,
+        isPremium: era.isPremium,
+      );
 
   // ── Personajes ilustres ───────────────────────────────────────────────────
   static const List<ContentItem> personajes = [
@@ -146,7 +132,7 @@ class ContentRepository {
   ];
 
   static List<ContentItem> get all => [
-        ...eras,
+        ...ErasRepository.allEras.map(_eraAsContentItem),
         ...personajes,
         ...tradiciones,
         ...gastronomia,

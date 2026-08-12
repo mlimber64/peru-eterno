@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +22,8 @@ import 'providers/premium_provider.dart';
 import 'providers/reading_progress_provider.dart';
 import 'providers/reading_text_scale_provider.dart';
 import 'services/home_widget_service.dart';
+import 'services/supabase_auth_service.dart';
+import 'services/user_progress_sync_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +59,17 @@ void main() async {
     ),
   );
 
+  // Auth anónima: da un user_id estable para sincronizar progreso (racha,
+  // quiz, coleccionables, finales) con Supabase. Se lanza sin `await` a
+  // propósito — es una llamada de red y el arranque de la app no debe
+  // esperarla; hasta que resuelva, `supabaseAuthService.userId.value` es
+  // null y todo sigue funcionando 100% local, igual que si Supabase no
+  // estuviera configurado.
+  final supabaseAuthService = SupabaseAuthService(
+    supabaseReady ? Supabase.instance.client : null,
+  );
+  unawaited(supabaseAuthService.initialize());
+
   final languageProvider = LanguageProvider();
   await languageProvider.initialize();
 
@@ -87,6 +102,21 @@ void main() async {
 
   final interactiveStoryProvider = InteractiveStoryProvider();
 
+  // Sync de progreso: se construye al final, una vez que existen los 4
+  // providers de progreso que lee/escribe. `UserProgressSyncService.instance`
+  // queda disponible para que esos mismos providers empujen cambios
+  // incrementales (ver sus métodos `applySynced*`/`pushXxx`) sin depender de
+  // Supabase directamente. Al asignar `instance` (o si ya había sesión al
+  // construirlo) dispara un `syncAll()` inicial en segundo plano.
+  UserProgressSyncService.instance = UserProgressSyncService(
+    client: supabaseReady ? Supabase.instance.client : null,
+    auth: supabaseAuthService,
+    dailyStoryProvider: dailyStoryProvider,
+    collectiblesProvider: collectiblesProvider,
+    readingProgressProvider: readingProgressProvider,
+    interactiveStoryProvider: interactiveStoryProvider,
+  );
+
   runApp(
     MultiProvider(
       providers: [
@@ -101,6 +131,8 @@ void main() async {
         ChangeNotifierProvider.value(value: collectiblesProvider),
         ChangeNotifierProvider.value(value: audioPlayerProvider),
         ChangeNotifierProvider.value(value: interactiveStoryProvider),
+        Provider.value(value: supabaseAuthService),
+        Provider.value(value: UserProgressSyncService.instance!),
       ],
       child: const PeruEternoApp(),
     ),

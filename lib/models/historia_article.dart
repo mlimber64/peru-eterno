@@ -2,6 +2,7 @@
 // Fuente: assets/data/historia_prehispanica.json
 // Independiente del sistema Wikipedia (ErasRepository + WikipediaService).
 
+import '../core/utils/localized_map.dart';
 import 'quiz_question.dart';
 
 /// Bloque de curiosidad "¿Sabías qué?" / "Curiosità" / "Fun fact" extraído
@@ -41,14 +42,15 @@ class HistoriaArticle {
   factory HistoriaArticle.fromJson(Map<String, dynamic> json) {
     return HistoriaArticle(
       id: json['id'] as String,
-      categoria: _toStringMap(json['categoria']),
+      categoria: LocalizedMapX.parse(json['categoria']),
       orden: json['orden'] as int,
-      titulo: _toStringMap(json['titulo']),
-      subtitulo: _toStringMap(json['subtitulo']),
+      titulo: LocalizedMapX.parse(json['titulo']),
+      subtitulo: LocalizedMapX.parse(json['subtitulo']),
       imagenSugerida: json['imagen_sugerida'] as String,
-      contenido: _toStringMap(json['contenido']),
+      contenido: LocalizedMapX.parse(json['contenido']),
       parentStageId: json['parent_stage_id'] as String?,
-      periodo: json['periodo'] != null ? _toStringMap(json['periodo']) : null,
+      periodo:
+          json['periodo'] != null ? LocalizedMapX.parse(json['periodo']) : null,
       quiz: (json['quiz'] as List<dynamic>? ?? const [])
           .map((e) => QuizQuestion.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -56,11 +58,11 @@ class HistoriaArticle {
   }
 
   // Getters localizados — fallback a italiano (idioma principal)
-  String tituloFor(String lang) => titulo[lang] ?? titulo['it'] ?? id;
-  String subtituloFor(String lang) => subtitulo[lang] ?? subtitulo['it'] ?? '';
-  String categoriaFor(String lang) => categoria[lang] ?? categoria['it'] ?? '';
-  String contenidoFor(String lang) => contenido[lang] ?? contenido['it'] ?? '';
-  String? periodoFor(String lang) => periodo?[lang] ?? periodo?['it'];
+  String tituloFor(String lang) => titulo.localizedFor(lang, fallback: id);
+  String subtituloFor(String lang) => subtitulo.localizedFor(lang);
+  String categoriaFor(String lang) => categoria.localizedFor(lang);
+  String contenidoFor(String lang) => contenido.localizedFor(lang);
+  String? periodoFor(String lang) => periodo?.localizedFor(lang);
 
   /// Párrafos del contenido en [lang] (separados por línea en blanco).
   List<String> _paragraphsFor(String lang) => contenidoFor(lang)
@@ -129,11 +131,4 @@ class HistoriaArticle {
   String get imagenAssetPath => imagenSugerida.startsWith('assets/')
       ? imagenSugerida
       : 'assets/images/historia/$imagenSugerida';
-
-  static Map<String, String> _toStringMap(dynamic raw) {
-    if (raw is Map) {
-      return raw.map((k, v) => MapEntry(k.toString(), v.toString()));
-    }
-    return {};
-  }
 }
