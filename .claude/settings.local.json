@@ -311,7 +311,17 @@
       "Bash(dart format *)",
       "Bash(MSYS_NO_PATHCONV=1 adb pull /sdcard/window_dump.xml \"C:\\\\Users\\\\limbe\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-limbe-OneDrive-Documentos-apps-flutter-peru-eterno\\\\41e8552f-c67f-45f6-8289-170b2a626e11\\\\scratchpad\\\\dump_drawer.xml\")",
       "Bash(MSYS_NO_PATHCONV=1 adb pull /sdcard/window_dump.xml \"C:\\\\Users\\\\limbe\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-limbe-OneDrive-Documentos-apps-flutter-peru-eterno\\\\41e8552f-c67f-45f6-8289-170b2a626e11\\\\scratchpad\\\\dump_cronista.xml\")",
-      "Bash(MSYS_NO_PATHCONV=1 adb pull /sdcard/window_dump.xml \"C:\\\\Users\\\\limbe\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-limbe-OneDrive-Documentos-apps-flutter-peru-eterno\\\\41e8552f-c67f-45f6-8289-170b2a626e11\\\\scratchpad\\\\dump_cronista2.xml\")"
+      "Bash(MSYS_NO_PATHCONV=1 adb pull /sdcard/window_dump.xml \"C:\\\\Users\\\\limbe\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-limbe-OneDrive-Documentos-apps-flutter-peru-eterno\\\\41e8552f-c67f-45f6-8289-170b2a626e11\\\\scratchpad\\\\dump_cronista2.xml\")",
+      "Bash(grep -E \"models\\\\\\\\\\\\\\\\localized_map|models\\\\\\\\\\\\\\\\historia_article\\\\.dart|models\\\\\\\\\\\\\\\\historia_stage\\\\.dart|models\\\\\\\\\\\\\\\\editorial_content\\\\.dart|models\\\\\\\\\\\\\\\\timeline_item\\\\.dart|core\\\\\\\\\\\\\\\\utils\\\\\\\\\\\\\\\\localized_map\")",
+      "Bash(grep -E \"error|models\\\\\\\\\\\\\\\\content_ref|models\\\\\\\\\\\\\\\\era_model|models\\\\\\\\\\\\\\\\content_item|data\\\\\\\\\\\\\\\\content_repository|providers\\\\\\\\\\\\\\\\history_provider|screens\\\\\\\\\\\\\\\\favorites_screen|screens\\\\\\\\\\\\\\\\explore_screen|screens\\\\\\\\\\\\\\\\world_screen|screens\\\\\\\\\\\\\\\\home_screen|widgets\\\\\\\\\\\\\\\\local_cinematic_card|issues found\")",
+      "Bash(MSYS_NO_PATHCONV=1 adb shell uiautomator dump /sdcard/ui.xml)",
+      "Bash(MSYS_NO_PATHCONV=1 adb pull /sdcard/ui.xml \"C:\\\\Users\\\\limbe\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-limbe-OneDrive-Documentos-apps-flutter-peru-eterno\\\\af8f3b9e-ac84-4744-a2af-8f5a8e593828\\\\scratchpad\\\\ui.xml\")",
+      "Bash(break)",
+      "Bash(adb uninstall *)",
+      "Bash(adb install *)",
+      "Bash(MSYS_NO_PATHCONV=1 adb pull /sdcard/ui.xml \"C:\\\\Users\\\\limbe\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-limbe-OneDrive-Documentos-apps-flutter-peru-eterno\\\\af8f3b9e-ac84-4744-a2af-8f5a8e593828\\\\scratchpad\\\\ui2.xml\")",
+      "Bash(MSYS_NO_PATHCONV=1 adb shell uiautomator dump /sdcard/ui2.xml)",
+      "Bash(MSYS_NO_PATHCONV=1 adb pull /sdcard/ui2.xml \"C:\\\\Users\\\\limbe\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-limbe-OneDrive-Documentos-apps-flutter-peru-eterno\\\\af8f3b9e-ac84-4744-a2af-8f5a8e593828\\\\scratchpad\\\\ui2.xml\")"
     ]
   }
 }

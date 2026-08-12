@@ -1,31 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../providers/language_provider.dart';
-import 'explore_screen.dart';
-import 'favorites_screen.dart';
-import 'home_screen.dart';
-import 'map_timeline_screen.dart';
-import 'settings_screen.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+/// Shell de las 5 pestañas principales. El contenido de cada pestaña (y su
+/// propia pila de navegación interna — `Navigator.push` desde dentro de una
+/// pestaña sigue funcionando exactamente igual que antes) lo gestiona
+/// `StatefulShellRoute.indexedStack` en `app_router.dart`; este widget solo
+/// dibuja el `Scaffold` + bottom nav (visualmente idéntico a la versión
+/// anterior basada en `IndexedStack` propio) y delega el cambio de pestaña a
+/// [navigationShell].
+class MainScreen extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
-
-  final List<Widget> _pages = const [
-    HomeScreen(),
-    ExploreScreen(),
-    MapTimelineScreen(),
-    FavoritesScreen(),
-    SettingsScreen(),
-  ];
+  const MainScreen({super.key, required this.navigationShell});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +23,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pages,
-      ),
+      body: navigationShell,
       bottomNavigationBar: _buildBottomNav(t),
     );
   }
@@ -65,12 +52,19 @@ class _MainScreenState extends State<MainScreen> {
           height: 60,
           child: Row(
             children: List.generate(_navItems.length, (i) {
-              final isActive = _currentIndex == i;
+              final isActive = navigationShell.currentIndex == i;
               final item = _navItems[i];
               return Expanded(
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => setState(() => _currentIndex = i),
+                  // `initialLocation: true` cuando se re-toca la pestaña ya
+                  // activa: vuelve a su ruta raíz (mismo comportamiento de
+                  // "tap en la pestaña actual reinicia su stack" que tienen
+                  // la mayoría de apps con bottom nav).
+                  onTap: () => navigationShell.goBranch(
+                    i,
+                    initialLocation: i == navigationShell.currentIndex,
+                  ),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     child: Column(

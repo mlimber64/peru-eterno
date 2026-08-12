@@ -5,8 +5,28 @@
 // assets/data-refactor/peru-prehispanico/ (uno por civilización).
 // Se cargan una sola vez y se cachean en memoria. Contenido 100% offline.
 //
-// Sistema anterior (ErasRepository + WikipediaService) sigue intacto
-// y puede coexistir con este repositorio.
+// ── SISTEMAS HERMANOS POR DISEÑO ────────────────────────────────────────
+// Esta app modela el contenido histórico con dos jerarquías deliberadamente
+// separadas, no fusionadas:
+//
+//   · Módulo Lectura (HistoriaArticle / HistoriaStage, este archivo y
+//     historia_stages_repository.dart): documentos pesados 100% offline
+//     (cuerpo multilenguaje, quiz embebido, offsets de audio TTS, racha
+//     diaria). Es el sistema que alimenta el lector, la Historia del Día
+//     y el quiz.
+//
+//   · Módulo Descubrimiento (ContentRef -> EraModel / ContentItem, ver
+//     models/content_ref.dart): referencias ligeras (id + categoría +
+//     slug de Wikipedia + flag premium) para las vistas de exploración —
+//     grids de Explorar/Mundos, mapa cultural, favoritos e historial de
+//     lectura — que resuelven su contenido real bajo demanda (editorial
+//     local o Wikipedia).
+//
+// Se mantienen separados a propósito: forzarlos a un solo modelo obligaría
+// a campos nulos artificiales en ambos lados (Interface Segregation
+// Principle). El único punto de contacto es un puente explícito y acotado
+// en ContentRepository (`_eraAsContentItem`) para los pocos consumidores
+// que aún necesitan una era como ContentItem genérico.
 
 import 'dart:convert';
 import 'package:flutter/services.dart';

@@ -9,6 +9,7 @@ import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_stages_repository.dart';
 import '../models/content_item.dart';
+import '../models/content_ref.dart';
 import '../models/era_model.dart';
 import '../models/historia_stage.dart';
 import '../providers/language_provider.dart';
@@ -48,15 +49,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
   // Returns true when we show the editorial stages view
   bool get _showStages => _activeFilter == 'era' && _query.isEmpty;
 
-  List<ContentItem> _filtered(String Function(String) t) {
-    final allErasAsItems = ErasRepository.allEras.map((e) => ContentItem(
-          id: e.id,
-          category: 'era',
-          wikipediaSlug: e.wikipediaSlug,
-          isPremium: e.isPremium,
-        ));
-    final all = [
-      ...allErasAsItems,
+  List<ContentRef> _filtered(String Function(String) t) {
+    final all = <ContentRef>[
+      ...ErasRepository.allEras,
       ...ContentRepository.personajes,
       ...ContentRepository.tradiciones,
       ...ContentRepository.gastronomia,
@@ -82,7 +77,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     final lang = context.watch<LanguageProvider>().currentLanguage;
     final t = context.watch<LanguageProvider>().t;
     final isPremium = context.watch<PremiumProvider>().isPremium;
-    final items = _showStages ? <ContentItem>[] : _filtered(t);
+    final items = _showStages ? <ContentRef>[] : _filtered(t);
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
@@ -247,7 +242,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     );
   }
 
-  Widget _buildGrid(BuildContext context, String lang, List<ContentItem> items,
+  Widget _buildGrid(BuildContext context, String lang, List<ContentRef> items,
       bool isPremium) {
     return GridView.builder(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 80),
@@ -260,11 +255,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       itemCount: items.length,
       itemBuilder: (context, i) {
         final item = items[i];
-        final era = item.category == 'era'
-            ? ErasRepository.allEras
-                .cast<EraModel?>()
-                .firstWhere((e) => e?.id == item.id, orElse: () => null)
-            : null;
+        final era = item is EraModel ? item : null;
         final isLocked = item.isPremium && !isPremium;
         final isComingSoon = CategoryConfigs.isComingSoon(item.category);
         final t = context.read<LanguageProvider>().t;
@@ -274,7 +265,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ? () => AppNavigation.openPremium(context)
                 : era != null
                     ? () => AppNavigation.openEra(context, era)
-                    : () => AppNavigation.openContent(context, item);
+                    : () =>
+                        AppNavigation.openContent(context, item as ContentItem);
 
         if (era != null) {
           return CinematicCard(

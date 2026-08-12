@@ -12,6 +12,7 @@ import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_stages_repository.dart';
 import '../models/content_item.dart';
+import '../models/content_ref.dart';
 import '../models/era_model.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
@@ -1528,7 +1529,7 @@ class _PersonajeDiaSection extends StatelessWidget {
 // ── Continue exploring ────────────────────────────────────────────────────────
 
 class _ContinueSection extends StatelessWidget {
-  final List<ContentItem> items;
+  final List<ContentRef> items;
   final String lang;
   const _ContinueSection({required this.items, required this.lang});
 
@@ -1542,11 +1543,7 @@ class _ContinueSection extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, i) {
           final item = items[i];
-          final era = item.category == 'era'
-              ? ErasRepository.allEras
-                  .cast<EraModel?>()
-                  .firstWhere((e) => e?.id == item.id, orElse: () => null)
-              : null;
+          final era = item is EraModel ? item : null;
           return Padding(
             padding: const EdgeInsets.only(right: 12),
             child: CinematicCard(
@@ -1561,7 +1558,7 @@ class _ContinueSection extends StatelessWidget {
                 if (era != null) {
                   AppNavigation.openEra(context, era);
                 } else {
-                  AppNavigation.openContent(context, item);
+                  AppNavigation.openContent(context, item as ContentItem);
                 }
               },
             ),

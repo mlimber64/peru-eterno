@@ -1,3 +1,5 @@
+import '../core/utils/localized_map.dart';
+
 class EditorialContent {
   final String id;
   final String category;
@@ -24,27 +26,20 @@ class EditorialContent {
       id: json['id'] as String,
       category: json['category'] as String,
       orden: json['orden'] as int,
-      titulo: _toStringMap(json['titulo']),
-      subtitulo: _toStringMap(json['subtitulo']),
-      contenido: _toStringMap(json['contenido']),
+      titulo: LocalizedMapX.parse(json['titulo']),
+      subtitulo: LocalizedMapX.parse(json['subtitulo']),
+      contenido: LocalizedMapX.parse(json['contenido']),
       imagenLocal: json['imagen_local'] as String?,
-      fuente: json['fuente'] != null ? _toStringMap(json['fuente']) : null,
+      fuente: json['fuente'] != null ? LocalizedMapX.parse(json['fuente']) : null,
     );
   }
 
   // Fallback it → es → en
-  String tituloFor(String lang) => titulo[lang] ?? titulo['it'] ?? id;
-  String subtituloFor(String lang) => subtitulo[lang] ?? subtitulo['it'] ?? '';
-  String contenidoFor(String lang) => contenido[lang] ?? contenido['it'] ?? '';
-  String? fuenteFor(String lang) => fuente?[lang] ?? fuente?['it'];
+  String tituloFor(String lang) => titulo.localizedFor(lang, fallback: id);
+  String subtituloFor(String lang) => subtitulo.localizedFor(lang);
+  String contenidoFor(String lang) => contenido.localizedFor(lang);
+  String? fuenteFor(String lang) => fuente?.localizedFor(lang);
 
   String? get imagenAssetPath =>
       imagenLocal != null ? 'assets/images/content/$imagenLocal' : null;
-
-  static Map<String, String> _toStringMap(dynamic raw) {
-    if (raw is Map) {
-      return raw.map((k, v) => MapEntry(k.toString(), v.toString()));
-    }
-    return {};
-  }
 }

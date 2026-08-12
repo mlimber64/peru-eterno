@@ -14,7 +14,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:taskAffinity=""
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -38,6 +38,25 @@
             <intent-filter>
                 <action android:name="es.antonborri.home_widget.action.LAUNCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <!-- Deep link con scheme propio (perueterno://...). go_router
+                 (vía MaterialApp.router) recibe la Uri automáticamente al
+                 abrir la app en frío o en segundo plano — no requiere código
+                 Dart adicional para el enrutamiento en sí. Nota: en una Uri
+                 con scheme personalizado el primer segmento tras "://" es el
+                 HOST, no el path (p. ej. perueterno://historia/x/y ⇒
+                 host="historia", path="/x/y") — a diferencia de las rutas
+                 "/historia/..." de app_router.dart, que sí empiezan el path
+                 en ese primer segmento. Sin un mapeo explícito Uri→ruta (no
+                 pedido en esta tarea), go_router intentará resolver por
+                 `uri.path`, que para estos links vendría vacío o distinto de
+                 lo esperado; validar/ajustar ese mapeo antes de depender de
+                 links reales en producción. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="perueterno"/>
             </intent-filter>
         </activity>
 

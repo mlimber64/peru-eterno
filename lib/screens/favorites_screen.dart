@@ -8,6 +8,7 @@ import '../core/navigation/app_navigation.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../models/content_item.dart';
+import '../models/content_ref.dart';
 import '../models/era_model.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/language_provider.dart';
@@ -19,8 +20,8 @@ import '../widgets/local_cinematic_card.dart';
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
 
-  List<ContentItem> _resolveItems(Set<String> ids) {
-    final items = <ContentItem>[];
+  List<ContentRef> _resolveItems(Set<String> ids) {
+    final items = <ContentRef>[];
     for (final id in ids) {
       // Check eras
       final era = ErasRepository.allEras.cast<EraModel?>().firstWhere(
@@ -28,12 +29,7 @@ class FavoritesScreen extends StatelessWidget {
             orElse: () => null,
           );
       if (era != null) {
-        items.add(ContentItem(
-          id: era.id,
-          category: 'era',
-          wikipediaSlug: era.wikipediaSlug,
-          isPremium: era.isPremium,
-        ));
+        items.add(era);
         continue;
       }
       // Check content
@@ -98,12 +94,7 @@ class FavoritesScreen extends StatelessWidget {
                       itemCount: items.length,
                       itemBuilder: (context, i) {
                         final item = items[i];
-                        final era = item.category == 'era'
-                            ? ErasRepository.allEras
-                                .cast<EraModel?>()
-                                .firstWhere((e) => e?.id == item.id,
-                                    orElse: () => null)
-                            : null;
+                        final era = item is EraModel ? item : null;
                         final isLocked = item.isPremium && !isPremium;
                         final t = context.read<LanguageProvider>().t;
                         final tapAction = isLocked
@@ -112,7 +103,7 @@ class FavoritesScreen extends StatelessWidget {
                                 ? () => AppNavigation.openEra(context, era)
                                 : () => AppNavigation.openContent(
                                       context,
-                                      item,
+                                      item as ContentItem,
                                     );
                         final card = era != null
                             ? CinematicCard(

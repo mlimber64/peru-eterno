@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/interactive_story_repository.dart';
 import '../models/interactive_story.dart';
+import '../services/user_progress_sync_service.dart';
 
 /// Motor de navegación de las historias interactivas ("Elige tu camino"):
 /// carga el árbol de decisiones de una historia, mantiene el nodo actual y
@@ -19,7 +20,13 @@ import '../models/interactive_story.dart';
 class InteractiveStoryProvider extends ChangeNotifier {
   static const _kProgressPrefix = 'isp_progress_';
   static const _kPathPrefix = 'isp_path_';
-  static const _kUnlockedEndingsPrefix = 'isp_endings_';
+
+  /// Prefijo de la clave de SharedPreferences con los finales desbloqueados
+  /// de cada historia (`'$kUnlockedEndingsPrefix$storyId'`). Público porque
+  /// [UserProgressSyncService] necesita leer/escribir esta clave para TODAS
+  /// las historias (no solo la que esté cargada en memoria aquí) al hacer
+  /// `syncAll()`.
+  static const kUnlockedEndingsPrefix = 'isp_endings_';
 
   SharedPreferences? _prefs;
 
@@ -60,7 +67,7 @@ class InteractiveStoryProvider extends ChangeNotifier {
     _pendingChoice = null;
     _path.clear();
     _unlockedEndings =
-        (_prefs!.getStringList('$_kUnlockedEndingsPrefix$storyId') ??
+        (_prefs!.getStringList('$kUnlockedEndingsPrefix$storyId') ??
                 const [])
             .toSet();
 
@@ -131,7 +138,8 @@ class InteractiveStoryProvider extends ChangeNotifier {
   }
 
   Future<void> _unlockEnding(String nodeId) async {
-    if (!_unlockedEndings.contains(nodeId)) {
+    final isNew = !_unlockedEndings.contains(nodeId);
+    if (isNew) {
       _unlockedEndings.add(nodeId);
       _justUnlockedEnding = true;
       notifyListeners();
@@ -140,13 +148,34 @@ class InteractiveStoryProvider extends ChangeNotifier {
     final story = _story;
     if (p == null || story == null) return;
     await p.setStringList(
-      '$_kUnlockedEndingsPrefix${story.id}',
+      '$kUnlockedEndingsPrefix${story.id}',
       _unlockedEndings.toList(),
     );
     // Llegar a un final cierra la partida en curso: se limpia el progreso
     // "en curso" para que la próxima apertura arranque desde el inicio.
     await p.remove('$_kProgressPrefix${story.id}');
     await p.remove('$_kPathPrefix${story.id}');
+    if (isNew) {
+      unawaited(
+        UserProgressSyncService.instance?.pushStoryEnding(story.id, nodeId),
+      );
+    }
+  }
+
+  /// Fusiona finales ya resueltos (unión local ∪ remoto, resuelto por
+  /// [UserProgressSyncService]) y persiste. Solo actualiza el estado en
+  /// memoria ([_unlockedEndings]) si [storyId] es la historia actualmente
+  /// cargada; para las demás, la próxima vez que [loadStory] las abra leerá
+  /// el valor ya fusionado directamente de SharedPreferences. No dispara
+  /// push de vuelta.
+  Future<void> applySyncedEndings(String storyId, Set<String> endings) async {
+    final p = _prefs;
+    if (p == null) return;
+    await p.setStringList('$kUnlockedEndingsPrefix$storyId', endings.toList());
+    if (_story?.id != storyId) return;
+    final before = _unlockedEndings.length;
+    _unlockedEndings = {..._unlockedEndings, ...endings};
+    if (_unlockedEndings.length != before) notifyListeners();
   }
 
   Future<void> _saveProgress() async {

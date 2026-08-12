@@ -10,6 +10,7 @@ import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_repository.dart';
 import '../models/content_item.dart';
+import '../models/content_ref.dart';
 import '../models/era_model.dart';
 import '../models/historia_article.dart';
 import '../providers/language_provider.dart';
@@ -289,17 +290,14 @@ class WorldScreen extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 (context, i) {
                   final item = items[i];
-                  final era = item.category == 'era'
-                      ? ErasRepository.allEras.cast<EraModel?>().firstWhere(
-                          (e) => e?.id == item.id,
-                          orElse: () => null)
-                      : null;
+                  final era = item is EraModel ? item : null;
                   final isLocked = item.isPremium && !isPremium;
                   final tapAction = isLocked
                       ? () => AppNavigation.openPremium(context)
                       : era != null
                           ? () => AppNavigation.openEra(context, era)
-                          : () => AppNavigation.openContent(context, item);
+                          : () => AppNavigation.openContent(
+                              context, item as ContentItem);
 
                   if (era != null) {
                     return CinematicCard(
@@ -376,9 +374,9 @@ class WorldScreen extends StatelessWidget {
     );
   }
 
-  List<ContentItem> _itemsForWorld(WorldEntry world) {
+  List<ContentRef> _itemsForWorld(WorldEntry world) {
     return switch (world.category) {
-      'era' => ContentRepository.eras,
+      'era' => ErasRepository.allEras,
       'tradicion' => ContentRepository.tradiciones,
       'gastronomia' => ContentRepository.gastronomia,
       'musica' => ContentRepository.musica,
