@@ -55,4 +55,20 @@ class CategoryConfigs {
   static IconData iconOf(String category) => of(category).icon;
   static String labelOf(String category, String lang) =>
       of(category).labelFor(lang);
+
+  /// Categorías cuyo contenido curado todavía no está listo para publicarse
+  /// (mezcla incompleta de contenido editorial + fallback de Wikipedia). Se
+  /// mantienen visibles en la UI pero bloqueadas con un aviso "Próximamente"
+  /// en vez de quitarse — ver [[widgets/coming_soon.dart]] y su uso en
+  /// HomeScreen/ExploreScreen/WorldScreen.
+  static const Set<String> comingSoonCategories = {
+    'personaje',
+    'tradicion',
+    'gastronomia',
+    'musica',
+    'geografia',
+  };
+
+  static bool isComingSoon(String category) =>
+      comingSoonCategories.contains(category);
 }

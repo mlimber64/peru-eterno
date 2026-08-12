@@ -1,0 +1,359 @@
+{
+  "id": "cronista_cajamarca_adventure",
+  "titulo": {
+    "es": "El Cronista de Cajamarca",
+    "it": "Il Cronista di Cajamarca",
+    "en": "The Chronicler of Cajamarca"
+  },
+  "descripcion": {
+    "es": "Eres Diego, escribano de Pizarro. El 16 de noviembre de 1532 debes decidir cómo registrar el encuentro que cambiará América para siempre.",
+    "it": "Sei Diego, scrivano di Pizarro. Il 16 novembre 1532 devi decidere come registrare l'incontro che cambierà per sempre l'America.",
+    "en": "You are Diego, Pizarro's scribe. On November 16, 1532, you must decide how to record the encounter that will change the Americas forever."
+  },
+  "imagen_portada": "assets/images/conquista/conquista_1.jpg",
+  "is_premium": false,
+  "start_node_id": "inicio",
+  "nodes": [
+    {
+      "node_id": "inicio",
+      "title": {
+        "es": "La Orden de Pizarro",
+        "it": "L'Ordine di Pizarro",
+        "en": "Pizarro's Order"
+      },
+      "narrative": {
+        "es": "Eres Diego, escribano de la expedición de Francisco Pizarro. Es el 16 de noviembre de 1532, y el Inca Atahualpa se acerca a la plaza de Cajamarca con miles de hombres en una litera dorada. Pizarro te ordena registrar cada palabra y gesto de lo que está por ocurrir: el destino de dos imperios depende de este encuentro. El fraile Vicente de Valverde se prepara para leer el Requerimiento con una biblia en la mano. Debes decidir dónde posicionarte para cumplir tu misión.",
+        "it": "Sei Diego, scrivano della spedizione di Francisco Pizarro. È il 16 novembre 1532, e l'Inca Atahualpa si avvicina alla piazza di Cajamarca con migliaia di uomini su una lettiga dorata. Pizarro ti ordina di registrare ogni parola e gesto di ciò che sta per accadere: il destino di due imperi dipende da questo incontro. Il frate Vicente de Valverde si prepara a leggere il Requerimiento con una bibbia in mano. Devi decidere dove posizionarti per compiere la tua missione.",
+        "en": "You are Diego, scribe of Francisco Pizarro's expedition. It is November 16, 1532, and Inca Atahualpa approaches Cajamarca's plaza with thousands of men on a golden litter. Pizarro orders you to record every word and gesture of what is about to happen: the fate of two empires hinges on this meeting. Friar Vicente de Valverde prepares to read the Requerimiento with a Bible in hand. You must decide where to position yourself to carry out your mission."
+      },
+      "image_path": "assets/images/conquista/conquista_1.jpg",
+      "historical_fact": {
+        "es": "Francisco de Xerez, secretario personal de Pizarro, fue el cronista real presente en Cajamarca. Su 'Verdadera relación de la conquista del Perú' (1534) es una de las fuentes más citadas — y también una de las más cuestionadas por su cercanía al propio Pizarro.",
+        "it": "Francisco de Xerez, segretario personale di Pizarro, fu il cronista reale presente a Cajamarca. La sua 'Verdadera relación de la conquista del Perú' (1534) è una delle fonti più citate — e anche una delle più discusse per la sua vicinanza a Pizarro stesso.",
+        "en": "Francisco de Xerez, Pizarro's personal secretary, was the royal chronicler present at Cajamarca. His 'Verdadera relación de la conquista del Perú' (1534) is one of the most cited sources — and also one of the most disputed, given his closeness to Pizarro himself."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Seguir de cerca al fraile Valverde", "it": "Seguire da vicino il frate Valverde", "en": "Follow Friar Valverde closely"},
+          "next_node_id": "cerca_valverde",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Quedarte junto a la artillería, con la tropa principal", "it": "Restare vicino all'artiglieria, con la truppa principale", "en": "Stay near the artillery, with the main troop"},
+          "next_node_id": "con_artilleria",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "cerca_valverde",
+      "title": {
+        "es": "El Requerimiento",
+        "it": "Il Requerimiento",
+        "en": "The Requerimiento"
+      },
+      "narrative": {
+        "es": "Avanzas junto a Valverde hasta quedar a pocos pasos del Inca. A través del intérprete Felipillo, el fraile exige que Atahualpa se someta al rey de España y acepte la fe cristiana, extendiéndole una biblia. Atahualpa examina el libro con curiosidad, se lo acerca al oído como si esperara que le hablara, y finalmente lo arroja al suelo, ofendido por no comprender su significado. El silencio se rompe con un disparo de cañón.",
+        "it": "Avanzi insieme a Valverde fino a pochi passi dall'Inca. Attraverso l'interprete Felipillo, il frate esige che Atahualpa si sottometta al re di Spagna e accetti la fede cristiana, porgendogli una bibbia. Atahualpa esamina il libro con curiosità, se lo avvicina all'orecchio come se aspettasse che gli parlasse, e infine lo getta a terra, offeso per non comprenderne il significato. Il silenzio si rompe con uno sparo di cannone.",
+        "en": "You advance alongside Valverde until you're just steps from the Inca. Through the interpreter Felipillo, the friar demands that Atahualpa submit to the king of Spain and accept the Christian faith, holding out a Bible. Atahualpa examines the book with curiosity, brings it close to his ear as if expecting it to speak, and finally throws it to the ground, offended at not understanding its meaning. The silence breaks with a cannon shot."
+      },
+      "image_path": "assets/images/conquista/conquista_2.jpg",
+      "historical_fact": {
+        "es": "Felipillo, uno de los primeros intérpretes indígenas de los españoles, dominaba apenas rudimentos de castellano y ningún vocabulario teológico. Muchos historiadores creen que el 'Requerimiento' fue traducido de forma tan deficiente que Atahualpa jamás entendió realmente lo que se le exigía.",
+        "it": "Felipillo, uno dei primi interpreti indigeni al servizio degli spagnoli, conosceva solo rudimenti di castigliano e nessun vocabolario teologico. Molti storici ritengono che il 'Requerimiento' fu tradotto in modo così carente che Atahualpa non comprese mai davvero cosa gli si stesse chiedendo.",
+        "en": "Felipillo, one of the first indigenous interpreters serving the Spanish, knew only rudimentary Castilian and no theological vocabulary. Many historians believe the Requerimiento was translated so poorly that Atahualpa never truly understood what was being demanded of him."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Escribir exactamente lo que viste, sin adornos", "it": "Scrivere esattamente ciò che hai visto, senza abbellimenti", "en": "Write exactly what you saw, without embellishment"},
+          "next_node_id": "escribir_verdad",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Escribir la versión que conviene a los capitanes", "it": "Scrivere la versione che conviene ai capitani", "en": "Write the version that suits the captains"},
+          "next_node_id": "narrativa_oficial",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Investigar en secreto qué tradujo realmente Felipillo", "it": "Indagare in segreto cosa tradusse davvero Felipillo", "en": "Secretly investigate what Felipillo actually translated"},
+          "next_node_id": "interpretar_verdad",
+          "required_premium": true
+        }
+      ]
+    },
+    {
+      "node_id": "con_artilleria",
+      "title": {
+        "es": "La Señal de Fuego",
+        "it": "Il Segnale di Fuoco",
+        "en": "The Signal Shot"
+      },
+      "narrative": {
+        "es": "Desde tu posición junto a los cañones, ves la señal acordada: un disparo retumba sobre la plaza. De inmediato, la caballería española emerge de los edificios donde estaba oculta y arremete contra la multitud desarmada. Los gritos y el pánico se mezclan con el humo de la pólvora. En cuestión de minutos, miles de hombres del séquito de Atahualpa caen sin haber podido siquiera desenvainar un arma.",
+        "it": "Dalla tua posizione vicino ai cannoni, vedi il segnale concordato: uno sparo rimbomba sulla piazza. Subito la cavalleria spagnola emerge dagli edifici dove era nascosta e si scaglia contro la folla disarmata. Le grida e il panico si mescolano al fumo della polvere da sparo. In pochi minuti, migliaia di uomini del seguito di Atahualpa cadono senza aver potuto nemmeno sguainare un'arma.",
+        "en": "From your position by the cannons, you see the agreed signal: a shot rings out over the plaza. Spanish cavalry immediately emerges from the buildings where it lay hidden and charges the unarmed crowd. Screams and panic mix with gunpowder smoke. Within minutes, thousands of men from Atahualpa's retinue fall without even managing to draw a weapon."
+      },
+      "image_path": "assets/images/conquista/conquista_3.jpg",
+      "historical_fact": {
+        "es": "Los cronistas coinciden en que del lado inca murieron entre 2,000 y 7,000 personas ese día, mientras que no se registró ninguna baja española de consideración. La emboscada estaba planeada desde antes: los españoles jamás tuvieron intención de un encuentro pacífico.",
+        "it": "I cronisti concordano sul fatto che dalla parte inca morirono tra le 2.000 e le 7.000 persone quel giorno, mentre non si registrò alcuna perdita spagnola rilevante. L'imboscata era pianificata da prima: gli spagnoli non ebbero mai intenzione di un incontro pacifico.",
+        "en": "Chroniclers agree that between 2,000 and 7,000 people died on the Inca side that day, while no significant Spanish casualties were recorded. The ambush had been planned in advance: the Spanish never intended a peaceful meeting."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Abrirte paso entre el caos para ver la captura de cerca", "it": "Farti strada nel caos per vedere da vicino la cattura", "en": "Push through the chaos to see the capture up close"},
+          "next_node_id": "capturar_cerca",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Quedarte en un lugar seguro y registrar desde lejos", "it": "Restare in un luogo sicuro e registrare da lontano", "en": "Stay in a safe spot and record from afar"},
+          "next_node_id": "registro_lejano",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "escribir_verdad",
+      "title": {
+        "es": "La Pluma Fiel",
+        "it": "La Penna Fedele",
+        "en": "The Faithful Pen"
+      },
+      "narrative": {
+        "es": "Escribes sin suavizar nada: la confusión del intérprete, el desconcierto genuino de Atahualpa, la desproporción brutal entre un ejército emboscado y otro que jamás esperó un ataque. Tu capitán te advierte que un relato así podría incomodar a los inspectores de la Corona, pero decides que tu deber es con la verdad, no con la conveniencia.",
+        "it": "Scrivi senza addolcire nulla: la confusione dell'interprete, il genuino sconcerto di Atahualpa, la sproporzione brutale tra un esercito colto in imboscata e uno che non si aspettava affatto un attacco. Il tuo capitano ti avverte che un simile racconto potrebbe irritare gli ispettori della Corona, ma decidi che il tuo dovere è verso la verità, non verso la convenienza.",
+        "en": "You write without softening anything: the interpreter's confusion, Atahualpa's genuine bewilderment, the brutal imbalance between an ambushed army and one that never expected an attack. Your captain warns you that such an account could trouble the Crown's inspectors, but you decide your duty is to the truth, not to convenience."
+      },
+      "image_path": "assets/images/conquista/conquista_4.jpg",
+      "historical_fact": {
+        "es": "No todos los cronistas de la conquista fueron complacientes con el poder: Bartolomé de las Casas y, más tarde, el mestizo Inca Garcilaso de la Vega, cuestionaron duramente la violencia de Cajamarca y sus justificaciones, abriendo un debate que continúa siglos después.",
+        "it": "Non tutti i cronisti della conquista furono compiacenti col potere: Bartolomé de las Casas e, più tardi, il meticcio Inca Garcilaso de la Vega, misero duramente in discussione la violenza di Cajamarca e le sue giustificazioni, aprendo un dibattito che continua ancora secoli dopo.",
+        "en": "Not every chronicler of the conquest was compliant with power: Bartolomé de las Casas and, later, the mestizo Inca Garcilaso de la Vega, harshly questioned the violence at Cajamarca and its justifications, opening a debate that continues centuries later."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_cronista_veraz",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "narrativa_oficial",
+      "title": {
+        "es": "La Pluma que Sirve",
+        "it": "La Penna al Servizio",
+        "en": "The Pen in Service"
+      },
+      "narrative": {
+        "es": "Escribes la versión que tus capitanes prefieren: un Inca soberbio que rechazó la palabra de Dios y del rey, y que por tanto mereció el castigo recibido. Tu relato, cuidadosamente redactado, será enviado a la Corona como justificación oficial de lo ocurrido en Cajamarca.",
+        "it": "Scrivi la versione che i tuoi capitani preferiscono: un Inca superbo che rifiutò la parola di Dio e del re, e che perciò meritò il castigo ricevuto. Il tuo racconto, accuratamente redatto, verrà inviato alla Corona come giustificazione ufficiale di quanto accaduto a Cajamarca.",
+        "en": "You write the version your captains prefer: a proud Inca who rejected the word of God and king, and thus deserved the punishment he received. Your carefully drafted account will be sent to the Crown as official justification for what happened at Cajamarca."
+      },
+      "image_path": "assets/images/conquista/conquista_5.jpg",
+      "historical_fact": {
+        "es": "Durante siglos, la versión oficial española presentó la masacre de Cajamarca como una batalla legítima provocada por la 'traición' de Atahualpa. Documentos y crónicas contradictorias, redescubiertas siglos después, permitieron reconstruir una versión más matizada de los hechos.",
+        "it": "Per secoli, la versione ufficiale spagnola presentò il massacro di Cajamarca come una battaglia legittima provocata dal 'tradimento' di Atahualpa. Documenti e cronache contraddittorie, riscoperti secoli dopo, hanno permesso di ricostruire una versione più sfumata dei fatti.",
+        "en": "For centuries, the official Spanish version presented the Cajamarca massacre as a legitimate battle provoked by Atahualpa's 'treachery.' Contradictory documents and chronicles, rediscovered centuries later, allowed a more nuanced version of events to be reconstructed."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_narrativa_oficial",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "interpretar_verdad",
+      "title": {
+        "es": "El Secreto de Felipillo",
+        "it": "Il Segreto di Felipillo",
+        "en": "Felipillo's Secret"
+      },
+      "narrative": {
+        "es": "Te apartas discretamente para hablar con Felipillo, el joven intérprete, antes de que el caos estalle. Sus explicaciones tambaleantes revelan que ni siquiera él comprendía del todo los conceptos religiosos que se le pedía traducir. Comprendes que todo el 'Requerimiento' fue, desde el inicio, un diálogo imposible entre dos mundos que no compartían ni una sola palabra en común.",
+        "it": "Ti allontani discretamente per parlare con Felipillo, il giovane interprete, prima che scoppi il caos. Le sue spiegazioni incerte rivelano che nemmeno lui comprendeva del tutto i concetti religiosi che gli si chiedeva di tradurre. Capisci che l'intero 'Requerimiento' fu, fin dall'inizio, un dialogo impossibile tra due mondi che non condividevano nemmeno una parola in comune.",
+        "en": "You slip away discreetly to speak with Felipillo, the young interpreter, before the chaos erupts. His halting explanations reveal that even he did not fully grasp the religious concepts he was asked to translate. You realize the entire Requerimiento was, from the start, an impossible dialogue between two worlds that did not share a single common word."
+      },
+      "image_path": "assets/images/conquista/conquista_2.jpg",
+      "historical_fact": {
+        "es": "El 'Requerimiento' era un documento legal leído —a menudo en latín o castellano formal— a pueblos indígenas de toda América antes de atacarlos, exigiéndoles conversión inmediata. Aun cuando se traducía, rara vez existían las palabras equivalentes en las lenguas originarias para conceptos como 'Papa' o 'vasallaje'.",
+        "it": "Il 'Requerimiento' era un documento legale letto — spesso in latino o castigliano formale — ai popoli indigeni di tutta l'America prima di attaccarli, esigendo la conversione immediata. Anche quando veniva tradotto, raramente esistevano parole equivalenti nelle lingue originarie per concetti come 'Papa' o 'vassallaggio'.",
+        "en": "The Requerimiento was a legal document read — often in Latin or formal Castilian — to indigenous peoples across the Americas before attacking them, demanding immediate conversion. Even when translated, equivalent words rarely existed in native languages for concepts like 'Pope' or 'vassalage.'"
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_voz_felipillo",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "capturar_cerca",
+      "title": {
+        "es": "La Captura del Inca",
+        "it": "La Cattura dell'Inca",
+        "en": "The Capture of the Inca"
+      },
+      "narrative": {
+        "es": "Te abres paso entre cuerpos caídos y caballos encabritados hasta presenciar el instante exacto: Pizarro, con la espada en alto, ordena a sus hombres capturar a Atahualpa con vida en lugar de matarlo. Sujetan la litera dorada, derriban a sus porteadores y toman prisionero al gobernante del imperio más grande de América. Anotas cada detalle: sabes que acabas de presenciar el momento que cambiará la historia.",
+        "it": "Ti fai strada tra corpi caduti e cavalli imbizzarriti fino ad assistere all'istante esatto: Pizarro, con la spada alzata, ordina ai suoi uomini di catturare Atahualpa vivo invece di ucciderlo. Afferrano la lettiga dorata, abbattono i suoi portatori e catturano il sovrano dell'impero più grande d'America. Annoti ogni dettaglio: sai di aver appena assistito al momento che cambierà la storia.",
+        "en": "You push through fallen bodies and rearing horses just in time to witness the exact instant: Pizarro, sword raised, orders his men to capture Atahualpa alive rather than kill him. They seize the golden litter, cut down its bearers, and take prisoner the ruler of the greatest empire in the Americas. You note every detail: you know you have just witnessed the moment that will change history."
+      },
+      "image_path": "assets/images/conquista/conquista_1.jpg",
+      "historical_fact": {
+        "es": "Pizarro comprendía el valor de un rescate: mantener a Atahualpa con vida le permitió exigir el pago del 'Cuarto del Rescate' —la habitación llena de oro y plata— antes de finalmente ejecutarlo meses después, en julio de 1533.",
+        "it": "Pizarro comprendeva il valore di un riscatto: tenere in vita Atahualpa gli permise di esigere il pagamento del 'Cuarto del Rescate' — la stanza piena d'oro e d'argento — prima di giustiziarlo infine mesi dopo, nel luglio 1533.",
+        "en": "Pizarro understood the value of a ransom: keeping Atahualpa alive let him demand payment of the 'Ransom Room' — the chamber filled with gold and silver — before finally executing him months later, in July 1533."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_testigo_historia",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "registro_lejano",
+      "title": {
+        "es": "La Distancia Prudente",
+        "it": "La Distanza Prudente",
+        "en": "The Prudent Distance"
+      },
+      "narrative": {
+        "es": "Observas la masacre desde una distancia segura, protegido detrás de la línea de artillería. Registras lo que alcanzas a ver: el humo, los gritos, la caballería arrasando la plaza. Tu relato es honesto, pero incompleto — careces del detalle que solo un testigo cercano podría haber capturado.",
+        "it": "Osservi il massacro da una distanza sicura, protetto dietro la linea di artiglieria. Registri ciò che riesci a vedere: il fumo, le grida, la cavalleria che devasta la piazza. Il tuo racconto è onesto, ma incompleto — ti manca il dettaglio che solo un testimone vicino avrebbe potuto cogliere.",
+        "en": "You watch the massacre from a safe distance, sheltered behind the artillery line. You record what you can make out: the smoke, the screams, the cavalry tearing through the plaza. Your account is honest, but incomplete — it lacks the detail only a close witness could have captured."
+      },
+      "image_path": "assets/images/conquista/conquista_3.jpg",
+      "historical_fact": {
+        "es": "Las crónicas de la conquista varían enormemente según la cercanía y la posición social de quien las escribió: soldados rasos, capitanes, frailes y, más tarde, cronistas indígenas o mestizos, todos narraron Cajamarca de forma distinta, y ninguna versión por sí sola basta para reconstruir la verdad completa.",
+        "it": "Le cronache della conquista variano enormemente secondo la vicinanza e la posizione sociale di chi le scrisse: soldati semplici, capitani, frati e, più tardi, cronisti indigeni o meticci, raccontarono tutti Cajamarca in modo diverso, e nessuna versione da sola basta a ricostruire la verità completa.",
+        "en": "Chronicles of the conquest vary enormously depending on the proximity and social standing of whoever wrote them: common soldiers, captains, friars, and later indigenous or mestizo chroniclers all told Cajamarca differently, and no single version alone suffices to reconstruct the full truth."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_registro_incompleto",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "final_cronista_veraz",
+      "title": {
+        "es": "Final: El Cronista que No Calló",
+        "it": "Finale: Il Cronista che Non Tacque",
+        "en": "Ending: The Chronicler Who Would Not Stay Silent"
+      },
+      "narrative": {
+        "es": "Tu relato honesto de Cajamarca, incómodo para muchos en su momento, sobrevive los siglos como una de las fuentes más valiosas para entender lo que realmente ocurrió aquel 16 de noviembre. Historiadores futuros agradecerán tu negativa a embellecer la historia.",
+        "it": "Il tuo racconto onesto di Cajamarca, scomodo per molti al momento, sopravvive ai secoli come una delle fonti più preziose per capire cosa accadde realmente quel 16 novembre. Gli storici futuri saranno grati al tuo rifiuto di abbellire la storia.",
+        "en": "Your honest account of Cajamarca, uncomfortable for many at the time, survives the centuries as one of the most valuable sources for understanding what truly happened that November 16th. Future historians will be grateful for your refusal to embellish history."
+      },
+      "image_path": "assets/images/conquista/conquista_4.jpg",
+      "historical_fact": {
+        "es": "Cronistas como Pedro Cieza de León recorrieron el Perú años después recogiendo testimonios directos, muchas veces contradiciendo las versiones oficiales — un trabajo que hoy consideramos fundamental para entender la conquista desde múltiples perspectivas.",
+        "it": "Cronisti come Pedro Cieza de León percorsero il Perù anni dopo raccogliendo testimonianze dirette, spesso contraddicendo le versioni ufficiali — un lavoro che oggi consideriamo fondamentale per comprendere la conquista da prospettive multiple.",
+        "en": "Chroniclers like Pedro Cieza de León traveled Peru years later gathering firsthand testimonies, often contradicting official versions — work we now consider essential to understanding the conquest from multiple perspectives."
+      },
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "node_id": "final_narrativa_oficial",
+      "title": {
+        "es": "Final: La Pluma que Sirvió al Imperio",
+        "it": "Finale: La Penna che Servì l'Impero",
+        "en": "Ending: The Pen That Served the Empire"
+      },
+      "narrative": {
+        "es": "Tu crónica se convierte en la versión oficial de los hechos, repetida durante generaciones en España. Solo siglos después, historiadores que cruzan tu relato con otras fuentes descubren las omisiones deliberadas — y tu nombre queda ligado para siempre a la narrativa que justificó la conquista.",
+        "it": "La tua cronaca diventa la versione ufficiale dei fatti, ripetuta per generazioni in Spagna. Solo secoli dopo, storici che incrociano il tuo racconto con altre fonti scoprono le omissioni deliberate — e il tuo nome resta legato per sempre alla narrazione che giustificò la conquista.",
+        "en": "Your chronicle becomes the official version of events, repeated for generations in Spain. Only centuries later do historians cross-referencing your account with other sources discover the deliberate omissions — and your name remains forever tied to the narrative that justified the conquest."
+      },
+      "image_path": "assets/images/conquista/conquista_5.jpg",
+      "historical_fact": {
+        "es": "La Corona española exigía a sus cronistas oficiales narrativas que legitimaran la conquista ante el Papa y otras potencias europeas. Esta presión política moldeó buena parte de lo que hoy conocemos como las 'Crónicas de Indias'.",
+        "it": "La Corona spagnola esigeva dai suoi cronisti ufficiali narrazioni che legittimassero la conquista davanti al Papa e alle altre potenze europee. Questa pressione politica plasmò buona parte di ciò che oggi conosciamo come le 'Cronache delle Indie'.",
+        "en": "The Spanish Crown required its official chroniclers to produce narratives that legitimized the conquest before the Pope and other European powers. This political pressure shaped much of what we now know as the 'Chronicles of the Indies.'"
+      },
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "node_id": "final_voz_felipillo",
+      "title": {
+        "es": "Final Legendario: La Voz Detrás de la Traducción",
+        "it": "Finale Leggendario: La Voce Dietro la Traduzione",
+        "en": "Legendary Ending: The Voice Behind the Translation"
+      },
+      "narrative": {
+        "es": "Tu investigación sobre Felipillo revela una verdad incómoda que pocos se atreven a registrar: la conquista del Tahuantinsuyo comenzó, en parte, por un malentendido de traducción entre dos mundos que jamás llegaron a comunicarse de verdad. Tu crónica se convertirá, siglos después, en una pieza clave para historiadores que buscan entender el papel de los intérpretes indígenas en la conquista.",
+        "it": "La tua indagine su Felipillo rivela una verità scomoda che pochi osano registrare: la conquista del Tahuantinsuyo iniziò, in parte, per un malinteso di traduzione tra due mondi che non riuscirono mai a comunicare davvero. La tua cronaca diventerà, secoli dopo, un tassello chiave per gli storici che cercano di capire il ruolo degli interpreti indigeni nella conquista.",
+        "en": "Your investigation into Felipillo reveals an uncomfortable truth few dare to record: the conquest of the Tahuantinsuyo began, in part, from a translation misunderstanding between two worlds that never truly managed to communicate. Your chronicle will become, centuries later, a key piece for historians seeking to understand the role of indigenous interpreters in the conquest."
+      },
+      "image_path": "assets/images/conquista/conquista_2.jpg",
+      "historical_fact": {
+        "es": "Felipillo, capturado de joven y llevado a España antes de la conquista, es una de las figuras más trágicas y debatidas del encuentro entre los dos mundos: acusado por unos de traición, retratado por otros como una víctima más de una situación imposible.",
+        "it": "Felipillo, catturato da giovane e portato in Spagna prima della conquista, è una delle figure più tragiche e discusse dell'incontro tra i due mondi: accusato da alcuni di tradimento, ritratto da altri come un'ulteriore vittima di una situazione impossibile.",
+        "en": "Felipillo, captured as a young man and taken to Spain before the conquest, is one of the most tragic and debated figures of the encounter between the two worlds: accused by some of treachery, portrayed by others as yet another victim of an impossible situation."
+      },
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "node_id": "final_testigo_historia",
+      "title": {
+        "es": "Final: Testigo del Momento que Cambió Todo",
+        "it": "Finale: Testimone del Momento che Cambiò Tutto",
+        "en": "Ending: Witness to the Moment That Changed Everything"
+      },
+      "narrative": {
+        "es": "Presenciaste de cerca la captura de Atahualpa, el instante exacto en que el imperio más grande de América perdió a su gobernante. Tu crónica detallada del momento se convertirá en una de las fuentes más citadas sobre la caída del Tahuantinsuyo.",
+        "it": "Hai assistito da vicino alla cattura di Atahualpa, l'istante esatto in cui l'impero più grande d'America perse il suo sovrano. La tua cronaca dettagliata di quel momento diventerà una delle fonti più citate sulla caduta del Tahuantinsuyo.",
+        "en": "You witnessed up close the capture of Atahualpa, the exact instant the greatest empire in the Americas lost its ruler. Your detailed chronicle of the moment will become one of the most cited sources on the fall of the Tahuantinsuyo."
+      },
+      "image_path": "assets/images/conquista/conquista_1.jpg",
+      "historical_fact": {
+        "es": "La captura de Atahualpa en Cajamarca es considerada uno de los eventos más determinantes de la historia americana: en pocas horas, un imperio de millones de súbditos quedó decapitado en su liderazgo, acelerando su colapso en los años siguientes.",
+        "it": "La cattura di Atahualpa a Cajamarca è considerata uno degli eventi più determinanti della storia americana: in poche ore, un impero di milioni di sudditi rimase decapitato nella sua leadership, accelerandone il collasso negli anni successivi.",
+        "en": "The capture of Atahualpa at Cajamarca is considered one of the most decisive events in American history: within hours, an empire of millions of subjects was left leaderless, accelerating its collapse in the years that followed."
+      },
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "node_id": "final_registro_incompleto",
+      "title": {
+        "es": "Final: Un Relato a Medias",
+        "it": "Finale: Un Racconto a Metà",
+        "en": "Ending: A Half-Told Story"
+      },
+      "narrative": {
+        "es": "Tu crónica, escrita desde la distancia, resulta honesta pero incompleta. Con el tiempo, otros relatos más detallados eclipsan al tuyo. Aun así, tu testimonio se suma al mosaico de voces que, juntas, permiten reconstruir lo que ocurrió aquel día en Cajamarca.",
+        "it": "La tua cronaca, scritta dalla distanza, risulta onesta ma incompleta. Col tempo, altri racconti più dettagliati eclissano il tuo. Ciononostante, la tua testimonianza si aggiunge al mosaico di voci che, insieme, permettono di ricostruire ciò che accadde quel giorno a Cajamarca.",
+        "en": "Your chronicle, written from a distance, turns out honest but incomplete. Over time, other more detailed accounts overshadow yours. Even so, your testimony joins the mosaic of voices that, together, allow us to reconstruct what happened that day at Cajamarca."
+      },
+      "image_path": "assets/images/conquista/conquista_3.jpg",
+      "historical_fact": {
+        "es": "Ningún cronista individual capturó jamás la historia completa de la conquista. Es la combinación de decenas de relatos —españoles, indígenas y mestizos— la que permite a los historiadores de hoy acercarse a una versión más completa y matizada de los hechos.",
+        "it": "Nessun cronista individuale ha mai colto l'intera storia della conquista. È la combinazione di decine di racconti — spagnoli, indigeni e meticci — che permette agli storici di oggi di avvicinarsi a una versione più completa e sfumata dei fatti.",
+        "en": "No single chronicler ever captured the whole story of the conquest. It is the combination of dozens of accounts — Spanish, indigenous, and mestizo — that lets today's historians approach a fuller, more nuanced version of events."
+      },
+      "is_ending": true,
+      "choices": []
+    }
+  ]
+}

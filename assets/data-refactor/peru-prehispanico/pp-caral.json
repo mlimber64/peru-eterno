@@ -29,7 +29,7 @@
     "it": "3000 a.C. - 1800 a.C.",
     "en": "3000 BC - 1800 BC"
   },
-  "imagen_sugerida": "assets/images/caral/caral_1.jpg",
+  "imagen_sugerida": "https://res.cloudinary.com/dxpps0nwm/image/upload/v1784906788/caral_desertico_dnao5k.webp",
   "quiz": [
     {
       "pregunta": {

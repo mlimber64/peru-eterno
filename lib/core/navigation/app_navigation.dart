@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/category_config.dart';
 import '../../data/historia_stages_repository.dart';
 import '../../models/content_item.dart';
 import '../../models/era_model.dart';
@@ -13,6 +14,7 @@ import '../../screens/era_detail_screen.dart';
 import '../../screens/historia_article_detail_screen.dart';
 import '../../screens/historia_subtopics_screen.dart';
 import '../../screens/premium_screen.dart';
+import '../../widgets/coming_soon.dart';
 
 class AppNavigation {
   /// Navigator raíz de la app. Necesario para navegar desde fuera del árbol
@@ -40,6 +42,14 @@ class AppNavigation {
     ContentItem item, {
     bool isLocked = false,
   }) async {
+    // Red de seguridad centralizada: cubre cualquier punto de entrada
+    // (presente o futuro) a categorías bloqueadas como "Próximamente" en
+    // esta primera versión, aunque cada pantalla ya evita navegar hasta acá
+    // para esas categorías.
+    if (CategoryConfigs.isComingSoon(item.category)) {
+      showComingSoonSnackBar(context);
+      return;
+    }
     if (isLocked) {
       return openPremium(context);
     }

@@ -41,6 +41,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/google_fonts/
     - assets/i18n/
     - assets/data/
     - assets/data-refactor/peru-prehispanico/
@@ -48,6 +49,7 @@ flutter:
     - assets/data-refactor/virreinato-peru/
     - assets/data-refactor/independencia-peru/
     - assets/data-refactor/republica-peru/
+    - assets/data-refactor/stories/
     - assets/images/content/
     - assets/images/content/caral/
     - assets/images/banners/

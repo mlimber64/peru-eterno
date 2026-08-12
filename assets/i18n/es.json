@@ -152,6 +152,31 @@
     "rarity_epic": "Épica",
     "rarity_legendary": "Legendaria"
   },
+  "interactive_stories": {
+    "drawer_label": "Historias Interactivas",
+    "hub_title": "Elige tu Camino",
+    "hub_subtitle": "Vive la historia del Perú tomando tus propias decisiones. Cada elección revela un dato histórico real.",
+    "hub_empty": "Pronto habrá más historias disponibles.",
+    "home_banner_eyebrow": "NUEVO",
+    "home_banner_title": "Elige tu Camino",
+    "home_banner_subtitle": "Conviértete en un chasqui inca y decide su destino con tus propias decisiones",
+    "start_button": "Comenzar la aventura",
+    "resume_button": "Continuar la aventura",
+    "historical_fact_label": "Dato Real",
+    "continue_button": "Continuar",
+    "your_path_title": "Tu camino",
+    "restart_button": "Intentar otra ruta",
+    "back_to_hub_button": "Volver a Historias",
+    "step_label": "Decisión",
+    "premium_choice_badge": "Premium",
+    "premium_story_badge": "Historia Premium",
+    "new_ending_unlocked": "¡Nuevo final descubierto!"
+  },
+  "coming_soon": {
+    "badge": "Próximamente",
+    "title": "Muy pronto",
+    "message": "Estamos preparando este contenido con cariño. ¡Vuelve pronto!"
+  },
   "eras": {
     "caral": {
       "title": "Caral",

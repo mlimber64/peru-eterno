@@ -29,7 +29,7 @@
     "it": "700 a.C. - 200 d.C.",
     "en": "700 BC - 200 AD"
   },
-  "imagen_sugerida": "assets/images/banners/caral-desertico.jpg",
+  "imagen_sugerida": "https://res.cloudinary.com/dxpps0nwm/image/upload/v1784920774/paracas_hzobyn.png",
   "quiz": [
     {
       "pregunta": {

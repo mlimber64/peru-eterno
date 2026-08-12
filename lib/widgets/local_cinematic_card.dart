@@ -17,6 +17,7 @@ class LocalCinematicCard extends StatefulWidget {
   final String? subtitle;
   final String? badge;
   final bool isPremium;
+  final bool isComingSoon;
   final VoidCallback? onTap;
   final double width;
   final double height;
@@ -28,6 +29,7 @@ class LocalCinematicCard extends StatefulWidget {
     this.subtitle,
     this.badge,
     this.isPremium = false,
+    this.isComingSoon = false,
     this.onTap,
     this.width = double.infinity,
     this.height = 200,
@@ -84,6 +86,7 @@ class _LocalCinematicCardState extends State<LocalCinematicCard> {
       subtitle: widget.subtitle ?? widget.item.localizedSubtitle(t),
       badge: widget.badge,
       isPremium: widget.isPremium,
+      isComingSoon: widget.isComingSoon,
       onTap: widget.onTap,
       width: widget.width,
       height: widget.height,
