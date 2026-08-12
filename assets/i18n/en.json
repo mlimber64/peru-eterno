@@ -152,6 +152,31 @@
     "rarity_epic": "Epic",
     "rarity_legendary": "Legendary"
   },
+  "interactive_stories": {
+    "drawer_label": "Interactive Stories",
+    "hub_title": "Choose Your Path",
+    "hub_subtitle": "Live Peru's history by making your own decisions. Every choice reveals a real historical fact.",
+    "hub_empty": "More stories will be available soon.",
+    "home_banner_eyebrow": "NEW",
+    "home_banner_title": "Choose Your Path",
+    "home_banner_subtitle": "Become an Inca chasqui and decide his fate with your own choices",
+    "start_button": "Start the adventure",
+    "resume_button": "Continue the adventure",
+    "historical_fact_label": "Real Fact",
+    "continue_button": "Continue",
+    "your_path_title": "Your path",
+    "restart_button": "Try another route",
+    "back_to_hub_button": "Back to Stories",
+    "step_label": "Decision",
+    "premium_choice_badge": "Premium",
+    "premium_story_badge": "Premium Story",
+    "new_ending_unlocked": "New ending unlocked!"
+  },
+  "coming_soon": {
+    "badge": "Coming soon",
+    "title": "Coming very soon",
+    "message": "We're carefully preparing this content. Check back soon!"
+  },
   "eras": {
     "caral": {
       "title": "Caral",

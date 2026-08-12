@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app.dart';
@@ -13,6 +14,7 @@ import 'providers/content_provider.dart';
 import 'providers/daily_story_provider.dart';
 import 'providers/favorites_provider.dart';
 import 'providers/history_provider.dart';
+import 'providers/interactive_story_provider.dart';
 import 'providers/language_provider.dart';
 import 'providers/premium_provider.dart';
 import 'providers/reading_progress_provider.dart';
@@ -21,6 +23,12 @@ import 'services/home_widget_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Lato y Playfair Display se sirven desde assets/google_fonts/ (bundleadas
+  // en el binario), no por red: evita depender de internet en el primer
+  // arranque y una llamada a Google en cada instalación nueva. Ver
+  // assets/google_fonts/README.md para cómo regenerar el set de pesos.
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -77,6 +85,8 @@ void main() async {
   final audioPlayerProvider = AudioPlayerProvider();
   await audioPlayerProvider.initialize();
 
+  final interactiveStoryProvider = InteractiveStoryProvider();
+
   runApp(
     MultiProvider(
       providers: [
@@ -90,6 +100,7 @@ void main() async {
         ChangeNotifierProvider.value(value: dailyStoryProvider),
         ChangeNotifierProvider.value(value: collectiblesProvider),
         ChangeNotifierProvider.value(value: audioPlayerProvider),
+        ChangeNotifierProvider.value(value: interactiveStoryProvider),
       ],
       child: const PeruEternoApp(),
     ),

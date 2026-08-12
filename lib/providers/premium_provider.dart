@@ -43,8 +43,7 @@ enum PremiumPlan { none, weekly, annual }
 ///    ([InAppPurchase.completePurchase]) para que no quede en el limbo.
 /// 5. [restorePurchases] re-emite las compras previas por el mismo stream.
 class PremiumProvider extends ChangeNotifier {
-  PremiumProvider({InAppPurchase? iap})
-      : _iap = iap ?? InAppPurchase.instance;
+  PremiumProvider({InAppPurchase? iap}) : _injectedIap = iap;
 
   /// IDs de producto tal cual dados de alta en Play Console / App Store
   /// Connect (suscripciones). Deben coincidir EXACTAMENTE.
@@ -67,7 +66,14 @@ class PremiumProvider extends ChangeNotifier {
   static const String msgUnavailable = 'premium.error_unavailable';
   static const String msgRestoreSuccess = 'premium.restore_success';
 
-  final InAppPurchase _iap;
+  // Resuelto perezosamente: construir un PremiumProvider no debe tener el
+  // efecto secundario de tocar el canal de plataforma (registra el cliente
+  // de facturación nativo). Solo se resuelve la primera vez que de verdad se
+  // necesita (initialize/buyPlan/restorePurchases), lo que además permite
+  // instanciar el provider en tests puros sin un entorno de plataforma real.
+  final InAppPurchase? _injectedIap;
+  InAppPurchase? _iapInstance;
+  InAppPurchase get _iap => _injectedIap ?? (_iapInstance ??= InAppPurchase.instance);
   StreamSubscription<List<PurchaseDetails>>? _subscription;
   SharedPreferences? _prefs;
 

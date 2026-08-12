@@ -15,6 +15,7 @@ import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../widgets/app_state_views.dart';
 import '../widgets/cinematic_card.dart';
+import '../widgets/coming_soon.dart';
 import '../widgets/local_cinematic_card.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -265,12 +266,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 .firstWhere((e) => e?.id == item.id, orElse: () => null)
             : null;
         final isLocked = item.isPremium && !isPremium;
+        final isComingSoon = CategoryConfigs.isComingSoon(item.category);
         final t = context.read<LanguageProvider>().t;
-        final tapAction = isLocked
-            ? () => AppNavigation.openPremium(context)
-            : era != null
-                ? () => AppNavigation.openEra(context, era)
-                : () => AppNavigation.openContent(context, item);
+        final tapAction = isComingSoon
+            ? () => showComingSoonSnackBar(context)
+            : isLocked
+                ? () => AppNavigation.openPremium(context)
+                : era != null
+                    ? () => AppNavigation.openEra(context, era)
+                    : () => AppNavigation.openContent(context, item);
 
         if (era != null) {
           return CinematicCard(
@@ -288,7 +292,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
         return LocalCinematicCard(
           item: item,
           subtitle: CategoryConfigs.labelOf(item.category, lang),
+          badge: isComingSoon ? t('coming_soon.badge') : null,
           isPremium: isLocked,
+          isComingSoon: isComingSoon,
           onTap: tapAction,
         ).animate().fadeIn(
               duration: 400.ms,

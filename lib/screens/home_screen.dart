@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../core/constants/app_colors.dart';
+import '../core/constants/category_config.dart';
 import '../core/constants/world_config.dart';
 import '../core/navigation/app_navigation.dart';
 import '../data/content_repository.dart';
@@ -22,6 +23,8 @@ import '../providers/reading_progress_provider.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/caral_placeholder.dart';
 import '../widgets/cinematic_card.dart';
+import '../widgets/coming_soon.dart';
+import 'interactive_stories_list_screen.dart';
 import 'world_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -116,6 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // ── Historia del Día & Racha ─────────────────────────────────────
           SliverToBoxAdapter(child: _DailyStoryStreakSection(lang: lang)),
+
+          // ── Historias Interactivas ("Elige tu camino") ───────────────────
+          const SliverToBoxAdapter(child: _InteractiveStoriesBanner()),
 
           // ── Continua il tuo viaggio ─────────────────────────────────────
           if (rp.hasLastArticle) ...[
@@ -735,6 +741,132 @@ class _StreakBadge extends StatelessWidget {
   }
 }
 
+// ── Historias Interactivas banner ("Elige tu camino") ──────────────────────────
+
+class _InteractiveStoriesBanner extends StatelessWidget {
+  const _InteractiveStoriesBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.read<LanguageProvider>().t;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+      child: GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const InteractiveStoriesListScreen()),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            gradient: LinearGradient(
+              colors: [
+                Color.lerp(AppColors.verdeAndino, Colors.black, 0.35)!,
+                AppColors.negoCacao,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            border: Border.all(color: AppColors.verdeAndino.withOpacity(0.4)),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.verdeAndino.withOpacity(0.2),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(22),
+            child: Stack(
+              children: [
+                Positioned(
+                  right: -16,
+                  bottom: -16,
+                  child: Icon(
+                    Icons.route_rounded,
+                    size: 130,
+                    color: Colors.white.withOpacity(0.06),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: AppColors.verdeAndino.withOpacity(0.85),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              t('interactive_stories.home_banner_eyebrow'),
+                              style: GoogleFonts.lato(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                                letterSpacing: 0.8,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Icon(Icons.route_rounded,
+                              size: 16,
+                              color: AppColors.verdeAndino.withOpacity(0.9)),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        t('interactive_stories.home_banner_title'),
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          height: 1.2,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        t('interactive_stories.home_banner_subtitle'),
+                        style: GoogleFonts.lato(
+                          fontSize: 12,
+                          color: AppColors.cremaPergamino.withOpacity(0.65),
+                          height: 1.4,
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      Row(
+                        children: [
+                          Text(
+                            t('interactive_stories.start_button'),
+                            style: GoogleFonts.lato(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.verdeAndino,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Icon(Icons.arrow_forward_rounded,
+                              size: 14, color: AppColors.verdeAndino),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.08, end: 0),
+      ),
+    );
+  }
+}
+
 // ── Peru intro section ────────────────────────────────────────────────────────
 
 class _PeruIntroSection extends StatelessWidget {
@@ -1139,19 +1271,26 @@ class _WorldsSection extends StatelessWidget {
         itemCount: WorldConfig.worlds.length,
         itemBuilder: (context, i) {
           final world = WorldConfig.worlds[i];
+          final isComingSoon = CategoryConfigs.isComingSoon(world.category);
           return Padding(
             padding: const EdgeInsets.only(right: 14),
             child: CinematicCard(
               accentColor: world.accentColor,
               title: world.titleFor(lang),
               subtitle: world.descriptionFor(lang),
+              badge: isComingSoon
+                  ? context.read<LanguageProvider>().t('coming_soon.badge')
+                  : null,
+              isComingSoon: isComingSoon,
               width: 160,
               height: 210,
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => WorldScreen(worldId: world.id)),
-              ),
+              onTap: isComingSoon
+                  ? () => showComingSoonSnackBar(context)
+                  : () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => WorldScreen(worldId: world.id)),
+                      ),
             ).animate().fadeIn(duration: 500.ms, delay: (i * 80).ms).scale(
                   begin: const Offset(0.92, 0.92),
                   end: const Offset(1, 1),
@@ -1253,7 +1392,7 @@ class _PersonajeDiaSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GestureDetector(
-        onTap: () => AppNavigation.openContent(context, item),
+        onTap: () => showComingSoonSnackBar(context),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -1280,6 +1419,22 @@ class _PersonajeDiaSection extends StatelessWidget {
                 Positioned.fill(
                   child: CustomPaint(
                     painter: _DiagonalPatternPainter(const Color(0xFF8B4513)),
+                  ),
+                ),
+                Positioned.fill(
+                  child: Container(color: Colors.black.withOpacity(0.45)),
+                ),
+                Positioned(
+                  top: 14,
+                  right: 14,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.hourglass_top_rounded,
+                        size: 14, color: Colors.white70),
                   ),
                 ),
                 Padding(
@@ -1337,18 +1492,18 @@ class _PersonajeDiaSection extends StatelessWidget {
                                 Text(
                                   context
                                       .read<LanguageProvider>()
-                                      .t('home.view_biography'),
+                                      .t('coming_soon.badge'),
                                   style: GoogleFonts.lato(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.ocre,
+                                    color: Colors.white70,
                                   ),
                                 ),
                                 const SizedBox(width: 4),
                                 const Icon(
-                                  Icons.arrow_forward_rounded,
+                                  Icons.hourglass_top_rounded,
                                   size: 14,
-                                  color: AppColors.ocre,
+                                  color: Colors.white70,
                                 ),
                               ],
                             ),
