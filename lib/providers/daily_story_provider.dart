@@ -167,4 +167,24 @@ class DailyStoryProvider extends ChangeNotifier {
     await p.setInt(_kCurrentStreak, _currentStreak);
     await p.setInt(_kLongestStreak, _longestStreak);
   }
+
+  /// Borra la racha y su historial local (no la historia del día ya cargada,
+  /// que es contenido, no progreso). Lo usa `AccountDataService` al ejecutar
+  /// "Borrar mis datos"; no empuja nada a Supabase porque ese borrado remoto
+  /// lo hace el propio servicio antes de llamar aquí.
+  Future<void> resetProgress() async {
+    _lastReadDate = null;
+    _currentStreak = 0;
+    _longestStreak = 0;
+    _freezesUsed = 0;
+    _justUsedStreakFreeze = false;
+    notifyListeners();
+
+    final p = _prefs;
+    if (p == null) return;
+    await p.remove(_kLastReadDate);
+    await p.remove(_kCurrentStreak);
+    await p.remove(_kLongestStreak);
+    await p.remove(_kFreezesUsed);
+  }
 }

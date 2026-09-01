@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +12,7 @@ import '../models/quiz_question.dart';
 import '../providers/collectibles_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import '../services/review_prompt_service.dart';
 import 'collectibles_album_screen.dart';
 
 /// Flujo de evaluación de un capítulo: 3 preguntas de opción múltiple con
@@ -312,8 +315,15 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
 
   Future<void> _claimCard(BuildContext context, LanguageProvider t) async {
     final collectibles = context.read<CollectiblesProvider>();
+    final review = context.read<ReviewPromptService>();
     await collectibles.recordQuizScore(widget.article.id, _score);
     await collectibles.unlockCard(widget.article.id);
+
+    // Acaba de superar un quiz y ganar una carta: es el mejor momento para
+    // pedirle una valoración. El servicio decide si toca o no — no la pide
+    // hasta el tercer momento bueno.
+    unawaited(review.registerGoodMoment());
+
     if (!context.mounted) return;
 
     final card = collectibles.cards.firstWhere((c) => c.id == widget.article.id);

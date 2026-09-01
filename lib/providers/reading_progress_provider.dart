@@ -248,4 +248,27 @@ class ReadingProgressProvider extends ChangeNotifier {
     );
     await p.setString(_kRead, jsonEncode(_read.toList()));
   }
+
+  /// Borra todo el progreso de lectura local (último artículo, porcentajes,
+  /// historial y capítulos marcados como leídos). Lo usa
+  /// `AccountDataService` al ejecutar "Borrar mis datos"; no empuja nada a
+  /// Supabase porque ese borrado remoto ya lo hizo el servicio.
+  Future<void> resetProgress() async {
+    lastArticleId = null;
+    lastStageId = null;
+    lastProgress = 0;
+    _progress = {};
+    _history = [];
+    _read = {};
+    notifyListeners();
+
+    final p = _prefs;
+    if (p == null) return;
+    await p.remove(_kLastArticle);
+    await p.remove(_kLastStage);
+    await p.remove(_kLastPct);
+    await p.remove(_kProgress);
+    await p.remove(_kHistory);
+    await p.remove(_kRead);
+  }
 }

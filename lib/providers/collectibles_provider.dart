@@ -184,4 +184,25 @@ class CollectiblesProvider extends ChangeNotifier {
       jsonEncode(_unlockedAt.map((k, v) => MapEntry(k, v.toIso8601String()))),
     );
   }
+
+  /// Vuelve a bloquear todas las tarjetas y borra los puntajes de quiz
+  /// locales. El manifiesto de tarjetas ([_cards]) se conserva —es
+  /// contenido, no progreso—, solo se marca como no desbloqueado. Lo usa
+  /// `AccountDataService` al ejecutar "Borrar mis datos".
+  Future<void> resetProgress() async {
+    _unlocked.clear();
+    _unlockedAt.clear();
+    _quizScores.clear();
+    // Se reconstruyen desde el manifiesto en vez de con `copyWith`: ese
+    // copyWith ignora un `unlockedAt: null` (patrón `?? this.unlockedAt`) y
+    // dejaría la fecha de desbloqueo vieja pegada a una tarjeta bloqueada.
+    await _loadCards();
+    notifyListeners();
+
+    final p = _prefs;
+    if (p == null) return;
+    await p.remove(_kUnlocked);
+    await p.remove(_kUnlockedAt);
+    await p.remove(_kQuizScores);
+  }
 }
