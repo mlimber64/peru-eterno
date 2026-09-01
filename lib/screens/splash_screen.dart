@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../providers/language_provider.dart';
+import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,8 +19,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 2800), () {
-      if (mounted) context.go('/home');
+    Future.delayed(const Duration(milliseconds: 2800), () async {
+      if (!mounted) return;
+      // El primer arranque pasa por la presentación; el resto van directos.
+      final showOnboarding = await OnboardingScreen.shouldShow();
+      if (!mounted) return;
+      context.go(showOnboarding ? OnboardingScreen.routePath : '/home');
     });
   }
 

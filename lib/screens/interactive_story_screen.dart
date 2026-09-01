@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +10,8 @@ import '../models/interactive_story.dart';
 import '../providers/interactive_story_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import '../services/review_prompt_service.dart';
+import '../services/share_service.dart';
 import '../widgets/app_state_views.dart';
 
 /// Lector de historias interactivas ("Elige tu camino"): muestra el nodo
@@ -465,6 +469,8 @@ class _EndingViewState extends State<_EndingView> {
     final isp = context.read<InteractiveStoryProvider>();
     _showUnlockedBadge = isp.justUnlockedEnding;
     if (_showUnlockedBadge) {
+      // Final nuevo desbloqueado: otro momento bueno para la valoración.
+      unawaited(context.read<ReviewPromptService>().registerGoodMoment());
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) context.read<InteractiveStoryProvider>().consumeJustUnlockedEndingFlag();
       });
@@ -587,6 +593,35 @@ class _EndingViewState extends State<_EndingView> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28),
                 ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          // Compartir el final alcanzado: de todo lo que hace la app, es lo
+          // que más invita a contarlo, porque el camino de cada uno es
+          // distinto y da pie a comparar.
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () => ShareService.share(
+                message: widget
+                    .t('share.story_ending')
+                    .replaceAll('{story}', widget.story.tituloFor(widget.lang))
+                    .replaceAll('{ending}', widget.node.titleFor(widget.lang)),
+                subject: widget.t('share.story_subject'),
+              ),
+              icon: const Icon(Icons.ios_share_rounded, size: 18),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.ocre,
+                side: BorderSide(color: AppColors.ocre.withOpacity(0.5)),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(28),
+                ),
+              ),
+              label: Text(
+                widget.t('share.button'),
+                style: GoogleFonts.lato(fontWeight: FontWeight.w800, fontSize: 14),
               ),
             ),
           ),

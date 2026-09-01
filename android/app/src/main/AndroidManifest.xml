@@ -7,6 +7,13 @@
          canales de prueba y producción de compras dentro de la app. -->
     <uses-permission android:name="com.android.vending.BILLING" />
 
+    <!-- Recordatorio diario de racha. En Android 13+ el permiso se pide en
+         tiempo de ejecución, y solo cuando el usuario activa el recordatorio
+         desde Ajustes — no al abrir la app por primera vez. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Permite reprogramar el aviso tras reiniciar el teléfono. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:label="Perú Eterno"
         android:name="${applicationName}"

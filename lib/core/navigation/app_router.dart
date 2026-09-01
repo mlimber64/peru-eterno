@@ -17,6 +17,7 @@ import '../../screens/home_screen.dart';
 import '../../screens/interactive_story_screen.dart';
 import '../../screens/main_screen.dart';
 import '../../screens/map_timeline_screen.dart';
+import '../../screens/onboarding_screen.dart';
 import '../../screens/premium_screen.dart';
 import '../../screens/settings_screen.dart';
 import '../../screens/splash_screen.dart';
@@ -55,6 +56,12 @@ class AppRouter {
       // "Home" apunta a '/'), y por si algo navega ahí directamente.
       GoRoute(path: '/', redirect: (context, state) => '/home'),
       GoRoute(path: '/splash', builder: (context, state) => const SplashScreen()),
+      // Primer arranque. Fuera del shell a propósito: sin barra inferior,
+      // para que nadie se salte la presentación tocando otra pestaña.
+      GoRoute(
+        path: OnboardingScreen.routePath,
+        builder: (context, state) => const OnboardingScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         // `pageBuilder` (no `builder`) para poder envolver el shell completo
         // (MainScreen + bottom nav) en el mismo fade de 700ms que tenía el

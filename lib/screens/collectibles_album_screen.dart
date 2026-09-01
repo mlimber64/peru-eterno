@@ -9,6 +9,7 @@ import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
 import '../providers/collectibles_provider.dart';
 import '../providers/language_provider.dart';
+import '../services/share_service.dart';
 
 /// Álbum de tarjetas coleccionables, agrupado por etapa histórica. Las
 /// tarjetas bloqueadas se muestran en escala de grises con una pista de
@@ -374,6 +375,32 @@ class _CollectibleTile extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+            // Compartir justo aquí y no en la cuadrícula: este es el momento
+            // en que alguien acaba de ver la carta que desbloqueó, que es
+            // cuando de verdad le apetece enseñarla.
+            FilledButton.icon(
+              onPressed: () => ShareService.share(
+                message: t
+                    .t('share.collectible')
+                    .replaceAll('{card}', card.tituloFor(lang)),
+                subject: t.t('share.collectible_subject'),
+              ),
+              icon: const Icon(Icons.ios_share_rounded, size: 18),
+              label: Text(
+                t.t('share.button'),
+                style: GoogleFonts.lato(fontWeight: FontWeight.w800),
+              ),
+              style: FilledButton.styleFrom(
+                backgroundColor: card.rarity.color,
+                foregroundColor: AppColors.negoCacao,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
             TextButton(
               onPressed: () => Navigator.pop(ctx),
               child: Text(t.t('quiz.close'),

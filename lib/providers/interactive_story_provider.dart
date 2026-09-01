@@ -187,6 +187,35 @@ class InteractiveStoryProvider extends ChangeNotifier {
     await p.setString('$_kPathPrefix${story.id}', jsonEncode(_path));
   }
 
+  /// Borra el progreso de TODAS las historias interactivas (nodo guardado,
+  /// camino recorrido y finales desbloqueados), no solo la que esté cargada.
+  ///
+  /// Barre por prefijo `isp_` porque las claves son una por historia
+  /// (`isp_progress_<id>`, `isp_path_<id>`, `isp_endings_<id>`) y este
+  /// provider solo conoce la historia actualmente abierta. Lo usa
+  /// `AccountDataService` al ejecutar "Borrar mis datos".
+  Future<void> resetProgress() async {
+    final p = _prefs ??= await SharedPreferences.getInstance();
+    for (final key in p.getKeys().toList()) {
+      if (key.startsWith('isp_')) await p.remove(key);
+    }
+
+    _unlockedEndings = {};
+    _pendingChoice = null;
+    _justUnlockedEnding = false;
+    final story = _story;
+    if (story != null && story.startNode != null) {
+      _path
+        ..clear()
+        ..add(story.startNodeId);
+      _currentNode = story.startNode;
+    } else {
+      _path.clear();
+      _currentNode = null;
+    }
+    notifyListeners();
+  }
+
   /// Reinicia la historia actual desde `start_node_id`.
   Future<void> restart() async {
     final story = _story;

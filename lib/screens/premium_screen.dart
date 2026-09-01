@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
+import '../models/legal_document.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import 'legal_screen.dart';
 
 class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
@@ -337,15 +339,11 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
   Widget _buildLegalFooter(
       BuildContext context, String Function(String) t, PremiumProvider p) {
-    void showComingSoon() {
-      ScaffoldMessenger.of(context)
-        ..clearSnackBars()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(t('premium.legal_coming_soon')),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
+    void openLegal(LegalDocType type) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => LegalScreen(type: type)),
+      );
     }
 
     TextStyle style() => GoogleFonts.lato(
@@ -360,12 +358,12 @@ class _PremiumScreenState extends State<PremiumScreen> {
       spacing: 4,
       children: [
         TextButton(
-          onPressed: showComingSoon,
+          onPressed: () => openLegal(LegalDocType.terms),
           child: Text(t('premium.legal_terms'), style: style()),
         ),
         Text('·', style: style()),
         TextButton(
-          onPressed: showComingSoon,
+          onPressed: () => openLegal(LegalDocType.privacy),
           child: Text(t('premium.legal_privacy'), style: style()),
         ),
         Text('·', style: style()),
