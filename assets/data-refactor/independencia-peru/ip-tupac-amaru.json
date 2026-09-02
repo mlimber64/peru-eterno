@@ -1,0 +1,89 @@
+{
+  "id": "rebelion_tupac_amaru",
+  "parent_stage_id": "indipendenza",
+  "orden": 1,
+  "categoria": {
+    "es": "Precursores y Rebeliones",
+    "it": "Precursori e Ribellioni",
+    "en": "Precursors and Rebellions"
+  },
+  "titulo": {
+    "es": "Túpac Amaru II y Micaela Bastidas: El rugido de la libertad",
+    "it": "Túpac Amaru II e Micaela Bastidas: Il ruggito della libertà",
+    "en": "Túpac Amaru II and Micaela Bastidas: The Roar of Freedom"
+  },
+  "subtitulo": {
+    "es": "La mayor rebelión anticolonial de América que hizo temblar las bases del Imperio Español en 1780.",
+    "it": "La più grande ribellione anticoloniale d'America che fece tremare l'Impero Spagnolo nel 1780.",
+    "en": "The largest anti-colonial rebellion in the Americas that shook the Spanish Empire in 1780."
+  },
+  "contenido": {
+    "es": "El 4 de noviembre de 1780 d.C., en el pueblo de Tinta (Cusco), el cacique José Gabriel Condorcanqui —quien adoptó el nombre de **Túpac Amaru II** en honor a su antepasado— apresó al abusivo corregidor español Antonio de Arriaga. Este acto encendió la chispa de la rebelión anticolonial más sangrienta y masiva de la historia de América del Sur, levantando a más de 100,000 indígenas, mestizos y criollos en contra de los repartos forzados, la mita minera y los tributos abusivos de las Reformas Borbónicas.\n\nA su lado, como estratega indispensable del movimiento, estuvo su esposa **Micaela Bastidas**. Lejos de cumplir un rol secundario, Micaela administraba la retaguardia rebelde: manejaba la logística militar, organizaba el abastecimiento de provisiones y municiones, lideraba el servicio de espionaje e incluso dictaba edictos políticos. Mientras Túpac Amaru combatía en el campo de batalla, Micaela mantenía unido e informado al ejército rebelde.\n\nTras victorias contundentes como la Batalla de Sangarará, la indecisión de atacar Cusco a tiempo permitió a las tropas realistas reorganizarse con refuerzos traídos desde Lima. En abril de 1781, tras ser traicionados, Túpac Amaru, Micaela Bastidas y sus principales jefes fueron capturados. El 18 de mayo de 1781, en la Plaza Mayor del Cusco, sufrieron un martirio brutal: Micaela fue ejecutada tras ser torturada, y Túpac Amaru fue descuartizado atando sus extremidades a cuatro caballos tras presenciar la muerte de su familia.\n\nAunque la rebelión fue sofocada, el miedo sembrado en la Corona obligó a abolir los corregimientos y la mita. La semilla de la libertad quedó sembrada para siempre en la conciencia andina.\n\n**[¿SABÍAS QUÉ?]**\nMicaela Bastidas advirtió repetidamente a su esposo mediante cartas urgentes sobre la necesidad táctica de tomar Cusco de inmediato antes de que llegaran las tropas de Lima. En una famosa carta le escribió: *'Te he advertido bastante para que pasases a Cusco inmediatamente, pero has dado gana al tiempo...'*. La historia confirmó que su intuición militar era absolutamente acertada.\n\n*Créditos de investigación y agradecimientos especiales a la Colección Documental de la Independencia del Perú y a los estudios de la historiadora Scarlett O'Phelan.*",
+
+    "it": "Il 4 novembre 1780, a Tinta (Cusco), il capo indigeno José Gabriel Condorcanqui —assumendo il nome di **Túpac Amaru II** in onore del suo antenato— fece prigioniero l'abusivo corregidor spagnolo Antonio de Arriaga, dando inizio alla più grande ribellione anticoloniale del Sud America. Diede inizio alla più grande ribellione anticoloniale del Sud America, mobilitando oltre 100.000 persone contro la Mita e i tributi della Corona.\n\nAl suo fianco vi fu la moglie **Micaela Bastidas**, vera mente logistica e strategica del movimento: gestiva le munizioni, il servizio di spionaggio e il reclutamento delle truppe.\n\nDopo la sconfitta, il 18 maggio 1781, entrambi furono giustiziati brutalmente nella Piazza d'Armi di Cusco. Nonostante la sconfitta, il loro sacrificio costrinse la Spagna ad abolire le istituzioni più oppressive.\n\n**[CURIOSITÀ]**\nMicaela Bastidas scrisse lettere d'emergenza a Túpac Amaru supplicandolo di attaccare subito Cusco prima dell'arrivo dei rinforzi da Lima. La storia dimostrò che la sua visione militare era corretta.\n\n*Crediti di ricerca e ringraziamenti alla Collezione Documentale dell'Indipendenza del Perù e alla storica Scarlett O'Phelan.*",
+
+    "en": "On November 4, 1780, in Tinta (Cusco), indigenous leader José Gabriel Condorcanqui took the name **Túpac Amaru II** and launched the largest anti-colonial uprising in South American history against forced labor and heavy taxation.\n\nBeside him stood his wife **Micaela Bastidas**, the movement's logistical and strategic leader. She managed supply lines, military intelligence, and troop recruitment while Túpac Amaru led forces in the field.\n\nFollowing their capture, both suffered brutal public executions in Cusco's main square on May 18, 1781. Though crushed, the rebellion forced Spain to abolish its most oppressive colonial institutions.\n\n**[FUN FACT]**\nMicaela Bastidas repeatedly urged her husband in desperate letters to strike Cusco immediately before royalist reinforcements arrived from Lima—a military insight proven right by history.\n\n*Research credits and special thanks to the Documentary Collection of the Independence of Peru and historian Scarlett O'Phelan.*"
+  },
+  "periodo": {
+    "es": "1780 d.C. - 1781 d.C.",
+    "it": "1780 d.C. - 1781 d.C.",
+    "en": "1780 AD - 1781 AD"
+  },
+  "imagen_sugerida": "https://res.cloudinary.com/dxpps0nwm/image/upload/v1784906857/independencia_1_qhmdwj.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Quién adoptó el nombre de Túpac Amaru II para liderar la rebelión de 1780?",
+        "it": "Chi adottò il nome di Túpac Amaru II per guidare la ribellione del 1780?",
+        "en": "Who adopted the name Túpac Amaru II to lead the 1780 rebellion?"
+      },
+      "opciones": {
+        "es": ["Diego Quispe Tito", "José Gabriel Condorcanqui", "Andrés Avelino Cáceres", "Francisco Bolognesi"],
+        "it": ["Diego Quispe Tito", "José Gabriel Condorcanqui", "Andrés Avelino Cáceres", "Francisco Bolognesi"],
+        "en": ["Diego Quispe Tito", "José Gabriel Condorcanqui", "Andrés Avelino Cáceres", "Francisco Bolognesi"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "El cacique José Gabriel Condorcanqui tomó el nombre de su antepasado para liderar la rebelión.",
+        "it": "Il capo indigeno José Gabriel Condorcanqui prese il nome del suo antenato per guidare la ribellione.",
+        "en": "Indigenous leader José Gabriel Condorcanqui took his ancestor's name to lead the rebellion."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué rol cumplió Micaela Bastidas en la rebelión?",
+        "it": "Che ruolo ebbe Micaela Bastidas nella ribellione?",
+        "en": "What role did Micaela Bastidas play in the rebellion?"
+      },
+      "opciones": {
+        "es": ["Fue solo una figura simbólica", "Dirigió la logística militar y el espionaje rebelde", "No participó en la rebelión", "Negoció la paz con España"],
+        "it": ["Fu solo una figura simbolica", "Diresse la logistica militare e lo spionaggio ribelle", "Non partecipò alla ribellione", "Negoziò la pace con la Spagna"],
+        "en": ["She was only a symbolic figure", "She led the rebel military logistics and espionage", "She did not take part in the rebellion", "She negotiated peace with Spain"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Micaela administraba la retaguardia: logística, abastecimiento y espionaje del ejército rebelde.",
+        "it": "Micaela amministrava la retroguardia: logistica, approvvigionamento e spionaggio dell'esercito ribelle.",
+        "en": "Micaela managed the rear guard: logistics, supplies, and espionage for the rebel army."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cómo terminó la rebelión de Túpac Amaru II en 1781?",
+        "it": "Come terminò la ribellione di Túpac Amaru II nel 1781?",
+        "en": "How did Túpac Amaru II's rebellion end in 1781?"
+      },
+      "opciones": {
+        "es": ["Con la independencia inmediata del Perú", "Con su captura y ejecución brutal en el Cusco", "Con una victoria total sobre España", "Con su exilio a España"],
+        "it": ["Con l'indipendenza immediata del Perù", "Con la sua cattura ed esecuzione brutale a Cusco", "Con una vittoria totale sulla Spagna", "Con il suo esilio in Spagna"],
+        "en": ["With Peru's immediate independence", "With his capture and brutal execution in Cusco", "With a total victory over Spain", "With his exile to Spain"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Tras ser traicionados, Túpac Amaru II y Micaela Bastidas fueron capturados y ejecutados el 18 de mayo de 1781.",
+        "it": "Dopo essere stati traditi, Túpac Amaru II e Micaela Bastidas furono catturati e giustiziati il 18 maggio 1781.",
+        "en": "After being betrayed, Túpac Amaru II and Micaela Bastidas were captured and executed on May 18, 1781."
+      }
+    }
+  ]
+}

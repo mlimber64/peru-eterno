@@ -1,4 +1,66 @@
 {
+  "onboarding": {
+    "skip": "Salta",
+    "next": "Avanti",
+    "start": "Inizia",
+    "p1_eyebrow": "Benvenuto",
+    "p1_title": "5.000 anni di storia, un capitolo alla volta",
+    "p1_body": "Da Caral, la città più antica delle Americhe, fino alla Repubblica. Capitoli da un minuto, illustrati e narrati, per capire da dove viene il Perù.",
+    "p2_eyebrow": "Lingua",
+    "p2_title": "In che lingua vuoi leggere?",
+    "p3_eyebrow": "La tua serie",
+    "p3_title": "Un capitolo al giorno e non la molli più",
+    "p3_body": "Ogni giorno ti aspetta una storia nuova. Leggila e la tua serie cresce; supera il quiz e guadagni una carta da collezione. Puoi attivare un promemoria quando vuoi."
+  },
+  "share": {
+    "button": "Condividi",
+    "collectible": "Ho sbloccato la carta «{card}» su Perú Eterno. 5.000 anni di storia del Perù in tasca.",
+    "collectible_subject": "La mia carta di Perú Eterno",
+    "story_ending": "Ho finito «{story}» su Perú Eterno e il mio cammino è finito così: {ending}. Tu cosa avresti scelto?",
+    "story_subject": "Il mio finale su Perú Eterno"
+  },
+  "notifications": {
+    "reminder_title": "La tua serie ti aspetta",
+    "reminder_body": "Un capitolo da 1 minuto e continui ad accumulare giorni.",
+    "reminder_body_streak": "Non perdere i tuoi {days} giorni di serie: leggi la storia di oggi.",
+    "permission_denied": "Android non ha concesso il permesso per le notifiche. Puoi attivarlo dalle impostazioni di sistema."
+  },
+  "account": {
+    "title": "Il tuo account",
+    "anonymous_badge": "Progressi solo su questo dispositivo",
+    "linked_badge": "Progressi al sicuro",
+    "link_title": "Salva i tuoi progressi",
+    "link_intro": "Collega un'email e potrai recuperare la tua serie, i capitoli letti e i collezionabili se cambi telefono o reinstalli l'app. Non usiamo la tua email per altro: niente pubblicità, niente newsletter, nessuna condivisione.",
+    "link_warning": "In questo momento i tuoi progressi esistono solo su questo dispositivo. Se lo perdi o disinstalli l'app, non si possono recuperare.",
+    "email_label": "La tua email",
+    "email_hint": "nome@esempio.com",
+    "send_code": "Inviami il codice",
+    "code_title": "Inserisci il codice",
+    "code_intro": "Abbiamo inviato un codice di 6 cifre a",
+    "code_label": "Codice di 6 cifre",
+    "verify": "Verifica",
+    "resend": "Invia un altro codice",
+    "have_account": "Ho già un account",
+    "have_account_intro": "Se hai già collegato un'email su un altro dispositivo, inseriscila e recupererai qui i tuoi progressi.",
+    "recover": "Recupera i miei progressi",
+    "linked_title": "Account collegato",
+    "linked_intro": "I tuoi progressi sono al sicuro. Se cambi telefono, accedi con questa email e li ritrovi.",
+    "link_success": "Fatto! I tuoi progressi sono al sicuro.",
+    "signin_success": "Progressi recuperati su questo dispositivo.",
+    "merge_note": "Quello che hai letto su questo dispositivo si aggiunge a quello del tuo account: non si perde nulla.",
+    "err_invalid_email": "Questa email non sembra valida. Controllala.",
+    "err_invalid_code": "Il codice non è corretto o è scaduto. Richiedine uno nuovo.",
+    "err_not_found": "Nessun account con questa email. Volevi collegarla invece?",
+    "err_already_used": "Questa email è già collegata a un altro account. Usa «Ho già un account» per accedere.",
+    "err_too_many": "Troppi tentativi. Aspetta qualche minuto prima di chiedere un altro codice.",
+    "err_network": "Nessuna connessione con il server. Riprova.",
+    "err_unavailable": "Non è stato possibile completare l'operazione. Riprova più tardi."
+  },
+  "legal": {
+    "updated": "Aggiornato il",
+    "contact": "Scrivici",
+    "load_error": "Impossibile caricare il documento. Riprova."
+  },
   "app": {
     "name": "Peru Eterno",
     "tagline": "Un viaggio nel tempo"
@@ -12,6 +74,7 @@
     "close": "Chiudi",
     "home": "Home",
     "explore": "Esplora",
+    "map": "Mappa",
     "saved": "Salvati",
     "settings": "Impostazioni",
     "previous": "Precedente",
@@ -21,26 +84,45 @@
     "title": "Sblocca Premium",
     "subtitle": "Intera storia del Perù",
     "description": "Scopri l'Impero Inca, la Conquista spagnola, il Vicereame e l'Indipendenza del Perù in un viaggio unico attraverso i secoli.",
+    "hero_title": "Sblocca l'esperienza completa di Perù Eterno",
+    "hero_subtitle": "Audio-storie, l'archivio completo di 20 capitoli, carte leggendarie e lettura offline.",
     "price": "€2,99",
     "unlock_button": "Sblocca ora",
-    "restore_button": "Ripristina acquisto",
+    "restore_button": "Ripristina acquisti",
     "locked_label": "Contenuto Premium",
     "tap_to_unlock": "Tocca per sbloccare",
     "features_title": "Cosa include Premium",
     "features": [
-      "Accesso completo a tutte le 7 ere storiche",
-      "Gallerie di illustrazioni esclusive per ogni era",
-      "Descrizioni storiche dettagliate trilingue",
-      "Lettura offline completa",
-      "Nessuna pubblicità"
+      "Audio-storie illimitate, narrate nella tua lingua",
+      "Archivio storico completo: tutti i 20 capitoli, senza aspettare il giorno",
+      "Carte collezionabili epiche e leggendarie",
+      "Lettura offline completa e congelatori di serie illimitati"
     ],
+    "trial_banner": "Prova gratis per 7 giorni. Annulla quando vuoi.",
+    "plan_weekly_label": "Settimanale",
+    "plan_weekly_price": "€2,99/settimana",
+    "plan_weekly_badge": "Più popolare",
+    "plan_annual_label": "Annuale",
+    "plan_annual_price": "€59,99/anno",
+    "plan_annual_badge": "Risparmia 60%",
+    "cta_trial": "Inizia la mia prova gratuita di 7 giorni",
+    "cta_subscribe": "Abbonami",
+    "legal_terms": "Termini di servizio",
+    "legal_privacy": "Informativa sulla privacy",
+    "trial_active_prefix": "Ti restano",
+    "trial_active_suffix": "giorni di prova gratuita",
     "free_label": "GRATUITO",
     "premium_label": "PREMIUM",
-    "active_message": "Hai accesso completo a tutta la storia del Peru!",
+    "active_message": "Hai accesso completo a tutta la storia del Perù!",
     "error_canceled": "Acquisto annullato.",
     "error_failed": "Non è stato possibile completare il pagamento. Riprova.",
     "error_unavailable": "Negozio non disponibile al momento. Riprova più tardi.",
     "restore_success": "Acquisto ripristinato con successo."
+  },
+  "audio": {
+    "listen_button": "Ascolta",
+    "now_playing": "In riproduzione",
+    "error": "Impossibile riprodurre l'audio su questo dispositivo. Prova un'altra lingua o riprova più tardi."
   },
   "language": {
     "select": "Seleziona lingua",
@@ -73,7 +155,7 @@
     "historical_progress": "Progresso storico",
     "hero_eyebrow": "PERU - 5.000 ANNI",
     "hero_title": "5.000 anni\ndi storia",
-    "hero_subtitle": "Scopri l'anima del Peru",
+    "hero_subtitle": "Scopri l'anima del Perù",
     "start_journey": "Inizia il viaggio",
     "explore_eras": "Esplora le ere",
     "capital": "Capitale",
@@ -81,8 +163,8 @@
     "population": "Popolazione",
     "regions": "Regioni",
     "regions_value": "Costa - Sierra - Giungla",
-    "about_title": "Il Peru",
-    "about_text": "Il Peru e una delle piu grandi culle della civilta mondiale. Sede dell'Impero Inca, della citta sacra di Machu Picchu e di decine di culture lungo 5.000 anni, la storia del Peru e una delle piu ricche del mondo.",
+    "about_title": "Il Perù",
+    "about_text": "Il Perù è una delle più grandi culle della civiltà mondiale. Sede dell'Impero Inca, della città sacra di Machu Picchu e di decine di culture lungo 5.000 anni, la storia del Perù è una delle più ricche del mondo.",
     "how_title": "Come usare Peru Eterno",
     "step_1": "Scegli un mondo (Storia, Cultura, Sapori...) per iniziare",
     "step_2": "Tocca una scheda per leggere il contenuto completo",
@@ -90,6 +172,71 @@
     "featured_badge": "ERA IN EVIDENZA",
     "view_biography": "Vedi biografia",
     "continue_reading": "Continua a leggere ->"
+  },
+  "daily_story": {
+    "banner_label": "STORIA DI OGGI",
+    "streak_unit": "giorni",
+    "streak_start": "Inizia la tua serie!",
+    "completed_title": "Serie di oggi completata!",
+    "pending_title": "Leggi la storia di oggi per mantenere la tua serie",
+    "read_now": "Leggi ora",
+    "streak_increased": "Serie aumentata!",
+    "streak_saved": "Serie di oggi salvata!",
+    "streak_frozen": "Hai saltato un giorno, ma abbiamo usato un congelatore per salvare la tua serie!"
+  },
+  "quiz": {
+    "title": "Quiz del capitolo",
+    "start_cta": "Metti alla prova ciò che hai imparato",
+    "start_button": "Inizia il Quiz",
+    "best_score": "Miglior punteggio:",
+    "next": "Avanti",
+    "see_results": "Vedi risultati",
+    "score_perfect": "Punteggio perfetto!",
+    "score_good": "Ben fatto!",
+    "score_low": "Continua a esercitarti",
+    "claim_card": "Riscatta la Carta Collezionabile!",
+    "claim_card_locked": "Carta Premium — Sblocca",
+    "already_claimed": "Hai già questa carta",
+    "card_claimed": "Carta sbloccata!",
+    "view_album": "Vedi album",
+    "close": "Chiudi"
+  },
+  "collectibles": {
+    "title": "Album da Collezione",
+    "progress_label": "carte sbloccate",
+    "locked_prefix": "Completa il quiz di",
+    "locked_suffix": "per sbloccarla",
+    "go_to_chapter": "Vai al capitolo",
+    "unlocked_on": "Sbloccata il",
+    "rarity_common": "Comune",
+    "rarity_rare": "Rara",
+    "rarity_epic": "Epica",
+    "rarity_legendary": "Leggendaria"
+  },
+  "interactive_stories": {
+    "drawer_label": "Storie Interattive",
+    "hub_title": "Scegli il tuo Cammino",
+    "hub_subtitle": "Vivi la storia del Perù prendendo le tue decisioni. Ogni scelta rivela un dato storico reale.",
+    "hub_empty": "Presto saranno disponibili altre storie.",
+    "home_banner_eyebrow": "NUOVO",
+    "home_banner_title": "Scegli il tuo Cammino",
+    "home_banner_subtitle": "Diventa un chasqui inca e decidi il suo destino con le tue scelte",
+    "start_button": "Inizia l'avventura",
+    "resume_button": "Continua l'avventura",
+    "historical_fact_label": "Dato Reale",
+    "continue_button": "Continua",
+    "your_path_title": "Il tuo cammino",
+    "restart_button": "Prova un altro percorso",
+    "back_to_hub_button": "Torna alle Storie",
+    "step_label": "Decisione",
+    "premium_choice_badge": "Premium",
+    "premium_story_badge": "Storia Premium",
+    "new_ending_unlocked": "Nuovo finale scoperto!"
+  },
+  "coming_soon": {
+    "badge": "Prossimamente",
+    "title": "Molto presto",
+    "message": "Stiamo preparando questo contenuto con cura. Torna presto!"
   },
   "eras": {
     "caral": {
@@ -158,7 +305,7 @@
   },
   "explore": {
     "title": "Esplora",
-    "subtitle": "Scopri il Peru",
+    "subtitle": "Scopri il Perú",
     "search_hint": "Cerca storia, persone, cibo...",
     "results": "risultati",
     "historical_stages_count": "fasi storiche",
@@ -170,13 +317,16 @@
   "historia": {
     "editorial_articles": "ARTICOLI EDITORIALI",
     "prehispanic_peru": "Perù preispanico",
-    "prehispanic_subtitle": "Origini e civilta antiche",
+    "prehispanic_subtitle": "Origini e civiltà antiche",
     "articles": "Articoli",
     "read_article": "Leggi articolo",
     "sources_title": "Fonti e crediti",
-    "sources_body": "Contenuto editoriale creato per Peru Eterno. Basato su fonti accademiche: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Peru, Enciclopedia del Peru.",
+    "sources_body": "Contenuto editoriale creato per Peru Eterno. Basato su fonti accademiche: Universidad Nacional Mayor de San Marcos, Instituto Nacional de Cultura del Perù, Enciclopedia del Perù.",
     "explore_also": "Esplora anche",
-    "read": "Leggi"
+    "read": "Leggi",
+    "read_time_unit": "min di lettura",
+    "mark_as_read": "Segna come letto",
+    "completed": "Completato"
   },
   "timeline": {
     "historical": "Cronologia storica"
@@ -187,13 +337,16 @@
     "eyebrow": "MUSEO DIGITALE",
     "title": "Mappa culturale del Perù",
     "subtitle": "Esplora luoghi, epoche e territori sacri.",
-    "open_story": "Apri storia"
+    "open_story": "Apri storia",
+    "view_map": "Mappa",
+    "view_timeline": "Timeline",
+    "filter_all": "Tutti"
   },
   "favorites": {
     "eyebrow": "LA MIA COLLEZIONE",
     "title": "Salvati",
     "empty_title": "Niente ancora salvato",
-    "empty_subtitle": "Tocca il cuore su qualsiasi`narticolo per salvarlo"
+    "empty_subtitle": "Tocca il cuore su qualsiasi articolo per salvarlo"
   },
   "world": {
     "editorial": "Approfondimenti preispanici",
@@ -206,6 +359,7 @@
     "title": "Impostazioni",
     "language": "LINGUA",
     "premium": "PREMIUM",
+    "collectibles": "COLLEZIONABILI",
     "storage": "ARCHIVIAZIONE",
     "about": "INFO",
     "premium_active": "Premium attivo",
@@ -217,8 +371,33 @@
     "clear_history": "Cancella cronologia",
     "clear_history_subtitle": "Rimuovi elementi \"continua a esplorare\"",
     "clear_favorites": "Cancella tutti i preferiti",
-    "clear_favorites_subtitle": "Questa azione non puo essere annullata",
+    "clear_favorites_subtitle": "Questa azione non può essere annullata",
     "cache_cleared": "Cache svuotata",
+    "legal": "LEGALE",
+    "privacy_subtitle": "Quali dati trattiamo e come cancellarli",
+    "terms_subtitle": "Condizioni d'uso e di abbonamento",
+    "notifications": "PROMEMORIA",
+    "streak_reminder": "Promemoria della serie",
+    "streak_reminder_subtitle": "Un avviso alle 20:00 se non hai ancora letto oggi",
+    "account": "ACCOUNT",
+    "account_anonymous": "Salva i tuoi progressi",
+    "account_anonymous_subtitle": "Collega un'email per non perderli cambiando telefono",
+    "account_linked_subtitle": "I tuoi progressi si possono recuperare su un altro dispositivo",
+    "data": "I TUOI DATI",
+    "delete_data": "Cancella i miei dati",
+    "delete_data_subtitle": "Elimina i tuoi progressi da questo dispositivo e dal cloud",
+    "delete_data_title": "Cancellare tutti i tuoi dati?",
+    "delete_data_body": "Verranno eliminati la tua serie, i capitoli letti, i punteggi dei quiz, le carte da collezione, i finali sbloccati, i tuoi preferiti e la cronologia. Sia su questo dispositivo sia sul server.",
+    "delete_data_kept": "Non vengono toccati né il tuo abbonamento premium né la lingua scelta. Questa azione non può essere annullata.",
+    "delete_data_cta": "Sì, cancella tutto",
+    "delete_data_cancel": "Annulla",
+    "delete_data_working": "Cancellazione…",
+    "delete_data_done": "I tuoi dati sono stati eliminati.",
+    "delete_data_local_only": "I tuoi dati su questo dispositivo sono stati cancellati.",
+    "delete_data_remote_failed": "Non è stato possibile completare la cancellazione sul server. I tuoi progressi locali sono già stati eliminati; riprova quando hai connessione.",
+    "user_id": "Identificativo anonimo",
+    "user_id_none": "Nessuna sessione — modalità locale",
+    "user_id_copied": "Identificativo copiato",
     "footer_credits": "Fonti editoriali · Dominio pubblico",
     "about_text": "Un'enciclopedia culturale sulla storia, le tradizioni e le persone del Perù. Fonti editoriali · Dominio pubblico.",
     "credits": "Fonti e crediti",
@@ -243,7 +422,7 @@
     "items": {
       "caral": {
         "title": "Caral",
-        "subtitle": "Civilta piu antica delle Americhe"
+        "subtitle": "Civiltà più antica delle Americhe"
       },
       "moche": {
         "title": "Moche",
@@ -270,7 +449,7 @@
         "subtitle": "La nascita di una nazione"
       },
       "cesar_vallejo": {
-        "title": "Cesar Vallejo",
+        "title": "César Vallejo",
         "subtitle": "Poeta universale"
       },
       "chabuca_granda": {
@@ -298,7 +477,7 @@
         "subtitle": "Architetto dell'Impero Inca"
       },
       "carrion": {
-        "title": "Daniel Alcides Carrion",
+        "title": "Daniel Alcides Carrión",
         "subtitle": "Martire della medicina peruviana"
       },
       "bolognesi": {
@@ -311,7 +490,7 @@
       },
       "marinera": {
         "title": "Marinera",
-        "subtitle": "Danza nazionale del Peru"
+        "subtitle": "Danza nazionale del Perú"
       },
       "pachamama": {
         "title": "Pachamama",
@@ -363,15 +542,15 @@
       },
       "andes": {
         "title": "Ande",
-        "subtitle": "Spina dorsale del Peru"
+        "subtitle": "Spina dorsale del Perú"
       },
       "amazonia": {
         "title": "Amazzonia peruviana",
-        "subtitle": "Foresta viva e biodiversita"
+        "subtitle": "Foresta viva e biodiversità"
       },
       "machu_picchu": {
         "title": "Machu Picchu",
-        "subtitle": "Citta sacra degli Inca"
+        "subtitle": "Città sacra degli Inca"
       },
       "lago_titicaca": {
         "title": "Lago Titicaca",

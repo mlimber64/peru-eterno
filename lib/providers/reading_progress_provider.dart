@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/user_progress_sync_service.dart';
 
 /// Tracks which HistoriaArticles the user has opened and how far they've read.
 class ArticleHistoryEntry {
@@ -27,6 +29,7 @@ class ReadingProgressProvider extends ChangeNotifier {
   static const _kLastPct = 'rp_last_pct';
   static const _kProgress = 'rp_progress';
   static const _kHistory = 'rp_history';
+  static const _kRead = 'rp_read';
 
   SharedPreferences? _prefs;
 
@@ -36,6 +39,7 @@ class ReadingProgressProvider extends ChangeNotifier {
 
   Map<String, int> _progress = {};
   List<ArticleHistoryEntry> _history = [];
+  Set<String> _read = {};
 
   bool get hasLastArticle => lastArticleId != null;
   bool get hasHistory => _history.isNotEmpty;
@@ -43,6 +47,43 @@ class ReadingProgressProvider extends ChangeNotifier {
 
   int progressFor(String articleId) => _progress[articleId] ?? 0;
   bool isCompleted(String articleId) => progressFor(articleId) >= 90;
+
+  /// ¿El usuario marcó (manualmente o al llegar al final) este artículo como
+  /// leído? A diferencia de [isCompleted] (derivado del % de scroll, que
+  /// fluctúa si el usuario vuelve a subir), esto es un estado explícito y
+  /// no retrocede solo.
+  bool isRead(String articleId) => _read.contains(articleId);
+
+  /// Ids de artículos marcados como leídos. Expuesto (junto con [isRead])
+  /// para que [UserProgressSyncService] pueda fusionar con
+  /// `user_chapter_progress.is_read` sin acceder a campos privados.
+  Set<String> get readArticleIds => Set.unmodifiable(_read);
+
+  /// Marca o desmarca un artículo como leído explícitamente (botón "Marcar
+  /// como leído" del lector).
+  Future<void> setRead(String articleId, bool read) async {
+    if (read) {
+      _read.add(articleId);
+    } else {
+      _read.remove(articleId);
+    }
+    notifyListeners();
+    await _save();
+    if (read) {
+      unawaited(UserProgressSyncService.instance?.pushChapterProgress(articleId));
+    }
+  }
+
+  /// Añade [ids] al conjunto de leídos ya fusionado (máximo/unión entre
+  /// local y remoto, resuelto por [UserProgressSyncService]) y persiste. No
+  /// dispara push de vuelta — el propio servicio de sync ya hizo ese lado.
+  Future<void> applySyncedReadIds(Set<String> ids) async {
+    final before = _read.length;
+    _read.addAll(ids);
+    if (_read.length == before) return; // Sin novedades: nada que persistir.
+    notifyListeners();
+    await _save();
+  }
 
   Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
@@ -60,6 +101,7 @@ class ReadingProgressProvider extends ChangeNotifier {
 
     _progress = await _loadProgress();
     _history = await _loadHistory();
+    _read = await _loadRead();
 
     notifyListeners();
   }
@@ -108,6 +150,22 @@ class ReadingProgressProvider extends ChangeNotifier {
       return progress;
     } catch (_) {
       await p.remove(_kProgress);
+      return {};
+    }
+  }
+
+  Future<Set<String>> _loadRead() async {
+    final p = _prefs;
+    if (p == null) return {};
+
+    try {
+      final raw = p.getString(_kRead);
+      if (raw == null) return {};
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) throw const FormatException('Invalid read set');
+      return decoded.whereType<String>().toSet();
+    } catch (_) {
+      await p.remove(_kRead);
       return {};
     }
   }
@@ -162,9 +220,16 @@ class ReadingProgressProvider extends ChangeNotifier {
 
     _progress[articleId] = pct;
     if (articleId == lastArticleId) lastProgress = pct;
+    // Llegar al final del artículo lo marca como leído automáticamente. No se
+    // desmarca si el usuario vuelve a subir: eso solo lo hace el usuario
+    // explícitamente con [setRead].
+    final justFinishedReading = pct >= 90 && _read.add(articleId);
 
     notifyListeners();
     await _save();
+    if (justFinishedReading) {
+      unawaited(UserProgressSyncService.instance?.pushChapterProgress(articleId));
+    }
   }
 
   Future<void> _save() async {
@@ -181,5 +246,29 @@ class ReadingProgressProvider extends ChangeNotifier {
       _kHistory,
       jsonEncode(_history.map((e) => e.toJson()).toList()),
     );
+    await p.setString(_kRead, jsonEncode(_read.toList()));
+  }
+
+  /// Borra todo el progreso de lectura local (último artículo, porcentajes,
+  /// historial y capítulos marcados como leídos). Lo usa
+  /// `AccountDataService` al ejecutar "Borrar mis datos"; no empuja nada a
+  /// Supabase porque ese borrado remoto ya lo hizo el servicio.
+  Future<void> resetProgress() async {
+    lastArticleId = null;
+    lastStageId = null;
+    lastProgress = 0;
+    _progress = {};
+    _history = [];
+    _read = {};
+    notifyListeners();
+
+    final p = _prefs;
+    if (p == null) return;
+    await p.remove(_kLastArticle);
+    await p.remove(_kLastStage);
+    await p.remove(_kLastPct);
+    await p.remove(_kProgress);
+    await p.remove(_kHistory);
+    await p.remove(_kRead);
   }
 }

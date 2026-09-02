@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/category_config.dart';
 import '../data/editorial_repository.dart';
-import '../models/content_item.dart';
+import '../models/content_ref.dart';
 import '../providers/language_provider.dart';
 import 'cinematic_card.dart';
 
@@ -11,12 +11,16 @@ import 'cinematic_card.dart';
 /// Muestra el gradiente de categoría de inmediato; si existe imagen local
 /// en el JSON editorial, cambia a ella una vez resuelto (usualmente < 1 frame
 /// tras la primera carga, dado el cache en memoria del repositorio).
+///
+/// Acepta cualquier [ContentRef] (en la práctica, siempre un ContentItem no
+/// era: las eras se renderizan con CinematicCard directamente).
 class LocalCinematicCard extends StatefulWidget {
-  final ContentItem item;
+  final ContentRef item;
   final String? title;
   final String? subtitle;
   final String? badge;
   final bool isPremium;
+  final bool isComingSoon;
   final VoidCallback? onTap;
   final double width;
   final double height;
@@ -28,6 +32,7 @@ class LocalCinematicCard extends StatefulWidget {
     this.subtitle,
     this.badge,
     this.isPremium = false,
+    this.isComingSoon = false,
     this.onTap,
     this.width = double.infinity,
     this.height = 200,
@@ -84,6 +89,7 @@ class _LocalCinematicCardState extends State<LocalCinematicCard> {
       subtitle: widget.subtitle ?? widget.item.localizedSubtitle(t),
       badge: widget.badge,
       isPremium: widget.isPremium,
+      isComingSoon: widget.isComingSoon,
       onTap: widget.onTap,
       width: widget.width,
       height: widget.height,

@@ -1,0 +1,89 @@
+{
+  "id": "nazca",
+  "parent_stage_id": "peru_prehispanico",
+  "orden": 4,
+  "categoria": {
+    "es": "Desarrollos Regionales",
+    "it": "Sviluppi Regionali",
+    "en": "Regional Developments"
+  },
+  "titulo": {
+    "es": "Nazca: Los astrónomos del desierto y los ríos subterráneos",
+    "it": "Nazca: Gli astronomi del deserto e i fiumi sotterranei",
+    "en": "Nazca: The Desert Astronomers and Underground Rivers"
+  },
+  "subtitulo": {
+    "es": "Las líneas gigantescas dibujadas en la tierra árida para comunicarse con los dioses del agua.",
+    "it": "Le linee gigantesche disegnate sulla terra arida per comunicare con gli dei dell'acqua.",
+    "en": "The giant lines drawn on arid earth to communicate with the gods of water."
+  },
+  "contenido": {
+    "es": "Sobre las desoladas pampas de Jumana y San José, en la costa sur del Perú, se extiende uno de los misterios más grandes de la humanidad. Vistas desde el suelo, son simples zanjas claras en medio del desierto. Pero al elevarse unos cientos de metros sobre el aire, el paisaje cobra vida: un colibrí de 96 metros, un mono de cola en espiral, un astronauta estilizado y cientos de figuras geométricas que parecen despegar hacia el horizonte. Bienvenidos al territorio Nazca.\n\nDurante siglos, el origen de estas figuras dio pie a teorías fantásticas. Sin embargo, la investigación arqueológica y la incansable dedicación de la investigadora alemana María Reiche revelaron una verdad aún más fascinante: los Nazca lograron trazar estos gigantescos geoglifos usando principios matemáticos simples pero brillantes. Mediante cordeles, estacas y maquetas a escala reducida, removieron cuidadosamente la capa superior de piedras rojizas e hiperoxidadas del desierto, dejando al descubierto la arcilla blanca y caliza que yacía debajo.\n\nPero, ¿por qué dibujar figuras que solo podían apreciarse en toda su plenitud desde el cielo? La respuesta no estaba en las estrellas lejanas, sino en la lucha desesperada por el agua. Las pampas de Nazca son uno de los lugares más secos del planeta. Las líneas y figuras no eran simples dibujos estáticos, sino verdaderos senderos rituales procesionales. Las familias Nazca caminaban en fila india sobre estos trazos durante las épocas de sequía, cantando y ofreciendo vasijas cerámicas a los dioses para implorar lluvias en la cordillera.\n\nPara sobrevivir a este entorno despiadado, los Nazca crearon una obra maestra de la ingeniería hidráulica que sigue funcionando hasta hoy: los puquios. Construyeron una red subterránea de acueductos en forma de espiral descendente que captaba las aguas filtradas de las montañas bajo el desierto, permitiéndoles cultivar maíz, algodón y ajíes en medio del calor sofocante.\n\n**[¿SABÍAS QUÉ?]**\nLas Líneas de Nazca se han conservado casi intactas durante más de 1,500 años gracias a un fenómeno climático único. El desierto de Nazca no tiene lluvias significativos y las piedras oscuras de la superficie absorben tanto calor que crean una capa de aire caliente estático sobre el suelo. Esta 'barrera térmica' desvía los vientos fuertes, evitando que la arena tape los surcos blancos.\n\n*Créditos de investigación y agradecimientos a la Asociación María Reiche, al Ministerio de Cultura del Perú y a las investigaciones arqueológicas en la cuenca del Río Grande.*",
+
+    "it": "Sulle desolate pampas di Jumana e San José, si estende uno dei più grandi misteri dell'umanità. Viste da terra, sono semplici solchi chiari nel deserto. Ma alzandosi in volo, il paesaggio prende vita: un colibrì di 96 metri, una scimmia con la coda a spirale e centinaia di figure geometriche. Benvenuti nel territorio Nazca.\n\nGrazie alle ricerche della matematica tedesca Maria Reiche, sappiamo che i Nazca tracciarono questi geoglifi usando corda, paletti e calcoli geometrici. Rimuovendo le pietre scure superficiali, portarono alla luce l'argilla chiara sottostante. Questi disegni non erano semplici opere d'arte, ma percorsi rituali camminati in processione per invocare l'acqua agli dei durante le grandi siccità.\n\nPer dominare il deserto, i Nazca crearono anche i 'puquios': una rete di acquedotti sotterranei a spirale che intercettava le falde acquifere montane, funzionante ancora oggi dopo oltre 1.500 anni.\n\n**[CURIOSITÀ]**\nLe linee si sono conservate perfette per secoli grazie a una 'barriera termica': le pietre scure assorbono così tanto calore da creare un cuscinetto d'aria calda che devia i venti forti, impedendo alla sabbia di coprire i solchi.\n\n*Crediti di ricerca e ringraziamenti all'Associazione Maria Reiche e al Ministero della Cultura del Perù.*",
+
+    "en": "Across the desolate plains of Jumana and San José lies one of humanity's greatest mysteries. From the ground, they look like simple light-colored trenches. But from high above, the landscape comes alive: a 96-meter hummingbird, a monkey with a spiral tail, and hundreds of geometric lines. Welcome to Nazca territory.\n\nThrough the work of German researcher Maria Reiche, we know the Nazca created these giant geoglyphs using geometry, ropes, and wooden stakes. By removing the dark, oxidized surface stones, they exposed the light clay underneath. These lines served as sacred processional paths walked during rituals to implore rain from the water deities.\n\nTo overcome the desert, the Nazca also engineered 'puquios': an underground network of spiral aqueducts that captured mountain water tables, still functioning today after more than 1,500 years.\n\n**[FUN FACT]**\nThe lines have remained intact for over 1,500 years due to a natural 'thermal cushion': the dark surface stones absorb intense heat, creating a warm air layer that deflects strong desert winds and prevents sand from covering the white paths.\n\n*Research credits and special thanks to the Maria Reiche Association and the Ministry of Culture of Peru.*"
+  },
+  "periodo": {
+    "es": "100 d.C. - 800 d.C.",
+    "it": "100 d.C. - 800 d.C.",
+    "en": "100 AD - 800 AD"
+  },
+  "imagen_sugerida": "https://res.cloudinary.com/dxpps0nwm/image/upload/v1784905921/caral-desertico_bfupo1.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Quién dedicó su vida a investigar el origen matemático de las Líneas de Nazca?",
+        "it": "Chi dedicò la propria vita a studiare l'origine matematica delle Linee di Nazca?",
+        "en": "Who dedicated her life to researching the mathematical origin of the Nazca Lines?"
+      },
+      "opciones": {
+        "es": ["Julio C. Tello", "María Reiche", "Ruth Shady", "Walter Alva"],
+        "it": ["Julio C. Tello", "María Reiche", "Ruth Shady", "Walter Alva"],
+        "en": ["Julio C. Tello", "María Reiche", "Ruth Shady", "Walter Alva"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "La investigadora alemana María Reiche reveló los principios geométricos usados para trazar los geoglifos.",
+        "it": "La ricercatrice tedesca María Reiche rivelò i principi geometrici usati per tracciare i geoglifi.",
+        "en": "German researcher María Reiche revealed the geometric principles used to draw the geoglyphs."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Cuál era el propósito ritual de caminar sobre las líneas y figuras de Nazca?",
+        "it": "Qual era lo scopo rituale di camminare sulle linee e figure di Nazca?",
+        "en": "What was the ritual purpose of walking along the Nazca lines and figures?"
+      },
+      "opciones": {
+        "es": ["Entrenamiento militar", "Procesiones para pedir lluvia", "Carreras deportivas", "Rutas comerciales"],
+        "it": ["Addestramento militare", "Processioni per invocare la pioggia", "Gare sportive", "Rotte commerciali"],
+        "en": ["Military training", "Processions to request rain", "Sporting races", "Trade routes"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Las familias caminaban en procesión sobre los trazos para implorar lluvias a los dioses del agua.",
+        "it": "Le famiglie camminavano in processione sui tracciati per implorare la pioggia agli dei dell'acqua.",
+        "en": "Families walked in procession along the lines to implore rain from the water deities."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué son los 'puquios' construidos por los Nazca?",
+        "it": "Cosa sono i 'puquios' costruiti dai Nazca?",
+        "en": "What are the 'puquios' built by the Nazca?"
+      },
+      "opciones": {
+        "es": ["Templos subterráneos", "Acueductos en espiral para captar agua", "Tumbas reales", "Silos de maíz"],
+        "it": ["Templi sotterranei", "Acquedotti a spirale per captare l'acqua", "Tombe reali", "Silos di mais"],
+        "en": ["Underground temples", "Spiral aqueducts to capture water", "Royal tombs", "Corn silos"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "Una red de acueductos en espiral que capta agua filtrada de las montañas, funcional hasta hoy.",
+        "it": "Una rete di acquedotti a spirale che capta l'acqua filtrata dalle montagne, ancora funzionante oggi.",
+        "en": "A network of spiral aqueducts that captures filtered mountain water, still functioning today."
+      }
+    }
+  ]
+}

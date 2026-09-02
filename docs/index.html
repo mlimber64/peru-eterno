@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perú Eterno · Legal</title>
+<style>
+  :root {
+    --ocre: #C8860A;
+    --crema: #F5E6C8;
+    --negro-cacao: #1A0F0A;
+    --marron-profundo: #2C1810;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--negro-cacao);
+    color: rgba(245, 230, 200, 0.72);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 72px; }
+  .langbar { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+  .langbar button {
+    background: var(--marron-profundo);
+    color: rgba(245, 230, 200, 0.55);
+    border: 1px solid rgba(245, 230, 200, 0.1);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .langbar button[aria-pressed="true"] {
+    background: rgba(200, 134, 10, 0.15);
+    border-color: rgba(200, 134, 10, 0.6);
+    color: var(--ocre);
+  }
+  .doc { display: none; }
+  .doc.active { display: block; }
+  h1 { color: var(--crema); font-size: 30px; line-height: 1.2; margin: 0 0 8px; }
+  h2 { color: var(--ocre); font-size: 18px; margin: 32px 0 8px; }
+  .updated { color: var(--ocre); font-size: 12px; font-weight: 700; letter-spacing: 0.5px; margin: 0 0 20px; }
+  .intro {
+    background: var(--marron-profundo);
+    border: 1px solid rgba(245, 230, 200, 0.06);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  p { margin: 0 0 12px; }
+  a { color: var(--ocre); }
+  .doc-link { font-size: 18px; font-weight: 700; }
+  .footer-nav {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(245, 230, 200, 0.08);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="langbar">
+      <button type="button" data-target="es">Español</button>
+      <button type="button" data-target="it">Italiano</button>
+      <button type="button" data-target="en">English</button>
+    </nav>
+<section class="doc" data-lang="es">
+  <h1>Perú Eterno</h1>
+  <p class="intro">Documentos legales de la aplicación Perú Eterno, una app educativa sobre la historia del Perú.</p>
+  <p><a class="doc-link" href="privacy.html">Política de Privacidad</a></p>
+  <p><a class="doc-link" href="terms.html">Términos de Servicio</a></p>
+  <p class="footer-nav">Contacto: <a href="mailto:perueterno.app@gmail.com">perueterno.app@gmail.com</a></p>
+</section>
+<section class="doc" data-lang="it">
+  <h1>Perú Eterno</h1>
+  <p class="intro">Documenti legali dell'applicazione Perú Eterno, un'app educativa sulla storia del Perù.</p>
+  <p><a class="doc-link" href="privacy.html">Informativa sulla Privacy</a></p>
+  <p><a class="doc-link" href="terms.html">Termini di Servizio</a></p>
+  <p class="footer-nav">Contatto: <a href="mailto:perueterno.app@gmail.com">perueterno.app@gmail.com</a></p>
+</section>
+<section class="doc" data-lang="en">
+  <h1>Perú Eterno</h1>
+  <p class="intro">Legal documents for Perú Eterno, an educational app about the history of Peru.</p>
+  <p><a class="doc-link" href="privacy.html">Privacy Policy</a></p>
+  <p><a class="doc-link" href="terms.html">Terms of Service</a></p>
+  <p class="footer-nav">Contact: <a href="mailto:perueterno.app@gmail.com">perueterno.app@gmail.com</a></p>
+</section>
+  </div>
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.langbar button');
+    var docs = document.querySelectorAll('.doc');
+    function show(lang) {
+      docs.forEach(function (d) { d.classList.toggle('active', d.dataset.lang === lang); });
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.target === lang)); });
+      document.documentElement.lang = lang;
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { show(b.dataset.target); });
+    });
+    var browser = (navigator.language || 'es').slice(0, 2);
+    show(['es', 'it', 'en'].indexOf(browser) >= 0 ? browser : 'es');
+  })();
+</script>
+</body>
+</html>

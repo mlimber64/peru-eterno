@@ -4,12 +4,22 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
+import '../core/navigation/app_navigation.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
+import '../providers/audio_player_provider.dart';
+import '../providers/collectibles_provider.dart';
+import '../providers/daily_story_provider.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/language_provider.dart';
+import '../providers/premium_provider.dart';
 import '../providers/reading_progress_provider.dart';
 import '../providers/reading_text_scale_provider.dart';
+import '../widgets/audio_bottom_player_bar.dart';
+import '../widgets/did_you_know_card.dart';
+import '../widgets/historia_rich_text.dart';
+import '../widgets/language_selector_button.dart';
+import 'chapter_quiz_screen.dart';
 
 class HistoriaArticleDetailScreen extends StatefulWidget {
   final HistoriaArticle article;
@@ -86,6 +96,10 @@ class _HistoriaArticleDetailScreenState
     _scrollCtrl.dispose();
     _pageCtrl.dispose();
     _timer?.cancel();
+    // El mini-player de audio vive solo en el lector: se detiene al salir
+    // para no dejar TTS sonando en segundo plano sin UI que lo controle.
+    final audio = context.read<AudioPlayerProvider>();
+    if (audio.isActiveFor(widget.article.id)) audio.stop();
     super.dispose();
   }
 
@@ -99,8 +113,67 @@ class _HistoriaArticleDetailScreenState
         context
             .read<ReadingProgressProvider>()
             .updateProgress(widget.article.id, pct);
+        if (pct >= 90) _maybeCompleteDailyStory();
       }
     }
+  }
+
+  // ── Historia del Día / racha ──────────────────────────────────────────────
+
+  Future<void> _maybeCompleteDailyStory() async {
+    final daily = context.read<DailyStoryProvider>();
+    if (daily.dailyArticle?.id != widget.article.id) return;
+    final justCompleted = await daily.completeToday();
+    if (!justCompleted || !mounted) return;
+    _showStreakSnackBar(daily.currentStreak);
+  }
+
+  void _showStreakSnackBar(int streak) {
+    final t = context.read<LanguageProvider>();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: AppColors.marronProfundo,
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 3),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14),
+          side: const BorderSide(color: Color(0x80FF7A1A)),
+        ),
+        content: Row(
+          children: [
+            const Icon(Icons.local_fire_department_rounded,
+                    color: Color(0xFFFF7A1A), size: 26)
+                .animate(onPlay: (c) => c.repeat(reverse: true))
+                .scaleXY(begin: 1.0, end: 1.15, duration: 500.ms),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    t.t('daily_story.streak_increased'),
+                    style: GoogleFonts.lato(
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      fontSize: 13,
+                    ),
+                  ),
+                  Text(
+                    '$streak ${t.t('daily_story.streak_unit')}',
+                    style: GoogleFonts.lato(
+                      color: const Color(0xFFFF7A1A),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   // ── Manejo del pellizco con Listener (no compite con el scroll) ──────────
@@ -134,9 +207,30 @@ class _HistoriaArticleDetailScreenState
     }
   }
 
+  void _maybeShowAudioErrorSnackBar(BuildContext context) {
+    final audio = context.read<AudioPlayerProvider>();
+    final message = audio.errorMessage;
+    if (message == null) return;
+    audio.consumeError();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(context.read<LanguageProvider>().t('audio.error')),
+            backgroundColor: AppColors.terracota,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>().currentLanguage;
+    context.watch<AudioPlayerProvider>();
+    _maybeShowAudioErrorSnackBar(context);
     final textScale = context.watch<ReadingTextScaleProvider>().scale;
     final isFav =
         context.watch<FavoritesProvider>().isFavorite(widget.article.id);
@@ -148,17 +242,15 @@ class _HistoriaArticleDetailScreenState
     final screenHeight = MediaQuery.of(context).size.height;
     final carouselHeight = screenHeight * 0.38;
 
-    final paragraphs = widget.article
-        .contenidoFor(lang)
-        .split('\n\n')
-        .where((p) => p.trim().isNotEmpty)
-        .toList();
+    final paragraphs = widget.article.bodyParagraphsFor(lang);
+    final callout = widget.article.calloutFor(lang);
     final idx = widget.allArticles.indexWhere((a) => a.id == widget.article.id);
     final hasPrev = idx > 0;
     final hasNext = idx < widget.allArticles.length - 1;
 
     return Scaffold(
       backgroundColor: AppColors.negoCacao,
+      bottomNavigationBar: _buildBottomBar(context, lang, hasPrev, hasNext, idx),
       body: Listener(
         onPointerDown: _onPointerDown,
         onPointerMove: _onPointerMove,
@@ -170,7 +262,7 @@ class _HistoriaArticleDetailScreenState
               controller: _scrollCtrl,
               slivers: [
           // ── Hero Carousel ────────────────────────────────────────────────
-          _buildSliverAppBar(context, isFav, carouselHeight, readingPct),
+          _buildSliverAppBar(context, isFav, carouselHeight, readingPct, lang),
 
           // ── Título y subtítulo ───────────────────────────────────────────
           SliverToBoxAdapter(
@@ -182,6 +274,9 @@ class _HistoriaArticleDetailScreenState
             child: _buildChips(lang),
           ),
 
+          // ── Audio-historia ────────────────────────────────────────────────
+          SliverToBoxAdapter(child: _buildAudioButton(context, lang)),
+
           // ── Cuerpo del artículo ──────────────────────────────────────────
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
@@ -189,6 +284,7 @@ class _HistoriaArticleDetailScreenState
               delegate: SliverChildBuilderDelegate(
                 (context, i) {
                   if (i.isOdd) {
+                    // Separador entre párrafos.
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       child: Divider(
@@ -198,13 +294,10 @@ class _HistoriaArticleDetailScreenState
                     );
                   }
                   final pIndex = i ~/ 2;
-                  return Text(
-                    paragraphs[pIndex].trim(),
-                    style: GoogleFonts.lato(
-                      fontSize: 16 * textScale,
-                      color: AppColors.cremaPergamino.withOpacity(0.85),
-                      height: 1.8,
-                    ),
+                  return HistoriaParagraph(
+                    text: paragraphs[pIndex].trim(),
+                    accent: _accent,
+                    textScale: textScale,
                   ).animate().fadeIn(duration: 500.ms, delay: (pIndex * 90).ms);
                 },
                 childCount: paragraphs.isEmpty ? 0 : paragraphs.length * 2 - 1,
@@ -212,8 +305,23 @@ class _HistoriaArticleDetailScreenState
             ),
           ),
 
+          // ── ¿Sabías qué? ─────────────────────────────────────────────────
+          if (callout != null)
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+              sliver: SliverToBoxAdapter(
+                child: DidYouKnowCard(callout: callout, textScale: textScale)
+                    .animate()
+                    .fadeIn(duration: 450.ms),
+              ),
+            ),
+
           // ── Fuentes ──────────────────────────────────────────────────────
           SliverToBoxAdapter(child: _buildSourcesSection(lang)),
+
+          // ── Quiz del capítulo ────────────────────────────────────────────
+          if (widget.article.quiz.isNotEmpty)
+            SliverToBoxAdapter(child: _buildQuizCta(context, lang)),
 
           // ── Esplora anche ────────────────────────────────────────────────
           SliverToBoxAdapter(child: _buildRelatedSection(context, lang)),
@@ -249,7 +357,78 @@ class _HistoriaArticleDetailScreenState
                   ),
                 ),
               ),
+            // Mini-player de audio flotante, sobre la barra inferior.
+            if (context.watch<AudioPlayerProvider>().isActiveFor(widget.article.id))
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AudioBottomPlayerBar(
+                  articleTitle: widget.article.tituloFor(lang),
+                  lang: lang,
+                  accent: _accent,
+                ),
+              ),
           ],
+        ),
+      ),
+    );
+  }
+
+  // ── Audio-historia ────────────────────────────────────────────────────────
+
+  Widget _buildAudioButton(BuildContext context, String lang) {
+    final audio = context.watch<AudioPlayerProvider>();
+    final t = context.read<LanguageProvider>();
+    final isActive = audio.isActiveFor(widget.article.id);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 14, 24, 0),
+      child: GestureDetector(
+        onTap: isActive
+            ? null
+            : () {
+                final isPremium = context.read<PremiumProvider>().isPremium;
+                if (!isPremium) {
+                  AppNavigation.openPremium(context);
+                  return;
+                }
+                audio.playArticle(widget.article, lang);
+              },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: _accent.withOpacity(isActive ? 0.22 : 0.1),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: _accent.withOpacity(0.4)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                isActive
+                    ? Icons.graphic_eq_rounded
+                    : Icons.volume_up_rounded,
+                size: 16,
+                color: _accent,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                isActive
+                    ? t.t('audio.now_playing')
+                    : t.t('audio.listen_button'),
+                style: GoogleFonts.lato(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: _accent,
+                ),
+              ),
+              if (!context.read<PremiumProvider>().isPremium) ...[
+                const SizedBox(width: 6),
+                Icon(Icons.lock_rounded, size: 12, color: _accent.withOpacity(0.7)),
+              ],
+            ],
+          ),
         ),
       ),
     );
@@ -258,7 +437,7 @@ class _HistoriaArticleDetailScreenState
   // ── SliverAppBar con hero carousel ──────────────────────────────────────────
 
   SliverAppBar _buildSliverAppBar(BuildContext context, bool isFav,
-      double carouselHeight, double readingPct) {
+      double carouselHeight, double readingPct, String lang) {
     final accent = _accent;
 
     return SliverAppBar(
@@ -293,6 +472,18 @@ class _HistoriaArticleDetailScreenState
       ),
       actions: [
         _floatingIconButton(
+          icon: Text(
+            lang.toUpperCase(),
+            style: GoogleFonts.lato(
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+              letterSpacing: 0.5,
+            ),
+          ),
+          onPressed: () => LanguageSelectorButton.show(context),
+        ),
+        _floatingIconButton(
           icon: Icon(
             isFav ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
             size: 18,
@@ -326,6 +517,137 @@ class _HistoriaArticleDetailScreenState
         ),
         child: Center(child: icon),
       ),
+    );
+  }
+
+  // ── Barra inferior: marcar como leído + navegación rápida ────────────────────
+
+  Widget _buildBottomBar(
+    BuildContext context,
+    String lang,
+    bool hasPrev,
+    bool hasNext,
+    int idx,
+  ) {
+    final t = context.read<LanguageProvider>();
+    final isRead =
+        context.watch<ReadingProgressProvider>().isRead(widget.article.id);
+
+    return SafeArea(
+      top: false,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+        decoration: BoxDecoration(
+          color: AppColors.marronProfundo,
+          border: Border(
+            top: BorderSide(color: _accent.withOpacity(0.15)),
+          ),
+        ),
+        child: Row(
+          children: [
+            _bottomBarArrow(
+              icon: Icons.arrow_back_ios_new_rounded,
+              enabled: hasPrev,
+              onTap: hasPrev
+                  ? () => _goToArticle(context, widget.allArticles[idx - 1])
+                  : null,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  final markingRead = !isRead;
+                  context
+                      .read<ReadingProgressProvider>()
+                      .setRead(widget.article.id, markingRead);
+                  if (markingRead) _maybeCompleteDailyStory();
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  height: 46,
+                  decoration: BoxDecoration(
+                    color: isRead ? Colors.transparent : _accent,
+                    borderRadius: BorderRadius.circular(23),
+                    border: isRead
+                        ? Border.all(color: _accent, width: 1.4)
+                        : null,
+                  ),
+                  child: Center(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 250),
+                      child: Row(
+                        key: ValueKey(isRead),
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            isRead
+                                ? Icons.check_circle_rounded
+                                : Icons.check_circle_outline_rounded,
+                            size: 18,
+                            color: isRead ? _accent : Colors.white,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            isRead
+                                ? t.t('historia.completed')
+                                : t.t('historia.mark_as_read'),
+                            style: GoogleFonts.lato(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: isRead ? _accent : Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            _bottomBarArrow(
+              icon: Icons.arrow_forward_ios_rounded,
+              enabled: hasNext,
+              onTap: hasNext
+                  ? () => _goToArticle(context, widget.allArticles[idx + 1])
+                  : null,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _bottomBarArrow({
+    required IconData icon,
+    required bool enabled,
+    required VoidCallback? onTap,
+  }) {
+    return Opacity(
+      opacity: enabled ? 1 : 0.3,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: 46,
+          height: 46,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: _accent.withOpacity(0.4)),
+          ),
+          child: Icon(icon, size: 16, color: _accent),
+        ),
+      ),
+    );
+  }
+
+  void _goToArticle(BuildContext context, HistoriaArticle article) {
+    AppNavigation.openHistoriaArticle(
+      context,
+      article: article,
+      allArticles: widget.allArticles,
+      stage: widget.stage,
+      carouselImages: widget.carouselImages,
+      replace: true,
     );
   }
 
@@ -536,7 +858,11 @@ class _HistoriaArticleDetailScreenState
     if (widget.stage != null) chips.add(widget.stage!.tituloFor(lang));
     final periodo = widget.article.periodoFor(lang);
     if (periodo != null && periodo.isNotEmpty) chips.add(periodo);
-    if (chips.isEmpty) return const SizedBox(height: 16);
+    final readTimeUnit =
+        context.read<LanguageProvider>().t('historia.read_time_unit');
+    chips.add(
+      '${widget.article.estimatedReadTimeMinutes(lang)} $readTimeUnit',
+    );
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 14, 24, 0),
@@ -569,6 +895,7 @@ class _HistoriaArticleDetailScreenState
   // ── Fuentes ───────────────────────────────────────────────────────────────────
 
   Widget _buildSourcesSection(String lang) {
+    final credits = widget.article.creditosFor(lang);
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 36, 24, 0),
       child: Container(
@@ -602,14 +929,88 @@ class _HistoriaArticleDetailScreenState
             ),
             const SizedBox(height: 10),
             Text(
-              context.read<LanguageProvider>().t('historia.sources_body'),
+              credits ?? context.read<LanguageProvider>().t('historia.sources_body'),
               style: GoogleFonts.lato(
                 fontSize: 12,
+                fontStyle: credits != null ? FontStyle.italic : FontStyle.normal,
                 color: AppColors.cremaPergamino.withOpacity(0.5),
                 height: 1.6,
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  // ── Quiz del capítulo ─────────────────────────────────────────────────────────
+
+  Widget _buildQuizCta(BuildContext context, String lang) {
+    final t = context.read<LanguageProvider>();
+    final bestScore =
+        context.watch<CollectiblesProvider>().bestScoreFor(widget.article.id);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+      child: GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) =>
+                ChapterQuizScreen(article: widget.article, lang: lang),
+          ),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: AppColors.ocre.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.ocre.withOpacity(0.35)),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: AppColors.ocre.withOpacity(0.18),
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Icon(Icons.quiz_rounded, color: AppColors.ocre, size: 22),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      t.t('quiz.start_cta'),
+                      style: GoogleFonts.lato(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.cremaPergamino,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      bestScore != null
+                          ? '${t.t('quiz.best_score')} $bestScore/${widget.article.quiz.length}'
+                          : t.t('quiz.start_button'),
+                      style: GoogleFonts.lato(
+                        fontSize: 11,
+                        color: AppColors.ocre,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios_rounded,
+                  size: 14, color: AppColors.ocre),
+            ],
+          ),
         ),
       ),
     );
@@ -642,17 +1043,8 @@ class _HistoriaArticleDetailScreenState
                   subtitle: widget.allArticles[idx - 1].tituloFor(lang),
                   icon: Icons.arrow_back_ios_rounded,
                   isForward: false,
-                  onTap: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => HistoriaArticleDetailScreen(
-                        article: widget.allArticles[idx - 1],
-                        allArticles: widget.allArticles,
-                        stage: widget.stage,
-                        carouselImages: widget.carouselImages,
-                      ),
-                    ),
-                  ),
+                  onTap: () =>
+                      _goToArticle(context, widget.allArticles[idx - 1]),
                 ),
               ),
             if (hasPrev && hasNext)
@@ -668,17 +1060,8 @@ class _HistoriaArticleDetailScreenState
                   subtitle: widget.allArticles[idx + 1].tituloFor(lang),
                   icon: Icons.arrow_forward_ios_rounded,
                   isForward: true,
-                  onTap: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => HistoriaArticleDetailScreen(
-                        article: widget.allArticles[idx + 1],
-                        allArticles: widget.allArticles,
-                        stage: widget.stage,
-                        carouselImages: widget.carouselImages,
-                      ),
-                    ),
-                  ),
+                  onTap: () =>
+                      _goToArticle(context, widget.allArticles[idx + 1]),
                 ),
               ),
           ],
@@ -734,15 +1117,11 @@ class _HistoriaArticleDetailScreenState
               return Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: GestureDetector(
-                  onTap: () => Navigator.push(
+                  onTap: () => AppNavigation.openHistoriaArticle(
                     ctx,
-                    MaterialPageRoute(
-                      builder: (_) => HistoriaArticleDetailScreen(
-                        article: related,
-                        allArticles: widget.allArticles,
-                        stage: widget.stage,
-                      ),
-                    ),
+                    article: related,
+                    allArticles: widget.allArticles,
+                    stage: widget.stage,
                   ),
                   child: Container(
                     width: 158,

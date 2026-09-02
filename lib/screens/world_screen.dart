@@ -10,6 +10,7 @@ import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_repository.dart';
 import '../models/content_item.dart';
+import '../models/content_ref.dart';
 import '../models/era_model.dart';
 import '../models/historia_article.dart';
 import '../providers/language_provider.dart';
@@ -26,12 +27,19 @@ class WorldScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final world = WorldConfig.findById(worldId);
+    if (world == null) return const SizedBox.shrink();
+
+    // Mundos bloqueados como "Próximamente" en esta primera versión (ver
+    // CategoryConfigs.isComingSoon): guarda de respaldo, ya que las tarjetas
+    // de Home/Explore ya no navegan hasta aquí para estas categorías.
+    if (CategoryConfigs.isComingSoon(world.category)) {
+      return _ComingSoonWorldView(world: world);
+    }
+
     // 'Sabores' ahora se sirve desde Supabase (offline-first) en su pantalla
     // dedicada. El resto de mundos sigue con el flujo local actual.
     if (worldId == 'sabores') return const GastronomiaScreen();
-
-    final world = WorldConfig.findById(worldId);
-    if (world == null) return const SizedBox.shrink();
 
     final lang = context.watch<LanguageProvider>().currentLanguage;
     final isPremium = context.watch<PremiumProvider>().isPremium;
@@ -282,17 +290,14 @@ class WorldScreen extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 (context, i) {
                   final item = items[i];
-                  final era = item.category == 'era'
-                      ? ErasRepository.allEras.cast<EraModel?>().firstWhere(
-                          (e) => e?.id == item.id,
-                          orElse: () => null)
-                      : null;
+                  final era = item is EraModel ? item : null;
                   final isLocked = item.isPremium && !isPremium;
                   final tapAction = isLocked
                       ? () => AppNavigation.openPremium(context)
                       : era != null
                           ? () => AppNavigation.openEra(context, era)
-                          : () => AppNavigation.openContent(context, item);
+                          : () => AppNavigation.openContent(
+                              context, item as ContentItem);
 
                   if (era != null) {
                     return CinematicCard(
@@ -369,9 +374,9 @@ class WorldScreen extends StatelessWidget {
     );
   }
 
-  List<ContentItem> _itemsForWorld(WorldEntry world) {
+  List<ContentRef> _itemsForWorld(WorldEntry world) {
     return switch (world.category) {
-      'era' => ContentRepository.eras,
+      'era' => ErasRepository.allEras,
       'tradicion' => ContentRepository.tradiciones,
       'gastronomia' => ContentRepository.gastronomia,
       'musica' => ContentRepository.musica,
@@ -477,6 +482,82 @@ class _EditorialMiniCard extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Vista "Próximamente" para mundos aún no publicados ──────────────────────
+
+class _ComingSoonWorldView extends StatelessWidget {
+  final WorldEntry world;
+  const _ComingSoonWorldView({required this.world});
+
+  @override
+  Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>().currentLanguage;
+    final t = context.read<LanguageProvider>().t;
+
+    return Scaffold(
+      backgroundColor: AppColors.negoCacao,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+              size: 18, color: AppColors.cremaPergamino),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 84,
+                height: 84,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: world.accentColor.withOpacity(0.15),
+                  border: Border.all(color: world.accentColor.withOpacity(0.4)),
+                ),
+                child: Icon(Icons.hourglass_top_rounded,
+                    size: 36, color: world.accentColor),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                world.titleFor(lang),
+                style: GoogleFonts.playfairDisplay(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.cremaPergamino,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                t('coming_soon.title'),
+                style: GoogleFonts.lato(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                  color: world.accentColor,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                t('coming_soon.message'),
+                style: GoogleFonts.lato(
+                  fontSize: 13,
+                  color: AppColors.cremaPergamino.withOpacity(0.6),
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

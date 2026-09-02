@@ -8,24 +8,16 @@ import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../core/navigation/app_navigation.dart';
 import '../data/content_repository.dart';
-import '../data/historia_repository.dart';
 import '../data/historia_stages_repository.dart';
 import '../models/historia_article.dart';
 import '../models/historia_stage.dart';
+import '../providers/daily_story_provider.dart';
 import '../providers/language_provider.dart';
+import '../providers/premium_provider.dart';
 import '../widgets/image_with_fallback.dart';
 
-class CulturalMapScreen extends StatefulWidget {
+class CulturalMapScreen extends StatelessWidget {
   const CulturalMapScreen({super.key});
-
-  @override
-  State<CulturalMapScreen> createState() => _CulturalMapScreenState();
-}
-
-class _CulturalMapScreenState extends State<CulturalMapScreen> {
-  int _selectedIndex = 0;
-
-  CulturalMapPoint get _selected => culturalMapPoints[_selectedIndex];
 
   @override
   Widget build(BuildContext context) {
@@ -51,59 +43,123 @@ class _CulturalMapScreenState extends State<CulturalMapScreen> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 18, 20, 0),
-              child: _MapStage(
-                selectedIndex: _selectedIndex,
-                onPointTap: (index) => setState(() => _selectedIndex = index),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 18, 20, 0),
-              child: _SelectedPointCard(
-                point: _selected,
-                lang: lang,
-                onOpen: () => _openPoint(context, _selected, lang),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 28, 20, 10),
-              child: _SectionTitle(
-                  label: context
-                      .read<LanguageProvider>()
-                      .t('cultural_map.places')),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 90),
-            sliver: SliverList.builder(
-              itemCount: culturalMapPoints.length,
-              itemBuilder: (context, index) {
-                final point = culturalMapPoints[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: _MapPointListTile(
-                    point: point,
-                    lang: lang,
-                    isSelected: index == _selectedIndex,
-                    onTap: () {
-                      setState(() => _selectedIndex = index);
-                      _openPoint(context, point, lang);
-                    },
-                  ),
-                )
-                    .animate()
-                    .fadeIn(duration: 420.ms, delay: (index * 45).ms)
-                    .slideY(begin: 0.04, end: 0);
-              },
+              padding: const EdgeInsets.fromLTRB(20, 18, 20, 90),
+              child: const CulturalMapBody(),
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+/// Cuerpo del mapa cultural (filtro de etapa + mapa con zoom/pan + tarjeta
+/// del punto seleccionado + lista), sin `Scaffold`/hero propios, para poder
+/// incrustarse tanto en [CulturalMapScreen] como en la pestaña Mapa/Línea de
+/// tiempo (`MapTimelineScreen`).
+class CulturalMapBody extends StatefulWidget {
+  const CulturalMapBody({super.key});
+
+  @override
+  State<CulturalMapBody> createState() => _CulturalMapBodyState();
+}
+
+class _CulturalMapBodyState extends State<CulturalMapBody> {
+  String _stageFilter = 'all';
+  int _selectedIndex = 0;
+
+  List<CulturalMapPoint> get _visiblePoints => _stageFilter == 'all'
+      ? culturalMapPoints
+      : culturalMapPoints.where((p) => p.stageId == _stageFilter).toList();
+
+  CulturalMapPoint get _selected {
+    final points = _visiblePoints;
+    if (points.isEmpty) return culturalMapPoints.first;
+    return points[_selectedIndex.clamp(0, points.length - 1)];
+  }
+
+  void _setFilter(String stageId) {
+    setState(() {
+      _stageFilter = stageId;
+      _selectedIndex = 0;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>().currentLanguage;
+    final points = _visiblePoints;
+    final isPremium = context.watch<PremiumProvider>().isPremium;
+    final dailyArticleId = context.watch<DailyStoryProvider>().dailyArticle?.id;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        FutureBuilder<List<HistoriaStage>>(
+          future: HistoriaStagesRepository.loadStages(),
+          builder: (context, snap) {
+            final stages = snap.data ?? const <HistoriaStage>[];
+            return _StageFilterRow(
+              stages: stages,
+              activeStageId: _stageFilter,
+              lang: lang,
+              onSelect: _setFilter,
+            );
+          },
+        ),
+        const SizedBox(height: 18),
+        _MapStage(
+          points: points,
+          selectedIndex: _selectedIndex,
+          isPremium: isPremium,
+          dailyArticleId: dailyArticleId,
+          onPointTap: (index) => setState(() => _selectedIndex = index),
+        ),
+        const SizedBox(height: 18),
+        if (points.isNotEmpty)
+          _SelectedPointCard(
+            point: _selected,
+            lang: lang,
+            isLocked: _isLocked(_selected, isPremium, dailyArticleId),
+            onOpen: () => _openPoint(context, _selected, lang),
+          ),
+        const SizedBox(height: 28),
+        _SectionTitle(label: context.read<LanguageProvider>().t('cultural_map.places')),
+        const SizedBox(height: 10),
+        ...List.generate(points.length, (index) {
+          final point = points[index];
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: _MapPointListTile(
+              point: point,
+              lang: lang,
+              isSelected: point.id == _selected.id,
+              isLocked: _isLocked(point, isPremium, dailyArticleId),
+              onTap: () {
+                setState(() => _selectedIndex = index);
+                _openPoint(context, point, lang);
+              },
+            ),
+          ).animate().fadeIn(duration: 380.ms, delay: (index * 35).ms);
+        }),
+      ],
+    );
+  }
+
+  /// Un punto ligado a un capítulo respeta el mismo gating que el resto del
+  /// archivo histórico (ver `AppNavigation.openHistoriaArticle`): free solo
+  /// puede la Historia del Día. Uno ligado a un `ContentItem` respeta
+  /// `ContentItem.isPremium`.
+  bool _isLocked(CulturalMapPoint point, bool isPremium, String? dailyArticleId) {
+    if (isPremium) return false;
+    if (point.historiaArticleId != null) {
+      return point.historiaArticleId != dailyArticleId;
+    }
+    if (point.contentItemId != null) {
+      final item = ContentRepository.findById(point.contentItemId!);
+      return item?.isPremium ?? false;
+    }
+    return false;
   }
 
   Future<void> _openPoint(
@@ -112,12 +168,14 @@ class _CulturalMapScreenState extends State<CulturalMapScreen> {
     String lang,
   ) async {
     if (point.historiaArticleId != null) {
-      final articles = await HistoriaRepository.loadAll();
+      final stageId = point.stageId ?? 'peru_prehispanico';
+      final stage = await _stageById(stageId);
+      final articles =
+          await HistoriaStagesRepository.loadArticlesForStage(stageId);
       final article = articles.cast<HistoriaArticle?>().firstWhere(
             (item) => item?.id == point.historiaArticleId,
             orElse: () => null,
           );
-      final stage = await _preHispanicStage();
       if (!context.mounted) return;
       if (article != null) {
         AppNavigation.openHistoriaArticle(
@@ -134,7 +192,12 @@ class _CulturalMapScreenState extends State<CulturalMapScreen> {
       final item = ContentRepository.findById(point.contentItemId!);
       if (!context.mounted) return;
       if (item != null) {
-        AppNavigation.openContent(context, item);
+        final isPremium = context.read<PremiumProvider>().isPremium;
+        AppNavigation.openContent(
+          context,
+          item,
+          isLocked: item.isPremium && !isPremium,
+        );
         return;
       }
     }
@@ -155,10 +218,10 @@ class _CulturalMapScreenState extends State<CulturalMapScreen> {
     );
   }
 
-  Future<HistoriaStage?> _preHispanicStage() async {
+  Future<HistoriaStage?> _stageById(String id) async {
     final stages = await HistoriaStagesRepository.loadStages();
     return stages.cast<HistoriaStage?>().firstWhere(
-          (stage) => stage?.id == 'peru_prehispanico',
+          (stage) => stage?.id == id,
           orElse: () => null,
         );
   }
@@ -172,6 +235,7 @@ class CulturalMapPoint {
   final String imageAsset;
   final Offset position;
   final Color accentColor;
+  final String? stageId;
   final String? historiaArticleId;
   final String? contentItemId;
 
@@ -183,6 +247,7 @@ class CulturalMapPoint {
     required this.imageAsset,
     required this.position,
     required this.accentColor,
+    this.stageId,
     this.historiaArticleId,
     this.contentItemId,
   });
@@ -193,6 +258,7 @@ class CulturalMapPoint {
 }
 
 const culturalMapPoints = [
+  // ── Perú prehispánico ────────────────────────────────────────────────────
   CulturalMapPoint(
     id: 'caral',
     name: {'it': 'Caral', 'es': 'Caral', 'en': 'Caral'},
@@ -209,6 +275,7 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/caral/caral_1.jpg',
     position: Offset(0.36, 0.33),
     accentColor: AppColors.caralColor,
+    stageId: 'peru_prehispanico',
     historiaArticleId: 'caral',
   ),
   CulturalMapPoint(
@@ -227,6 +294,7 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/banners/sacerdote-ceremonial-andino.jpg',
     position: Offset(0.48, 0.27),
     accentColor: AppColors.worldHistoria,
+    stageId: 'peru_prehispanico',
     historiaArticleId: 'chavin',
   ),
   CulturalMapPoint(
@@ -245,7 +313,27 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/banners/caral-desertico.jpg',
     position: Offset(0.38, 0.55),
     accentColor: Color(0xFFD8A64A),
-    // TODO: Add a dedicated Nazca article route or ContentItem.
+    stageId: 'peru_prehispanico',
+    historiaArticleId: 'nazca',
+  ),
+  CulturalMapPoint(
+    id: 'paracas',
+    name: {'it': 'Paracas', 'es': 'Paracas', 'en': 'Paracas'},
+    region: {
+      'it': 'Ica, penisola desertica',
+      'es': 'Ica, península desértica',
+      'en': 'Ica, desert peninsula'
+    },
+    period: {
+      'it': 'Tessitori e chirurghi',
+      'es': 'Tejedores y cirujanos',
+      'en': 'Weavers and surgeons'
+    },
+    imageAsset: 'assets/images/banners/caral-desertico.jpg',
+    position: Offset(0.34, 0.50),
+    accentColor: Color(0xFF4A9494),
+    stageId: 'peru_prehispanico',
+    historiaArticleId: 'paracas',
   ),
   CulturalMapPoint(
     id: 'moche',
@@ -263,7 +351,27 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/moche/moche_1.jpg',
     position: Offset(0.38, 0.20),
     accentColor: AppColors.mocheColor,
+    stageId: 'peru_prehispanico',
     contentItemId: 'moche',
+  ),
+  CulturalMapPoint(
+    id: 'wari',
+    name: {'it': 'Wari', 'es': 'Wari', 'en': 'Wari'},
+    region: {
+      'it': 'Ayacucho, Ande centrali',
+      'es': 'Ayacucho, sierra central',
+      'en': 'Ayacucho, central Andes'
+    },
+    period: {
+      'it': 'Primo impero andino',
+      'es': 'Primer imperio andino',
+      'en': 'First Andean empire'
+    },
+    imageAsset: 'assets/images/banners/sacerdote-ceremonial-andino.jpg',
+    position: Offset(0.52, 0.48),
+    accentColor: Color(0xFF8B5B8B),
+    stageId: 'peru_prehispanico',
+    historiaArticleId: 'wari',
   ),
   CulturalMapPoint(
     id: 'chan_chan',
@@ -281,7 +389,8 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/moche/moche_3.jpg',
     position: Offset(0.33, 0.16),
     accentColor: Color(0xFFB86F35),
-    // TODO: Add a Chan Chan / Chimu article route or ContentItem.
+    stageId: 'peru_prehispanico',
+    historiaArticleId: 'chimu',
   ),
   CulturalMapPoint(
     id: 'machu_picchu',
@@ -299,6 +408,7 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/banners/machu-picchu-amanecer.jpg',
     position: Offset(0.60, 0.63),
     accentColor: AppColors.incaColor,
+    stageId: 'peru_prehispanico',
     contentItemId: 'machu_picchu',
   ),
   CulturalMapPoint(
@@ -317,6 +427,7 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/tiahuanaco/tiahuanaco_2.jpg',
     position: Offset(0.70, 0.76),
     accentColor: AppColors.tiahuanacoColor,
+    stageId: 'peru_prehispanico',
     contentItemId: 'lago_titicaca',
   ),
   CulturalMapPoint(
@@ -335,7 +446,292 @@ const culturalMapPoints = [
     imageAsset: 'assets/images/inca/inca_2.jpg',
     position: Offset(0.58, 0.58),
     accentColor: AppColors.incaColor,
+    stageId: 'peru_prehispanico',
     // TODO: Add a dedicated Cusco article route or ContentItem.
+  ),
+
+  // ── Conquista española ───────────────────────────────────────────────────
+  CulturalMapPoint(
+    id: 'captura_cajamarca',
+    name: {
+      'it': 'Cajamarca',
+      'es': 'Cajamarca',
+      'en': 'Cajamarca',
+    },
+    region: {
+      'it': 'Cajamarca, Ande settentrionali',
+      'es': 'Cajamarca, sierra norte',
+      'en': 'Cajamarca, northern Andes'
+    },
+    period: {
+      'it': "L'imboscata e il riscatto d'oro",
+      'es': 'La emboscada y el rescate de oro',
+      'en': 'The ambush and the gold ransom'
+    },
+    imageAsset: 'assets/images/incas/incas_1.jpg',
+    position: Offset(0.42, 0.13),
+    accentColor: AppColors.conquistaColor,
+    stageId: 'conquista_spagnola',
+    historiaArticleId: 'captura_cajamarca',
+  ),
+  CulturalMapPoint(
+    id: 'guerra_civil_inca',
+    name: {
+      'it': 'Guerra civile inca',
+      'es': 'Guerra civil inca',
+      'en': 'Inca civil war',
+    },
+    region: {
+      'it': 'Ande centrali',
+      'es': 'Andes centrales',
+      'en': 'Central Andes'
+    },
+    period: {
+      'it': 'Huascar contro Atahualpa',
+      'es': 'Huáscar contra Atahualpa',
+      'en': 'Huáscar against Atahualpa'
+    },
+    imageAsset: 'assets/images/incas/incas_2.jpg',
+    position: Offset(0.55, 0.50),
+    accentColor: AppColors.conquistaColor,
+    stageId: 'conquista_spagnola',
+    historiaArticleId: 'guerra_civil_inca',
+  ),
+  CulturalMapPoint(
+    id: 'resistencia_vilcabamba',
+    name: {
+      'it': 'Vilcabamba',
+      'es': 'Vilcabamba',
+      'en': 'Vilcabamba',
+    },
+    region: {
+      'it': 'Cusco, selva andina',
+      'es': 'Cusco, selva andina',
+      'en': 'Cusco, Andean jungle'
+    },
+    period: {
+      'it': "L'ultimo rifugio inca",
+      'es': 'El último refugio inca',
+      'en': 'The last Inca refuge'
+    },
+    imageAsset: 'assets/images/incas/incas_2.jpg',
+    position: Offset(0.62, 0.68),
+    accentColor: AppColors.conquistaColor,
+    stageId: 'conquista_spagnola',
+    historiaArticleId: 'resistencia_vilcabamba',
+  ),
+
+  // ── Virreinato del Perú ──────────────────────────────────────────────────
+  CulturalMapPoint(
+    id: 'lima_virreinal',
+    name: {
+      'it': 'Lima virreale',
+      'es': 'Lima virreinal',
+      'en': 'Viceregal Lima',
+    },
+    region: {
+      'it': 'Lima, costa centrale',
+      'es': 'Lima, costa central',
+      'en': 'Lima, central coast'
+    },
+    period: {
+      'it': 'Capitale del vicereame',
+      'es': 'Capital del virreinato',
+      'en': 'Viceroyalty capital'
+    },
+    imageAsset: 'assets/images/banners/sacerdote-ceremonial-andino.jpg',
+    position: Offset(0.30, 0.45),
+    accentColor: AppColors.virreinatoColor,
+    stageId: 'vicereame_peru',
+    historiaArticleId: 'lima_virreinal',
+  ),
+  CulturalMapPoint(
+    id: 'sincretismo_escuela_cusquena',
+    name: {
+      'it': 'Escuela Cusqueña',
+      'es': 'Escuela Cusqueña',
+      'en': 'Cusco School',
+    },
+    region: {
+      'it': 'Cusco, Ande meridionali',
+      'es': 'Cusco, Andes del sur',
+      'en': 'Cusco, southern Andes'
+    },
+    period: {
+      'it': 'Sincretismo artistico',
+      'es': 'Sincretismo artístico',
+      'en': 'Artistic syncretism'
+    },
+    imageAsset: 'assets/images/banners/caral-desertico.jpg',
+    position: Offset(0.56, 0.62),
+    accentColor: AppColors.virreinatoColor,
+    stageId: 'vicereame_peru',
+    historiaArticleId: 'sincretismo_escuela_cusquena',
+  ),
+  CulturalMapPoint(
+    id: 'terremoto_tapadas_limenas',
+    name: {
+      'it': 'Terremoto e tapadas',
+      'es': 'Terremoto y tapadas',
+      'en': 'Earthquake and tapadas',
+    },
+    region: {
+      'it': 'Lima, costa centrale',
+      'es': 'Lima, costa central',
+      'en': 'Lima, central coast'
+    },
+    period: {
+      'it': 'Ricostruzione e vita limena',
+      'es': 'Reconstrucción y vida limeña',
+      'en': 'Rebuilding and life in Lima'
+    },
+    imageAsset: 'assets/images/virreinato/virreinato_3.jpg',
+    position: Offset(0.28, 0.50),
+    accentColor: AppColors.virreinatoColor,
+    stageId: 'vicereame_peru',
+    historiaArticleId: 'terremoto_tapadas_limeñas',
+  ),
+
+  // ── Independencia del Perú ───────────────────────────────────────────────
+  CulturalMapPoint(
+    id: 'rebelion_tupac_amaru',
+    name: {
+      'it': 'Ribellione di Túpac Amaru II',
+      'es': 'Rebelión de Túpac Amaru II',
+      'en': 'Túpac Amaru II rebellion',
+    },
+    region: {
+      'it': 'Cusco, Tinta',
+      'es': 'Cusco, Tinta',
+      'en': 'Cusco, Tinta'
+    },
+    period: {
+      'it': 'La grande ribellione andina',
+      'es': 'La gran rebelión andina',
+      'en': 'The great Andean uprising'
+    },
+    imageAsset: 'assets/images/independencia/independencia_1.jpg',
+    position: Offset(0.60, 0.55),
+    accentColor: AppColors.independenciaColor,
+    stageId: 'indipendenza',
+    historiaArticleId: 'rebelion_tupac_amaru',
+  ),
+  CulturalMapPoint(
+    id: 'corriente_libertadora_sur',
+    name: {
+      'it': 'Spedizione liberatrice del sud',
+      'es': 'Expedición Libertadora del Sur',
+      'en': 'Liberating Expedition of the South',
+    },
+    region: {
+      'it': 'Ica, baia di Paracas',
+      'es': 'Ica, bahía de Paracas',
+      'en': 'Ica, Paracas Bay'
+    },
+    period: {
+      'it': "Lo sbarco di San Martín",
+      'es': 'El desembarco de San Martín',
+      'en': "San Martín's landing"
+    },
+    imageAsset: 'assets/images/independencia/independencia_2.jpg',
+    position: Offset(0.36, 0.53),
+    accentColor: AppColors.independenciaColor,
+    stageId: 'indipendenza',
+    historiaArticleId: 'corriente_libertadora_sur',
+  ),
+  CulturalMapPoint(
+    id: 'batallas_junin_ayacucho',
+    name: {
+      'it': 'Junín e Ayacucho',
+      'es': 'Junín y Ayacucho',
+      'en': 'Junín and Ayacucho',
+    },
+    region: {
+      'it': 'Ande centro-meridionali',
+      'es': 'Sierra centro-sur',
+      'en': 'South-central highlands'
+    },
+    period: {
+      'it': 'Le battaglie decisive',
+      'es': 'Las batallas decisivas',
+      'en': 'The decisive battles'
+    },
+    imageAsset: 'assets/images/independencia/independencia_3.jpg',
+    position: Offset(0.50, 0.46),
+    accentColor: AppColors.independenciaColor,
+    stageId: 'indipendenza',
+    historiaArticleId: 'batallas_junin_ayacucho',
+  ),
+
+  // ── República del Perú ───────────────────────────────────────────────────
+  CulturalMapPoint(
+    id: 'era_guano_dos_mayo',
+    name: {
+      'it': "Combattimento del 2 maggio",
+      'es': 'Combate del 2 de Mayo',
+      'en': 'Battle of May 2nd',
+    },
+    region: {
+      'it': 'Callao, costa centrale',
+      'es': 'Callao, costa central',
+      'en': 'Callao, central coast'
+    },
+    period: {
+      'it': "L'era del guano",
+      'es': 'La era del guano',
+      'en': 'The guano era'
+    },
+    imageAsset: 'assets/images/republica/republica_1.jpg',
+    position: Offset(0.25, 0.40),
+    accentColor: AppColors.republicaColor,
+    stageId: 'republica_peru',
+    historiaArticleId: 'era_guano_dos_mayo',
+  ),
+  CulturalMapPoint(
+    id: 'guerra_pacifico_grau',
+    name: {
+      'it': 'Guerra del Pacifico',
+      'es': 'Guerra del Pacífico',
+      'en': 'War of the Pacific',
+    },
+    region: {
+      'it': 'Costa meridionale',
+      'es': 'Costa sur',
+      'en': 'Southern coast'
+    },
+    period: {
+      'it': "L'eroismo di Grau",
+      'es': 'El heroísmo de Grau',
+      'en': "Grau's heroism"
+    },
+    imageAsset: 'assets/images/republica/republica_2.jpg',
+    position: Offset(0.20, 0.80),
+    accentColor: AppColors.republicaColor,
+    stageId: 'republica_peru',
+    historiaArticleId: 'guerra_pacifico_grau',
+  ),
+  CulturalMapPoint(
+    id: 'resistencia_bolognesi_caceres',
+    name: {
+      'it': 'Resistenza di Bolognesi e Cáceres',
+      'es': 'Resistencia de Bolognesi y Cáceres',
+      'en': 'Bolognesi and Cáceres resistance',
+    },
+    region: {
+      'it': 'Frontiera meridionale',
+      'es': 'Frontera sur',
+      'en': 'Southern border'
+    },
+    period: {
+      'it': 'La resistencia final',
+      'es': 'La resistencia final',
+      'en': 'The final resistance'
+    },
+    imageAsset: 'assets/images/republica/republica_3.jpg',
+    position: Offset(0.24, 0.88),
+    accentColor: AppColors.republicaColor,
+    stageId: 'republica_peru',
+    historiaArticleId: 'resistencia_bolognesi_caceres',
   ),
 ];
 
@@ -420,14 +816,115 @@ class _MapHero extends StatelessWidget {
   }
 }
 
+// ── Filtro por etapa ────────────────────────────────────────────────────────
+
+class _StageFilterRow extends StatelessWidget {
+  final List<HistoriaStage> stages;
+  final String activeStageId;
+  final String lang;
+  final ValueChanged<String> onSelect;
+
+  const _StageFilterRow({
+    required this.stages,
+    required this.activeStageId,
+    required this.lang,
+    required this.onSelect,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.read<LanguageProvider>();
+    return SizedBox(
+      height: 34,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          _FilterChip(
+            label: t.t('cultural_map.filter_all'),
+            color: AppColors.ocre,
+            isActive: activeStageId == 'all',
+            onTap: () => onSelect('all'),
+          ),
+          ...stages.map(
+            (stage) => Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: _FilterChip(
+                label: stage.tituloFor(lang),
+                color: stage.accentColor,
+                isActive: activeStageId == stage.id,
+                onTap: () => onSelect(stage.id),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FilterChip extends StatelessWidget {
+  final String label;
+  final Color color;
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _FilterChip({
+    required this.label,
+    required this.color,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+        decoration: BoxDecoration(
+          color: isActive ? color.withOpacity(0.2) : AppColors.marronProfundo,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isActive ? color.withOpacity(0.7) : AppColors.cremaPergamino.withOpacity(0.1),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: GoogleFonts.lato(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: isActive ? color : AppColors.cremaPergamino.withOpacity(0.5),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Mapa con zoom/pan ────────────────────────────────────────────────────────
+
 class _MapStage extends StatelessWidget {
+  final List<CulturalMapPoint> points;
   final int selectedIndex;
+  final bool isPremium;
+  final String? dailyArticleId;
   final ValueChanged<int> onPointTap;
 
   const _MapStage({
+    required this.points,
     required this.selectedIndex,
+    required this.isPremium,
+    required this.dailyArticleId,
     required this.onPointTap,
   });
+
+  bool _isLocked(CulturalMapPoint point) {
+    if (isPremium || point.historiaArticleId == null) return false;
+    return point.historiaArticleId != dailyArticleId;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -455,38 +952,44 @@ class _MapStage extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              const mapInset = EdgeInsets.fromLTRB(44, 28, 44, 30);
-              final mapRect = Rect.fromLTWH(
-                mapInset.left,
-                mapInset.top,
-                constraints.maxWidth - mapInset.horizontal,
-                constraints.maxHeight - mapInset.vertical,
-              );
+          child: InteractiveViewer(
+            minScale: 1,
+            maxScale: 4,
+            boundaryMargin: const EdgeInsets.all(40),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                const mapInset = EdgeInsets.fromLTRB(44, 28, 44, 30);
+                final mapRect = Rect.fromLTWH(
+                  mapInset.left,
+                  mapInset.top,
+                  constraints.maxWidth - mapInset.horizontal,
+                  constraints.maxHeight - mapInset.vertical,
+                );
 
-              return Stack(
-                fit: StackFit.expand,
-                children: [
-                  const CustomPaint(
-                      painter: _MuseumTexturePainter(AppColors.ocre)),
-                  const Padding(
-                    padding: mapInset,
-                    child: CustomPaint(painter: _PeruMapPainter()),
-                  ),
-                  ...List.generate(culturalMapPoints.length, (index) {
-                    final point = culturalMapPoints[index];
-                    final isSelected = selectedIndex == index;
-                    return _Hotspot(
-                      point: point,
-                      mapRect: mapRect,
-                      isSelected: isSelected,
-                      onTap: () => onPointTap(index),
-                    );
-                  }),
-                ],
-              );
-            },
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    const CustomPaint(
+                        painter: _MuseumTexturePainter(AppColors.ocre)),
+                    const Padding(
+                      padding: mapInset,
+                      child: CustomPaint(painter: _PeruMapPainter()),
+                    ),
+                    ...List.generate(points.length, (index) {
+                      final point = points[index];
+                      final isSelected = selectedIndex == index;
+                      return _Hotspot(
+                        point: point,
+                        mapRect: mapRect,
+                        isSelected: isSelected,
+                        isLocked: _isLocked(point),
+                        onTap: () => onPointTap(index),
+                      );
+                    }),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -502,12 +1005,14 @@ class _Hotspot extends StatelessWidget {
   final CulturalMapPoint point;
   final Rect mapRect;
   final bool isSelected;
+  final bool isLocked;
   final VoidCallback onTap;
 
   const _Hotspot({
     required this.point,
     required this.mapRect,
     required this.isSelected,
+    required this.isLocked,
     required this.onTap,
   });
 
@@ -536,16 +1041,19 @@ class _Hotspot extends StatelessWidget {
             ],
           ),
           child: Center(
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 240),
-              width: isSelected ? 15 : 10,
-              height: isSelected ? 15 : 10,
-              decoration: BoxDecoration(
-                color: point.accentColor,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white.withOpacity(0.72)),
-              ),
-            ),
+            child: isLocked
+                ? Icon(Icons.lock_rounded,
+                    size: isSelected ? 15 : 11, color: Colors.white.withOpacity(0.85))
+                : AnimatedContainer(
+                    duration: const Duration(milliseconds: 240),
+                    width: isSelected ? 15 : 10,
+                    height: isSelected ? 15 : 10,
+                    decoration: BoxDecoration(
+                      color: point.accentColor,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white.withOpacity(0.72)),
+                    ),
+                  ),
           ),
         ),
       ),
@@ -556,11 +1064,13 @@ class _Hotspot extends StatelessWidget {
 class _SelectedPointCard extends StatelessWidget {
   final CulturalMapPoint point;
   final String lang;
+  final bool isLocked;
   final VoidCallback onOpen;
 
   const _SelectedPointCard({
     required this.point,
     required this.lang,
+    required this.isLocked,
     required this.onOpen,
   });
 
@@ -635,11 +1145,18 @@ class _SelectedPointCard extends StatelessWidget {
                         minimumSize: const Size(0, 28),
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      icon: const Icon(Icons.arrow_forward_rounded, size: 15),
+                      icon: Icon(
+                        isLocked
+                            ? Icons.lock_rounded
+                            : Icons.arrow_forward_rounded,
+                        size: 15,
+                      ),
                       label: Text(
-                        context
-                            .read<LanguageProvider>()
-                            .t('cultural_map.open_story'),
+                        context.read<LanguageProvider>().t(
+                              isLocked
+                                  ? 'premium.locked_label'
+                                  : 'cultural_map.open_story',
+                            ),
                         style: GoogleFonts.lato(
                           fontSize: 12,
                           fontWeight: FontWeight.w800,
@@ -661,12 +1178,14 @@ class _MapPointListTile extends StatelessWidget {
   final CulturalMapPoint point;
   final String lang;
   final bool isSelected;
+  final bool isLocked;
   final VoidCallback onTap;
 
   const _MapPointListTile({
     required this.point,
     required this.lang,
     required this.isSelected,
+    required this.isLocked,
     required this.onTap,
   });
 
@@ -746,7 +1265,7 @@ class _MapPointListTile extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Icon(
-                Icons.arrow_forward_ios_rounded,
+                isLocked ? Icons.lock_rounded : Icons.arrow_forward_ios_rounded,
                 size: 13,
                 color: point.accentColor.withOpacity(0.78),
               ),

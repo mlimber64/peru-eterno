@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/utils/localized_map.dart';
+
 class HistoriaStage {
   final String id;
   final int orden;
@@ -23,9 +25,9 @@ class HistoriaStage {
     return HistoriaStage(
       id: json['id'] as String,
       orden: json['orden'] as int,
-      titulo: _toStringMap(json['titulo']),
-      subtitulo: _toStringMap(json['subtitulo']),
-      periodo: _toStringMap(json['periodo']),
+      titulo: LocalizedMapX.parse(json['titulo']),
+      subtitulo: LocalizedMapX.parse(json['subtitulo']),
+      periodo: LocalizedMapX.parse(json['periodo']),
       accentColor: color,
     );
   }
@@ -33,14 +35,7 @@ class HistoriaStage {
   /// Ruta del asset de imagen de fondo de la etapa (derivada del id).
   String get imageAssetPath => 'assets/images/stages/$id.webp';
 
-  String tituloFor(String lang) => titulo[lang] ?? titulo['it'] ?? id;
-  String subtituloFor(String lang) => subtitulo[lang] ?? subtitulo['it'] ?? '';
-  String periodoFor(String lang) => periodo[lang] ?? periodo['it'] ?? '';
-
-  static Map<String, String> _toStringMap(dynamic raw) {
-    if (raw is Map) {
-      return raw.map((k, v) => MapEntry(k.toString(), v.toString()));
-    }
-    return {};
-  }
+  String tituloFor(String lang) => titulo.localizedFor(lang, fallback: id);
+  String subtituloFor(String lang) => subtitulo.localizedFor(lang);
+  String periodoFor(String lang) => periodo.localizedFor(lang);
 }

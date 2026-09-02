@@ -1,0 +1,32 @@
+<!-- Plantilla "Magic Link" de Supabase Auth.
+     Se envía al recuperar el progreso en un dispositivo nuevo.
+     PEGAR EN: Authentication → Emails → Templates → Magic Link.
+     La variable imprescindible es {{ .Token }}: sin ella el correo llega sin
+     código y la app no puede completar la verificación. -->
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;color:#2C1810;">
+
+  <p style="font-size:11px;font-weight:800;letter-spacing:2px;color:#B0760A;margin:0 0 6px;">PERÚ ETERNO</p>
+
+  <h1 style="font-size:22px;margin:0 0 20px;color:#2C1810;">Il tuo codice · Tu código · Your code</h1>
+
+  <div style="background:#F5EBD6;border:1px solid #E4D9C6;border-radius:14px;padding:22px;text-align:center;margin:0 0 24px;">
+    <div style="font-size:34px;font-weight:800;letter-spacing:10px;color:#2C1810;">{{ .Token }}</div>
+  </div>
+
+  <p style="font-size:14px;line-height:1.6;margin:0 0 10px;color:#5B4A3A;">
+    <strong>IT</strong> · Inserisci questo codice nell'app per recuperare i tuoi progressi. Scade tra un'ora.
+  </p>
+  <p style="font-size:14px;line-height:1.6;margin:0 0 10px;color:#5B4A3A;">
+    <strong>ES</strong> · Escribe este código en la app para recuperar tu progreso. Caduca en una hora.
+  </p>
+  <p style="font-size:14px;line-height:1.6;margin:0 0 24px;color:#5B4A3A;">
+    <strong>EN</strong> · Enter this code in the app to recover your progress. It expires in one hour.
+  </p>
+
+  <p style="font-size:12.5px;line-height:1.6;color:#8A7863;border-top:1px solid #E4D9C6;padding-top:16px;margin:0;">
+    Se non hai richiesto questo codice, ignora questo messaggio.<br>
+    Si no pediste este código, ignora este mensaje.<br>
+    If you did not request this code, please ignore this message.
+  </p>
+
+</div>

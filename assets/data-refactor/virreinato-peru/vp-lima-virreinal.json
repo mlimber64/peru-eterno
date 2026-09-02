@@ -1,0 +1,89 @@
+{
+  "id": "lima_virreinal",
+  "parent_stage_id": "vicereame_peru",
+  "orden": 1,
+  "categoria": {
+    "es": "Esplendor Virreinal",
+    "it": "Splendore Vicereale",
+    "en": "Viceregal Splendor"
+  },
+  "titulo": {
+    "es": "Lima, la Ciudad de los Reyes: El corazón de Sudamérica",
+    "it": "Lima, la Città dei Re: Il cuore del Sud America",
+    "en": "Lima, the City of Kings: The Heart of South America"
+  },
+  "subtitulo": {
+    "es": "La capital opulenta desde donde se gobernó un continente alimentada por la plata de Potosí.",
+    "it": "L'opulenta capitale da cui fu governato un continente alimentata dall'argento di Potosí.",
+    "en": "The opulent capital from which a continent was governed, fueled by the silver of Potosí."
+  },
+  "contenido": {
+    "es": "Fundada por Francisco Pizarro el 18 de enero de 1535 en el fértil valle del río Rímac, Lima se convirtió en pocos años en la metrópoli más rica, poderosa e imponente de la América española. Nombrada capital del Virreinato del Perú en 1542, desde sus palacios se administraba un territorio colosal que abarcaba prácticamente toda Sudamérica, desde Panamá hasta la Patagonia.\n\nLa columna vertebral de esta opulencia provenía de las entrañas de los Andes, principalmente del legendario Cerro Rico de Potosí (en la actual Bolivia) y de las minas de azogue de Huancavelica. Toneladas de plata pura fluían en caravanas de mulas hacia el puerto del Callao, desde donde la célebre Armada del Sur navegaba hacia Panamá para financiar las guerras e iglesias del Imperio Español en Europa.\n\nLima se convirtió en una ciudad barroca de iglesias con altares cubiertos en pan de oro, balcones de madera tallada traídos de las Indias Orientales y majestuosos conventos como San Francisco y Santo Domingo. Fue también la cuna intelectual del continente: en 1551 se fundó la Real y Pontificia Universidad de San Marcos, la primera universidad oficial de América, transformando a la ciudad en un hervidero de teólogos, poetas, juristas y santos como Santa Rosa de Lima y San Martín de Porres.\n\nSin embargo, detrás de la suntuosidad de los bailes de corte en el Palacio de Gobierno, existía un estricto orden jerárquico. La sociedad virreinal estaba rígidamente dividida en castas, mientras que el Tribunal de la Santa Inquisición ejercía un férreo control ideológico en la Plaza Mayor.\n\n**[¿SABÍAS QUÉ?]**\nLa riqueza extraída del Virreinato del Perú era tan inmensa en Europa que dio origen a la famosa frase popular en español y francés: '¡Vale un Perú!' (en francés: *C'est le Pérou*), expresión universal que se utilizaba para describir algo de incalculable valor o riqueza extraordinaria.\n\n*Créditos de investigación y agradecimientos especiales al Archivo General de la Nación (AGN), al Patronato del Centro Histórico de Lima y al Museo de Arte de Lima (MALI).*",
+
+    "it": "Fondata il 18 gennaio 1535 nel fertile bacino del fiume Rímac, Lima divenne rapidamente la metropoli più ricca e imponente dell'America spagnola. Capitale del Vicereame del Perù dal 1542, governava un territorio immenso che spaziava da Panama alla Patagonia.\n\nLa fonte di questa opulenza proveniva dalle miniere d'argento di Potosí e dalle miniere di mercurio di Huancavelica. Tonnellate d'argento fluivano verso il porto del Callao per finanziare l'Impero Spagnolo.\n\nLima divenne una città barocca ricca di altari dorati e balconi scolpiti. Nel 1551 vi fu fondata la prima università d'America, San Marcos, e fu la culla di santi come Santa Rosa e San Martín de Porres.\n\n**[CURIOSITÀ]**\nL'incredibile ricchezza di Lima era così celebre che nacque il famoso detto diffuso anche in Europa: 'Vale un Perù!' (*C'est le Pérou* in francese), espressione usata ancora oggi per descrivere una fortuna inestimabile.\n\n*Crediti di ricerca e ringraziamenti all'Archivio Generale della Nazione e al Museo d'Arte di Lima (MALI).*",
+
+    "en": "Founded on January 18, 1535, in the fertile Rímac valley, Lima quickly grew into the wealthiest metropolis in Spanish America. Designated capital of the Viceroyalty of Peru in 1542, its authority stretched across nearly all of South America.\n\nThis grandeur was fueled by the vast silver deposits of Cerro Rico in Potosí and the mercury mines of Huancavelica. Caravans transported silver to the port of Callao to fund the Spanish Empire abroad.\n\nLima emerged as a baroque haven of gilded altars, carved balconies, and grand convents. In 1551, the Royal and Pontifical University of San Marcos was established—the first official university in the Americas.\n\n**[FUN FACT]**\nThe Viceroyalty's wealth was so legendary across Europe that it inspired the lasting phrase 'It's worth a Peru!' (*C'est le Pérou* in French), symbolizing priceless value.\n\n*Research credits and special thanks to the General Archive of the Nation (AGN) and the Lima Art Museum (MALI).*"
+  },
+  "periodo": {
+    "es": "1535 d.C. - 1750 d.C.",
+    "it": "1535 d.C. - 1750 d.C.",
+    "en": "1535 AD - 1750 AD"
+  },
+  "imagen_sugerida": "assets/images/banners/sacerdote-ceremonial-andino.jpg",
+  "quiz": [
+    {
+      "pregunta": {
+        "es": "¿Quién fundó la ciudad de Lima y en qué año?",
+        "it": "Chi fondò la città di Lima e in che anno?",
+        "en": "Who founded the city of Lima and in what year?"
+      },
+      "opciones": {
+        "es": ["Francisco Pizarro en 1535", "Diego de Almagro en 1540", "Francisco de Toledo en 1560", "Manco Inca en 1536"],
+        "it": ["Francisco Pizarro nel 1535", "Diego de Almagro nel 1540", "Francisco de Toledo nel 1560", "Manco Inca nel 1536"],
+        "en": ["Francisco Pizarro in 1535", "Diego de Almagro in 1540", "Francisco de Toledo in 1560", "Manco Inca in 1536"]
+      },
+      "respuesta_correcta": 0,
+      "explicacion": {
+        "es": "Francisco Pizarro fundó Lima el 18 de enero de 1535 en el valle del río Rímac.",
+        "it": "Francisco Pizarro fondò Lima il 18 gennaio 1535 nella valle del fiume Rímac.",
+        "en": "Francisco Pizarro founded Lima on January 18, 1535, in the Rímac river valley."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿De dónde provenía principalmente la riqueza que hizo próspera a Lima virreinal?",
+        "it": "Da dove proveniva principalmente la ricchezza che rese prospera Lima vicereale?",
+        "en": "Where did the wealth that made viceregal Lima prosperous mainly come from?"
+      },
+      "opciones": {
+        "es": ["El comercio con Asia", "La plata de Potosí y el mercurio de Huancavelica", "La agricultura de la costa", "La venta de esclavos"],
+        "it": ["Il commercio con l'Asia", "L'argento di Potosí e il mercurio di Huancavelica", "L'agricoltura costiera", "La vendita di schiavi"],
+        "en": ["Trade with Asia", "Potosí silver and Huancavelica mercury", "Coastal agriculture", "The sale of enslaved people"]
+      },
+      "respuesta_correcta": 1,
+      "explicacion": {
+        "es": "La plata de Potosí y el mercurio de Huancavelica financiaban al Imperio español desde Lima.",
+        "it": "L'argento di Potosí e il mercurio di Huancavelica finanziavano l'Impero spagnolo da Lima.",
+        "en": "Potosí silver and Huancavelica mercury financed the Spanish Empire from Lima."
+      }
+    },
+    {
+      "pregunta": {
+        "es": "¿Qué universidad, la primera de América, se fundó en Lima en 1551?",
+        "it": "Quale università, la prima d'America, fu fondata a Lima nel 1551?",
+        "en": "What university, the first in the Americas, was founded in Lima in 1551?"
+      },
+      "opciones": {
+        "es": ["La Universidad de San Marcos", "La Universidad Católica", "La Universidad de Cusco", "El Real Colegio de San Martín"],
+        "it": ["L'Università di San Marcos", "L'Università Cattolica", "L'Università di Cusco", "Il Real Colegio de San Martín"],
+        "en": ["The University of San Marcos", "The Catholic University", "The University of Cusco", "The Royal College of San Martín"]
+      },
+      "respuesta_correcta": 0,
+      "explicacion": {
+        "es": "La Real y Pontificia Universidad de San Marcos fue la primera universidad oficial de América.",
+        "it": "La Real y Pontificia Universidad de San Marcos fu la prima università ufficiale d'America.",
+        "en": "The Royal and Pontifical University of San Marcos was the first official university in the Americas."
+      }
+    }
+  ]
+}

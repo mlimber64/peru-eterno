@@ -7,14 +7,24 @@
          canales de prueba y producción de compras dentro de la app. -->
     <uses-permission android:name="com.android.vending.BILLING" />
 
+    <!-- Recordatorio diario de racha. En Android 13+ el permiso se pide en
+         tiempo de ejecución, y solo cuando el usuario activa el recordatorio
+         desde Ajustes — no al abrir la app por primera vez. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Permite reprogramar el aviso tras reiniciar el teléfono. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:label="Perú Eterno"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/full_backup_content"
+        android:dataExtractionRules="@xml/data_extraction_rules">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:taskAffinity=""
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -32,7 +42,46 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <!-- Permite que el clic en el Home Screen Widget (home_widget)
+                 entregue su Uri de vuelta a Dart (HomeWidget.widgetClicked /
+                 initiallyLaunchedFromHomeWidget). -->
+            <intent-filter>
+                <action android:name="es.antonborri.home_widget.action.LAUNCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <!-- Deep link con scheme propio (perueterno://...). go_router
+                 (vía MaterialApp.router) recibe la Uri automáticamente al
+                 abrir la app en frío o en segundo plano — no requiere código
+                 Dart adicional para el enrutamiento en sí. Nota: en una Uri
+                 con scheme personalizado el primer segmento tras "://" es el
+                 HOST, no el path (p. ej. perueterno://historia/x/y ⇒
+                 host="historia", path="/x/y") — a diferencia de las rutas
+                 "/historia/..." de app_router.dart, que sí empiezan el path
+                 en ese primer segmento. Sin un mapeo explícito Uri→ruta (no
+                 pedido en esta tarea), go_router intentará resolver por
+                 `uri.path`, que para estos links vendría vacío o distinto de
+                 lo esperado; validar/ajustar ese mapeo antes de depender de
+                 links reales en producción. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="perueterno"/>
+            </intent-filter>
         </activity>
+
+        <!-- Widget de pantalla de inicio: Historia del Día / ¿Sabías qué? -->
+        <receiver
+            android:name=".DailyFactWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/daily_fact_widget_info"/>
+        </receiver>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

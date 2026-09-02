@@ -123,7 +123,7 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '3000 a.C.  →  1821 d.C.',
+                        '3000 a.C.  →  1884 d.C.',
                         style: GoogleFonts.lato(
                           fontSize: 10,
                           color: AppColors.cremaPergamino.withOpacity(0.38),
