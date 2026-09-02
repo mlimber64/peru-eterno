@@ -127,8 +127,8 @@ class _StoryHeader extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black.withOpacity(0.55),
-                  Colors.black.withOpacity(0.15),
+                  Colors.black.withValues(alpha: 0.55),
+                  Colors.black.withValues(alpha: 0.15),
                   AppColors.negoCacao,
                 ],
                 stops: const [0.0, 0.5, 1.0],
@@ -152,7 +152,7 @@ class _StoryHeader extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: progress,
                       minHeight: 5,
-                      backgroundColor: AppColors.cremaPergamino.withOpacity(0.15),
+                      backgroundColor: AppColors.cremaPergamino.withValues(alpha: 0.15),
                       valueColor:
                           const AlwaysStoppedAnimation<Color>(AppColors.ocre),
                     ),
@@ -183,7 +183,7 @@ class _HeaderFallback extends StatelessWidget {
       ),
       child: Center(
         child: Icon(Icons.terrain_rounded,
-            size: 64, color: AppColors.ocre.withOpacity(0.25)),
+            size: 64, color: AppColors.ocre.withValues(alpha: 0.25)),
       ),
     );
   }
@@ -244,7 +244,7 @@ class _PlayBody extends StatelessWidget {
               node.narrativeFor(lang),
               style: GoogleFonts.lato(
                 fontSize: 15,
-                color: AppColors.cremaPergamino.withOpacity(0.85),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                 height: 1.7,
               ),
             ),
@@ -313,9 +313,9 @@ class _HistoricalFactCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
       decoration: BoxDecoration(
-        color: gold.withOpacity(0.1),
+        color: gold.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: gold.withOpacity(0.45), width: 1.2),
+        border: Border.all(color: gold.withValues(alpha: 0.45), width: 1.2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,7 +326,7 @@ class _HistoricalFactCard extends StatelessWidget {
                 width: 26,
                 height: 26,
                 decoration: BoxDecoration(
-                  color: gold.withOpacity(0.18),
+                  color: gold.withValues(alpha: 0.18),
                   shape: BoxShape.circle,
                 ),
                 child: const Center(
@@ -350,7 +350,7 @@ class _HistoricalFactCard extends StatelessWidget {
             text,
             style: GoogleFonts.lato(
               fontSize: 14,
-              color: AppColors.cremaPergamino.withOpacity(0.9),
+              color: AppColors.cremaPergamino.withValues(alpha: 0.9),
               height: 1.65,
             ),
           ),
@@ -378,7 +378,7 @@ class _ChoiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderColor =
-        isLocked ? AppColors.ocre.withOpacity(0.5) : AppColors.ocre.withOpacity(0.3);
+        isLocked ? AppColors.ocre.withValues(alpha: 0.5) : AppColors.ocre.withValues(alpha: 0.3);
 
     return Material(
       color: AppColors.marronProfundo,
@@ -386,7 +386,7 @@ class _ChoiceCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
         onTap: onTap,
-        splashColor: AppColors.ocre.withOpacity(0.15),
+        splashColor: AppColors.ocre.withValues(alpha: 0.15),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: BoxDecoration(
@@ -411,7 +411,7 @@ class _ChoiceCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.ocre.withOpacity(0.18),
+                    color: AppColors.ocre.withValues(alpha: 0.18),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -433,7 +433,7 @@ class _ChoiceCard extends StatelessWidget {
                 )
               else
                 Icon(Icons.arrow_forward_rounded,
-                    size: 18, color: AppColors.ocre.withOpacity(0.7)),
+                    size: 18, color: AppColors.ocre.withValues(alpha: 0.7)),
             ],
           ),
         ),
@@ -501,9 +501,9 @@ class _EndingViewState extends State<_EndingView> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                 decoration: BoxDecoration(
-                  color: AppColors.ocre.withOpacity(0.16),
+                  color: AppColors.ocre.withValues(alpha: 0.16),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.ocre.withOpacity(0.5)),
+                  border: Border.all(color: AppColors.ocre.withValues(alpha: 0.5)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -536,7 +536,7 @@ class _EndingViewState extends State<_EndingView> {
             widget.node.narrativeFor(widget.lang),
             style: GoogleFonts.lato(
               fontSize: 15,
-              color: AppColors.cremaPergamino.withOpacity(0.85),
+              color: AppColors.cremaPergamino.withValues(alpha: 0.85),
               height: 1.7,
             ),
           ).animate().fadeIn(duration: 500.ms, delay: 100.ms),
@@ -565,14 +565,14 @@ class _EndingViewState extends State<_EndingView> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.circle, size: 6, color: AppColors.ocre.withOpacity(0.7)),
+                    Icon(Icons.circle, size: 6, color: AppColors.ocre.withValues(alpha: 0.7)),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         title,
                         style: GoogleFonts.lato(
                           fontSize: 12.5,
-                          color: AppColors.cremaPergamino.withOpacity(0.65),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.65),
                         ),
                       ),
                     ),
@@ -618,7 +618,7 @@ class _EndingViewState extends State<_EndingView> {
               icon: const Icon(Icons.ios_share_rounded, size: 18),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.ocre,
-                side: BorderSide(color: AppColors.ocre.withOpacity(0.5)),
+                side: BorderSide(color: AppColors.ocre.withValues(alpha: 0.5)),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28),
@@ -637,7 +637,7 @@ class _EndingViewState extends State<_EndingView> {
               onPressed: () => Navigator.pop(context),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.cremaPergamino,
-                side: BorderSide(color: AppColors.cremaPergamino.withOpacity(0.3)),
+                side: BorderSide(color: AppColors.cremaPergamino.withValues(alpha: 0.3)),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28),

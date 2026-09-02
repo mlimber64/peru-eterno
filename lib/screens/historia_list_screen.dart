@@ -61,7 +61,7 @@ class HistoriaListScreen extends StatelessWidget {
         icon: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: 0.35),
             shape: BoxShape.circle,
           ),
           child: const Icon(Icons.arrow_back_ios_new_rounded,
@@ -83,14 +83,14 @@ class HistoriaListScreen extends StatelessWidget {
                 ),
               ),
             ),
-            CustomPaint(painter: _DiagPainter(_accent)),
+            const CustomPaint(painter: _DiagPainter(_accent)),
             Positioned(
               right: -20,
               top: 10,
               child: Icon(
                 Icons.history_edu_rounded,
                 size: 200,
-                color: Colors.white.withOpacity(0.04),
+                color: Colors.white.withValues(alpha: 0.04),
               ),
             ),
             const DecoratedBox(
@@ -113,7 +113,7 @@ class HistoriaListScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.history_edu_rounded, size: 14, color: _accent),
+                      const Icon(Icons.history_edu_rounded, size: 14, color: _accent),
                       const SizedBox(width: 8),
                       Text(
                         context
@@ -147,7 +147,7 @@ class HistoriaListScreen extends StatelessWidget {
                         .t('historia.prehispanic_subtitle'),
                     style: GoogleFonts.lato(
                       fontSize: 13,
-                      color: Colors.white.withOpacity(0.65),
+                      color: Colors.white.withValues(alpha: 0.65),
                     ),
                   ),
                 ],
@@ -229,7 +229,7 @@ class _ArticleCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _accent.withOpacity(0.12)),
+              border: Border.all(color: _accent.withValues(alpha: 0.12)),
             ),
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -240,13 +240,13 @@ class _ArticleCard extends StatelessWidget {
                   width: 36,
                   height: 36,
                   decoration: BoxDecoration(
-                    color: _accent.withOpacity(0.15),
+                    color: _accent.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
-                    border: Border.all(color: _accent.withOpacity(0.4)),
+                    border: Border.all(color: _accent.withValues(alpha: 0.4)),
                   ),
                   child: Center(
                     child: isLocked
-                        ? Icon(Icons.lock_rounded, size: 15, color: _accent)
+                        ? const Icon(Icons.lock_rounded, size: 15, color: _accent)
                         : Text(
                             '${article.orden}',
                             style: GoogleFonts.lato(
@@ -267,7 +267,7 @@ class _ArticleCard extends StatelessWidget {
                         style: GoogleFonts.lato(
                           fontSize: 9,
                           fontWeight: FontWeight.w700,
-                          color: _accent.withOpacity(0.75),
+                          color: _accent.withValues(alpha: 0.75),
                           letterSpacing: 1.3,
                         ),
                       ),
@@ -287,7 +287,7 @@ class _ArticleCard extends StatelessWidget {
                         style: GoogleFonts.lato(
                           fontSize: 12,
                           fontStyle: FontStyle.italic,
-                          color: AppColors.cremaPergamino.withOpacity(0.55),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.55),
                           height: 1.3,
                         ),
                       ),
@@ -297,7 +297,7 @@ class _ArticleCard extends StatelessWidget {
                           preview,
                           style: GoogleFonts.lato(
                             fontSize: 13,
-                            color: AppColors.cremaPergamino.withOpacity(0.6),
+                            color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                             height: 1.5,
                           ),
                           maxLines: 2,
@@ -361,7 +361,7 @@ class _DiagPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.07)
+      ..color = color.withValues(alpha: 0.07)
       ..strokeWidth = 1;
     const spacing = 28.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {

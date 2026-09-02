@@ -139,7 +139,7 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.42),
+                  color: Colors.black.withValues(alpha: 0.42),
                   shape: BoxShape.circle,
                 ),
                 child: const Center(
@@ -232,7 +232,7 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
                     decoration: BoxDecoration(
                       color: _currentPage == i
                           ? Colors.white
-                          : Colors.white.withOpacity(0.35),
+                          : Colors.white.withValues(alpha: 0.35),
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
@@ -291,7 +291,7 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
             child: Icon(
               Icons.history_edu_rounded,
               size: 200,
-              color: Colors.white.withOpacity(0.04),
+              color: Colors.white.withValues(alpha: 0.04),
             ),
           ),
           Positioned(
@@ -314,16 +314,16 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: 0.35),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.25), width: 1),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.25), width: 1),
           ),
           child: Text(
             widget.stage.periodoFor(lang),
             style: GoogleFonts.lato(
               fontSize: 10,
               fontWeight: FontWeight.w700,
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               letterSpacing: 0.8,
             ),
           ),
@@ -343,7 +343,7 @@ class _HistoriaSubtopicsScreenState extends State<HistoriaSubtopicsScreen> {
           widget.stage.subtituloFor(lang),
           style: GoogleFonts.lato(
             fontSize: 12,
-            color: Colors.white.withOpacity(0.72),
+            color: Colors.white.withValues(alpha: 0.72),
             height: 1.3,
           ),
         ),
@@ -455,7 +455,7 @@ class _SubtopicCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: accent.withOpacity(0.15)),
+              border: Border.all(color: accent.withValues(alpha: 0.15)),
             ),
             padding: const EdgeInsets.all(18),
             child: Row(
@@ -466,9 +466,9 @@ class _SubtopicCard extends StatelessWidget {
                   width: 34,
                   height: 34,
                   decoration: BoxDecoration(
-                    color: accent.withOpacity(0.15),
+                    color: accent.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
-                    border: Border.all(color: accent.withOpacity(0.4)),
+                    border: Border.all(color: accent.withValues(alpha: 0.4)),
                   ),
                   child: Center(
                     child: isLocked
@@ -494,7 +494,7 @@ class _SubtopicCard extends StatelessWidget {
                           style: GoogleFonts.lato(
                             fontSize: 9,
                             fontWeight: FontWeight.w700,
-                            color: accent.withOpacity(0.75),
+                            color: accent.withValues(alpha: 0.75),
                             letterSpacing: 1.2,
                           ),
                         ),
@@ -515,7 +515,7 @@ class _SubtopicCard extends StatelessWidget {
                         style: GoogleFonts.lato(
                           fontSize: 12,
                           fontStyle: FontStyle.italic,
-                          color: AppColors.cremaPergamino.withOpacity(0.5),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.5),
                           height: 1.3,
                         ),
                       ),
@@ -525,7 +525,7 @@ class _SubtopicCard extends StatelessWidget {
                           preview,
                           style: GoogleFonts.lato(
                             fontSize: 12,
-                            color: AppColors.cremaPergamino.withOpacity(0.55),
+                            color: AppColors.cremaPergamino.withValues(alpha: 0.55),
                             height: 1.5,
                           ),
                           maxLines: 2,
@@ -588,7 +588,7 @@ class _DiagPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.08)
+      ..color = color.withValues(alpha: 0.08)
       ..strokeWidth = 1;
     const spacing = 28.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {

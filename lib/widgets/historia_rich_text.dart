@@ -52,7 +52,7 @@ class HistoriaParagraph extends StatelessWidget {
 
     final baseStyle = GoogleFonts.lato(
       fontSize: 16 * textScale,
-      color: AppColors.cremaPergamino.withOpacity(0.85),
+      color: AppColors.cremaPergamino.withValues(alpha: 0.85),
       height: 1.8,
     );
 
