@@ -73,7 +73,7 @@ class EraTimelineCard extends StatelessWidget {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: era.accentColor.withOpacity(0.4),
+                          color: era.accentColor.withValues(alpha: 0.4),
                           blurRadius: 6,
                           spreadRadius: 1,
                         ),
@@ -112,17 +112,17 @@ class EraTimelineCard extends StatelessWidget {
   Widget _buildCardContent(BuildContext context, String Function(String) t) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.75),
+        color: Colors.white.withValues(alpha: 0.75),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: AppColors.cardShadow,
             blurRadius: 12,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
         border: Border.all(
-          color: era.accentColor.withOpacity(0.25),
+          color: era.accentColor.withValues(alpha: 0.25),
           width: 1,
         ),
       ),
@@ -150,7 +150,7 @@ class EraTimelineCard extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          era.accentColor.withOpacity(0.7),
+                          era.accentColor.withValues(alpha: 0.7),
                         ],
                       ),
                     ),
@@ -165,10 +165,10 @@ class EraTimelineCard extends StatelessWidget {
                         vertical: 3,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withValues(alpha: 0.4),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: AppColors.ocre.withOpacity(0.6),
+                          color: AppColors.ocre.withValues(alpha: 0.6),
                           width: 0.5,
                         ),
                       ),
@@ -232,10 +232,10 @@ class EraTimelineCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: era.accentColor.withOpacity(0.12),
+                        color: era.accentColor.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: era.accentColor.withOpacity(0.3),
+                          color: era.accentColor.withValues(alpha: 0.3),
                           width: 1,
                         ),
                       ),

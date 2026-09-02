@@ -78,7 +78,7 @@ class AppEmptyState extends StatelessWidget {
               style: subtitleStyle ??
                   GoogleFonts.lato(
                     fontSize: 13,
-                    color: subtitleColor ?? titleColor.withOpacity(0.7),
+                    color: subtitleColor ?? titleColor.withValues(alpha: 0.7),
                     height: 1.5,
                   ),
             ),

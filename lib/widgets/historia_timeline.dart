@@ -126,7 +126,7 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
                         '3000 a.C.  →  1884 d.C.',
                         style: GoogleFonts.lato(
                           fontSize: 10,
-                          color: AppColors.cremaPergamino.withOpacity(0.38),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.38),
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -141,10 +141,10 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: items[_selectedIdx].color.withOpacity(0.15),
+                        color: items[_selectedIdx].color.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: items[_selectedIdx].color.withOpacity(0.35),
+                          color: items[_selectedIdx].color.withValues(alpha: 0.35),
                           width: 1,
                         ),
                       ),
@@ -219,7 +219,7 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
                         gradient: LinearGradient(
                           colors: [
                             AppColors.negoCacao,
-                            AppColors.negoCacao.withOpacity(0),
+                            AppColors.negoCacao.withValues(alpha: 0),
                           ],
                         ),
                       ),
@@ -238,7 +238,7 @@ class _HistoriaTimelineState extends State<HistoriaTimeline> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            AppColors.negoCacao.withOpacity(0),
+                            AppColors.negoCacao.withValues(alpha: 0),
                             AppColors.negoCacao,
                           ],
                         ),
@@ -306,13 +306,13 @@ class _TimelineNode extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: isSelected ? accent : accent.withOpacity(0.35),
+                    color: isSelected ? accent : accent.withValues(alpha: 0.35),
                     width: isSelected ? 2.5 : 1.0,
                   ),
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: accent.withOpacity(0.45),
+                            color: accent.withValues(alpha: 0.45),
                             blurRadius: 18,
                             spreadRadius: 2,
                           ),
@@ -348,14 +348,14 @@ class _TimelineNode extends StatelessWidget {
                       height: 1.5,
                       color: isFirst
                           ? Colors.transparent
-                          : accent.withOpacity(0.28),
+                          : accent.withValues(alpha: 0.28),
                     ),
                     Container(
                       width: halfW,
                       height: 1.5,
                       color: isLast
                           ? Colors.transparent
-                          : accent.withOpacity(0.28),
+                          : accent.withValues(alpha: 0.28),
                     ),
                   ],
                 ),
@@ -371,7 +371,7 @@ class _TimelineNode extends StatelessWidget {
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
-                              color: accent.withOpacity(0.55),
+                              color: accent.withValues(alpha: 0.55),
                               blurRadius: 10,
                               spreadRadius: 1,
                             ),
@@ -393,7 +393,7 @@ class _TimelineNode extends StatelessWidget {
               fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
               color: isSelected
                   ? Colors.white
-                  : AppColors.cremaPergamino.withOpacity(0.55),
+                  : AppColors.cremaPergamino.withValues(alpha: 0.55),
               height: 1.2,
             ),
             child: Text(
@@ -413,8 +413,8 @@ class _TimelineNode extends StatelessWidget {
             style: GoogleFonts.lato(
               fontSize: 9,
               color: isSelected
-                  ? accent.withOpacity(0.85)
-                  : AppColors.cremaPergamino.withOpacity(0.28),
+                  ? accent.withValues(alpha: 0.85)
+                  : AppColors.cremaPergamino.withValues(alpha: 0.28),
               height: 1.2,
             ),
             maxLines: 2,

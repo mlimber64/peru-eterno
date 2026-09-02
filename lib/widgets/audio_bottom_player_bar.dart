@@ -31,10 +31,10 @@ class AudioBottomPlayerBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.marronProfundo,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: accent.withOpacity(0.4)),
+        border: Border.all(color: accent.withValues(alpha: 0.4)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: 0.35),
             blurRadius: 16,
             offset: const Offset(0, 6),
           ),
@@ -49,7 +49,7 @@ class AudioBottomPlayerBar extends StatelessWidget {
                 width: 34,
                 height: 34,
                 decoration: BoxDecoration(
-                  color: accent.withOpacity(0.18),
+                  color: accent.withValues(alpha: 0.18),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(Icons.graphic_eq_rounded, color: accent, size: 18),
@@ -94,7 +94,7 @@ class AudioBottomPlayerBar extends StatelessWidget {
               ),
               _iconButton(
                 icon: Icons.stop_rounded,
-                color: AppColors.cremaPergamino.withOpacity(0.7),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.7),
                 onTap: audio.stop,
               ),
             ],
@@ -105,7 +105,7 @@ class AudioBottomPlayerBar extends StatelessWidget {
             child: LinearProgressIndicator(
               value: audio.progress,
               minHeight: 3,
-              backgroundColor: accent.withOpacity(0.15),
+              backgroundColor: accent.withValues(alpha: 0.15),
               valueColor: AlwaysStoppedAnimation(accent),
             ),
           ),
@@ -122,9 +122,9 @@ class AudioBottomPlayerBar extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 4),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         decoration: BoxDecoration(
-          color: accent.withOpacity(0.14),
+          color: accent.withValues(alpha: 0.14),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: accent.withOpacity(0.4)),
+          border: Border.all(color: accent.withValues(alpha: 0.4)),
         ),
         child: Text(
           '${audio.speechRate}x',

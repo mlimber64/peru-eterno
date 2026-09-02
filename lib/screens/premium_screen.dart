@@ -91,7 +91,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                     t('premium.hero_subtitle'),
                     style: GoogleFonts.lato(
                       fontSize: 14,
-                      color: AppColors.cremaPergamino.withOpacity(0.7),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.7),
                       height: 1.6,
                     ),
                     textAlign: TextAlign.center,
@@ -140,7 +140,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.ocre.withOpacity(0.5),
+            color: AppColors.ocre.withValues(alpha: 0.5),
             blurRadius: 20,
             spreadRadius: 2,
           ),
@@ -184,8 +184,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.ocre.withOpacity(0.16),
-                    border: Border.all(color: AppColors.ocre.withOpacity(0.4)),
+                    color: AppColors.ocre.withValues(alpha: 0.16),
+                    border: Border.all(color: AppColors.ocre.withValues(alpha: 0.4)),
                   ),
                   child: Icon(icon, size: 16, color: AppColors.ocre),
                 ),
@@ -197,7 +197,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       features[i],
                       style: GoogleFonts.lato(
                         fontSize: 14,
-                        color: AppColors.cremaPergamino.withOpacity(0.85),
+                        color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                         height: 1.4,
                       ),
                     ),
@@ -220,14 +220,14 @@ class _PremiumScreenState extends State<PremiumScreen> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.verdeAndino.withOpacity(0.25),
-            AppColors.verdeAndino.withOpacity(0.08),
+            AppColors.verdeAndino.withValues(alpha: 0.25),
+            AppColors.verdeAndino.withValues(alpha: 0.08),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.verdeAndino.withOpacity(0.5)),
+        border: Border.all(color: AppColors.verdeAndino.withValues(alpha: 0.5)),
       ),
       child: Row(
         children: [
@@ -303,7 +303,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.ocre,
           foregroundColor: Colors.white,
-          disabledBackgroundColor: AppColors.ocre.withOpacity(0.4),
+          disabledBackgroundColor: AppColors.ocre.withValues(alpha: 0.4),
           padding: const EdgeInsets.symmetric(vertical: 18),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -348,9 +348,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
     TextStyle style() => GoogleFonts.lato(
           fontSize: 11,
-          color: AppColors.cremaPergamino.withOpacity(0.45),
+          color: AppColors.cremaPergamino.withValues(alpha: 0.45),
           decoration: TextDecoration.underline,
-          decorationColor: AppColors.cremaPergamino.withOpacity(0.3),
+          decorationColor: AppColors.cremaPergamino.withValues(alpha: 0.3),
         );
 
     return Wrap(
@@ -464,8 +464,8 @@ class _PlanCard extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    AppColors.ocre.withOpacity(0.24),
-                    AppColors.terracota.withOpacity(0.14),
+                    AppColors.ocre.withValues(alpha: 0.24),
+                    AppColors.terracota.withValues(alpha: 0.14),
                   ],
                 )
               : null,
@@ -474,7 +474,7 @@ class _PlanCard extends StatelessWidget {
           border: Border.all(
             color: isSelected
                 ? AppColors.ocre
-                : AppColors.cremaPergamino.withOpacity(0.12),
+                : AppColors.cremaPergamino.withValues(alpha: 0.12),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -484,9 +484,9 @@ class _PlanCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
-                color: badgeColor.withOpacity(0.2),
+                color: badgeColor.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: badgeColor.withOpacity(0.6)),
+                border: Border.all(color: badgeColor.withValues(alpha: 0.6)),
               ),
               child: Text(
                 badge.toUpperCase(),
@@ -504,7 +504,7 @@ class _PlanCard extends StatelessWidget {
               style: GoogleFonts.lato(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: AppColors.cremaPergamino.withOpacity(0.75),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.75),
               ),
             ),
             const SizedBox(height: 4),
@@ -524,7 +524,7 @@ class _PlanCard extends StatelessWidget {
               size: 18,
               color: isSelected
                   ? AppColors.ocre
-                  : AppColors.cremaPergamino.withOpacity(0.3),
+                  : AppColors.cremaPergamino.withValues(alpha: 0.3),
             ),
           ],
         ),

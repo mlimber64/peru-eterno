@@ -76,7 +76,7 @@ class _LegalScreenState extends State<LegalScreen> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.lato(
                       fontSize: 14,
-                      color: AppColors.cremaPergamino.withOpacity(0.6),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                     ),
                   ),
                 ),
@@ -114,14 +114,14 @@ class _DocumentBody extends StatelessWidget {
         Row(
           children: [
             Icon(Icons.update_rounded,
-                size: 13, color: AppColors.ocre.withOpacity(0.8)),
+                size: 13, color: AppColors.ocre.withValues(alpha: 0.8)),
             const SizedBox(width: 6),
             Text(
               '${t('legal.updated')} ${doc.updatedAt}',
               style: GoogleFonts.lato(
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
-                color: AppColors.ocre.withOpacity(0.8),
+                color: AppColors.ocre.withValues(alpha: 0.8),
                 letterSpacing: 0.5,
               ),
             ),
@@ -134,13 +134,13 @@ class _DocumentBody extends StatelessWidget {
             color: AppColors.marronProfundo,
             borderRadius: BorderRadius.circular(14),
             border:
-                Border.all(color: AppColors.cremaPergamino.withOpacity(0.06)),
+                Border.all(color: AppColors.cremaPergamino.withValues(alpha: 0.06)),
           ),
           child: Text(
             doc.intro,
             style: GoogleFonts.lato(
               fontSize: 13.5,
-              color: AppColors.cremaPergamino.withOpacity(0.72),
+              color: AppColors.cremaPergamino.withValues(alpha: 0.72),
               height: 1.65,
             ),
           ),
@@ -164,7 +164,7 @@ class _DocumentBody extends StatelessWidget {
                 paragraph,
                 style: GoogleFonts.lato(
                   fontSize: 13.5,
-                  color: AppColors.cremaPergamino.withOpacity(0.65),
+                  color: AppColors.cremaPergamino.withValues(alpha: 0.65),
                   height: 1.7,
                 ),
               ),
@@ -187,7 +187,7 @@ class _ContactButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.ocre.withOpacity(0.12),
+      color: AppColors.ocre.withValues(alpha: 0.12),
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -201,7 +201,7 @@ class _ContactButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColors.ocre.withOpacity(0.3)),
+            border: Border.all(color: AppColors.ocre.withValues(alpha: 0.3)),
           ),
           child: Row(
             children: [
@@ -225,7 +225,7 @@ class _ContactButton extends StatelessWidget {
                       email,
                       style: GoogleFonts.lato(
                         fontSize: 12,
-                        color: AppColors.ocre.withOpacity(0.65),
+                        color: AppColors.ocre.withValues(alpha: 0.65),
                       ),
                     ),
                   ],

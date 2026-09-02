@@ -20,7 +20,7 @@ class PremiumLockOverlay extends StatelessWidget {
         Positioned.fill(
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.marronOscuro.withOpacity(0.78),
+              color: AppColors.marronOscuro.withValues(alpha: 0.78),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Material(
@@ -42,7 +42,7 @@ class PremiumLockOverlay extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: AppColors.ocre, width: 1.5),
-                        color: AppColors.marronOscuro.withOpacity(0.6),
+                        color: AppColors.marronOscuro.withValues(alpha: 0.6),
                       ),
                       child: const Icon(
                         Icons.lock_rounded,

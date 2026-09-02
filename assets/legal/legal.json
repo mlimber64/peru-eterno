@@ -1,6 +1,6 @@
 {
-  "version": "1.0",
-  "updated_at": "2026-09-01",
+  "version": "1.1",
+  "updated_at": "2026-09-02",
   "controller": "Limber Mendoza",
   "controller_country": "Italia",
   "contact_email": "perueterno.app@gmail.com",
@@ -24,7 +24,8 @@
             "Progreso de aprendizaje: capítulos marcados como leídos, puntuación de los cuestionarios, cartas coleccionables desbloqueadas, finales alcanzados en las historias interactivas, racha diaria y fecha de la última lectura.",
             "Preferencias y datos que no salen de tu dispositivo: idioma elegido, tamaño del texto de lectura, favoritos, historial de navegación dentro de la app y el estado de tu suscripción.",
             "Datos técnicos mínimos: como en cualquier conexión a internet, las peticiones HTTPS a nuestros proveedores incluyen tu dirección IP para que la comunicación funcione. Nosotros no la guardamos ni la asociamos a tu identificador.",
-            "Informes de error: si la app falla, enviamos a nuestro propio servidor el tipo de error, su traza técnica, la versión de la app, el sistema operativo y el idioma, para poder corregirlo. No viaja nada de lo que hayas escrito ni qué estabas leyendo, y no se usa ningún servicio de terceros para esto."
+            "Informes de error: si la app falla, enviamos a nuestro propio servidor el tipo de error, su traza técnica, la versión de la app, el sistema operativo y el idioma, para poder corregirlo. No viaja nada de lo que hayas escrito ni qué estabas leyendo, y no se usa ningún servicio de terceros para esto.",
+            "Estadísticas de uso: registramos acciones anónimas dentro de la app —abrirla, terminar o saltar la introducción, abrir un capítulo, completar un cuestionario, desbloquear una carta, ver la pantalla de suscripción o compartir algo— junto con la versión de la app, el sistema operativo, el idioma y si tienes suscripción activa. No se registra nada de lo que escribas, ninguna búsqueda ni ningún texto libre: solo identificadores de contenido predefinidos. Se guardan en nuestro propio servidor y no se comparten con nadie."
           ]
         },
         {
@@ -33,6 +34,7 @@
             "Guardar tu progreso y poder recuperarlo si cambias de dispositivo o reinstalas la app. La recuperación solo es posible si has vinculado un correo: sin él, el progreso queda atado a esta instalación.",
             "Recordar tus preferencias (idioma, tamaño de texto, favoritos) y mantener la racha de lectura.",
             "Dar acceso al contenido premium a quien tiene una suscripción o prueba gratuita vigente.",
+            "Entender de forma agregada cómo se usa la app —qué capítulos se leen, cuánta gente termina la introducción, en qué punto se abandona— para decidir qué mejorar y qué contenido escribir después. Es la única finalidad de las estadísticas de uso: no se usan para perfilarte ni para mostrarte nada distinto a otro usuario.",
             "Base legal (RGPD, si te aplica): la ejecución del servicio que nos solicitas al usar la app. No tratamos tus datos con fines publicitarios, de perfilado ni de decisiones automatizadas."
           ]
         },
@@ -41,7 +43,7 @@
           "p": [
             "No vendemos, alquilamos ni cedemos tus datos a terceros con fines comerciales.",
             "No mostramos publicidad ni integramos redes publicitarias.",
-            "No incorporamos SDK de analítica ni rastreadores de terceros.",
+            "No incorporamos SDK de analítica ni rastreadores de terceros. Las estadísticas de uso que sí recogemos (apartado 2) las guarda nuestro propio servidor, no salen hacia ningún proveedor de analítica y no se cruzan con datos de otras aplicaciones.",
             "No usamos identificadores de publicidad (AAID / IDFA) ni te rastreamos entre aplicaciones o sitios web."
           ]
         },
@@ -69,7 +71,8 @@
             "Mientras sigas usando la app. Si usas la opción «Borrar mis datos» de los Ajustes, tu progreso se elimina de inmediato del dispositivo y del servidor.",
             "Las cuentas anónimas sin actividad durante 24 meses se eliminan junto con su progreso.",
             "Desinstalar la app borra todo lo guardado en el dispositivo, pero no lo que ya se sincronizó en el servidor: para eso usa «Borrar mis datos» antes de desinstalar, o escríbenos.",
-            "Los informes de error se borran automáticamente a los 90 días: pasado ese tiempo ya no sirven para arreglar nada."
+            "Los informes de error se borran automáticamente a los 90 días: pasado ese tiempo ya no sirven para arreglar nada.",
+            "Las estadísticas de uso se eliminan automáticamente a los 12 meses. Si borras tu cuenta, las que quedaran dejan de estar asociadas a ti."
           ]
         },
         {
@@ -116,7 +119,8 @@
             "Progressi di apprendimento: capitoli segnati come letti, punteggio dei quiz, carte da collezione sbloccate, finali raggiunti nelle storie interattive, serie giornaliera e data dell'ultima lettura.",
             "Preferenze e dati che non lasciano il dispositivo: lingua scelta, dimensione del testo di lettura, preferiti, cronologia di navigazione interna all'app e stato del tuo abbonamento.",
             "Dati tecnici minimi: come in qualsiasi connessione a internet, le richieste HTTPS ai nostri fornitori includono il tuo indirizzo IP affinché la comunicazione funzioni. Noi non lo conserviamo né lo associamo al tuo identificativo.",
-            "Segnalazioni di errore: se l'app va in errore, inviamo al nostro server il tipo di errore, la sua traccia tecnica, la versione dell'app, il sistema operativo e la lingua, per poterlo correggere. Non viene inviato nulla di ciò che hai scritto né cosa stavi leggendo, e per questo non usiamo alcun servizio di terze parti."
+            "Segnalazioni di errore: se l'app va in errore, inviamo al nostro server il tipo di errore, la sua traccia tecnica, la versione dell'app, il sistema operativo e la lingua, per poterlo correggere. Non viene inviato nulla di ciò che hai scritto né cosa stavi leggendo, e per questo non usiamo alcun servizio di terze parti.",
+            "Statistiche d'uso: registriamo azioni anonime nell'app —aprirla, completare o saltare l'introduzione, aprire un capitolo, completare un quiz, sbloccare una carta, visualizzare la schermata di abbonamento o condividere qualcosa— insieme alla versione dell'app, al sistema operativo, alla lingua e al fatto che tu abbia o meno un abbonamento attivo. Non registriamo nulla di ciò che scrivi, nessuna ricerca e nessun testo libero: solo identificatori di contenuto predefiniti. Sono conservate sul nostro server e non vengono condivise con nessuno."
           ]
         },
         {
@@ -125,6 +129,7 @@
             "Salvare i tuoi progressi e poterli recuperare se cambi dispositivo o reinstalli l'app. Il recupero è possibile solo se hai collegato un'email: senza, i progressi restano legati a questa installazione.",
             "Ricordare le tue preferenze (lingua, dimensione del testo, preferiti) e mantenere la serie di lettura.",
             "Dare accesso ai contenuti premium a chi ha un abbonamento o una prova gratuita in corso.",
+            "Capire in forma aggregata come viene usata l'app —quali capitoli si leggono, quante persone completano l'introduzione, in quale punto si abbandona— per decidere cosa migliorare e quali contenuti scrivere in seguito. È l'unica finalità delle statistiche d'uso: non servono a profilarti né a mostrarti qualcosa di diverso rispetto a un altro utente.",
             "Base giuridica (GDPR): l'esecuzione del servizio che ci richiedi usando l'app. Non trattiamo i tuoi dati per finalità pubblicitarie, di profilazione o decisioni automatizzate."
           ]
         },
@@ -133,7 +138,7 @@
           "p": [
             "Non vendiamo, non affittiamo e non cediamo i tuoi dati a terzi per finalità commerciali.",
             "Non mostriamo pubblicità e non integriamo circuiti pubblicitari.",
-            "Non includiamo SDK di analytics né tracker di terze parti.",
+            "Non includiamo SDK di analytics né tracker di terze parti. Le statistiche d'uso che raccogliamo (punto 2) restano sul nostro server, non vengono inviate ad alcun fornitore di analytics e non vengono incrociate con dati di altre applicazioni.",
             "Non usiamo identificativi pubblicitari (AAID / IDFA) e non ti tracciamo tra app o siti web."
           ]
         },
@@ -161,7 +166,8 @@
             "Finché continui a usare l'app. Se usi l'opzione «Cancella i miei dati» nelle Impostazioni, i tuoi progressi vengono eliminati immediatamente dal dispositivo e dal server.",
             "Gli account anonimi inattivi per 24 mesi vengono eliminati insieme ai loro progressi.",
             "Disinstallare l'app cancella tutto ciò che è salvato sul dispositivo, ma non ciò che è già stato sincronizzato sul server: per questo usa «Cancella i miei dati» prima di disinstallare, oppure scrivici.",
-            "Le segnalazioni di errore vengono cancellate automaticamente dopo 90 giorni: passato quel tempo non servono più a correggere nulla."
+            "Le segnalazioni di errore vengono cancellate automaticamente dopo 90 giorni: passato quel tempo non servono più a correggere nulla.",
+            "Le statistiche d'uso vengono eliminate automaticamente dopo 12 mesi. Se cancelli il tuo account, quelle eventualmente rimaste non sono più associate a te."
           ]
         },
         {
@@ -208,7 +214,8 @@
             "Learning progress: chapters marked as read, quiz scores, unlocked collectible cards, endings reached in interactive stories, daily streak and the date of your last reading session.",
             "Preferences and data that never leaves your device: chosen language, reading text size, favourites, in-app browsing history and your subscription status.",
             "Minimal technical data: as with any internet connection, HTTPS requests to our providers include your IP address so the communication can work. We do not store it or link it to your identifier.",
-            "Error reports: if the app fails, we send our own server the error type, its technical trace, the app version, the operating system and the language, so we can fix it. Nothing you have written or were reading is sent, and no third-party service is used for this."
+            "Error reports: if the app fails, we send our own server the error type, its technical trace, the app version, the operating system and the language, so we can fix it. Nothing you have written or were reading is sent, and no third-party service is used for this.",
+            "Usage statistics: we record anonymous in-app actions —opening the app, finishing or skipping the introduction, opening a chapter, completing a quiz, unlocking a card, viewing the subscription screen or sharing something— together with the app version, operating system, language and whether you have an active subscription. We do not record anything you type, any search or any free text: only predefined content identifiers. They are stored on our own server and are not shared with anyone."
           ]
         },
         {
@@ -217,6 +224,7 @@
             "To save your progress and let you recover it if you change device or reinstall the app. Recovery is only possible if you have linked an email: without one, progress stays tied to this installation.",
             "To remember your preferences (language, text size, favourites) and keep your reading streak.",
             "To grant premium content access to users with an active subscription or free trial.",
+            "To understand in aggregate how the app is used —which chapters are read, how many people finish the introduction, where people drop off— so we can decide what to improve and what to write next. That is the only purpose of usage statistics: they are not used to profile you or to show you anything different from another user.",
             "Legal basis (GDPR, where it applies to you): performance of the service you request by using the app. We do not process your data for advertising, profiling or automated decision-making."
           ]
         },
@@ -225,7 +233,7 @@
           "p": [
             "We do not sell, rent or share your data with third parties for commercial purposes.",
             "We do not show ads and we do not integrate any advertising network.",
-            "We do not embed analytics SDKs or third-party trackers.",
+            "We do not embed analytics SDKs or third-party trackers. The usage statistics we do collect (section 2) are stored on our own server, are never sent to any analytics provider and are never combined with data from other apps.",
             "We do not use advertising identifiers (AAID / IDFA) and we do not track you across apps or websites."
           ]
         },
@@ -253,7 +261,8 @@
             "For as long as you keep using the app. If you use the «Delete my data» option in Settings, your progress is removed immediately from both the device and the server.",
             "Anonymous accounts with no activity for 24 months are deleted along with their progress.",
             "Uninstalling the app erases everything stored on the device, but not what has already been synced to the server: for that, use «Delete my data» before uninstalling, or write to us.",
-            "Error reports are deleted automatically after 90 days: past that point they are no longer useful for fixing anything."
+            "Error reports are deleted automatically after 90 days: past that point they are no longer useful for fixing anything.",
+            "Usage statistics are deleted automatically after 12 months. If you delete your account, any that remain are no longer associated with you."
           ]
         },
         {

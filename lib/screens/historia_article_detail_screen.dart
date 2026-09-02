@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../services/analytics_service.dart';
 import '../core/constants/app_colors.dart';
 import '../core/navigation/app_navigation.dart';
 import '../models/historia_article.dart';
@@ -125,6 +126,12 @@ class _HistoriaArticleDetailScreenState
     if (daily.dailyArticle?.id != widget.article.id) return;
     final justCompleted = await daily.completeToday();
     if (!justCompleted || !mounted) return;
+    // `value` = día de racha alcanzado. Junto con daily_open dice cuántos
+    // abren la historia del día y cuántos llegan de verdad al final.
+    context.read<AnalyticsService>().log(
+          AnalyticsService.dailyComplete,
+          value: daily.currentStreak,
+        );
     _showStreakSnackBar(daily.currentStreak);
   }
 
@@ -288,7 +295,7 @@ class _HistoriaArticleDetailScreenState
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       child: Divider(
-                        color: _accent.withOpacity(0.12),
+                        color: _accent.withValues(alpha: 0.12),
                         thickness: 1,
                       ),
                     );
@@ -343,7 +350,7 @@ class _HistoriaArticleDetailScreenState
                     padding: const EdgeInsets.symmetric(
                         horizontal: 18, vertical: 10),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withValues(alpha: 0.6),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Text(
@@ -398,9 +405,9 @@ class _HistoriaArticleDetailScreenState
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
-            color: _accent.withOpacity(isActive ? 0.22 : 0.1),
+            color: _accent.withValues(alpha: isActive ? 0.22 : 0.1),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: _accent.withOpacity(0.4)),
+            border: Border.all(color: _accent.withValues(alpha: 0.4)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -425,7 +432,7 @@ class _HistoriaArticleDetailScreenState
               ),
               if (!context.read<PremiumProvider>().isPremium) ...[
                 const SizedBox(width: 6),
-                Icon(Icons.lock_rounded, size: 12, color: _accent.withOpacity(0.7)),
+                Icon(Icons.lock_rounded, size: 12, color: _accent.withValues(alpha: 0.7)),
               ],
             ],
           ),
@@ -512,7 +519,7 @@ class _HistoriaArticleDetailScreenState
         width: 36,
         height: 36,
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.42),
+          color: Colors.black.withValues(alpha: 0.42),
           shape: BoxShape.circle,
         ),
         child: Center(child: icon),
@@ -540,7 +547,7 @@ class _HistoriaArticleDetailScreenState
         decoration: BoxDecoration(
           color: AppColors.marronProfundo,
           border: Border(
-            top: BorderSide(color: _accent.withOpacity(0.15)),
+            top: BorderSide(color: _accent.withValues(alpha: 0.15)),
           ),
         ),
         child: Row(
@@ -632,7 +639,7 @@ class _HistoriaArticleDetailScreenState
           height: 46,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: _accent.withOpacity(0.4)),
+            border: Border.all(color: _accent.withValues(alpha: 0.4)),
           ),
           child: Icon(icon, size: 16, color: _accent),
         ),
@@ -728,7 +735,7 @@ class _HistoriaArticleDetailScreenState
                     decoration: BoxDecoration(
                       color: _currentPage == i
                           ? Colors.white
-                          : Colors.white.withOpacity(0.35),
+                          : Colors.white.withValues(alpha: 0.35),
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
@@ -763,16 +770,16 @@ class _HistoriaArticleDetailScreenState
           child: Icon(
             Icons.history_edu_rounded,
             size: 220,
-            color: Colors.white.withOpacity(0.04),
+            color: Colors.white.withValues(alpha: 0.04),
           ),
         ),
-        DecoratedBox(
+        const DecoratedBox(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [Colors.transparent, AppColors.negoCacao],
-              stops: const [0.42, 1.0],
+              stops: [0.42, 1.0],
             ),
           ),
         ),
@@ -795,10 +802,10 @@ class _HistoriaArticleDetailScreenState
                 width: 28,
                 height: 28,
                 decoration: BoxDecoration(
-                  color: _accent.withOpacity(0.2),
+                  color: _accent.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                   border:
-                      Border.all(color: _accent.withOpacity(0.55), width: 1),
+                      Border.all(color: _accent.withValues(alpha: 0.55), width: 1),
                 ),
                 child: Center(
                   child: Text(
@@ -818,7 +825,7 @@ class _HistoriaArticleDetailScreenState
                   style: GoogleFonts.lato(
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
-                    color: _accent.withOpacity(0.85),
+                    color: _accent.withValues(alpha: 0.85),
                     letterSpacing: 1.3,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -842,7 +849,7 @@ class _HistoriaArticleDetailScreenState
             style: GoogleFonts.playfairDisplay(
               fontSize: 14,
               fontStyle: FontStyle.italic,
-              color: AppColors.cremaPergamino.withOpacity(0.6),
+              color: AppColors.cremaPergamino.withValues(alpha: 0.6),
               height: 1.35,
             ),
           ),
@@ -873,9 +880,9 @@ class _HistoriaArticleDetailScreenState
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
             decoration: BoxDecoration(
-              color: _accent.withOpacity(0.12),
+              color: _accent.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: _accent.withOpacity(0.3), width: 1),
+              border: Border.all(color: _accent.withValues(alpha: 0.3), width: 1),
             ),
             child: Text(
               label,
@@ -902,7 +909,7 @@ class _HistoriaArticleDetailScreenState
         decoration: BoxDecoration(
           color: AppColors.marronProfundo,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: _accent.withOpacity(0.1)),
+          border: Border.all(color: _accent.withValues(alpha: 0.1)),
         ),
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -911,7 +918,7 @@ class _HistoriaArticleDetailScreenState
             Row(
               children: [
                 Icon(Icons.info_outline_rounded,
-                    size: 14, color: _accent.withOpacity(0.7)),
+                    size: 14, color: _accent.withValues(alpha: 0.7)),
                 const SizedBox(width: 8),
                 Text(
                   context
@@ -921,7 +928,7 @@ class _HistoriaArticleDetailScreenState
                   style: GoogleFonts.lato(
                     fontSize: 9,
                     fontWeight: FontWeight.w800,
-                    color: _accent.withOpacity(0.7),
+                    color: _accent.withValues(alpha: 0.7),
                     letterSpacing: 1.4,
                   ),
                 ),
@@ -933,7 +940,7 @@ class _HistoriaArticleDetailScreenState
               style: GoogleFonts.lato(
                 fontSize: 12,
                 fontStyle: credits != null ? FontStyle.italic : FontStyle.normal,
-                color: AppColors.cremaPergamino.withOpacity(0.5),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.5),
                 height: 1.6,
               ),
             ),
@@ -963,9 +970,9 @@ class _HistoriaArticleDetailScreenState
         child: Container(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            color: AppColors.ocre.withOpacity(0.1),
+            color: AppColors.ocre.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.ocre.withOpacity(0.35)),
+            border: Border.all(color: AppColors.ocre.withValues(alpha: 0.35)),
           ),
           child: Row(
             children: [
@@ -973,7 +980,7 @@ class _HistoriaArticleDetailScreenState
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: AppColors.ocre.withOpacity(0.18),
+                  color: AppColors.ocre.withValues(alpha: 0.18),
                   shape: BoxShape.circle,
                 ),
                 child: const Center(
@@ -1031,7 +1038,7 @@ class _HistoriaArticleDetailScreenState
         decoration: BoxDecoration(
           color: AppColors.marronProfundo,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.ocre.withOpacity(0.12)),
+          border: Border.all(color: AppColors.ocre.withValues(alpha: 0.12)),
         ),
         child: Row(
           children: [
@@ -1051,7 +1058,7 @@ class _HistoriaArticleDetailScreenState
               Container(
                 width: 1,
                 height: 48,
-                color: AppColors.ocre.withOpacity(0.12),
+                color: AppColors.ocre.withValues(alpha: 0.12),
               ),
             if (hasNext)
               Expanded(
@@ -1132,7 +1139,7 @@ class _HistoriaArticleDetailScreenState
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: accent.withOpacity(0.3)),
+                      border: Border.all(color: accent.withValues(alpha: 0.3)),
                     ),
                     padding: const EdgeInsets.all(14),
                     child: Column(
@@ -1143,7 +1150,7 @@ class _HistoriaArticleDetailScreenState
                           height: 24,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.black.withOpacity(0.25),
+                            color: Colors.black.withValues(alpha: 0.25),
                           ),
                           child: Center(
                             child: Text(
@@ -1151,7 +1158,7 @@ class _HistoriaArticleDetailScreenState
                               style: GoogleFonts.lato(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w800,
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                               ),
                             ),
                           ),
@@ -1174,7 +1181,7 @@ class _HistoriaArticleDetailScreenState
                         Row(
                           children: [
                             Icon(Icons.arrow_forward_ios_rounded,
-                                size: 8, color: Colors.white.withOpacity(0.7)),
+                                size: 8, color: Colors.white.withValues(alpha: 0.7)),
                             const SizedBox(width: 4),
                             Text(
                               context
@@ -1183,7 +1190,7 @@ class _HistoriaArticleDetailScreenState
                               style: GoogleFonts.lato(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white.withValues(alpha: 0.7),
                               ),
                             ),
                           ],
@@ -1234,20 +1241,20 @@ class _NavButton extends StatelessWidget {
                   isForward ? MainAxisAlignment.end : MainAxisAlignment.start,
               children: [
                 if (!isForward)
-                  Icon(icon, size: 12, color: AppColors.ocre.withOpacity(0.6)),
+                  Icon(icon, size: 12, color: AppColors.ocre.withValues(alpha: 0.6)),
                 if (!isForward) const SizedBox(width: 4),
                 Text(
                   label.toUpperCase(),
                   style: GoogleFonts.lato(
                     fontSize: 9,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.ocre.withOpacity(0.6),
+                    color: AppColors.ocre.withValues(alpha: 0.6),
                     letterSpacing: 1.2,
                   ),
                 ),
                 if (isForward) const SizedBox(width: 4),
                 if (isForward)
-                  Icon(icon, size: 12, color: AppColors.ocre.withOpacity(0.6)),
+                  Icon(icon, size: 12, color: AppColors.ocre.withValues(alpha: 0.6)),
               ],
             ),
             const SizedBox(height: 4),
@@ -1256,7 +1263,7 @@ class _NavButton extends StatelessWidget {
               style: GoogleFonts.lato(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: AppColors.cremaPergamino.withOpacity(0.7),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.7),
                 height: 1.3,
               ),
               maxLines: 2,
@@ -1279,7 +1286,7 @@ class _DiagPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.07)
+      ..color = color.withValues(alpha: 0.07)
       ..strokeWidth = 1;
     const spacing = 28.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {

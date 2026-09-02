@@ -64,7 +64,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                       children: [
                         Icon(
                           Icons.photo_library_outlined,
-                          color: Colors.white.withOpacity(0.4),
+                          color: Colors.white.withValues(alpha: 0.4),
                           size: 64,
                         ),
                         const SizedBox(height: 16),
@@ -72,7 +72,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                           t('gallery.no_images'),
                           style: GoogleFonts.playfairDisplay(
                             fontSize: 18,
-                            color: Colors.white.withOpacity(0.5),
+                            color: Colors.white.withValues(alpha: 0.5),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -80,7 +80,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                           t('gallery.placeholder_hint'),
                           style: GoogleFonts.lato(
                             fontSize: 12,
-                            color: Colors.white.withOpacity(0.35),
+                            color: Colors.white.withValues(alpha: 0.35),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -102,7 +102,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.7),
+                    Colors.black.withValues(alpha: 0.7),
                     Colors.transparent,
                   ],
                 ),
@@ -134,7 +134,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                         '${_currentIndex + 1} ${t('gallery.image_of')} ${era.imageFilenames.length}',
                         style: GoogleFonts.lato(
                           fontSize: 13,
-                          color: Colors.white.withOpacity(0.7),
+                          color: Colors.white.withValues(alpha: 0.7),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -161,7 +161,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   decoration: BoxDecoration(
                     color: _currentIndex == index
                         ? era.accentColor
-                        : Colors.white.withOpacity(0.35),
+                        : Colors.white.withValues(alpha: 0.35),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),

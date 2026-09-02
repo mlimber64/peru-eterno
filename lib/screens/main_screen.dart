@@ -41,7 +41,7 @@ class MainScreen extends StatelessWidget {
         color: AppColors.marronProfundo,
         border: Border(
           top: BorderSide(
-            color: AppColors.cremaPergamino.withOpacity(0.08),
+            color: AppColors.cremaPergamino.withValues(alpha: 0.08),
             width: 1,
           ),
         ),
@@ -76,7 +76,7 @@ class MainScreen extends StatelessWidget {
                               horizontal: 16, vertical: 4),
                           decoration: BoxDecoration(
                             color: isActive
-                                ? AppColors.ocre.withOpacity(0.15)
+                                ? AppColors.ocre.withValues(alpha: 0.15)
                                 : Colors.transparent,
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -85,7 +85,7 @@ class MainScreen extends StatelessWidget {
                             size: 22,
                             color: isActive
                                 ? AppColors.ocre
-                                : AppColors.cremaPergamino.withOpacity(0.45),
+                                : AppColors.cremaPergamino.withValues(alpha: 0.45),
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -97,7 +97,7 @@ class MainScreen extends StatelessWidget {
                                 isActive ? FontWeight.w700 : FontWeight.w400,
                             color: isActive
                                 ? AppColors.ocre
-                                : AppColors.cremaPergamino.withOpacity(0.4),
+                                : AppColors.cremaPergamino.withValues(alpha: 0.4),
                             letterSpacing: 0.3,
                           ),
                         ),

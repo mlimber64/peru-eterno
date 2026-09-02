@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   ContentItem get _personajeDelDia {
-    final personajes = ContentRepository.personajes;
+    const personajes = ContentRepository.personajes;
     final dayOfYear = DateTime.now()
         .difference(
           DateTime(DateTime.now().year),
@@ -247,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 38,
             height: 38,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.35),
+              color: Colors.black.withValues(alpha: 0.35),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.menu_rounded,
@@ -328,7 +328,7 @@ class _HeroSection extends StatelessWidget {
             child: Container(
               width: 1,
               height: 80,
-              color: AppColors.ocre.withOpacity(0.3),
+              color: AppColors.ocre.withValues(alpha: 0.3),
             ),
           ),
           Positioned(
@@ -337,7 +337,7 @@ class _HeroSection extends StatelessWidget {
             child: Container(
               width: 1,
               height: 50,
-              color: AppColors.ocre.withOpacity(0.15),
+              color: AppColors.ocre.withValues(alpha: 0.15),
             ),
           ),
           // Content
@@ -392,7 +392,7 @@ class _HeroSection extends StatelessWidget {
                   style: GoogleFonts.playfairDisplay(
                     fontSize: 17,
                     fontStyle: FontStyle.italic,
-                    color: AppColors.cremaPergamino.withOpacity(0.7),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.7),
                   ),
                 ).animate().fadeIn(duration: 800.ms, delay: 480.ms),
                 const SizedBox(height: 30),
@@ -473,7 +473,7 @@ class _HeroButton extends StatelessWidget {
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.white,
-        side: BorderSide(color: Colors.white.withOpacity(0.5), width: 1),
+        side: BorderSide(color: Colors.white.withValues(alpha: 0.5), width: 1),
         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
@@ -495,7 +495,7 @@ class _HeroTexturePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.03)
+      ..color = AppColors.ocre.withValues(alpha: 0.03)
       ..strokeWidth = 1;
     const spacing = 36.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {
@@ -545,10 +545,10 @@ class _DailyStoryStreakSection extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            border: Border.all(color: accent.withOpacity(0.35)),
+            border: Border.all(color: accent.withValues(alpha: 0.35)),
             boxShadow: [
               BoxShadow(
-                color: accent.withOpacity(0.2),
+                color: accent.withValues(alpha: 0.2),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
               ),
@@ -572,8 +572,8 @@ class _DailyStoryStreakSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.negoCacao.withOpacity(0.1),
-                        AppColors.negoCacao.withOpacity(0.88),
+                        AppColors.negoCacao.withValues(alpha: 0.1),
+                        AppColors.negoCacao.withValues(alpha: 0.88),
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -624,7 +624,7 @@ class _DailyStoryStreakSection extends StatelessWidget {
                         article.subtituloFor(lang),
                         style: GoogleFonts.lato(
                           fontSize: 12,
-                          color: AppColors.cremaPergamino.withOpacity(0.6),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                           height: 1.4,
                         ),
                         maxLines: 2,
@@ -634,14 +634,14 @@ class _DailyStoryStreakSection extends StatelessWidget {
                       Row(
                         children: [
                           Icon(Icons.schedule_rounded,
-                              size: 13, color: accent.withOpacity(0.8)),
+                              size: 13, color: accent.withValues(alpha: 0.8)),
                           const SizedBox(width: 5),
                           Text(
                             '${article.estimatedReadTimeMinutes(lang)} min',
                             style: GoogleFonts.lato(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
-                              color: accent.withOpacity(0.8),
+                              color: accent.withValues(alpha: 0.8),
                             ),
                           ),
                           const SizedBox(width: 16),
@@ -652,7 +652,7 @@ class _DailyStoryStreakSection extends StatelessWidget {
                             size: 13,
                             color: completed
                                 ? const Color(0xFFFF7A1A)
-                                : AppColors.cremaPergamino.withOpacity(0.5),
+                                : AppColors.cremaPergamino.withValues(alpha: 0.5),
                           ),
                           const SizedBox(width: 5),
                           Expanded(
@@ -665,7 +665,7 @@ class _DailyStoryStreakSection extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 color: completed
                                     ? const Color(0xFFFF7A1A)
-                                    : AppColors.cremaPergamino.withOpacity(0.55),
+                                    : AppColors.cremaPergamino.withValues(alpha: 0.55),
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -709,14 +709,14 @@ class _StreakBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.read<LanguageProvider>().t;
     final active = streak > 0;
-    final color = active ? const Color(0xFFFF7A1A) : AppColors.cremaPergamino.withOpacity(0.4);
+    final color = active ? const Color(0xFFFF7A1A) : AppColors.cremaPergamino.withValues(alpha: 0.4);
 
     Widget badge = Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.16),
+        color: color.withValues(alpha: 0.16),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.5)),
+        border: Border.all(color: color.withValues(alpha: 0.5)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -771,10 +771,10 @@ class _InteractiveStoriesBanner extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            border: Border.all(color: AppColors.verdeAndino.withOpacity(0.4)),
+            border: Border.all(color: AppColors.verdeAndino.withValues(alpha: 0.4)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.verdeAndino.withOpacity(0.2),
+                color: AppColors.verdeAndino.withValues(alpha: 0.2),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
               ),
@@ -790,7 +790,7 @@ class _InteractiveStoriesBanner extends StatelessWidget {
                   child: Icon(
                     Icons.route_rounded,
                     size: 130,
-                    color: Colors.white.withOpacity(0.06),
+                    color: Colors.white.withValues(alpha: 0.06),
                   ),
                 ),
                 Padding(
@@ -804,7 +804,7 @@ class _InteractiveStoriesBanner extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
-                              color: AppColors.verdeAndino.withOpacity(0.85),
+                              color: AppColors.verdeAndino.withValues(alpha: 0.85),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
@@ -820,7 +820,7 @@ class _InteractiveStoriesBanner extends StatelessWidget {
                           const SizedBox(width: 10),
                           Icon(Icons.route_rounded,
                               size: 16,
-                              color: AppColors.verdeAndino.withOpacity(0.9)),
+                              color: AppColors.verdeAndino.withValues(alpha: 0.9)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -838,7 +838,7 @@ class _InteractiveStoriesBanner extends StatelessWidget {
                         t('interactive_stories.home_banner_subtitle'),
                         style: GoogleFonts.lato(
                           fontSize: 12,
-                          color: AppColors.cremaPergamino.withOpacity(0.65),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.65),
                           height: 1.4,
                         ),
                       ),
@@ -854,7 +854,7 @@ class _InteractiveStoriesBanner extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 4),
-                          Icon(Icons.arrow_forward_rounded,
+                          const Icon(Icons.arrow_forward_rounded,
                               size: 14, color: AppColors.verdeAndino),
                         ],
                       ),
@@ -889,7 +889,7 @@ class _PeruIntroSection extends StatelessWidget {
               color: AppColors.marronProfundo,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: AppColors.ocre.withOpacity(0.15),
+                color: AppColors.ocre.withValues(alpha: 0.15),
               ),
             ),
             child: ClipRRect(
@@ -974,7 +974,7 @@ class _PeruIntroSection extends StatelessWidget {
               color: AppColors.marronProfundo,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: AppColors.ocre.withOpacity(0.15),
+                color: AppColors.ocre.withValues(alpha: 0.15),
               ),
             ),
             child: Column(
@@ -1003,7 +1003,7 @@ class _PeruIntroSection extends StatelessWidget {
                   context.read<LanguageProvider>().t('home.about_text'),
                   style: GoogleFonts.lato(
                     fontSize: 13,
-                    color: AppColors.cremaPergamino.withOpacity(0.75),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.75),
                     height: 1.6,
                   ),
                 ),
@@ -1022,7 +1022,7 @@ class _PeruIntroSection extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.ocre.withOpacity(0.12),
+                  AppColors.ocre.withValues(alpha: 0.12),
                   AppColors.marronProfundo,
                 ],
                 begin: Alignment.topLeft,
@@ -1030,7 +1030,7 @@ class _PeruIntroSection extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: AppColors.ocre.withOpacity(0.25),
+                color: AppColors.ocre.withValues(alpha: 0.25),
               ),
             ),
             child: Column(
@@ -1090,7 +1090,7 @@ class _Stat extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 13, color: AppColors.ocre.withOpacity(0.7)),
+        Icon(icon, size: 13, color: AppColors.ocre.withValues(alpha: 0.7)),
         const SizedBox(width: 6),
         Expanded(
           child: RichText(
@@ -1100,7 +1100,7 @@ class _Stat extends StatelessWidget {
                   text: '$label: ',
                   style: GoogleFonts.lato(
                     fontSize: 11,
-                    color: AppColors.cremaPergamino.withOpacity(0.45),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.45),
                   ),
                 ),
                 TextSpan(
@@ -1108,7 +1108,7 @@ class _Stat extends StatelessWidget {
                   style: GoogleFonts.lato(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.cremaPergamino.withOpacity(0.85),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                   ),
                 ),
               ],
@@ -1135,8 +1135,8 @@ class _HowStep extends StatelessWidget {
           height: 22,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.ocre.withOpacity(0.2),
-            border: Border.all(color: AppColors.ocre.withOpacity(0.5)),
+            color: AppColors.ocre.withValues(alpha: 0.2),
+            border: Border.all(color: AppColors.ocre.withValues(alpha: 0.5)),
           ),
           child: Center(
             child: Text(
@@ -1155,7 +1155,7 @@ class _HowStep extends StatelessWidget {
             text,
             style: GoogleFonts.lato(
               fontSize: 13,
-              color: AppColors.cremaPergamino.withOpacity(0.7),
+              color: AppColors.cremaPergamino.withValues(alpha: 0.7),
               height: 1.5,
             ),
           ),
@@ -1169,11 +1169,11 @@ class _PeruMapPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.55)
+      ..color = AppColors.ocre.withValues(alpha: 0.55)
       ..style = PaintingStyle.fill;
 
     final borderPaint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.9)
+      ..color = AppColors.ocre.withValues(alpha: 0.9)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
 
@@ -1214,7 +1214,7 @@ class _PeruMapPainter extends CustomPainter {
 
     // ── Lima (capital, sobre la costa central) ──
     final limaPaint = Paint()
-      ..color = Colors.white.withOpacity(0.9)
+      ..color = Colors.white.withValues(alpha: 0.9)
       ..style = PaintingStyle.fill;
     final lima = p(0.335, 0.66);
     canvas.drawCircle(lima, 3.0, limaPaint);
@@ -1224,7 +1224,7 @@ class _PeruMapPainter extends CustomPainter {
         text: 'Lima',
         style: GoogleFonts.lato(
           fontSize: 8,
-          color: Colors.white.withOpacity(0.85),
+          color: Colors.white.withValues(alpha: 0.85),
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -1234,7 +1234,7 @@ class _PeruMapPainter extends CustomPainter {
 
     // ── Cusco (interior sur-andino) ──
     final cuscoPaint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.95)
+      ..color = AppColors.ocre.withValues(alpha: 0.95)
       ..style = PaintingStyle.fill;
     final cusco = p(0.73, 0.74);
     canvas.drawCircle(cusco, 2.5, cuscoPaint);
@@ -1244,7 +1244,7 @@ class _PeruMapPainter extends CustomPainter {
         text: 'Cusco',
         style: GoogleFonts.lato(
           fontSize: 7,
-          color: AppColors.ocre.withOpacity(0.85),
+          color: AppColors.ocre.withValues(alpha: 0.85),
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -1371,7 +1371,7 @@ class _FeaturedEraSection extends StatelessWidget {
           count: eras.length,
           effect: ExpandingDotsEffect(
             activeDotColor: AppColors.ocre,
-            dotColor: AppColors.cremaPergamino.withOpacity(0.2),
+            dotColor: AppColors.cremaPergamino.withValues(alpha: 0.2),
             dotHeight: 5,
             dotWidth: 5,
             expansionFactor: 3,
@@ -1403,9 +1403,9 @@ class _PersonajeAvatar extends StatelessWidget {
       height: 72,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: const Color(0xFF8B4513).withOpacity(0.4),
+        color: const Color(0xFF8B4513).withValues(alpha: 0.4),
         border: Border.all(
-          color: AppColors.ocre.withOpacity(0.5),
+          color: AppColors.ocre.withValues(alpha: 0.5),
           width: 1.5,
         ),
       ),
@@ -1417,7 +1417,7 @@ class _PersonajeAvatar extends StatelessWidget {
             return Icon(
               Icons.person_rounded,
               size: 36,
-              color: AppColors.ocre.withOpacity(0.8),
+              color: AppColors.ocre.withValues(alpha: 0.8),
             );
           }
           return ClipOval(
@@ -1429,7 +1429,7 @@ class _PersonajeAvatar extends StatelessWidget {
               errorBuilder: (_, __, ___) => Icon(
                 Icons.person_rounded,
                 size: 36,
-                color: AppColors.ocre.withOpacity(0.8),
+                color: AppColors.ocre.withValues(alpha: 0.8),
               ),
             ),
           );
@@ -1465,7 +1465,7 @@ class _PersonajeDiaSection extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color(0xFF8B4513).withOpacity(0.9),
+                const Color(0xFF8B4513).withValues(alpha: 0.9),
                 const Color(0xFF3E1C00),
               ],
               begin: Alignment.topLeft,
@@ -1474,7 +1474,7 @@ class _PersonajeDiaSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 blurRadius: 16,
                 offset: const Offset(0, 6),
               ),
@@ -1484,13 +1484,13 @@ class _PersonajeDiaSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                Positioned.fill(
+                const Positioned.fill(
                   child: CustomPaint(
-                    painter: _DiagonalPatternPainter(const Color(0xFF8B4513)),
+                    painter: _DiagonalPatternPainter(Color(0xFF8B4513)),
                   ),
                 ),
                 Positioned.fill(
-                  child: Container(color: Colors.black.withOpacity(0.45)),
+                  child: Container(color: Colors.black.withValues(alpha: 0.45)),
                 ),
                 if (CategoryConfigs.isComingSoon(item.category))
                   Positioned(
@@ -1499,7 +1499,7 @@ class _PersonajeDiaSection extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withValues(alpha: 0.5),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.hourglass_top_rounded,
@@ -1676,10 +1676,10 @@ class _GlassButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
-          color: AppColors.ocre.withOpacity(0.15),
+          color: AppColors.ocre.withValues(alpha: 0.15),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: AppColors.ocre.withOpacity(0.5),
+            color: AppColors.ocre.withValues(alpha: 0.5),
             width: 1,
           ),
         ),
@@ -1794,10 +1794,10 @@ class _JourneyCardState extends State<_JourneyCard> {
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: accent.withOpacity(0.3)),
+            border: Border.all(color: accent.withValues(alpha: 0.3)),
             boxShadow: [
               BoxShadow(
-                color: accent.withOpacity(0.15),
+                color: accent.withValues(alpha: 0.15),
                 blurRadius: 20,
                 offset: const Offset(0, 6),
               ),
@@ -1841,7 +1841,7 @@ class _JourneyCardState extends State<_JourneyCard> {
                     article.subtituloFor(widget.lang),
                     style: GoogleFonts.lato(
                       fontSize: 12,
-                      color: AppColors.cremaPergamino.withOpacity(0.55),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.55),
                       height: 1.4,
                     ),
                     maxLines: 1,
@@ -1858,7 +1858,7 @@ class _JourneyCardState extends State<_JourneyCard> {
                                 height: 3,
                                 width: c.maxWidth,
                                 decoration: BoxDecoration(
-                                  color: accent.withOpacity(0.15),
+                                  color: accent.withValues(alpha: 0.15),
                                   borderRadius: BorderRadius.circular(2),
                                 ),
                               ),
@@ -2005,7 +2005,7 @@ class _RecentHistoriaStripState extends State<_RecentHistoriaStrip> {
                     decoration: BoxDecoration(
                       color: AppColors.marronProfundo,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: accent.withOpacity(0.2)),
+                      border: Border.all(color: accent.withValues(alpha: 0.2)),
                     ),
                     padding: const EdgeInsets.all(14),
                     child: Column(
@@ -2028,7 +2028,7 @@ class _RecentHistoriaStripState extends State<_RecentHistoriaStrip> {
                               Container(
                                 height: 2,
                                 width: c.maxWidth,
-                                color: accent.withOpacity(0.15),
+                                color: accent.withValues(alpha: 0.15),
                               ),
                               Container(
                                 height: 2,
@@ -2044,7 +2044,7 @@ class _RecentHistoriaStripState extends State<_RecentHistoriaStrip> {
                           style: GoogleFonts.lato(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
-                            color: accent.withOpacity(0.8),
+                            color: accent.withValues(alpha: 0.8),
                           ),
                         ),
                       ],
@@ -2106,7 +2106,7 @@ class _StageProgressSectionState extends State<_StageProgressSection> {
             decoration: BoxDecoration(
               color: AppColors.marronProfundo,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.ocre.withOpacity(0.12)),
+              border: Border.all(color: AppColors.ocre.withValues(alpha: 0.12)),
             ),
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -2167,7 +2167,7 @@ class _StageProgressRow extends StatelessWidget {
                 style: GoogleFonts.lato(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: accent.withOpacity(0.8),
+                  color: accent.withValues(alpha: 0.8),
                 ),
               ),
             ],
@@ -2180,7 +2180,7 @@ class _StageProgressRow extends StatelessWidget {
                   height: 4,
                   width: c.maxWidth,
                   decoration: BoxDecoration(
-                    color: accent.withOpacity(0.12),
+                    color: accent.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -2215,7 +2215,7 @@ class _DiagonalPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.08)
+      ..color = color.withValues(alpha: 0.08)
       ..strokeWidth = 1;
     const spacing = 24.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {

@@ -115,7 +115,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       color: AppColors.marronProfundo,
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
-                        color: AppColors.cremaPergamino.withOpacity(0.1),
+                        color: AppColors.cremaPergamino.withValues(alpha: 0.1),
                       ),
                     ),
                     child: TextField(
@@ -128,18 +128,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       decoration: InputDecoration(
                         hintText: t('explore.search_hint'),
                         hintStyle: GoogleFonts.lato(
-                          color: AppColors.cremaPergamino.withOpacity(0.3),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.3),
                           fontSize: 15,
                         ),
                         prefixIcon: Icon(
                           Icons.search_rounded,
-                          color: AppColors.cremaPergamino.withOpacity(0.4),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.4),
                         ),
                         suffixIcon: _query.isNotEmpty
                             ? IconButton(
                                 icon: Icon(Icons.close_rounded,
                                     color: AppColors.cremaPergamino
-                                        .withOpacity(0.4)),
+                                        .withValues(alpha: 0.4)),
                                 onPressed: () {
                                   _searchController.clear();
                                   setState(() => _query = '');
@@ -179,13 +179,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             horizontal: 14, vertical: 7),
                         decoration: BoxDecoration(
                           color: isActive
-                              ? color.withOpacity(0.2)
+                              ? color.withValues(alpha: 0.2)
                               : AppColors.marronProfundo,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             color: isActive
-                                ? color.withOpacity(0.7)
-                                : AppColors.cremaPergamino.withOpacity(0.1),
+                                ? color.withValues(alpha: 0.7)
+                                : AppColors.cremaPergamino.withValues(alpha: 0.1),
                             width: 1,
                           ),
                         ),
@@ -196,7 +196,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             fontWeight: FontWeight.w600,
                             color: isActive
                                 ? color
-                                : AppColors.cremaPergamino.withOpacity(0.5),
+                                : AppColors.cremaPergamino.withValues(alpha: 0.5),
                           ),
                         ),
                       ),
@@ -219,7 +219,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         : '${items.length} ${t('explore.results')}',
                     style: GoogleFonts.lato(
                       fontSize: 12,
-                      color: AppColors.cremaPergamino.withOpacity(0.4),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.4),
                     ),
                   ),
                 ],
@@ -300,8 +300,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return AppEmptyState(
       icon: Icons.search_off_rounded,
       title: context.read<LanguageProvider>().t('explore.no_results'),
-      iconColor: AppColors.cremaPergamino.withOpacity(0.15),
-      titleColor: AppColors.cremaPergamino.withOpacity(0.3),
+      iconColor: AppColors.cremaPergamino.withValues(alpha: 0.15),
+      titleColor: AppColors.cremaPergamino.withValues(alpha: 0.3),
     );
   }
 
@@ -412,7 +412,7 @@ class _StageCard extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: accent.withOpacity(0.25),
+              color: accent.withValues(alpha: 0.25),
               blurRadius: 16,
               offset: const Offset(0, 6),
             ),
@@ -437,7 +437,7 @@ class _StageCard extends StatelessWidget {
                       child: Icon(
                         Icons.history_edu_rounded,
                         size: 180,
-                        color: Colors.white.withOpacity(0.05),
+                        color: Colors.white.withValues(alpha: 0.05),
                       ),
                     ),
                   ],
@@ -450,9 +450,9 @@ class _StageCard extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.black.withOpacity(0.15),
-                      Colors.black.withOpacity(0.35),
-                      Colors.black.withOpacity(0.78),
+                      Colors.black.withValues(alpha: 0.15),
+                      Colors.black.withValues(alpha: 0.35),
+                      Colors.black.withValues(alpha: 0.78),
                     ],
                     stops: const [0.0, 0.45, 1.0],
                   ),
@@ -469,7 +469,7 @@ class _StageCard extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(7),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.lock_rounded,
@@ -484,10 +484,10 @@ class _StageCard extends StatelessWidget {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.25),
+                    color: Colors.black.withValues(alpha: 0.25),
                     shape: BoxShape.circle,
                     border: Border.all(
-                        color: Colors.white.withOpacity(0.2), width: 1),
+                        color: Colors.white.withValues(alpha: 0.2), width: 1),
                   ),
                   child: Center(
                     child: Text(
@@ -495,7 +495,7 @@ class _StageCard extends StatelessWidget {
                       style: GoogleFonts.lato(
                         fontSize: 12,
                         fontWeight: FontWeight.w800,
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                       ),
                     ),
                   ),
@@ -515,17 +515,17 @@ class _StageCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
+                        color: Colors.black.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                            color: Colors.white.withOpacity(0.2), width: 1),
+                            color: Colors.white.withValues(alpha: 0.2), width: 1),
                       ),
                       child: Text(
                         stage.periodoFor(lang),
                         style: GoogleFonts.lato(
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
-                          color: Colors.white.withOpacity(0.85),
+                          color: Colors.white.withValues(alpha: 0.85),
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -545,7 +545,7 @@ class _StageCard extends StatelessWidget {
                       stage.subtituloFor(lang),
                       style: GoogleFonts.lato(
                         fontSize: 12,
-                        color: Colors.white.withOpacity(0.7),
+                        color: Colors.white.withValues(alpha: 0.7),
                         height: 1.3,
                       ),
                       maxLines: 2,
@@ -562,7 +562,7 @@ class _StageCard extends StatelessWidget {
                   width: 36,
                   height: 36,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
+                    color: Colors.white.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -590,7 +590,7 @@ class _DiagPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.06)
+      ..color = Colors.white.withValues(alpha: 0.06)
       ..strokeWidth = 1;
     const spacing = 28.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {

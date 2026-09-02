@@ -137,7 +137,7 @@ class FavoritesScreen extends StatelessWidget {
                                 child: Container(
                                   padding: const EdgeInsets.all(5),
                                   decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.5),
+                                    color: Colors.black.withValues(alpha: 0.5),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Icon(
@@ -168,14 +168,14 @@ class FavoritesScreen extends StatelessWidget {
       title: context.read<LanguageProvider>().t('favorites.empty_title'),
       subtitle: context.read<LanguageProvider>().t('favorites.empty_subtitle'),
       iconSize: 64,
-      iconColor: AppColors.cremaPergamino.withOpacity(0.1),
+      iconColor: AppColors.cremaPergamino.withValues(alpha: 0.1),
       titleStyle: GoogleFonts.playfairDisplay(
         fontSize: 20,
-        color: AppColors.cremaPergamino.withOpacity(0.4),
+        color: AppColors.cremaPergamino.withValues(alpha: 0.4),
       ),
       subtitleStyle: GoogleFonts.lato(
         fontSize: 13,
-        color: AppColors.cremaPergamino.withOpacity(0.25),
+        color: AppColors.cremaPergamino.withValues(alpha: 0.25),
         height: 1.5,
       ),
     );
