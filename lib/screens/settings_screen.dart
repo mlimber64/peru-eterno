@@ -240,7 +240,7 @@ class SettingsScreen extends StatelessWidget {
                 color: AppColors.marronProfundo,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                    color: AppColors.cremaPergamino.withOpacity(0.06)),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.06)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,7 +258,7 @@ class SettingsScreen extends StatelessWidget {
                     'v1.0.0',
                     style: GoogleFonts.lato(
                       fontSize: 12,
-                      color: AppColors.cremaPergamino.withOpacity(0.4),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.4),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -266,7 +266,7 @@ class SettingsScreen extends StatelessWidget {
                     context.read<LanguageProvider>().t('settings.about_text'),
                     style: GoogleFonts.lato(
                       fontSize: 13,
-                      color: AppColors.cremaPergamino.withOpacity(0.55),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.55),
                       height: 1.55,
                     ),
                   ),
@@ -311,7 +311,7 @@ class SettingsScreen extends StatelessWidget {
               t('settings.delete_data_body'),
               style: GoogleFonts.lato(
                 fontSize: 13.5,
-                color: AppColors.cremaPergamino.withOpacity(0.7),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.7),
                 height: 1.6,
               ),
             ),
@@ -320,7 +320,7 @@ class SettingsScreen extends StatelessWidget {
               t('settings.delete_data_kept'),
               style: GoogleFonts.lato(
                 fontSize: 12.5,
-                color: AppColors.cremaPergamino.withOpacity(0.45),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.45),
                 height: 1.55,
               ),
             ),
@@ -332,7 +332,7 @@ class SettingsScreen extends StatelessWidget {
             child: Text(
               t('settings.delete_data_cancel'),
               style: GoogleFonts.lato(
-                color: AppColors.cremaPergamino.withOpacity(0.6),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -355,7 +355,14 @@ class SettingsScreen extends StatelessWidget {
 
     // Barrera modal mientras corre el borrado: son varias llamadas de red y
     // escrituras a disco, y volver a pulsar dispararía un segundo borrado.
+    // `navigator` se capturó ANTES del await de arriba (ver arriba en este
+    // método), así que `navigator.context` sigue siendo válido aunque este
+    // widget ya no esté montado. El analizador no puede demostrarlo y avisa
+    // igualmente; el aviso se silencia aquí en vez de dejarlo permanente,
+    // porque un warning que siempre está y siempre se ignora acaba tapando
+    // a los que sí importan.
     showDialog<void>(
+      // ignore: use_build_context_synchronously
       context: navigator.context,
       barrierDismissible: false,
       builder: (_) => PopScope(
@@ -377,7 +384,7 @@ class SettingsScreen extends StatelessWidget {
                 t('settings.delete_data_working'),
                 style: GoogleFonts.lato(
                   fontSize: 13.5,
-                  color: AppColors.cremaPergamino.withOpacity(0.75),
+                  color: AppColors.cremaPergamino.withValues(alpha: 0.75),
                 ),
               ),
             ],
@@ -421,7 +428,7 @@ class SettingsScreen extends StatelessWidget {
         style: GoogleFonts.lato(
           fontSize: 10,
           fontWeight: FontWeight.w800,
-          color: AppColors.cremaPergamino.withOpacity(0.35),
+          color: AppColors.cremaPergamino.withValues(alpha: 0.35),
           letterSpacing: 1.5,
         ),
       ),
@@ -493,7 +500,7 @@ class _StreakReminderCardState extends State<_StreakReminderCard> {
       decoration: BoxDecoration(
         color: AppColors.marronProfundo,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.cremaPergamino.withOpacity(0.06)),
+        border: Border.all(color: AppColors.cremaPergamino.withValues(alpha: 0.06)),
       ),
       child: Row(
         children: [
@@ -501,7 +508,7 @@ class _StreakReminderCardState extends State<_StreakReminderCard> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: AppColors.ocre.withOpacity(0.12),
+              color: AppColors.ocre.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -522,7 +529,7 @@ class _StreakReminderCardState extends State<_StreakReminderCard> {
                   style: GoogleFonts.lato(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.cremaPergamino.withOpacity(0.85),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -530,7 +537,7 @@ class _StreakReminderCardState extends State<_StreakReminderCard> {
                   t('settings.streak_reminder_subtitle'),
                   style: GoogleFonts.lato(
                     fontSize: 12,
-                    color: AppColors.cremaPergamino.withOpacity(0.35),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.35),
                   ),
                 ),
               ],
@@ -549,8 +556,8 @@ class _StreakReminderCardState extends State<_StreakReminderCard> {
             Switch(
               value: enabled,
               onChanged: _toggle,
-              activeColor: AppColors.ocre,
-              inactiveThumbColor: AppColors.cremaPergamino.withOpacity(0.3),
+              activeThumbColor: AppColors.ocre,
+              inactiveThumbColor: AppColors.cremaPergamino.withValues(alpha: 0.3),
             ),
         ],
       ),
@@ -650,7 +657,7 @@ class _AnonymousIdRow extends StatelessWidget {
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 1.2,
-                          color: AppColors.cremaPergamino.withOpacity(0.35),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.35),
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -658,7 +665,7 @@ class _AnonymousIdRow extends StatelessWidget {
                         userId ?? t('settings.user_id_none'),
                         style: GoogleFonts.lato(
                           fontSize: 11,
-                          color: AppColors.cremaPergamino.withOpacity(0.5),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.5),
                         ),
                       ),
                     ],
@@ -668,7 +675,7 @@ class _AnonymousIdRow extends StatelessWidget {
                   Icon(
                     Icons.copy_rounded,
                     size: 15,
-                    color: AppColors.cremaPergamino.withOpacity(0.3),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.3),
                   ),
               ],
             ),
@@ -700,13 +707,13 @@ class _LanguageSelector extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
                 color: isActive
-                    ? AppColors.ocre.withOpacity(0.15)
+                    ? AppColors.ocre.withValues(alpha: 0.15)
                     : AppColors.marronProfundo,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                   color: isActive
-                      ? AppColors.ocre.withOpacity(0.6)
-                      : AppColors.cremaPergamino.withOpacity(0.08),
+                      ? AppColors.ocre.withValues(alpha: 0.6)
+                      : AppColors.cremaPergamino.withValues(alpha: 0.08),
                   width: 1.5,
                 ),
               ),
@@ -721,7 +728,7 @@ class _LanguageSelector extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       color: isActive
                           ? AppColors.ocre
-                          : AppColors.cremaPergamino.withOpacity(0.4),
+                          : AppColors.cremaPergamino.withValues(alpha: 0.4),
                     ),
                   ),
                 ],
@@ -759,13 +766,13 @@ class _ActionCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(14),
-        splashColor: color.withOpacity(0.1),
+        splashColor: color.withValues(alpha: 0.1),
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             border:
-                Border.all(color: AppColors.cremaPergamino.withOpacity(0.06)),
+                Border.all(color: AppColors.cremaPergamino.withValues(alpha: 0.06)),
           ),
           child: Row(
             children: [
@@ -773,7 +780,7 @@ class _ActionCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.12),
+                  color: color.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, size: 20, color: color),
@@ -788,7 +795,7 @@ class _ActionCard extends StatelessWidget {
                       style: GoogleFonts.lato(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.cremaPergamino.withOpacity(0.85),
+                        color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -796,14 +803,14 @@ class _ActionCard extends StatelessWidget {
                       subtitle,
                       style: GoogleFonts.lato(
                         fontSize: 12,
-                        color: AppColors.cremaPergamino.withOpacity(0.35),
+                        color: AppColors.cremaPergamino.withValues(alpha: 0.35),
                       ),
                     ),
                   ],
                 ),
               ),
               Icon(Icons.chevron_right_rounded,
-                  size: 18, color: AppColors.cremaPergamino.withOpacity(0.2)),
+                  size: 18, color: AppColors.cremaPergamino.withValues(alpha: 0.2)),
             ],
           ),
         ),
@@ -830,9 +837,9 @@ class _InfoCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Row(
         children: [
@@ -840,7 +847,7 @@ class _InfoCard extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.15),
+              color: color.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, size: 20, color: color),
@@ -862,7 +869,7 @@ class _InfoCard extends StatelessWidget {
                 subtitle,
                 style: GoogleFonts.lato(
                   fontSize: 12,
-                  color: color.withOpacity(0.6),
+                  color: color.withValues(alpha: 0.6),
                 ),
               ),
             ],

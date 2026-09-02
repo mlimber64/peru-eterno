@@ -97,7 +97,7 @@ class _ProgressHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.marronProfundo,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.ocre.withOpacity(0.2)),
+        border: Border.all(color: AppColors.ocre.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +119,7 @@ class _ProgressHeader extends StatelessWidget {
                 t.t('collectibles.progress_label'),
                 style: GoogleFonts.lato(
                   fontSize: 12,
-                  color: AppColors.cremaPergamino.withOpacity(0.6),
+                  color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                 ),
               ),
             ],
@@ -130,7 +130,7 @@ class _ProgressHeader extends StatelessWidget {
             child: LinearProgressIndicator(
               value: pct,
               minHeight: 6,
-              backgroundColor: AppColors.ocre.withOpacity(0.12),
+              backgroundColor: AppColors.ocre.withValues(alpha: 0.12),
               valueColor: const AlwaysStoppedAnimation(AppColors.ocre),
             ),
           ),
@@ -157,13 +157,13 @@ class _CollectibleTile extends StatelessWidget {
           border: Border.all(
             color: card.isUnlocked
                 ? card.rarity.color
-                : AppColors.cremaPergamino.withOpacity(0.15),
+                : AppColors.cremaPergamino.withValues(alpha: 0.15),
             width: card.isUnlocked ? 2 : 1,
           ),
           boxShadow: card.isUnlocked
               ? [
                   BoxShadow(
-                    color: card.rarity.color.withOpacity(0.45),
+                    color: card.rarity.color.withValues(alpha: 0.45),
                     blurRadius: 12,
                     spreadRadius: 0.5,
                   ),
@@ -177,7 +177,7 @@ class _CollectibleTile extends StatelessWidget {
             _cardImage(),
             if (!card.isUnlocked)
               Container(
-                color: Colors.black.withOpacity(0.55),
+                color: Colors.black.withValues(alpha: 0.55),
                 child: const Center(
                   child: Icon(Icons.lock_rounded, color: Colors.white70, size: 22),
                 ),
@@ -296,7 +296,7 @@ class _CollectibleTile extends StatelessWidget {
                 border: Border.all(color: card.rarity.color, width: 3),
                 boxShadow: [
                   BoxShadow(
-                    color: card.rarity.color.withOpacity(0.55),
+                    color: card.rarity.color.withValues(alpha: 0.55),
                     blurRadius: 28,
                     spreadRadius: 2,
                   ),
@@ -325,7 +325,7 @@ class _CollectibleTile extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: card.rarity.color.withOpacity(0.18),
+                            color: card.rarity.color.withValues(alpha: 0.18),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: card.rarity.color),
                           ),
@@ -353,7 +353,7 @@ class _CollectibleTile extends StatelessWidget {
                           card.descripcionFor(lang),
                           style: GoogleFonts.lato(
                             fontSize: 12.5,
-                            color: AppColors.cremaPergamino.withOpacity(0.75),
+                            color: AppColors.cremaPergamino.withValues(alpha: 0.75),
                             height: 1.5,
                           ),
                         ),
@@ -364,7 +364,7 @@ class _CollectibleTile extends StatelessWidget {
                             '${_formatDate(card.unlockedAt!)}',
                             style: GoogleFonts.lato(
                               fontSize: 10.5,
-                              color: AppColors.cremaPergamino.withOpacity(0.45),
+                              color: AppColors.cremaPergamino.withValues(alpha: 0.45),
                             ),
                           ),
                         ],

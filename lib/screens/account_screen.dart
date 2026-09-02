@@ -195,7 +195,7 @@ class _AccountScreenState extends State<AccountScreen> {
               t(isLink ? 'account.link_intro' : 'account.have_account_intro'),
               style: GoogleFonts.lato(
                 fontSize: 14,
-                color: AppColors.cremaPergamino.withOpacity(0.66),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.66),
                 height: 1.6,
               ),
             ),
@@ -231,7 +231,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     fontWeight: FontWeight.w700,
                     color: AppColors.ocre,
                     decoration: TextDecoration.underline,
-                    decorationColor: AppColors.ocre.withOpacity(0.4),
+                    decorationColor: AppColors.ocre.withValues(alpha: 0.4),
                   ),
                 ),
               ),
@@ -281,7 +281,7 @@ class _AccountScreenState extends State<AccountScreen> {
           '${t('account.code_intro')} ${_emailController.text.trim()}',
           style: GoogleFonts.lato(
             fontSize: 13.5,
-            color: AppColors.cremaPergamino.withOpacity(0.6),
+            color: AppColors.cremaPergamino.withValues(alpha: 0.6),
             height: 1.5,
           ),
         ),
@@ -326,7 +326,7 @@ class _AccountScreenState extends State<AccountScreen> {
               t('account.resend'),
               style: GoogleFonts.lato(
                 fontSize: 13,
-                color: AppColors.cremaPergamino.withOpacity(0.55),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.55),
               ),
             ),
           ),
@@ -337,7 +337,7 @@ class _AccountScreenState extends State<AccountScreen> {
         hintText: hint,
         hintStyle: GoogleFonts.lato(
           fontSize: 15,
-          color: AppColors.cremaPergamino.withOpacity(0.25),
+          color: AppColors.cremaPergamino.withValues(alpha: 0.25),
         ),
         filled: true,
         fillColor: AppColors.marronProfundo,
@@ -345,16 +345,16 @@ class _AccountScreenState extends State<AccountScreen> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide:
-              BorderSide(color: AppColors.cremaPergamino.withOpacity(0.08)),
+              BorderSide(color: AppColors.cremaPergamino.withValues(alpha: 0.08)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: AppColors.ocre.withOpacity(0.7)),
+          borderSide: BorderSide(color: AppColors.ocre.withValues(alpha: 0.7)),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide:
-              BorderSide(color: AppColors.cremaPergamino.withOpacity(0.04)),
+              BorderSide(color: AppColors.cremaPergamino.withValues(alpha: 0.04)),
         ),
       );
 }
@@ -374,7 +374,7 @@ class _FieldLabel extends StatelessWidget {
             fontSize: 10,
             fontWeight: FontWeight.w800,
             letterSpacing: 1.4,
-            color: AppColors.cremaPergamino.withOpacity(0.35),
+            color: AppColors.cremaPergamino.withValues(alpha: 0.35),
           ),
         ),
       );
@@ -394,9 +394,9 @@ class _Callout extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -412,7 +412,7 @@ class _Callout extends StatelessWidget {
               text,
               style: GoogleFonts.lato(
                 fontSize: 13,
-                color: AppColors.cremaPergamino.withOpacity(0.75),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.75),
                 height: 1.5,
               ),
             ),
@@ -443,7 +443,7 @@ class _PrimaryButton extends StatelessWidget {
         onPressed: busy ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.ocre,
-          disabledBackgroundColor: AppColors.ocre.withOpacity(0.4),
+          disabledBackgroundColor: AppColors.ocre.withValues(alpha: 0.4),
           foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(

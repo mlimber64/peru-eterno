@@ -55,7 +55,15 @@ void main() async {
   const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
   final supabaseReady = supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty;
   if (supabaseReady) {
-    await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+    // `publishableKey` es el nombre nuevo del mismo parámetro: dentro del SDK
+    // se resuelve como `publishableKey ?? anonKey`, así que pasar aquí la anon
+    // key de siempre es exactamente equivalente. Se cambia solo el nombre del
+    // argumento; el dart-define sigue llamándose SUPABASE_ANON_KEY para no
+    // invalidar los env.json ni RELEASE.md.
+    await Supabase.initialize(
+      url: supabaseUrl,
+      publishableKey: supabaseAnonKey,
+    );
   }
 
   final contentProvider = ContentProvider(

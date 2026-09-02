@@ -33,14 +33,14 @@ class ContentCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              color.withOpacity(0.85),
-              color.withOpacity(0.6),
+              color.withValues(alpha: 0.85),
+              color.withValues(alpha: 0.6),
             ],
           ),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.25),
+              color: color.withValues(alpha: 0.25),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -57,7 +57,7 @@ class ContentCard extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: 70,
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                 ),
               ),
               // Content
@@ -70,7 +70,7 @@ class ContentCard extends StatelessWidget {
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(icon, size: 20, color: Colors.white),

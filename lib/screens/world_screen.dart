@@ -62,7 +62,7 @@ class WorldScreen extends StatelessWidget {
               icon: Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.35),
+                  color: Colors.black.withValues(alpha: 0.35),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.arrow_back_ios_new_rounded,
@@ -81,7 +81,7 @@ class WorldScreen extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          world.accentColor.withOpacity(0.85),
+                          world.accentColor.withValues(alpha: 0.85),
                           world.accentColorDark,
                         ],
                       ),
@@ -98,7 +98,7 @@ class WorldScreen extends StatelessWidget {
                     child: Icon(
                       world.icon,
                       size: 200,
-                      color: Colors.white.withOpacity(0.06),
+                      color: Colors.white.withValues(alpha: 0.06),
                     ),
                   ),
                   // Bottom gradient
@@ -150,7 +150,7 @@ class WorldScreen extends StatelessWidget {
                           world.descriptionFor(lang),
                           style: GoogleFonts.lato(
                             fontSize: 14,
-                            color: Colors.white.withOpacity(0.7),
+                            color: Colors.white.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
@@ -257,7 +257,7 @@ class WorldScreen extends StatelessWidget {
                             foregroundColor: AppColors.worldHistoria,
                             side: BorderSide(
                                 color:
-                                    AppColors.worldHistoria.withOpacity(0.4)),
+                                    AppColors.worldHistoria.withValues(alpha: 0.4)),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)),
                             minimumSize: const Size.fromHeight(44),
@@ -418,7 +418,7 @@ class _EditorialMiniCard extends StatelessWidget {
           height: 172,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: _accent.withOpacity(0.15)),
+            border: Border.all(color: _accent.withValues(alpha: 0.15)),
           ),
           padding: const EdgeInsets.all(14),
           child: Column(
@@ -428,9 +428,9 @@ class _EditorialMiniCard extends StatelessWidget {
                 width: 28,
                 height: 28,
                 decoration: BoxDecoration(
-                  color: _accent.withOpacity(0.15),
+                  color: _accent.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
-                  border: Border.all(color: _accent.withOpacity(0.4)),
+                  border: Border.all(color: _accent.withValues(alpha: 0.4)),
                 ),
                 child: Center(
                   child: Text(
@@ -449,7 +449,7 @@ class _EditorialMiniCard extends StatelessWidget {
                 style: GoogleFonts.lato(
                   fontSize: 8,
                   fontWeight: FontWeight.w700,
-                  color: _accent.withOpacity(0.7),
+                  color: _accent.withValues(alpha: 0.7),
                   letterSpacing: 1.2,
                 ),
                 maxLines: 1,
@@ -473,7 +473,7 @@ class _EditorialMiniCard extends StatelessWidget {
               Row(
                 children: [
                   Icon(Icons.arrow_forward_ios_rounded,
-                      size: 9, color: _accent.withOpacity(0.7)),
+                      size: 9, color: _accent.withValues(alpha: 0.7)),
                   const SizedBox(width: 4),
                   Text(
                     // Estaba escrito a mano en italiano: salía "Leggi" también
@@ -482,7 +482,7 @@ class _EditorialMiniCard extends StatelessWidget {
                     style: GoogleFonts.lato(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
-                      color: _accent.withOpacity(0.7),
+                      color: _accent.withValues(alpha: 0.7),
                     ),
                   ),
                 ],
@@ -527,8 +527,8 @@ class _ComingSoonWorldView extends StatelessWidget {
                 height: 84,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: world.accentColor.withOpacity(0.15),
-                  border: Border.all(color: world.accentColor.withOpacity(0.4)),
+                  color: world.accentColor.withValues(alpha: 0.15),
+                  border: Border.all(color: world.accentColor.withValues(alpha: 0.4)),
                 ),
                 child: Icon(Icons.hourglass_top_rounded,
                     size: 36, color: world.accentColor),
@@ -558,7 +558,7 @@ class _ComingSoonWorldView extends StatelessWidget {
                 t('coming_soon.message'),
                 style: GoogleFonts.lato(
                   fontSize: 13,
-                  color: AppColors.cremaPergamino.withOpacity(0.6),
+                  color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                   height: 1.5,
                 ),
                 textAlign: TextAlign.center,
@@ -578,7 +578,7 @@ class _DiagPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.07)
+      ..color = color.withValues(alpha: 0.07)
       ..strokeWidth = 1;
     const spacing = 28.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {

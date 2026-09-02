@@ -79,7 +79,7 @@ class LanguageSelectorButton extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 8),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? AppColors.ocre.withOpacity(0.15)
+                          ? AppColors.ocre.withValues(alpha: 0.15)
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(

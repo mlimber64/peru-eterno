@@ -206,7 +206,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
         icon: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: AppColors.marronOscuro.withOpacity(0.7),
+            color: AppColors.marronOscuro.withValues(alpha: 0.7),
             shape: BoxShape.circle,
           ),
           child: const Icon(Icons.arrow_back_ios_new_rounded, size: 16),
@@ -229,8 +229,8 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    color.withOpacity(0.9),
-                    color.withOpacity(0.6),
+                    color.withValues(alpha: 0.9),
+                    color.withValues(alpha: 0.6),
                     AppColors.marronOscuro,
                   ],
                   stops: const [0.0, 0.5, 1.0],
@@ -244,7 +244,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
               child: Icon(
                 icon,
                 size: 180,
-                color: Colors.white.withOpacity(0.07),
+                color: Colors.white.withValues(alpha: 0.07),
               ),
             ),
             // Imagen de la ficha: primero el asset local (contenido editorial
@@ -276,7 +276,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.marronOscuro.withOpacity(0.55),
+                    AppColors.marronOscuro.withValues(alpha: 0.55),
                     Colors.transparent,
                   ],
                   stops: const [0.0, 0.35],
@@ -291,7 +291,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    AppColors.marronOscuro.withOpacity(0.9),
+                    AppColors.marronOscuro.withValues(alpha: 0.9),
                   ],
                   stops: const [0.3, 1.0],
                 ),
@@ -309,7 +309,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.85),
+                      color: color.withValues(alpha: 0.85),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -423,16 +423,16 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.07),
+        color: color.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.2)),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Column(
         children: [
           Icon(
             CategoryConfigs.iconOf(widget.item.category),
             size: 48,
-            color: color.withOpacity(0.4),
+            color: color.withValues(alpha: 0.4),
           ),
           const SizedBox(height: 16),
           Text(
@@ -459,7 +459,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
         fit: BoxFit.cover,
         placeholder: (_, __) => Container(
           height: 220,
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           child: Center(
             child: CircularProgressIndicator(strokeWidth: 2, color: color),
           ),
@@ -474,9 +474,9 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.07),
+        color: color.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.2)),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -515,9 +515,9 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.08),
+        color: Colors.orange.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.orange.withOpacity(0.3)),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -528,7 +528,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
               label,
               style: GoogleFonts.lato(
                 fontSize: 12,
-                color: Colors.orange.withOpacity(0.9),
+                color: Colors.orange.withValues(alpha: 0.9),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -574,7 +574,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.dividerColor.withOpacity(0.2),
+        color: AppColors.dividerColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.dividerColor),
       ),
@@ -583,7 +583,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
         children: [
           Row(
             children: [
-              Icon(Icons.info_outline_rounded,
+              const Icon(Icons.info_outline_rounded,
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
@@ -679,13 +679,13 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.dividerColor.withOpacity(0.2),
+        color: AppColors.dividerColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.dividerColor),
       ),
       child: Row(
         children: [
-          Icon(Icons.menu_book_outlined,
+          const Icon(Icons.menu_book_outlined,
               size: 12, color: AppColors.textSecondary),
           const SizedBox(width: 6),
           Flexible(
@@ -726,7 +726,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
               localPath,
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 child: const Icon(Icons.image_not_supported_outlined),
               ),
             ),
@@ -740,7 +740,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 64, color: color.withOpacity(0.25)),
+            Icon(icon, size: 64, color: color.withValues(alpha: 0.25)),
             const SizedBox(height: 16),
             Text(
               widget.item.localizedTitle(context.read<LanguageProvider>().t),
@@ -774,9 +774,9 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
           CachedNetworkImage(
             imageUrl: url,
             fit: BoxFit.cover,
-            placeholder: (_, __) => Container(color: color.withOpacity(0.1)),
+            placeholder: (_, __) => Container(color: color.withValues(alpha: 0.1)),
             errorWidget: (_, __, ___) => Container(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               child: const Icon(Icons.image_not_supported_outlined),
             ),
           ),
@@ -786,7 +786,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.55),
+                color: Colors.black.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(

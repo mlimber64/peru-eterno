@@ -48,7 +48,7 @@ class ImageWithFallback extends StatelessWidget {
               end: Alignment.bottomRight,
               colors: [
                 fallbackColor,
-                fallbackColor.withOpacity(0.6),
+                fallbackColor.withValues(alpha: 0.6),
               ],
             ),
           ),
@@ -65,14 +65,14 @@ class ImageWithFallback extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.photo_library_outlined,
-                          color: Colors.white.withOpacity(0.5),
+                          color: Colors.white.withValues(alpha: 0.5),
                           size: 40,
                         ),
                         const SizedBox(height: 8),
                         Text(
                           'Ilustración IA',
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
+                            color: Colors.white.withValues(alpha: 0.6),
                             fontSize: 11,
                             letterSpacing: 1,
                           ),
@@ -95,7 +95,7 @@ class _PatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.06)
+      ..color = Colors.white.withValues(alpha: 0.06)
       ..strokeWidth = 1;
     const spacing = 20.0;
     for (double x = 0; x < size.width + size.height; x += spacing) {

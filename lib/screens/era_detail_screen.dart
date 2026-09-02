@@ -195,7 +195,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         icon: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: AppColors.marronOscuro.withOpacity(0.7),
+            color: AppColors.marronOscuro.withValues(alpha: 0.7),
             shape: BoxShape.circle,
           ),
           child: const Icon(Icons.arrow_back_ios_new_rounded, size: 16),
@@ -229,7 +229,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    AppColors.marronOscuro.withOpacity(0.85),
+                    AppColors.marronOscuro.withValues(alpha: 0.85),
                   ],
                   stops: const [0.4, 1.0],
                 ),
@@ -246,7 +246,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: widget.era.accentColor.withOpacity(0.9),
+                      color: widget.era.accentColor.withValues(alpha: 0.9),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -273,7 +273,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                     style: GoogleFonts.playfairDisplay(
                       fontSize: 14,
                       fontStyle: FontStyle.italic,
-                      color: AppColors.cremaPergamino.withOpacity(0.85),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                     ),
                   ),
                 ],
@@ -381,10 +381,10 @@ class _EraDetailScreenState extends State<EraDetailScreen>
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: widget.era.accentColor.withOpacity(0.07),
+            color: widget.era.accentColor.withValues(alpha: 0.07),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: widget.era.accentColor.withOpacity(0.2),
+              color: widget.era.accentColor.withValues(alpha: 0.2),
               width: 1,
             ),
           ),
@@ -411,7 +411,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         fit: BoxFit.cover,
         placeholder: (_, __) => Container(
           height: 220,
-          color: widget.era.accentColor.withOpacity(0.1),
+          color: widget.era.accentColor.withValues(alpha: 0.1),
           child: Center(
             child: CircularProgressIndicator(
               strokeWidth: 2,
@@ -429,10 +429,10 @@ class _EraDetailScreenState extends State<EraDetailScreen>
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: widget.era.accentColor.withOpacity(0.07),
+        color: widget.era.accentColor.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: widget.era.accentColor.withOpacity(0.2),
+          color: widget.era.accentColor.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -477,9 +477,9 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.08),
+        color: Colors.orange.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.orange.withOpacity(0.3)),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -490,7 +490,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
               label,
               style: GoogleFonts.lato(
                 fontSize: 12,
-                color: Colors.orange.withOpacity(0.9),
+                color: Colors.orange.withValues(alpha: 0.9),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -537,7 +537,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.dividerColor.withOpacity(0.2),
+        color: AppColors.dividerColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.dividerColor),
       ),
@@ -546,7 +546,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
         children: [
           Row(
             children: [
-              Icon(Icons.info_outline_rounded,
+              const Icon(Icons.info_outline_rounded,
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
@@ -663,7 +663,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.35),
+              color: Colors.black.withValues(alpha: 0.35),
               blurRadius: 16,
               offset: const Offset(0, 6),
             ),
@@ -687,13 +687,13 @@ class _EraDetailScreenState extends State<EraDetailScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.dividerColor.withOpacity(0.2),
+        color: AppColors.dividerColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.dividerColor),
       ),
       child: Row(
         children: [
-          Icon(Icons.menu_book_outlined,
+          const Icon(Icons.menu_book_outlined,
               size: 12, color: AppColors.textSecondary),
           const SizedBox(width: 6),
           Flexible(
@@ -742,14 +742,14 @@ class _EraDetailScreenState extends State<EraDetailScreen>
               children: [
                 ImageWithFallback(
                   assetPath: widget.era.imageAssetPath(images[index]),
-                  fallbackColor: widget.era.accentColor.withOpacity(0.7),
+                  fallbackColor: widget.era.accentColor.withValues(alpha: 0.7),
                   fit: BoxFit.cover,
                   fallbackIcon: Center(
                     child: Text(
                       '${index + 1}',
                       style: GoogleFonts.playfairDisplay(
                         fontSize: 28,
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withValues(alpha: 0.5),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -767,7 +767,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                         colors: [
-                          Colors.black.withOpacity(0.5),
+                          Colors.black.withValues(alpha: 0.5),
                           Colors.transparent,
                         ],
                       ),
@@ -776,7 +776,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
                       '',
                       style: GoogleFonts.lato(
                         fontSize: 10,
-                        color: Colors.white.withOpacity(0.85),
+                        color: Colors.white.withValues(alpha: 0.85),
                         fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.right,
@@ -804,10 +804,10 @@ class _EraDetailScreenState extends State<EraDetailScreen>
             imageUrl: url,
             fit: BoxFit.cover,
             placeholder: (_, __) => Container(
-              color: widget.era.accentColor.withOpacity(0.1),
+              color: widget.era.accentColor.withValues(alpha: 0.1),
             ),
             errorWidget: (_, __, ___) => Container(
-              color: widget.era.accentColor.withOpacity(0.1),
+              color: widget.era.accentColor.withValues(alpha: 0.1),
               child: const Icon(Icons.image_not_supported_outlined),
             ),
           ),
@@ -817,7 +817,7 @@ class _EraDetailScreenState extends State<EraDetailScreen>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.55),
+                color: Colors.black.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(

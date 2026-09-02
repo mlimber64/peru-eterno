@@ -47,7 +47,7 @@ class CreditsScreen extends StatelessWidget {
               t('credits.intro'),
               style: GoogleFonts.lato(
                 fontSize: 13.5,
-                color: AppColors.cremaPergamino.withOpacity(0.6),
+                color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                 height: 1.6,
               ),
             ),
@@ -147,7 +147,7 @@ class _SectionHeader extends StatelessWidget {
             subtitle,
             style: GoogleFonts.lato(
               fontSize: 12,
-              color: AppColors.cremaPergamino.withOpacity(0.4),
+              color: AppColors.cremaPergamino.withValues(alpha: 0.4),
               height: 1.4,
             ),
           ),
@@ -194,7 +194,7 @@ class _CreditTile extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               border:
-                  Border.all(color: AppColors.cremaPergamino.withOpacity(0.06)),
+                  Border.all(color: AppColors.cremaPergamino.withValues(alpha: 0.06)),
             ),
             child: Row(
               children: [
@@ -207,7 +207,7 @@ class _CreditTile extends StatelessWidget {
                         style: GoogleFonts.lato(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.cremaPergamino.withOpacity(0.9),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.9),
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -215,7 +215,7 @@ class _CreditTile extends StatelessWidget {
                         '${credit.author} · ${credit.year}',
                         style: GoogleFonts.lato(
                           fontSize: 12,
-                          color: AppColors.cremaPergamino.withOpacity(0.4),
+                          color: AppColors.cremaPergamino.withValues(alpha: 0.4),
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -225,10 +225,10 @@ class _CreditTile extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
-                              color: licenseColor.withOpacity(0.15),
+                              color: licenseColor.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                  color: licenseColor.withOpacity(0.5)),
+                                  color: licenseColor.withValues(alpha: 0.5)),
                             ),
                             child: Text(
                               t('credits.license_${credit.license.name}'),
@@ -245,10 +245,10 @@ class _CreditTile extends StatelessWidget {
                               t('credits.view_source'),
                               style: GoogleFonts.lato(
                                 fontSize: 11,
-                                color: AppColors.cremaPergamino.withOpacity(0.35),
+                                color: AppColors.cremaPergamino.withValues(alpha: 0.35),
                                 decoration: TextDecoration.underline,
                                 decorationColor:
-                                    AppColors.cremaPergamino.withOpacity(0.2),
+                                    AppColors.cremaPergamino.withValues(alpha: 0.2),
                               ),
                             ),
                           ],
@@ -260,7 +260,7 @@ class _CreditTile extends StatelessWidget {
                 if (hasSource)
                   Icon(Icons.open_in_new_rounded,
                       size: 16,
-                      color: AppColors.cremaPergamino.withOpacity(0.25)),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.25)),
               ],
             ),
           ),

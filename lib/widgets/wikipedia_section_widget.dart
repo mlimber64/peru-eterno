@@ -62,13 +62,15 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
           content.displayLang != widget.languageCode;
 
       if (!isWrongLanguage) return _buildArticle(content);
-      if (fallback != null && fallback.isNotEmpty)
+      if (fallback != null && fallback.isNotEmpty) {
         return _buildFallback(fallback);
+      }
       return _buildArticle(content);
     }
 
-    if (fallback != null && fallback.isNotEmpty)
+    if (fallback != null && fallback.isNotEmpty) {
       return _buildFallback(fallback);
+    }
     return const SizedBox.shrink();
   }
 
@@ -115,7 +117,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.dividerColor.withOpacity(0.5),
+        color: AppColors.dividerColor.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(4),
       ),
     ).animate(onPlay: (c) => c.repeat(reverse: true)).fade(
@@ -138,7 +140,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
           Icon(
             Icons.wifi_off_rounded,
             size: 44,
-            color: AppColors.textSecondary.withOpacity(0.4),
+            color: AppColors.textSecondary.withValues(alpha: 0.4),
           ),
           const SizedBox(height: 16),
           Text(
@@ -276,10 +278,10 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: widget.accentColor.withOpacity(0.10 * opacity + 0.02),
+        color: widget.accentColor.withValues(alpha: 0.10 * opacity + 0.02),
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
-          color: widget.accentColor.withOpacity(0.3 * opacity),
+          color: widget.accentColor.withValues(alpha: 0.3 * opacity),
           width: 0.5,
         ),
       ),
@@ -288,7 +290,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
         style: GoogleFonts.lato(
           fontSize: 9,
           fontWeight: FontWeight.w700,
-          color: widget.accentColor.withOpacity(opacity),
+          color: widget.accentColor.withValues(alpha: opacity),
           letterSpacing: 0.5,
         ),
       ),
@@ -299,9 +301,9 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.10),
+        color: Colors.orange.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.orange.withOpacity(0.35), width: 0.8),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.35), width: 0.8),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -332,7 +334,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
         placeholder: (_, __) => Container(
           height: 210,
           decoration: BoxDecoration(
-            color: widget.accentColor.withOpacity(0.12),
+            color: widget.accentColor.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(14),
           ),
           child: Center(
@@ -387,7 +389,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
                   height: isSubSection ? 16 : 20,
                   decoration: BoxDecoration(
                     color: isSubSection
-                        ? widget.accentColor.withOpacity(0.5)
+                        ? widget.accentColor.withValues(alpha: 0.5)
                         : widget.accentColor,
                     borderRadius: BorderRadius.circular(2),
                   ),
@@ -429,7 +431,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
         Container(
           height: 1,
           color: isSubSection
-              ? AppColors.dividerColor.withOpacity(0.5)
+              ? AppColors.dividerColor.withValues(alpha: 0.5)
               : AppColors.dividerColor,
           margin: const EdgeInsets.only(top: 4),
         ),
@@ -520,7 +522,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.dividerColor.withOpacity(0.2),
+        color: AppColors.dividerColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.dividerColor, width: 1),
       ),
@@ -529,7 +531,7 @@ class _WikipediaSectionWidgetState extends State<WikipediaSectionWidget> {
         children: [
           Row(
             children: [
-              Icon(Icons.info_outline_rounded,
+              const Icon(Icons.info_outline_rounded,
                   size: 12, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(

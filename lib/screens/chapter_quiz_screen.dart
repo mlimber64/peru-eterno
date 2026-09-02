@@ -111,7 +111,7 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
                   decoration: BoxDecoration(
                     color: i <= _index
                         ? AppColors.ocre
-                        : AppColors.ocre.withOpacity(0.15),
+                        : AppColors.ocre.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -161,11 +161,11 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: (isCorrectSelected ? _correctColor : _incorrectColor)
-                    .withOpacity(0.12),
+                    .withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                   color: (isCorrectSelected ? _correctColor : _incorrectColor)
-                      .withOpacity(0.4),
+                      .withValues(alpha: 0.4),
                 ),
               ),
               child: Row(
@@ -184,7 +184,7 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
                       q.explicacionFor(widget.lang),
                       style: GoogleFonts.lato(
                         fontSize: 13,
-                        color: AppColors.cremaPergamino.withOpacity(0.85),
+                        color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                         height: 1.45,
                       ),
                     ),
@@ -251,8 +251,8 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
             height: 140,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.ocre.withOpacity(0.12),
-              border: Border.all(color: AppColors.ocre.withOpacity(0.4), width: 3),
+              color: AppColors.ocre.withValues(alpha: 0.12),
+              border: Border.all(color: AppColors.ocre.withValues(alpha: 0.4), width: 3),
             ),
             child: Center(
               child: Text(
@@ -300,8 +300,8 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
               style: FilledButton.styleFrom(
                 backgroundColor: AppColors.ocre,
                 foregroundColor: AppColors.negoCacao,
-                disabledBackgroundColor: AppColors.ocre.withOpacity(0.25),
-                disabledForegroundColor: AppColors.cremaPergamino.withOpacity(0.6),
+                disabledBackgroundColor: AppColors.ocre.withValues(alpha: 0.25),
+                disabledForegroundColor: AppColors.cremaPergamino.withValues(alpha: 0.6),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28),
@@ -315,15 +315,17 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
   }
 
   Future<void> _claimCard(BuildContext context, LanguageProvider t) async {
+    // Los tres se leen ANTES de los `await`: después el widget puede estar
+    // desmontado y `context.read` lanzaría.
     final collectibles = context.read<CollectiblesProvider>();
     final review = context.read<ReviewPromptService>();
+    final analytics = context.read<AnalyticsService>();
     await collectibles.recordQuizScore(widget.article.id, _score);
     final esNueva = await collectibles.unlockCard(widget.article.id);
 
     // `value` = aciertos (0-3). Un capítulo cuyo quiz saca siempre 0 es un
     // capítulo mal escrito o unas preguntas mal formuladas, y eso solo se ve
     // aquí.
-    final analytics = context.read<AnalyticsService>();
     analytics.log(AnalyticsService.quizComplete,
         target: widget.article.id, value: _score);
     if (esNueva) {
@@ -355,7 +357,7 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
                 border: Border.all(color: card.rarity.color, width: 3),
                 boxShadow: [
                   BoxShadow(
-                    color: card.rarity.color.withOpacity(0.6),
+                    color: card.rarity.color.withValues(alpha: 0.6),
                     blurRadius: 30,
                     spreadRadius: 2,
                   ),
@@ -375,7 +377,7 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Colors.black.withOpacity(0.85)],
+                        colors: [Colors.transparent, Colors.black.withValues(alpha: 0.85)],
                         stops: const [0.5, 1.0],
                       ),
                     ),
@@ -456,17 +458,17 @@ class _OptionTile extends StatelessWidget {
     final Color bg;
     switch (state) {
       case _OptionState.idle:
-        color = AppColors.cremaPergamino.withOpacity(0.7);
+        color = AppColors.cremaPergamino.withValues(alpha: 0.7);
         bg = AppColors.marronProfundo;
       case _OptionState.correct:
         color = const Color(0xFF2ECC71);
-        bg = const Color(0xFF2ECC71).withOpacity(0.14);
+        bg = const Color(0xFF2ECC71).withValues(alpha: 0.14);
       case _OptionState.incorrect:
         color = const Color(0xFFE85B4E);
-        bg = const Color(0xFFE85B4E).withOpacity(0.14);
+        bg = const Color(0xFFE85B4E).withValues(alpha: 0.14);
       case _OptionState.disabled:
-        color = AppColors.cremaPergamino.withOpacity(0.3);
-        bg = AppColors.marronProfundo.withOpacity(0.5);
+        color = AppColors.cremaPergamino.withValues(alpha: 0.3);
+        bg = AppColors.marronProfundo.withValues(alpha: 0.5);
     }
 
     Widget tile = Material(
@@ -479,7 +481,7 @@ class _OptionTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: color.withOpacity(0.5)),
+            border: Border.all(color: color.withValues(alpha: 0.5)),
           ),
           child: Row(
             children: [

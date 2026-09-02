@@ -102,7 +102,7 @@ class _InteractiveStoriesListScreenState
                     t('interactive_stories.hub_subtitle'),
                     style: GoogleFonts.lato(
                       fontSize: 13,
-                      color: AppColors.cremaPergamino.withOpacity(0.6),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.6),
                       height: 1.5,
                     ),
                   ),

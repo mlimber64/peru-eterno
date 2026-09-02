@@ -51,7 +51,7 @@ class AppDrawer extends StatelessWidget {
                     context.read<LanguageProvider>().t('app.tagline'),
                     style: GoogleFonts.lato(
                       fontSize: 11,
-                      color: AppColors.cremaPergamino.withOpacity(0.45),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.45),
                     ),
                   ),
                 ],
@@ -161,7 +161,7 @@ class AppDrawer extends StatelessWidget {
                 'v1.0.0 · ${context.read<LanguageProvider>().t('settings.footer_credits')}',
                 style: GoogleFonts.lato(
                   fontSize: 10,
-                  color: AppColors.cremaPergamino.withOpacity(0.25),
+                  color: AppColors.cremaPergamino.withValues(alpha: 0.25),
                 ),
               ),
             ),
@@ -172,7 +172,7 @@ class AppDrawer extends StatelessWidget {
   }
 
   Widget _divider() => Divider(
-        color: AppColors.cremaPergamino.withOpacity(0.08),
+        color: AppColors.cremaPergamino.withValues(alpha: 0.08),
         thickness: 1,
         indent: 24,
         endIndent: 24,
@@ -203,13 +203,13 @@ class _LanguageTile extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
                   color: isActive
-                      ? AppColors.ocre.withOpacity(0.2)
+                      ? AppColors.ocre.withValues(alpha: 0.2)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     color: isActive
-                        ? AppColors.ocre.withOpacity(0.6)
-                        : AppColors.cremaPergamino.withOpacity(0.1),
+                        ? AppColors.ocre.withValues(alpha: 0.6)
+                        : AppColors.cremaPergamino.withValues(alpha: 0.1),
                     width: 1,
                   ),
                 ),
@@ -224,7 +224,7 @@ class _LanguageTile extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         color: isActive
                             ? AppColors.ocre
-                            : AppColors.cremaPergamino.withOpacity(0.5),
+                            : AppColors.cremaPergamino.withValues(alpha: 0.5),
                         letterSpacing: 1,
                       ),
                     ),
@@ -254,7 +254,7 @@ class _SectionLabel extends StatelessWidget {
         style: GoogleFonts.lato(
           fontSize: 10,
           fontWeight: FontWeight.w700,
-          color: AppColors.cremaPergamino.withOpacity(0.35),
+          color: AppColors.cremaPergamino.withValues(alpha: 0.35),
           letterSpacing: 1.5,
         ),
       ),
@@ -284,7 +284,7 @@ class _ActionTile extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(12),
-          splashColor: color.withOpacity(0.15),
+          splashColor: color.withValues(alpha: 0.15),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             child: Row(
@@ -296,13 +296,13 @@ class _ActionTile extends StatelessWidget {
                   style: GoogleFonts.lato(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.cremaPergamino.withOpacity(0.85),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.85),
                   ),
                 ),
                 const Spacer(),
                 Icon(Icons.chevron_right_rounded,
                     size: 16,
-                    color: AppColors.cremaPergamino.withOpacity(0.25)),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.25)),
               ],
             ),
           ),
@@ -351,7 +351,7 @@ class _MiniSunPainter extends CustomPainter {
     final radius = size.width / 3.5;
 
     final fill = Paint()
-      ..color = AppColors.ocre.withOpacity(0.2)
+      ..color = AppColors.ocre.withValues(alpha: 0.2)
       ..style = PaintingStyle.fill;
     final stroke = Paint()
       ..color = AppColors.ocre
