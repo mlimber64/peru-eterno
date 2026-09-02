@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../services/analytics_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -61,7 +62,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  Future<void> _finish() async {
+  /// [skipped] separa "lo terminó" de "le dio a Saltar". La diferencia entre
+  /// los dos números dice si las tres pantallas convencen o estorban, que es
+  /// justo lo que no se puede saber mirando solo cuánta gente llega a Home.
+  Future<void> _finish({bool skipped = false}) async {
+    context.read<AnalyticsService>().log(
+          skipped
+              ? AnalyticsService.onboardingSkip
+              : AnalyticsService.onboardingComplete,
+          value: _page + 1,
+        );
     await OnboardingScreen.markSeen();
     if (!mounted) return;
     context.go('/home');
@@ -91,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: _finish,
+                onPressed: () => _finish(skipped: true),
                 child: Text(
                   t('onboarding.skip'),
                   style: GoogleFonts.lato(

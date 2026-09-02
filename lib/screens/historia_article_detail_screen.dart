@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../services/analytics_service.dart';
 import '../core/constants/app_colors.dart';
 import '../core/navigation/app_navigation.dart';
 import '../models/historia_article.dart';
@@ -125,6 +126,12 @@ class _HistoriaArticleDetailScreenState
     if (daily.dailyArticle?.id != widget.article.id) return;
     final justCompleted = await daily.completeToday();
     if (!justCompleted || !mounted) return;
+    // `value` = día de racha alcanzado. Junto con daily_open dice cuántos
+    // abren la historia del día y cuántos llegan de verdad al final.
+    context.read<AnalyticsService>().log(
+          AnalyticsService.dailyComplete,
+          value: daily.currentStreak,
+        );
     _showStreakSnackBar(daily.currentStreak);
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../services/analytics_service.dart';
 import '../core/constants/app_colors.dart';
 import '../core/navigation/app_navigation.dart';
 import '../models/collectible_card.dart';
@@ -317,7 +318,17 @@ class _ChapterQuizScreenState extends State<ChapterQuizScreen> {
     final collectibles = context.read<CollectiblesProvider>();
     final review = context.read<ReviewPromptService>();
     await collectibles.recordQuizScore(widget.article.id, _score);
-    await collectibles.unlockCard(widget.article.id);
+    final esNueva = await collectibles.unlockCard(widget.article.id);
+
+    // `value` = aciertos (0-3). Un capítulo cuyo quiz saca siempre 0 es un
+    // capítulo mal escrito o unas preguntas mal formuladas, y eso solo se ve
+    // aquí.
+    final analytics = context.read<AnalyticsService>();
+    analytics.log(AnalyticsService.quizComplete,
+        target: widget.article.id, value: _score);
+    if (esNueva) {
+      analytics.log(AnalyticsService.cardUnlock, target: widget.article.id);
+    }
 
     // Acaba de superar un quiz y ganar una carta: es el mejor momento para
     // pedirle una valoración. El servicio decide si toca o no — no la pide
