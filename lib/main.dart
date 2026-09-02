@@ -24,6 +24,7 @@ import 'providers/reading_progress_provider.dart';
 import 'providers/reading_text_scale_provider.dart';
 import 'services/account_data_service.dart';
 import 'services/entitlement_service.dart';
+import 'services/analytics_service.dart';
 import 'services/error_reporter_service.dart';
 import 'services/home_widget_service.dart';
 import 'services/review_prompt_service.dart';
@@ -98,6 +99,21 @@ void main() async {
   );
 
   final premiumProvider = PremiumProvider(entitlements: entitlementService);
+
+  // Analítica propia (misma decisión que el crash reporting: en el Supabase
+  // del proyecto, sin SDK de terceros, para no contradecir la política de
+  // privacidad ni añadir un procesador que declarar). Se construye aquí, tras
+  // `premiumProvider`, porque marca cada evento con si el usuario paga o no:
+  // sin ese dato no se puede separar "no le interesa" de "no puede".
+  final analytics = AnalyticsService.supabase(
+    client: supabaseReady ? Supabase.instance.client : null,
+    auth: supabaseAuthService,
+    sessionId: AnalyticsService.newSessionId(),
+    localeProvider: () => languageProvider.currentLanguage,
+    premiumProvider: () => premiumProvider.isPremium,
+  );
+  analytics.installLifecycleFlush();
+  analytics.log(AnalyticsService.appOpen);
   // Solo el estado persistido (disco local) bloquea el arranque. La conexión
   // con Google Play / App Store va sin `await`, igual que la auth anónima de
   // Supabase: es canal nativo + red, y esperarla aquí dejaba la app en negro
@@ -218,6 +234,7 @@ void main() async {
         Provider.value(value: streakNotifications),
         Provider.value(value: reviewPrompts),
         Provider.value(value: UserProgressSyncService.instance!),
+        Provider.value(value: analytics),
       ],
       child: const PeruEternoApp(),
     ),

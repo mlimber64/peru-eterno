@@ -9,6 +9,7 @@ import '../../models/historia_article.dart';
 import '../../models/historia_stage.dart';
 import '../../providers/daily_story_provider.dart';
 import '../../providers/premium_provider.dart';
+import '../../services/analytics_service.dart';
 import '../../screens/content_detail_screen.dart';
 import '../../screens/era_detail_screen.dart';
 import '../../screens/historia_article_detail_screen.dart';
@@ -29,7 +30,7 @@ class AppNavigation {
     bool isLocked = false,
   }) async {
     if (isLocked) {
-      return openPremium(context);
+      return openPremium(context, source: 'era_lock');
     }
     await Navigator.push(
       context,
@@ -51,7 +52,7 @@ class AppNavigation {
       return;
     }
     if (isLocked) {
-      return openPremium(context);
+      return openPremium(context, source: 'content_lock');
     }
     await Navigator.push(
       context,
@@ -59,7 +60,19 @@ class AppNavigation {
     );
   }
 
-  static Future<void> openPremium(BuildContext context) async {
+  /// Abre el paywall. [source] dice DE DÓNDE viene, y es el dato más
+  /// accionable de toda la analítica: separa "cerró el candado de una etapa"
+  /// de "quiso escuchar el audio" de "entró por el menú", que son tres
+  /// intenciones de compra muy distintas. Sin él solo se sabe cuánta gente
+  /// vio el paywall, no qué la empujó hasta ahí.
+  static Future<void> openPremium(
+    BuildContext context, {
+    String source = 'other',
+  }) async {
+    context.read<AnalyticsService>().log(
+          AnalyticsService.paywallView,
+          target: source,
+        );
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const PremiumScreen()),
@@ -73,7 +86,7 @@ class AppNavigation {
     // Puerta de la etapa: las de pago ni se abren para un usuario free, así
     // no ve una lista de capítulos que no puede leer.
     if (stage.isPremium && !context.read<PremiumProvider>().isPremium) {
-      return openPremium(context);
+      return openPremium(context, source: 'stage_lock');
     }
     await Navigator.push(
       context,
@@ -134,7 +147,17 @@ class AppNavigation {
       isDailyArticle: isDailyArticle,
       stageIsPremium: resolvedStage?.isPremium ?? true,
     );
-    if (locked) return openPremium(context);
+    if (locked) return openPremium(context, source: 'chapter_lock');
+
+    // Se registra aquí, en el punto único por el que pasan TODOS los caminos
+    // al lector, en vez de en cada pantalla que abre un capítulo: así ninguna
+    // ruta nueva se queda sin medir por olvido.
+    context.read<AnalyticsService>().log(
+          isDailyArticle
+              ? AnalyticsService.dailyOpen
+              : AnalyticsService.chapterOpen,
+          target: article.id,
+        );
 
     final route = MaterialPageRoute(
       builder: (_) => HistoriaArticleDetailScreen(

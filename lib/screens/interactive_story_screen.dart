@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../services/analytics_service.dart';
 import '../core/constants/app_colors.dart';
 import '../core/navigation/app_navigation.dart';
 import '../models/interactive_story.dart';
@@ -471,6 +472,10 @@ class _EndingViewState extends State<_EndingView> {
     if (_showUnlockedBadge) {
       // Final nuevo desbloqueado: otro momento bueno para la valoración.
       unawaited(context.read<ReviewPromptService>().registerGoodMoment());
+      context.read<AnalyticsService>().log(
+            AnalyticsService.storyEnding,
+            target: widget.story.id,
+          );
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) context.read<InteractiveStoryProvider>().consumeJustUnlockedEndingFlag();
       });
