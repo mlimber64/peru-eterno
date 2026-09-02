@@ -56,18 +56,26 @@ class CategoryConfigs {
   static String labelOf(String category, String lang) =>
       of(category).labelFor(lang);
 
-  /// Categorías cuyo contenido curado todavía no está listo para publicarse
-  /// (mezcla incompleta de contenido editorial + fallback de Wikipedia). Se
-  /// mantienen visibles en la UI pero bloqueadas con un aviso "Próximamente"
-  /// en vez de quitarse — ver [[widgets/coming_soon.dart]] y su uso en
-  /// HomeScreen/ExploreScreen/WorldScreen.
-  static const Set<String> comingSoonCategories = {
-    'personaje',
-    'tradicion',
-    'gastronomia',
-    'musica',
-    'geografia',
-  };
+  /// Categorías cuyo contenido curado todavía no está listo para publicarse.
+  /// Se mantienen visibles en la UI pero bloqueadas con un aviso
+  /// "Próximamente" en vez de quitarse — ver [[widgets/coming_soon.dart]] y su
+  /// uso en HomeScreen/ExploreScreen/WorldScreen. Todo pasa por
+  /// [isComingSoon], así que añadir o quitar una categoría aquí basta.
+  ///
+  /// **Vacío desde el 2026-09-02.** Contenía personaje, tradicion,
+  /// gastronomia, musica y geografia, bloqueadas por una "mezcla incompleta
+  /// de contenido editorial + fallback de Wikipedia" que ya no existe: las 27
+  /// fichas están completas en `assets/data/editorial_*.json` (título,
+  /// subtítulo y contenido en es/it/en, con sus imágenes) y las mismas 29
+  /// filas están en `content_items` de Supabase. Como
+  /// `ContentDetailScreen._loadWikipediaContent` busca primero en los assets
+  /// por (id, categoría) y solo cae a Wikipedia si no encuentra nada, y los
+  /// ids del servidor coinciden 1:1 con los de los assets, ninguna de estas
+  /// fichas llega a pedirle nada a Wikipedia.
+  ///
+  /// El mecanismo se conserva a propósito para la próxima categoría que se
+  /// empiece antes de terminarla.
+  static const Set<String> comingSoonCategories = {};
 
   static bool isComingSoon(String category) =>
       comingSoonCategories.contains(category);
