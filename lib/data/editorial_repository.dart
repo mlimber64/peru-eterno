@@ -26,6 +26,26 @@ class EditorialRepository {
     }
   }
 
+  /// Ruta del asset con la imagen de la ficha [id] de [category], **ya
+  /// confirmada en el bundle**, o `null` si la ficha no existe, no declara
+  /// `imagen_local` o el archivo no está empaquetado.
+  ///
+  /// Comprobar con `rootBundle.load` antes de devolverla es el punto: quien
+  /// llama puede pintar su degradado de respaldo sin que aparezca un icono de
+  /// imagen rota. Vive aquí porque ya hacía falta en tres sitios
+  /// (`LocalCinematicCard`, la cabecera de `ContentDetailScreen` y la tarjeta
+  /// "Personaje del día").
+  static Future<String?> imageAssetFor(String id, String category) async {
+    final path = (await findById(id, category))?.imagenAssetPath;
+    if (path == null) return null;
+    try {
+      await rootBundle.load(path);
+      return path;
+    } catch (_) {
+      return null;
+    }
+  }
+
   /// Returns all items for [category], sorted by orden.
   /// Returns an empty list if the category has no JSON file or the file is missing.
   static Future<List<EditorialContent>> loadCategory(String category) =>

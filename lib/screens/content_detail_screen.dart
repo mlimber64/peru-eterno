@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -115,7 +114,11 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
           _editorialFuente = editorial.fuenteFor(lang);
         });
       }
-      await _resolveEditorialImage(editorial);
+      final imagePath = await EditorialRepository.imageAssetFor(
+          widget.item.id, widget.item.category);
+      if (imagePath != null && mounted) {
+        setState(() => _editorialImagePath = imagePath);
+      }
       return;
     }
 
@@ -187,21 +190,6 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
         ),
       ),
     );
-  }
-
-  /// Confirma que la imagen de [editorial] existe en el bundle antes de
-  /// usarla. Mismo patrón que `LocalCinematicCard._resolveAsset`: si el
-  /// archivo no está, se queda el degradado de categoría sin un parpadeo de
-  /// icono roto.
-  Future<void> _resolveEditorialImage(EditorialContent editorial) async {
-    final path = editorial.imagenAssetPath;
-    if (path == null) return;
-    try {
-      await rootBundle.load(path);
-      if (mounted) setState(() => _editorialImagePath = path);
-    } catch (_) {
-      // Asset ausente — se mantiene el degradado.
-    }
   }
 
   // ── SliverAppBar ──────────────────────────────────────────────────────────
