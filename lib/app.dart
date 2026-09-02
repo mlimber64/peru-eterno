@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'core/constants/app_colors.dart';
-import 'screens/splash_screen.dart';
+import 'core/navigation/app_router.dart';
 
 class PeruEternoApp extends StatelessWidget {
   const PeruEternoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
       title: 'Perú Eterno',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -34,7 +35,6 @@ class PeruEternoApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: const SplashScreen(),
     );
   }
 }

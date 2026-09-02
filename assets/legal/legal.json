@@ -1,0 +1,545 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-09-01",
+  "controller": "Limber Mendoza",
+  "controller_country": "Italia",
+  "contact_email": "perueterno.app@gmail.com",
+  "privacy": {
+    "es": {
+      "title": "Política de Privacidad",
+      "intro": "Perú Eterno es una app educativa sobre la historia del Perú. Esta política explica, sin rodeos, qué datos trata la app, para qué, con quién se comparten y cómo puedes borrarlos. No hay publicidad, ni rastreadores, ni venta de datos.",
+      "sections": [
+        {
+          "h": "1. Responsable del tratamiento",
+          "p": [
+            "Limber Mendoza (persona física), Italia, desarrollador independiente de la aplicación «Perú Eterno».",
+            "Contacto para cualquier asunto de privacidad: {email}"
+          ]
+        },
+        {
+          "h": "2. Qué datos tratamos",
+          "p": [
+            "Identificador anónimo: al abrir la app por primera vez se crea una sesión anónima que genera un identificador aleatorio (UUID). No pedimos tu nombre, teléfono, contactos, ubicación, cámara ni micrófono, y no hace falta registrarse para usar la app.",
+            "Correo electrónico (opcional): solo si decides vincular tu cuenta desde Ajustes para no perder el progreso al cambiar de teléfono. En ese caso guardamos tu dirección como identificador de la cuenta y te enviamos un código de verificación. No la usamos para publicidad ni novedades, y puedes seguir usando la app entera sin vincular nada.",
+            "Progreso de aprendizaje: capítulos marcados como leídos, puntuación de los cuestionarios, cartas coleccionables desbloqueadas, finales alcanzados en las historias interactivas, racha diaria y fecha de la última lectura.",
+            "Preferencias y datos que no salen de tu dispositivo: idioma elegido, tamaño del texto de lectura, favoritos, historial de navegación dentro de la app y el estado de tu suscripción.",
+            "Datos técnicos mínimos: como en cualquier conexión a internet, las peticiones HTTPS a nuestros proveedores incluyen tu dirección IP para que la comunicación funcione. Nosotros no la guardamos ni la asociamos a tu identificador.",
+            "Informes de error: si la app falla, enviamos a nuestro propio servidor el tipo de error, su traza técnica, la versión de la app, el sistema operativo y el idioma, para poder corregirlo. No viaja nada de lo que hayas escrito ni qué estabas leyendo, y no se usa ningún servicio de terceros para esto."
+          ]
+        },
+        {
+          "h": "3. Para qué usamos esos datos",
+          "p": [
+            "Guardar tu progreso y poder recuperarlo si cambias de dispositivo o reinstalas la app. La recuperación solo es posible si has vinculado un correo: sin él, el progreso queda atado a esta instalación.",
+            "Recordar tus preferencias (idioma, tamaño de texto, favoritos) y mantener la racha de lectura.",
+            "Dar acceso al contenido premium a quien tiene una suscripción o prueba gratuita vigente.",
+            "Base legal (RGPD, si te aplica): la ejecución del servicio que nos solicitas al usar la app. No tratamos tus datos con fines publicitarios, de perfilado ni de decisiones automatizadas."
+          ]
+        },
+        {
+          "h": "4. Lo que esta app NO hace",
+          "p": [
+            "No vendemos, alquilamos ni cedemos tus datos a terceros con fines comerciales.",
+            "No mostramos publicidad ni integramos redes publicitarias.",
+            "No incorporamos SDK de analítica ni rastreadores de terceros.",
+            "No usamos identificadores de publicidad (AAID / IDFA) ni te rastreamos entre aplicaciones o sitios web."
+          ]
+        },
+        {
+          "h": "5. Dónde se guardan tus datos",
+          "p": [
+            "En tu dispositivo: preferencias y progreso se guardan localmente, y el contenido descargado se almacena en una base de datos local para que la app funcione sin conexión.",
+            "En la nube: el progreso se sincroniza con Supabase (Supabase Inc.), nuestro proveedor de base de datos y autenticación. Las tablas tienen reglas de seguridad a nivel de fila (RLS) que impiden que un usuario acceda a los datos de otro.",
+            "Tus datos se alojan en la Unión Europea: la base de datos está en la región Europa Central (Frankfurt, Alemania). Algunos proveedores auxiliares pueden tratar datos fuera del Espacio Económico Europeo; esas transferencias se amparan en las cláusulas contractuales tipo de la Comisión Europea."
+          ]
+        },
+        {
+          "h": "6. Terceros que intervienen",
+          "p": [
+            "Supabase: alojamiento de la base de datos, autenticación anónima y entrega de contenido.",
+            "Google Play Billing y Apple App Store: procesan la compra y la renovación de la suscripción. El pago ocurre íntegramente dentro de la tienda; nunca vemos ni almacenamos tu tarjeta ni tus datos de pago.",
+            "Wikipedia (Wikimedia Foundation) y Europeana: se consultan para mostrar material complementario. Reciben la consulta de búsqueda, nunca tu identificador de usuario.",
+            "Cloudinary: entrega de parte de las imágenes de la app.",
+            "Cada uno de estos proveedores tiene su propia política de privacidad, que te recomendamos revisar."
+          ]
+        },
+        {
+          "h": "7. Cuánto tiempo conservamos los datos",
+          "p": [
+            "Mientras sigas usando la app. Si usas la opción «Borrar mis datos» de los Ajustes, tu progreso se elimina de inmediato del dispositivo y del servidor.",
+            "Las cuentas anónimas sin actividad durante 24 meses se eliminan junto con su progreso.",
+            "Desinstalar la app borra todo lo guardado en el dispositivo, pero no lo que ya se sincronizó en el servidor: para eso usa «Borrar mis datos» antes de desinstalar, o escríbenos.",
+            "Los informes de error se borran automáticamente a los 90 días: pasado ese tiempo ya no sirven para arreglar nada."
+          ]
+        },
+        {
+          "h": "8. Tus derechos",
+          "p": [
+            "Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad que te reconoce el Reglamento General de Protección de Datos (RGPD). Si resides fuera de la Unión Europea, puedes ejercer los derechos equivalentes que te otorgue la normativa de tu país.",
+            "La vía más rápida es la propia app: Ajustes → «Borrar mis datos» elimina toda tu información al instante, sin necesidad de contactarnos.",
+            "También puedes escribir a {email}. Responderemos en un plazo máximo de 30 días. Como la cuenta es anónima, para atender una solicitud por correo necesitaremos el identificador que aparece en Ajustes → Acerca de.",
+            "Si consideras que no hemos atendido bien tu solicitud, puedes reclamar ante la autoridad de control de tu país. La autoridad competente para nosotros es el Garante per la protezione dei dati personali (Italia)."
+          ]
+        },
+        {
+          "h": "9. Menores de edad",
+          "p": [
+            "El contenido es educativo y apto para todo público, pero la app no está dirigida a menores de 13 años y no recogemos conscientemente sus datos.",
+            "Si eres madre, padre o tutor y crees que un menor a tu cargo nos ha facilitado datos, escríbenos a {email} y los eliminaremos."
+          ]
+        },
+        {
+          "h": "10. Cambios en esta política",
+          "p": [
+            "Si modificamos esta política publicaremos la nueva versión aquí con su fecha de actualización. Los cambios importantes se avisarán dentro de la app antes de que entren en vigor.",
+            "Última actualización: {updated_at}."
+          ]
+        }
+      ]
+    },
+    "it": {
+      "title": "Informativa sulla Privacy",
+      "intro": "Perú Eterno è un'app educativa sulla storia del Perù. Questa informativa spiega, senza giri di parole, quali dati tratta l'app, per quale finalità, con chi vengono condivisi e come puoi cancellarli. Non c'è pubblicità, non ci sono tracker e non vendiamo dati.",
+      "sections": [
+        {
+          "h": "1. Titolare del trattamento",
+          "p": [
+            "Limber Mendoza (persona fisica), Italia, sviluppatore indipendente dell'applicazione «Perú Eterno».",
+            "Contatto per qualsiasi questione relativa alla privacy: {email}"
+          ]
+        },
+        {
+          "h": "2. Quali dati trattiamo",
+          "p": [
+            "Identificativo anonimo: alla prima apertura dell'app viene creata una sessione anonima che genera un identificativo casuale (UUID). Non chiediamo il tuo nome, telefono, contatti, posizione, fotocamera né microfono, e non serve registrarsi per usare l'app.",
+            "Email (facoltativa): solo se decidi di collegare il tuo account dalle Impostazioni per non perdere i progressi cambiando telefono. In quel caso conserviamo il tuo indirizzo come identificativo dell'account e ti inviamo un codice di verifica. Non lo usiamo per pubblicità né newsletter, e puoi usare tutta l'app senza collegare nulla.",
+            "Progressi di apprendimento: capitoli segnati come letti, punteggio dei quiz, carte da collezione sbloccate, finali raggiunti nelle storie interattive, serie giornaliera e data dell'ultima lettura.",
+            "Preferenze e dati che non lasciano il dispositivo: lingua scelta, dimensione del testo di lettura, preferiti, cronologia di navigazione interna all'app e stato del tuo abbonamento.",
+            "Dati tecnici minimi: come in qualsiasi connessione a internet, le richieste HTTPS ai nostri fornitori includono il tuo indirizzo IP affinché la comunicazione funzioni. Noi non lo conserviamo né lo associamo al tuo identificativo.",
+            "Segnalazioni di errore: se l'app va in errore, inviamo al nostro server il tipo di errore, la sua traccia tecnica, la versione dell'app, il sistema operativo e la lingua, per poterlo correggere. Non viene inviato nulla di ciò che hai scritto né cosa stavi leggendo, e per questo non usiamo alcun servizio di terze parti."
+          ]
+        },
+        {
+          "h": "3. Perché usiamo questi dati",
+          "p": [
+            "Salvare i tuoi progressi e poterli recuperare se cambi dispositivo o reinstalli l'app. Il recupero è possibile solo se hai collegato un'email: senza, i progressi restano legati a questa installazione.",
+            "Ricordare le tue preferenze (lingua, dimensione del testo, preferiti) e mantenere la serie di lettura.",
+            "Dare accesso ai contenuti premium a chi ha un abbonamento o una prova gratuita in corso.",
+            "Base giuridica (GDPR): l'esecuzione del servizio che ci richiedi usando l'app. Non trattiamo i tuoi dati per finalità pubblicitarie, di profilazione o decisioni automatizzate."
+          ]
+        },
+        {
+          "h": "4. Ciò che questa app NON fa",
+          "p": [
+            "Non vendiamo, non affittiamo e non cediamo i tuoi dati a terzi per finalità commerciali.",
+            "Non mostriamo pubblicità e non integriamo circuiti pubblicitari.",
+            "Non includiamo SDK di analytics né tracker di terze parti.",
+            "Non usiamo identificativi pubblicitari (AAID / IDFA) e non ti tracciamo tra app o siti web."
+          ]
+        },
+        {
+          "h": "5. Dove sono conservati i tuoi dati",
+          "p": [
+            "Sul tuo dispositivo: preferenze e progressi sono salvati localmente e i contenuti scaricati sono archiviati in un database locale, così l'app funziona anche offline.",
+            "Nel cloud: i progressi sono sincronizzati con Supabase (Supabase Inc.), il nostro fornitore di database e autenticazione. Le tabelle applicano regole di sicurezza a livello di riga (RLS) che impediscono a un utente di accedere ai dati di un altro.",
+            "I tuoi dati sono ospitati nell'Unione Europea: il database si trova nella regione Europa Centrale (Francoforte, Germania). Alcuni fornitori ausiliari possono trattare dati al di fuori dello Spazio Economico Europeo; tali trasferimenti sono coperti dalle clausole contrattuali tipo della Commissione Europea."
+          ]
+        },
+        {
+          "h": "6. Terze parti coinvolte",
+          "p": [
+            "Supabase: hosting del database, autenticazione anonima e distribuzione dei contenuti.",
+            "Google Play Billing e Apple App Store: gestiscono l'acquisto e il rinnovo dell'abbonamento. Il pagamento avviene interamente all'interno dello store; non vediamo né conserviamo la tua carta o i tuoi dati di pagamento.",
+            "Wikipedia (Wikimedia Foundation) ed Europeana: vengono consultate per mostrare materiale complementare. Ricevono la query di ricerca, mai il tuo identificativo utente.",
+            "Cloudinary: distribuzione di parte delle immagini dell'app.",
+            "Ognuno di questi fornitori ha una propria informativa sulla privacy, che ti consigliamo di consultare."
+          ]
+        },
+        {
+          "h": "7. Per quanto tempo conserviamo i dati",
+          "p": [
+            "Finché continui a usare l'app. Se usi l'opzione «Cancella i miei dati» nelle Impostazioni, i tuoi progressi vengono eliminati immediatamente dal dispositivo e dal server.",
+            "Gli account anonimi inattivi per 24 mesi vengono eliminati insieme ai loro progressi.",
+            "Disinstallare l'app cancella tutto ciò che è salvato sul dispositivo, ma non ciò che è già stato sincronizzato sul server: per questo usa «Cancella i miei dati» prima di disinstallare, oppure scrivici.",
+            "Le segnalazioni di errore vengono cancellate automaticamente dopo 90 giorni: passato quel tempo non servono più a correggere nulla."
+          ]
+        },
+        {
+          "h": "8. I tuoi diritti",
+          "p": [
+            "Puoi esercitare i diritti di accesso, rettifica, cancellazione, opposizione, limitazione e portabilità riconosciuti dal Regolamento generale sulla protezione dei dati (GDPR). Se risiedi fuori dall'Unione Europea, puoi esercitare i diritti equivalenti previsti dalla normativa del tuo Paese.",
+            "La via più rapida è l'app stessa: Impostazioni → «Cancella i miei dati» elimina tutte le tue informazioni all'istante, senza bisogno di contattarci.",
+            "Puoi anche scrivere a {email}. Risponderemo entro un massimo di 30 giorni. Poiché l'account è anonimo, per gestire una richiesta via email ci servirà l'identificativo che compare in Impostazioni → Informazioni.",
+            "Se ritieni che la tua richiesta non sia stata gestita correttamente, puoi presentare reclamo all'autorità di controllo del tuo Paese. L'autorità competente nei nostri confronti è il Garante per la protezione dei dati personali (Italia)."
+          ]
+        },
+        {
+          "h": "9. Minori",
+          "p": [
+            "Il contenuto è educativo e adatto a tutti, ma l'app non è rivolta ai minori di 13 anni e non raccogliamo consapevolmente i loro dati.",
+            "Se sei un genitore o un tutore e ritieni che un minore a tuo carico ci abbia fornito dei dati, scrivici a {email} e li elimineremo."
+          ]
+        },
+        {
+          "h": "10. Modifiche a questa informativa",
+          "p": [
+            "Se modifichiamo questa informativa pubblicheremo qui la nuova versione con la relativa data di aggiornamento. Le modifiche rilevanti saranno segnalate all'interno dell'app prima di entrare in vigore.",
+            "Ultimo aggiornamento: {updated_at}."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "title": "Privacy Policy",
+      "intro": "Perú Eterno is an educational app about the history of Peru. This policy explains plainly what data the app handles, why, who it is shared with and how you can delete it. There are no ads, no trackers and no data selling.",
+      "sections": [
+        {
+          "h": "1. Data controller",
+          "p": [
+            "Limber Mendoza (individual), Italy, independent developer of the «Perú Eterno» application.",
+            "Contact for any privacy matter: {email}"
+          ]
+        },
+        {
+          "h": "2. What data we handle",
+          "p": [
+            "Anonymous identifier: the first time you open the app an anonymous session is created, generating a random identifier (UUID). We do not ask for your name, phone number, contacts, location, camera or microphone, and no sign-up is needed to use the app.",
+            "Email address (optional): only if you choose to link your account from Settings so you do not lose your progress when changing phone. In that case we store your address as the account identifier and send you a verification code. We do not use it for advertising or newsletters, and you can use the whole app without linking anything.",
+            "Learning progress: chapters marked as read, quiz scores, unlocked collectible cards, endings reached in interactive stories, daily streak and the date of your last reading session.",
+            "Preferences and data that never leaves your device: chosen language, reading text size, favourites, in-app browsing history and your subscription status.",
+            "Minimal technical data: as with any internet connection, HTTPS requests to our providers include your IP address so the communication can work. We do not store it or link it to your identifier.",
+            "Error reports: if the app fails, we send our own server the error type, its technical trace, the app version, the operating system and the language, so we can fix it. Nothing you have written or were reading is sent, and no third-party service is used for this."
+          ]
+        },
+        {
+          "h": "3. Why we use this data",
+          "p": [
+            "To save your progress and let you recover it if you change device or reinstall the app. Recovery is only possible if you have linked an email: without one, progress stays tied to this installation.",
+            "To remember your preferences (language, text size, favourites) and keep your reading streak.",
+            "To grant premium content access to users with an active subscription or free trial.",
+            "Legal basis (GDPR, where it applies to you): performance of the service you request by using the app. We do not process your data for advertising, profiling or automated decision-making."
+          ]
+        },
+        {
+          "h": "4. What this app does NOT do",
+          "p": [
+            "We do not sell, rent or share your data with third parties for commercial purposes.",
+            "We do not show ads and we do not integrate any advertising network.",
+            "We do not embed analytics SDKs or third-party trackers.",
+            "We do not use advertising identifiers (AAID / IDFA) and we do not track you across apps or websites."
+          ]
+        },
+        {
+          "h": "5. Where your data is stored",
+          "p": [
+            "On your device: preferences and progress are stored locally, and downloaded content is kept in a local database so the app works offline.",
+            "In the cloud: progress is synced with Supabase (Supabase Inc.), our database and authentication provider. Tables enforce row level security (RLS) rules that prevent one user from reaching another user's data.",
+            "Your data is hosted in the European Union: the database is located in the Central Europe region (Frankfurt, Germany). Some auxiliary providers may process data outside the European Economic Area; such transfers are covered by the European Commission's standard contractual clauses."
+          ]
+        },
+        {
+          "h": "6. Third parties involved",
+          "p": [
+            "Supabase: database hosting, anonymous authentication and content delivery.",
+            "Google Play Billing and Apple App Store: they process the subscription purchase and its renewal. Payment happens entirely inside the store; we never see or store your card or payment details.",
+            "Wikipedia (Wikimedia Foundation) and Europeana: queried to show supplementary material. They receive the search query, never your user identifier.",
+            "Cloudinary: delivery of some of the app's images.",
+            "Each of these providers has its own privacy policy, which we encourage you to review."
+          ]
+        },
+        {
+          "h": "7. How long we keep data",
+          "p": [
+            "For as long as you keep using the app. If you use the «Delete my data» option in Settings, your progress is removed immediately from both the device and the server.",
+            "Anonymous accounts with no activity for 24 months are deleted along with their progress.",
+            "Uninstalling the app erases everything stored on the device, but not what has already been synced to the server: for that, use «Delete my data» before uninstalling, or write to us.",
+            "Error reports are deleted automatically after 90 days: past that point they are no longer useful for fixing anything."
+          ]
+        },
+        {
+          "h": "8. Your rights",
+          "p": [
+            "You may exercise the rights of access, rectification, erasure, objection, restriction and portability granted by the General Data Protection Regulation (GDPR). If you live outside the European Union, you may exercise the equivalent rights granted by your country's legislation.",
+            "The fastest route is the app itself: Settings → «Delete my data» erases all your information instantly, with no need to contact us.",
+            "You can also write to {email}. We will respond within 30 days at most. Since the account is anonymous, to handle an email request we will need the identifier shown in Settings → About.",
+            "If you believe your request was not handled properly, you may lodge a complaint with your country's supervisory authority. The authority competent for us is the Garante per la protezione dei dati personali (Italy)."
+          ]
+        },
+        {
+          "h": "9. Children",
+          "p": [
+            "The content is educational and suitable for all audiences, but the app is not directed at children under 13 and we do not knowingly collect their data.",
+            "If you are a parent or guardian and believe a child in your care has provided us with data, write to {email} and we will delete it."
+          ]
+        },
+        {
+          "h": "10. Changes to this policy",
+          "p": [
+            "If we change this policy we will publish the new version here with its update date. Significant changes will be announced inside the app before they take effect.",
+            "Last updated: {updated_at}."
+          ]
+        }
+      ]
+    }
+  },
+  "terms": {
+    "es": {
+      "title": "Términos de Servicio",
+      "intro": "Estos términos regulan el uso de la aplicación Perú Eterno. Al instalarla y usarla, aceptas lo que se describe aquí. Están escritos para que se entiendan; si algo no te queda claro, escríbenos.",
+      "sections": [
+        {
+          "h": "1. Quién presta el servicio",
+          "p": [
+            "Perú Eterno es una aplicación desarrollada y operada por Limber Mendoza (persona física), Italia. Contacto: {email}"
+          ]
+        },
+        {
+          "h": "2. Qué es la app y qué no es",
+          "p": [
+            "Perú Eterno es una app de divulgación educativa sobre la historia del Perú: capítulos ilustrados, cuestionarios, cartas coleccionables, audio narrado y narrativa interactiva.",
+            "El contenido se elabora con fines divulgativos y no sustituye a una fuente académica ni a una publicación científica revisada. La historia admite interpretaciones distintas y puede contener imprecisiones; si detectas un error, agradecemos que nos lo comuniques.",
+            "Las historias interactivas son ficción construida sobre un contexto histórico real, no una crónica de hechos verificados."
+          ]
+        },
+        {
+          "h": "3. Licencia de uso",
+          "p": [
+            "Te concedemos una licencia personal, revocable, no exclusiva y no transferible para usar la app en tus dispositivos con fines personales y no comerciales.",
+            "No está permitido: revender el acceso, extraer o copiar masivamente el contenido, redistribuir textos o imágenes fuera de la app, ni usarlos para entrenar modelos o crear productos derivados sin autorización escrita."
+          ]
+        },
+        {
+          "h": "4. Suscripción premium",
+          "p": [
+            "Parte del contenido es gratuito y parte requiere suscripción premium. Se ofrecen dos planes: semanal y anual.",
+            "Prueba gratuita: la app ofrece una prueba de 7 días, disponible una sola vez por usuario. Al terminar la prueba, el acceso premium se interrumpe salvo que contrates un plan.",
+            "El cobro lo gestiona íntegramente Google Play o la App Store, en tu moneda local y al precio que muestre la tienda en el momento de la compra.",
+            "La suscripción se renueva automáticamente al final de cada periodo, salvo que la canceles al menos 24 horas antes de la fecha de renovación.",
+            "Para cancelar debes hacerlo desde la propia tienda: en Android, Google Play → Pagos y suscripciones; en iOS, Ajustes → tu nombre → Suscripciones. Desinstalar la app NO cancela la suscripción."
+          ]
+        },
+        {
+          "h": "5. Reembolsos",
+          "p": [
+            "Las devoluciones las gestiona la tienda donde compraste (Google Play o App Store) según sus propias políticas. Nosotros no procesamos pagos ni podemos emitir reembolsos directamente.",
+            "Si resides en la Unión Europea, conservas los derechos de desistimiento y garantía que te otorga la normativa de consumo aplicable."
+          ]
+        },
+        {
+          "h": "6. Propiedad intelectual y fuentes",
+          "p": [
+            "Los textos originales, la estructura editorial, el diseño y las ilustraciones propias de la app son titularidad de Limber Mendoza, salvo indicación en contrario.",
+            "La app muestra además material de terceros: extractos de Wikipedia (Wikimedia Foundation), bajo licencia CC BY-SA, y objetos culturales de Europeana con las licencias que indica cada institución.",
+            "Las fuentes y atribuciones están detalladas en la sección Créditos dentro de la app."
+          ]
+        },
+        {
+          "h": "7. Uso aceptable",
+          "p": [
+            "No está permitido intentar eludir el acceso de pago, aplicar ingeniería inversa a la app, automatizar peticiones contra nuestros servidores o los de nuestros proveedores, ni interferir con el funcionamiento normal del servicio.",
+            "El incumplimiento puede llevar a la suspensión del acceso, sin perjuicio de los reembolsos que corresponda gestionar con la tienda."
+          ]
+        },
+        {
+          "h": "8. Disponibilidad del servicio",
+          "p": [
+            "La app se ofrece «tal cual». Buena parte del contenido funciona sin conexión, pero la sincronización del progreso y el material complementario dependen de servicios de terceros que pueden fallar o interrumpirse.",
+            "Podemos añadir, modificar o retirar contenidos y funciones, y también dejar de prestar el servicio. Si eso ocurriera, lo anunciaríamos con antelación razonable dentro de la app."
+          ]
+        },
+        {
+          "h": "9. Limitación de responsabilidad",
+          "p": [
+            "Hasta donde permita la ley aplicable, no respondemos por daños indirectos, pérdida de datos o lucro cesante derivados del uso de la app.",
+            "Nada de lo anterior limita los derechos irrenunciables que la normativa de consumo te reconozca."
+          ]
+        },
+        {
+          "h": "10. Ley aplicable",
+          "p": [
+            "Estos términos se rigen por la legislación italiana. Si eres consumidor, conservas siempre la protección de las normas imperativas de tu país de residencia habitual, que estos términos no pueden limitar."
+          ]
+        },
+        {
+          "h": "11. Cambios en los términos",
+          "p": [
+            "Podemos actualizar estos términos. La versión vigente es siempre la publicada aquí, con su fecha. Los cambios sustanciales se avisarán dentro de la app.",
+            "Última actualización: {updated_at}."
+          ]
+        }
+      ]
+    },
+    "it": {
+      "title": "Termini di Servizio",
+      "intro": "Questi termini regolano l'uso dell'applicazione Perú Eterno. Installandola e utilizzandola, accetti quanto qui descritto. Sono scritti per essere comprensibili; se qualcosa non ti è chiaro, scrivici.",
+      "sections": [
+        {
+          "h": "1. Chi eroga il servizio",
+          "p": [
+            "Perú Eterno è un'applicazione sviluppata e gestita da Limber Mendoza (persona fisica), Italia. Contatto: {email}"
+          ]
+        },
+        {
+          "h": "2. Cos'è l'app e cosa non è",
+          "p": [
+            "Perú Eterno è un'app di divulgazione educativa sulla storia del Perù: capitoli illustrati, quiz, carte da collezione, audio narrato e narrativa interattiva.",
+            "I contenuti hanno finalità divulgativa e non sostituiscono una fonte accademica né una pubblicazione scientifica sottoposta a revisione. La storia ammette interpretazioni diverse e può contenere imprecisioni; se noti un errore, ti saremo grati se ce lo segnali.",
+            "Le storie interattive sono opere di finzione costruite su un contesto storico reale, non cronache di fatti verificati."
+          ]
+        },
+        {
+          "h": "3. Licenza d'uso",
+          "p": [
+            "Ti concediamo una licenza personale, revocabile, non esclusiva e non trasferibile per usare l'app sui tuoi dispositivi a fini personali e non commerciali.",
+            "Non è consentito: rivendere l'accesso, estrarre o copiare massivamente i contenuti, ridistribuire testi o immagini al di fuori dell'app, né usarli per addestrare modelli o creare prodotti derivati senza autorizzazione scritta."
+          ]
+        },
+        {
+          "h": "4. Abbonamento premium",
+          "p": [
+            "Una parte dei contenuti è gratuita, un'altra richiede l'abbonamento premium. Sono disponibili due piani: settimanale e annuale.",
+            "Prova gratuita: l'app offre una prova di 7 giorni, disponibile una sola volta per utente. Al termine della prova l'accesso premium si interrompe, salvo sottoscrizione di un piano.",
+            "L'addebito è gestito interamente da Google Play o dall'App Store, nella tua valuta locale e al prezzo indicato dallo store al momento dell'acquisto.",
+            "L'abbonamento si rinnova automaticamente al termine di ogni periodo, salvo cancellazione almeno 24 ore prima della data di rinnovo.",
+            "La cancellazione va effettuata dallo store stesso: su Android, Google Play → Pagamenti e abbonamenti; su iOS, Impostazioni → il tuo nome → Abbonamenti. Disinstallare l'app NON cancella l'abbonamento."
+          ]
+        },
+        {
+          "h": "5. Rimborsi",
+          "p": [
+            "I rimborsi sono gestiti dallo store presso cui hai acquistato (Google Play o App Store) secondo le rispettive politiche. Noi non elaboriamo pagamenti e non possiamo emettere rimborsi direttamente.",
+            "Se risiedi nell'Unione Europea, conservi i diritti di recesso e garanzia previsti dalla normativa di consumo applicabile."
+          ]
+        },
+        {
+          "h": "6. Proprietà intellettuale e fonti",
+          "p": [
+            "I testi originali, la struttura editoriale, il design e le illustrazioni proprie dell'app appartengono a Limber Mendoza, salvo diversa indicazione.",
+            "L'app mostra inoltre materiale di terzi: estratti da Wikipedia (Wikimedia Foundation) con licenza CC BY-SA e oggetti culturali di Europeana con le licenze indicate da ciascuna istituzione.",
+            "Fonti e attribuzioni sono dettagliate nella sezione Crediti all'interno dell'app."
+          ]
+        },
+        {
+          "h": "7. Uso consentito",
+          "p": [
+            "Non è consentito tentare di aggirare l'accesso a pagamento, decompilare l'app, automatizzare richieste verso i nostri server o quelli dei nostri fornitori, né interferire con il normale funzionamento del servizio.",
+            "La violazione può comportare la sospensione dell'accesso, fatti salvi i rimborsi da richiedere allo store."
+          ]
+        },
+        {
+          "h": "8. Disponibilità del servizio",
+          "p": [
+            "L'app è fornita «così com'è». Gran parte dei contenuti funziona offline, ma la sincronizzazione dei progressi e il materiale complementare dipendono da servizi di terzi che possono guastarsi o interrompersi.",
+            "Possiamo aggiungere, modificare o rimuovere contenuti e funzioni, e anche cessare l'erogazione del servizio. In tal caso lo annunceremo con ragionevole anticipo all'interno dell'app."
+          ]
+        },
+        {
+          "h": "9. Limitazione di responsabilità",
+          "p": [
+            "Nei limiti consentiti dalla legge applicabile, non rispondiamo di danni indiretti, perdita di dati o mancato guadagno derivanti dall'uso dell'app.",
+            "Quanto sopra non limita i diritti inderogabili riconosciuti dalla normativa di consumo."
+          ]
+        },
+        {
+          "h": "10. Legge applicabile",
+          "p": [
+            "Questi termini sono regolati dalla legge italiana. Se sei un consumatore, conservi sempre la tutela delle norme imperative del tuo Paese di residenza abituale, che questi termini non possono limitare."
+          ]
+        },
+        {
+          "h": "11. Modifiche ai termini",
+          "p": [
+            "Possiamo aggiornare questi termini. La versione vigente è sempre quella pubblicata qui, con la relativa data. Le modifiche sostanziali saranno segnalate all'interno dell'app.",
+            "Ultimo aggiornamento: {updated_at}."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "title": "Terms of Service",
+      "intro": "These terms govern the use of the Perú Eterno application. By installing and using it, you accept what is described here. They are written to be understood; if anything is unclear, write to us.",
+      "sections": [
+        {
+          "h": "1. Who provides the service",
+          "p": [
+            "Perú Eterno is an application developed and operated by Limber Mendoza (individual), Italy. Contact: {email}"
+          ]
+        },
+        {
+          "h": "2. What the app is and is not",
+          "p": [
+            "Perú Eterno is an educational app about the history of Peru: illustrated chapters, quizzes, collectible cards, narrated audio and interactive storytelling.",
+            "The content is produced for educational outreach and does not replace an academic source or a peer-reviewed publication. History allows for differing interpretations and may contain inaccuracies; if you spot an error, we would be grateful if you told us.",
+            "The interactive stories are fiction built on a real historical setting, not a chronicle of verified events."
+          ]
+        },
+        {
+          "h": "3. Licence to use",
+          "p": [
+            "We grant you a personal, revocable, non-exclusive and non-transferable licence to use the app on your devices for personal, non-commercial purposes.",
+            "You may not: resell access, bulk-extract or copy the content, redistribute texts or images outside the app, or use them to train models or build derivative products without written permission."
+          ]
+        },
+        {
+          "h": "4. Premium subscription",
+          "p": [
+            "Some content is free and some requires a premium subscription. Two plans are offered: weekly and annual.",
+            "Free trial: the app offers a 7-day trial, available once per user. When the trial ends, premium access stops unless you subscribe to a plan.",
+            "Billing is handled entirely by Google Play or the App Store, in your local currency and at the price the store displays at the time of purchase.",
+            "The subscription renews automatically at the end of each period unless you cancel at least 24 hours before the renewal date.",
+            "Cancellation must be done in the store itself: on Android, Google Play → Payments and subscriptions; on iOS, Settings → your name → Subscriptions. Uninstalling the app does NOT cancel the subscription."
+          ]
+        },
+        {
+          "h": "5. Refunds",
+          "p": [
+            "Refunds are handled by the store where you purchased (Google Play or App Store) under their own policies. We do not process payments and cannot issue refunds directly.",
+            "If you live in the European Union, you keep the withdrawal and warranty rights granted by the applicable consumer legislation."
+          ]
+        },
+        {
+          "h": "6. Intellectual property and sources",
+          "p": [
+            "The original texts, editorial structure, design and the app's own illustrations belong to Limber Mendoza unless stated otherwise.",
+            "The app also displays third-party material: excerpts from Wikipedia (Wikimedia Foundation) under CC BY-SA, and cultural objects from Europeana under the licences stated by each institution.",
+            "Sources and attributions are detailed in the Credits section inside the app."
+          ]
+        },
+        {
+          "h": "7. Acceptable use",
+          "p": [
+            "You may not attempt to bypass paid access, reverse engineer the app, automate requests against our servers or those of our providers, or interfere with the normal operation of the service.",
+            "Breaching this may lead to suspension of access, without prejudice to any refund you may request from the store."
+          ]
+        },
+        {
+          "h": "8. Service availability",
+          "p": [
+            "The app is provided «as is». Much of the content works offline, but progress syncing and supplementary material depend on third-party services that may fail or be interrupted.",
+            "We may add, change or withdraw content and features, and we may also stop providing the service. Should that happen, we would announce it with reasonable notice inside the app."
+          ]
+        },
+        {
+          "h": "9. Limitation of liability",
+          "p": [
+            "To the extent permitted by applicable law, we are not liable for indirect damages, data loss or loss of profit arising from the use of the app.",
+            "None of the above limits the non-waivable rights granted to you by consumer legislation."
+          ]
+        },
+        {
+          "h": "10. Governing law",
+          "p": [
+            "These terms are governed by Italian law. If you are a consumer, you always keep the protection of the mandatory rules of your country of habitual residence, which these terms cannot limit."
+          ]
+        },
+        {
+          "h": "11. Changes to these terms",
+          "p": [
+            "We may update these terms. The version in force is always the one published here, with its date. Substantial changes will be announced inside the app.",
+            "Last updated: {updated_at}."
+          ]
+        }
+      ]
+    }
+  }
+}

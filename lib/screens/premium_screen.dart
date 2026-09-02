@@ -4,27 +4,39 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
-import '../data/eras_repository.dart';
+import '../models/legal_document.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
+import 'legal_screen.dart';
 
-class PremiumScreen extends StatelessWidget {
+class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
+
+  @override
+  State<PremiumScreen> createState() => _PremiumScreenState();
+}
+
+class _PremiumScreenState extends State<PremiumScreen> {
+  PremiumPlan _selectedPlan = PremiumPlan.weekly;
+
+  static const _benefitIcons = [
+    Icons.headphones_rounded,
+    Icons.auto_stories_rounded,
+    Icons.style_rounded,
+    Icons.cloud_off_rounded,
+  ];
 
   @override
   Widget build(BuildContext context) {
     final t = context.watch<LanguageProvider>().t;
-    final premiumProvider = context.watch<PremiumProvider>();
+    final premium = context.watch<PremiumProvider>();
 
     // ── Mensajes de compra localizados ──────────────────────────────────────
-    // El provider expone una clave i18n de un solo uso (error o éxito). La
-    // resolvemos con `t(...)` y la mostramos como SnackBar tras el frame
-    // actual, consumiéndola para no repetirla en cada rebuild.
-    final messageKey = premiumProvider.lastError;
+    final messageKey = premium.lastError;
     if (messageKey != null) {
-      final isError = premiumProvider.messageIsError;
+      final isError = premium.messageIsError;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        premiumProvider.consumeMessage();
+        premium.consumeMessage();
         if (!context.mounted) return;
         ScaffoldMessenger.of(context)
           ..clearSnackBars()
@@ -39,8 +51,8 @@ class PremiumScreen extends StatelessWidget {
       });
     }
 
-    if (premiumProvider.isPremium) {
-      return _buildAlreadyUnlocked(context, t);
+    if (premium.isPremium) {
+      return _buildAlreadyUnlocked(context, t, premium);
     }
 
     return Scaffold(
@@ -62,18 +74,13 @@ class PremiumScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Icon
                   _buildIcon()
                       .animate()
-                      .scale(
-                        duration: 700.ms,
-                        curve: Curves.elasticOut,
-                      )
+                      .scale(duration: 700.ms, curve: Curves.elasticOut)
                       .fadeIn(duration: 400.ms),
-                  const SizedBox(height: 28),
-                  // Title
+                  const SizedBox(height: 24),
                   Text(
-                    t('premium.title'),
+                    t('premium.hero_title'),
                     style: AppTextStyles.eraTitleLarge.copyWith(
                       color: AppColors.cremaPergamino,
                     ),
@@ -81,7 +88,7 @@ class PremiumScreen extends StatelessWidget {
                   ).animate().fadeIn(duration: 600.ms, delay: 200.ms),
                   const SizedBox(height: 10),
                   Text(
-                    t('premium.description'),
+                    t('premium.hero_subtitle'),
                     style: GoogleFonts.lato(
                       fontSize: 14,
                       color: AppColors.cremaPergamino.withOpacity(0.7),
@@ -89,42 +96,28 @@ class PremiumScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ).animate().fadeIn(duration: 600.ms, delay: 300.ms),
-                  const SizedBox(height: 32),
-                  // Price card
-                  _buildPriceCard(context, t, premiumProvider)
-                      .animate()
-                      .fadeIn(duration: 600.ms, delay: 400.ms)
-                      .slideY(begin: 0.2, end: 0, delay: 400.ms),
                   const SizedBox(height: 28),
-                  // Features
                   _buildFeaturesList(context, t)
                       .animate()
-                      .fadeIn(duration: 600.ms, delay: 500.ms),
-                  const SizedBox(height: 32),
-                  // Premium eras preview
-                  _buildPremiumErasPreview(t)
+                      .fadeIn(duration: 600.ms, delay: 400.ms),
+                  const SizedBox(height: 24),
+                  if (!premium.hasUsedTrial)
+                    _buildTrialBanner(t)
+                        .animate()
+                        .fadeIn(duration: 600.ms, delay: 450.ms)
+                        .slideY(begin: 0.15, end: 0, delay: 450.ms),
+                  if (!premium.hasUsedTrial) const SizedBox(height: 20),
+                  _buildPlanCards(context, t, premium)
+                      .animate()
+                      .fadeIn(duration: 600.ms, delay: 500.ms)
+                      .slideY(begin: 0.15, end: 0, delay: 500.ms),
+                  const SizedBox(height: 22),
+                  _buildCta(context, t, premium)
                       .animate()
                       .fadeIn(duration: 600.ms, delay: 600.ms),
+                  const SizedBox(height: 22),
+                  _buildLegalFooter(context, t, premium),
                   const SizedBox(height: 32),
-                  // Restore purchase
-                  TextButton(
-                    onPressed: () async {
-                      // El resultado llega por el purchaseStream; la pantalla
-                      // reacciona sola al cambiar `isPremium`.
-                      await premiumProvider.restorePurchases();
-                    },
-                    child: Text(
-                      t('premium.restore_button'),
-                      style: GoogleFonts.lato(
-                        fontSize: 13,
-                        color: AppColors.cremaPergamino.withOpacity(0.5),
-                        decoration: TextDecoration.underline,
-                        decorationColor:
-                            AppColors.cremaPergamino.withOpacity(0.3),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 40),
                 ],
               ),
             ),
@@ -161,81 +154,7 @@ class PremiumScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceCard(BuildContext context, String Function(String) t,
-      PremiumProvider premiumProvider) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            AppColors.ocre.withOpacity(0.2),
-            AppColors.terracota.withOpacity(0.15),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.ocre.withOpacity(0.4), width: 1.5),
-      ),
-      child: Column(
-        children: [
-          Text(
-            // Precio localizado real de la tienda si está disponible;
-            // si no, el valor estático de los JSON de i18n.
-            premiumProvider.localizedPrice ?? t('premium.price'),
-            style: AppTextStyles.premiumPrice,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            t('premium.subtitle'),
-            style: GoogleFonts.lato(
-              fontSize: 13,
-              color: AppColors.cremaPergamino.withOpacity(0.6),
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              // Deshabilitado mientras hay un pago en curso o la tienda no
-              // está disponible. El desbloqueo llega por el purchaseStream.
-              onPressed: (premiumProvider.isPurchasePending ||
-                      !premiumProvider.storeAvailable)
-                  ? null
-                  : () => premiumProvider.buyPremium(),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.ocre,
-                foregroundColor: Colors.white,
-                disabledBackgroundColor: AppColors.ocre.withOpacity(0.4),
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 0,
-              ),
-              child: premiumProvider.isPurchasePending
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Colors.white,
-                      ),
-                    )
-                  : Text(
-                      t('premium.unlock_button').toUpperCase(),
-                      style: GoogleFonts.lato(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 2,
-                      ),
-                    ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // ── Beneficios ───────────────────────────────────────────────────────────
 
   Widget _buildFeaturesList(BuildContext context, String Function(String) t) {
     final features = context.read<LanguageProvider>().tList('premium.features');
@@ -251,100 +170,219 @@ class PremiumScreen extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
-        ...features.map(
-          (feature) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+        const SizedBox(height: 14),
+        ...List.generate(features.length, (i) {
+          final icon = i < _benefitIcons.length
+              ? _benefitIcons[i]
+              : Icons.check_circle_rounded;
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 3),
-                  width: 18,
-                  height: 18,
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.ocre.withOpacity(0.2),
-                    border: Border.all(color: AppColors.ocre, width: 1),
+                    color: AppColors.ocre.withOpacity(0.16),
+                    border: Border.all(color: AppColors.ocre.withOpacity(0.4)),
                   ),
-                  child: const Icon(
-                    Icons.check,
-                    size: 11,
-                    color: AppColors.ocre,
-                  ),
+                  child: Icon(icon, size: 16, color: AppColors.ocre),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 14),
                 Expanded(
-                  child: Text(
-                    feature,
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: AppColors.cremaPergamino.withOpacity(0.85),
-                      height: 1.4,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Text(
+                      features[i],
+                      style: GoogleFonts.lato(
+                        fontSize: 14,
+                        color: AppColors.cremaPergamino.withOpacity(0.85),
+                        height: 1.4,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ),
+          );
+        }),
       ],
     );
   }
 
-  Widget _buildPremiumErasPreview(String Function(String) t) {
-    final premiumEras =
-        ErasRepository.allEras.where((e) => e.isPremium).toList();
+  // ── Banner de prueba gratuita ───────────────────────────────────────────
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: double.infinity,
-          height: 1,
-          color: AppColors.ocre.withOpacity(0.2),
+  Widget _buildTrialBanner(String Function(String) t) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            AppColors.verdeAndino.withOpacity(0.25),
+            AppColors.verdeAndino.withOpacity(0.08),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        const SizedBox(height: 20),
-        ...premiumEras.map(
-          (era) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Row(
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: era.accentColor,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  t('eras.${era.id}.title'),
-                  style: GoogleFonts.playfairDisplay(
-                    fontSize: 16,
-                    color: AppColors.cremaPergamino,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  t('eras.${era.id}.period'),
-                  style: GoogleFonts.lato(
-                    fontSize: 11,
-                    color: AppColors.cremaPergamino.withOpacity(0.5),
-                  ),
-                ),
-              ],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.verdeAndino.withOpacity(0.5)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.celebration_rounded,
+              color: AppColors.verdeAndino, size: 22),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              t('premium.trial_banner'),
+              style: GoogleFonts.lato(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: AppColors.cremaPergamino,
+                height: 1.35,
+              ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  // ── Tarjetas de plan ───────────────────────────────────────────────────
+
+  Widget _buildPlanCards(
+      BuildContext context, String Function(String) t, PremiumProvider p) {
+    return Row(
+      children: [
+        Expanded(
+          child: _PlanCard(
+            label: t('premium.plan_weekly_label'),
+            price: p.localizedPriceFor(PremiumPlan.weekly) ??
+                t('premium.plan_weekly_price'),
+            badge: t('premium.plan_weekly_badge'),
+            badgeColor: AppColors.ocre,
+            isSelected: _selectedPlan == PremiumPlan.weekly,
+            onTap: () => setState(() => _selectedPlan = PremiumPlan.weekly),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _PlanCard(
+            label: t('premium.plan_annual_label'),
+            price: p.localizedPriceFor(PremiumPlan.annual) ??
+                t('premium.plan_annual_price'),
+            badge: t('premium.plan_annual_badge'),
+            badgeColor: AppColors.verdeAndino,
+            isSelected: _selectedPlan == PremiumPlan.annual,
+            onTap: () => setState(() => _selectedPlan = PremiumPlan.annual),
+          ),
         ),
       ],
     );
   }
 
+  // ── CTA ──────────────────────────────────────────────────────────────────
+
+  Widget _buildCta(
+      BuildContext context, String Function(String) t, PremiumProvider p) {
+    final showTrialCta = !p.hasUsedTrial;
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: p.isPurchasePending
+            ? null
+            : () async {
+                if (showTrialCta) {
+                  await p.startFreeTrial();
+                } else {
+                  await p.buyPlan(_selectedPlan);
+                }
+              },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.ocre,
+          foregroundColor: Colors.white,
+          disabledBackgroundColor: AppColors.ocre.withOpacity(0.4),
+          padding: const EdgeInsets.symmetric(vertical: 18),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 0,
+        ),
+        child: p.isPurchasePending
+            ? const SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: Colors.white,
+                ),
+              )
+            : Text(
+                (showTrialCta
+                        ? t('premium.cta_trial')
+                        : t('premium.cta_subscribe'))
+                    .toUpperCase(),
+                style: GoogleFonts.lato(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1,
+                ),
+                textAlign: TextAlign.center,
+              ),
+      ),
+    );
+  }
+
+  // ── Pie legal ────────────────────────────────────────────────────────────
+
+  Widget _buildLegalFooter(
+      BuildContext context, String Function(String) t, PremiumProvider p) {
+    void openLegal(LegalDocType type) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => LegalScreen(type: type)),
+      );
+    }
+
+    TextStyle style() => GoogleFonts.lato(
+          fontSize: 11,
+          color: AppColors.cremaPergamino.withOpacity(0.45),
+          decoration: TextDecoration.underline,
+          decorationColor: AppColors.cremaPergamino.withOpacity(0.3),
+        );
+
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 4,
+      children: [
+        TextButton(
+          onPressed: () => openLegal(LegalDocType.terms),
+          child: Text(t('premium.legal_terms'), style: style()),
+        ),
+        Text('·', style: style()),
+        TextButton(
+          onPressed: () => openLegal(LegalDocType.privacy),
+          child: Text(t('premium.legal_privacy'), style: style()),
+        ),
+        Text('·', style: style()),
+        TextButton(
+          onPressed: () async => p.restorePurchases(),
+          child: Text(t('premium.restore_button'), style: style()),
+        ),
+      ],
+    );
+  }
+
+  // ── Ya premium ───────────────────────────────────────────────────────────
+
   Widget _buildAlreadyUnlocked(
-      BuildContext context, String Function(String) t) {
+      BuildContext context, String Function(String) t, PremiumProvider p) {
+    final subtitle = p.isInTrial
+        ? '${t('premium.trial_active_prefix')} ${p.daysLeftInTrial} ${t('premium.trial_active_suffix')}'
+        : t('premium.active_message');
+
     return Scaffold(
       backgroundColor: AppColors.marronOscuro,
       body: Center(
@@ -369,7 +407,7 @@ class PremiumScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                context.read<LanguageProvider>().t('premium.active_message'),
+                subtitle,
                 style: GoogleFonts.lato(
                   fontSize: 16,
                   color: AppColors.cremaPergamino,
@@ -388,6 +426,107 @@ class PremiumScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Tarjeta de plan seleccionable ─────────────────────────────────────────
+
+class _PlanCard extends StatelessWidget {
+  final String label;
+  final String price;
+  final String badge;
+  final Color badgeColor;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _PlanCard({
+    required this.label,
+    required this.price,
+    required this.badge,
+    required this.badgeColor,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: isSelected
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppColors.ocre.withOpacity(0.24),
+                    AppColors.terracota.withOpacity(0.14),
+                  ],
+                )
+              : null,
+          color: isSelected ? null : AppColors.marronProfundo,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: isSelected
+                ? AppColors.ocre
+                : AppColors.cremaPergamino.withOpacity(0.12),
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                color: badgeColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: badgeColor.withOpacity(0.6)),
+              ),
+              child: Text(
+                badge.toUpperCase(),
+                style: GoogleFonts.lato(
+                  fontSize: 9,
+                  fontWeight: FontWeight.w800,
+                  color: badgeColor,
+                  letterSpacing: 0.6,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              label,
+              style: GoogleFonts.lato(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: AppColors.cremaPergamino.withOpacity(0.75),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              price,
+              style: GoogleFonts.playfairDisplay(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.cremaPergamino,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Icon(
+              isSelected
+                  ? Icons.radio_button_checked_rounded
+                  : Icons.radio_button_off_rounded,
+              size: 18,
+              color: isSelected
+                  ? AppColors.ocre
+                  : AppColors.cremaPergamino.withOpacity(0.3),
+            ),
+          ],
         ),
       ),
     );

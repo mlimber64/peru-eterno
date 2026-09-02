@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
-import '../models/content_item.dart';
+import '../models/content_ref.dart';
+import '../models/era_model.dart';
 import '../services/history_service.dart';
 
 class HistoryProvider extends ChangeNotifier {
@@ -10,24 +11,16 @@ class HistoryProvider extends ChangeNotifier {
 
   List<String> get ids => List.unmodifiable(_ids);
 
-  List<ContentItem> get recentItems {
-    return _ids.map((id) {
-      // Check content repository first
-      final item = ContentRepository.findById(id);
-      if (item != null) return item;
-      // Check eras (as ContentItem)
-      try {
-        final era = ErasRepository.allEras.firstWhere((e) => e.id == id);
-        return ContentItem(
-          id: era.id,
-          category: 'era',
-          wikipediaSlug: era.wikipediaSlug,
-          isPremium: era.isPremium,
-        );
-      } catch (_) {
-        return null;
-      }
-    }).whereType<ContentItem>().take(3).toList();
+  List<ContentRef> get recentItems {
+    return _ids.map<ContentRef?>((id) {
+      // Eras primero (lista corta, y así el resultado es el EraModel real,
+      // no una copia genérica): el resto de categorías no comparte ids.
+      final era = ErasRepository.allEras
+          .cast<EraModel?>()
+          .firstWhere((e) => e?.id == id, orElse: () => null);
+      if (era != null) return era;
+      return ContentRepository.findById(id);
+    }).whereType<ContentRef>().take(3).toList();
   }
 
   Future<void> initialize() async {

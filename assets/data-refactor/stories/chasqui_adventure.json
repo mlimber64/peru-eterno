@@ -1,0 +1,338 @@
+{
+  "id": "chasqui_adventure",
+  "titulo": {
+    "es": "La Misión del Chasqui",
+    "it": "La Missione del Chasqui",
+    "en": "The Chasqui's Mission"
+  },
+  "descripcion": {
+    "es": "Conviértete en Kusi, un joven mensajero real del Tahuantinsuyo, y decide cómo llevar un quipu urgente a través del Qhapaq Ñan.",
+    "it": "Diventa Kusi, un giovane messaggero reale del Tahuantinsuyo, e decidi come consegnare un quipu urgente lungo il Qhapaq Ñan.",
+    "en": "Become Kusi, a young royal messenger of the Tahuantinsuyo, and decide how to carry an urgent quipu across the Qhapaq Ñan."
+  },
+  "imagen_portada": "assets/images/banners/sacerdote-ceremonial-andino.jpg",
+  "is_premium": false,
+  "start_node_id": "inicio",
+  "nodes": [
+    {
+      "node_id": "inicio",
+      "title": {
+        "es": "El Encargo del Amauta",
+        "it": "L'Incarico dell'Amauta",
+        "en": "The Amauta's Commission"
+      },
+      "narrative": {
+        "es": "Eres Kusi, un joven chasqui entrenado en los caminos del Tahuantinsuyo. Al amanecer, el gobernador de Cusco te entrega un quipu urgente: un mensaje anudado que debe llegar a Cajamarca antes de que caiga la próxima luna. De tu velocidad depende la suerte de miles. Frente a ti se abren dos caminos del Qhapaq Ñan: la ruta de la costa, rápida pero traicionera, y la ruta de la sierra, segura pero exigente con el cuerpo.",
+        "it": "Sei Kusi, un giovane chasqui addestrato lungo le vie del Tahuantinsuyo. All'alba, il governatore di Cusco ti consegna un quipu urgente: un messaggio annodato che deve raggiungere Cajamarca prima che sorga la prossima luna. Dalla tua velocità dipende il destino di migliaia di persone. Davanti a te si aprono due vie del Qhapaq Ñan: la rotta costiera, veloce ma insidiosa, e la rotta di montagna, sicura ma fisicamente estenuante.",
+        "en": "You are Kusi, a young chasqui trained along the roads of the Tahuantinsuyo. At dawn, the governor of Cusco hands you an urgent quipu: a knotted message that must reach Cajamarca before the next moon rises. Thousands of lives depend on your speed. Ahead of you, two branches of the Qhapaq Ñan open up: the coastal route, fast but treacherous, and the mountain route, safer but punishing on the body."
+      },
+      "image_path": "assets/images/inca/inca_1.jpg",
+      "historical_fact": {
+        "es": "El Qhapaq Ñan ('camino del Inca') conectaba más de 30,000 km entre Quito y Santiago. Los chasquis eran corredores de élite entrenados desde niños que relevaban mensajes por postas, alcanzando velocidades de hasta 240 km al día — más rápido que cualquier jinete europeo de la época.",
+        "it": "Il Qhapaq Ñan ('cammino dell'Inca') collegava oltre 30.000 km tra Quito e Santiago. I chasqui erano corridori d'élite addestrati fin da bambini che si davano il cambio lungo il percorso, raggiungendo velocità fino a 240 km al giorno — più veloce di qualsiasi cavaliere europeo dell'epoca.",
+        "en": "The Qhapaq Ñan ('the Inca's road') connected over 30,000 km between Quito and Santiago. Chasquis were elite runners trained from childhood who relayed messages between stations, reaching speeds of up to 240 km a day — faster than any European horseman of the era."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Tomar la ruta de la costa", "it": "Prendere la rotta costiera", "en": "Take the coastal route"},
+          "next_node_id": "costa_1",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Tomar la ruta de la sierra", "it": "Prendere la rotta di montagna", "en": "Take the mountain route"},
+          "next_node_id": "sierra_1",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "costa_1",
+      "title": {
+        "es": "El Desierto Traicionero",
+        "it": "Il Deserto Traditore",
+        "en": "The Treacherous Desert"
+      },
+      "narrative": {
+        "es": "El sol golpea sin piedad sobre las dunas mientras corres entre huacas de barro. Al llegar a un profundo cauce seco, descubres que el puente colgante de fibra vegetal está parcialmente deshecho por una crecida reciente. El siguiente tambo (posta de relevo) queda a solo un kilómetro, pero cruzar ahora mismo te ahorraría un tiempo valioso.",
+        "it": "Il sole colpisce senza pietà le dune mentre corri tra huacas di fango. Arrivato a un profondo letto di fiume in secca, scopri che il ponte sospeso in fibra vegetale è parzialmente distrutto da una recente piena. Il prossimo tambo (stazione di cambio) dista solo un chilometro, ma attraversare subito ti farebbe risparmiare tempo prezioso.",
+        "en": "The sun beats mercilessly on the dunes as you run past mud-brick huacas. Reaching a deep dry riverbed, you find the plant-fiber suspension bridge partially destroyed by a recent flood. The next tambo (relay station) is only a kilometer away, but crossing right now would save precious time."
+      },
+      "image_path": "assets/images/inca/inca_2.jpg",
+      "historical_fact": {
+        "es": "Los puentes colgantes incas (como el famoso Q'eswachaka) se tejían con fibra de ichu y se reconstruían cada año mediante trabajo comunitario (mit'a). Cruzar uno dañado era extremadamente peligroso; el sistema vial incluía tambos de relevo precisamente para evitar riesgos innecesarios.",
+        "it": "I ponti sospesi incaici (come il celebre Q'eswachaka) venivano intrecciati con fibra di ichu e ricostruiti ogni anno con lavoro comunitario (mit'a). Attraversarne uno danneggiato era estremamente pericoloso; il sistema viario prevedeva tambo di cambio proprio per evitare rischi inutili.",
+        "en": "Inca suspension bridges (like the famous Q'eswachaka) were woven from ichu fiber and rebuilt every year through communal labor (mit'a). Crossing a damaged one was extremely dangerous; the road system included relay tambos precisely to avoid unnecessary risks."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Arriesgarte y cruzar el puente dañado", "it": "Rischiare e attraversare il ponte danneggiato", "en": "Risk it and cross the damaged bridge"},
+          "next_node_id": "costa_bridge_risk",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Ir al tambo cercano y seguir el protocolo de relevo", "it": "Andare al tambo vicino e seguire il protocollo del cambio", "en": "Go to the nearby tambo and follow the relay protocol"},
+          "next_node_id": "costa_tambo",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "sierra_1",
+      "title": {
+        "es": "El Filo de los Apus",
+        "it": "Il Filo degli Apu",
+        "en": "The Edge of the Apus"
+      },
+      "narrative": {
+        "es": "El aire se enrarece a más de 4,000 metros de altura. Una caravana de llamas bloquea el sendero angosto tras un pequeño derrumbe, y el frío cala los huesos. A la distancia, un chasqui veterano te hace señas desde un tambo de piedra. Pero también ves un sendero secreto, prohibido a los no iniciados, que serpentea junto a un nevado sagrado.",
+        "it": "L'aria si fa rarefatta oltre i 4.000 metri di altitudine. Una carovana di lama blocca lo stretto sentiero dopo una piccola frana, e il freddo penetra fino alle ossa. In lontananza, un chasqui veterano ti fa segno da un tambo di pietra. Ma scorgi anche un sentiero segreto, proibito ai non iniziati, che si snoda accanto a un nevado sacro.",
+        "en": "The air thins above 4,000 meters. A llama caravan blocks the narrow trail after a small landslide, and the cold cuts to the bone. In the distance, a veteran chasqui waves at you from a stone tambo. But you also spot a secret path, forbidden to the uninitiated, winding beside a sacred snow-capped peak."
+      },
+      "image_path": "assets/images/inca/inca_3.jpg",
+      "historical_fact": {
+        "es": "Los tambos se ubicaban cada 15 a 25 km a lo largo del Qhapaq Ñan y ofrecían albergue, alimento y chasquis de relevo. Este sistema logístico permitía que un mensaje cruzara el imperio en relevos de apenas unos kilómetros por corredor, evitando el agotamiento y el mal de altura (soroche).",
+        "it": "I tambo erano collocati ogni 15-25 km lungo il Qhapaq Ñan e offrivano alloggio, cibo e chasqui di cambio. Questo sistema logistico permetteva a un messaggio di attraversare l'impero in staffette di pochi chilometri per corridore, evitando lo sfinimento e il mal di montagna (soroche).",
+        "en": "Tambos were spaced every 15 to 25 km along the Qhapaq Ñan, offering shelter, food, and relief chasquis. This logistics system let a message cross the empire in short relays of just a few kilometers per runner, avoiding exhaustion and altitude sickness (soroche)."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Tomar el atajo y seguir tú mismo, sin relevo", "it": "Prendere la scorciatoia e continuare da solo, senza cambio", "en": "Take the shortcut and keep going yourself, without a relay"},
+          "next_node_id": "sierra_shortcut",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Entregar el quipu al chasqui del tambo, según el protocolo", "it": "Consegnare il quipu al chasqui del tambo, secondo il protocollo", "en": "Hand the quipu to the tambo's chasqui, as protocol demands"},
+          "next_node_id": "sierra_tambo",
+          "required_premium": false
+        },
+        {
+          "text": {"es": "Cruzar el sendero prohibido junto al Apu sagrado", "it": "Attraversare il sentiero proibito accanto all'Apu sacro", "en": "Cross the forbidden path beside the sacred Apu"},
+          "next_node_id": "sierra_premium_pass",
+          "required_premium": true
+        }
+      ]
+    },
+    {
+      "node_id": "costa_tambo",
+      "title": {
+        "es": "El Relevo Perfecto",
+        "it": "Il Cambio Perfetto",
+        "en": "The Perfect Handoff"
+      },
+      "narrative": {
+        "es": "Llegas al tambo justo a tiempo. Un chasqui descansado recibe el quipu de tus manos y, tras repetir en voz alta el mensaje para no perder ni un detalle, retoma la carrera con energía renovada. Tú te dejas caer sobre una estera de totora, exhausto pero orgulloso: el sistema funcionó exactamente como fue diseñado.",
+        "it": "Arrivi al tambo appena in tempo. Un chasqui riposato riceve il quipu dalle tue mani e, dopo aver ripetuto ad alta voce il messaggio per non perdere alcun dettaglio, riprende la corsa con energia rinnovata. Ti lasci cadere su una stuoia di totora, esausto ma orgoglioso: il sistema ha funzionato esattamente come previsto.",
+        "en": "You reach the tambo just in time. A rested chasqui takes the quipu from your hands and, after repeating the message aloud to lose no detail, sets off again with renewed energy. You collapse onto a reed mat, exhausted but proud: the system worked exactly as it was designed to."
+      },
+      "image_path": "assets/images/inca/inca_4.jpg",
+      "historical_fact": {
+        "es": "Los chasquis memorizaban el mensaje verbal que acompañaba al quipu y lo repetían al siguiente corredor para evitar errores de transmisión — un relevo controlado con extremo rigor, ya que un mensaje mal transmitido podía costarle la vida al mensajero.",
+        "it": "I chasqui memorizzavano il messaggio verbale che accompagnava il quipu e lo ripetevano al corridore successivo per evitare errori di trasmissione — una staffetta controllata con estremo rigore, poiché un messaggio trasmesso male poteva costare la vita al messaggero.",
+        "en": "Chasquis memorized the spoken message that accompanied the quipu and repeated it to the next runner to avoid transmission errors — a relay controlled with extreme rigor, since a garbled message could cost the messenger his life."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_exito",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "sierra_tambo",
+      "title": {
+        "es": "La Sabiduría del Relevo",
+        "it": "La Saggezza del Cambio",
+        "en": "The Wisdom of the Relay"
+      },
+      "narrative": {
+        "es": "Entregas el quipu al chasqui veterano, quien asiente con respeto al reconocer los nudos del gobernador. En segundos, desaparece cuesta abajo con la agilidad de quien ha corrido esos senderos toda su vida. Te sientas junto al fuego del tambo, sabiendo que el mensaje llegará antes de lo que tú jamás hubieras logrado solo.",
+        "it": "Consegni il quipu al chasqui veterano, che annuisce con rispetto riconoscendo i nodi del governatore. In pochi secondi scompare in discesa con l'agilità di chi ha percorso quei sentieri per tutta la vita. Ti siedi accanto al fuoco del tambo, sapendo che il messaggio arriverà prima di quanto tu da solo avresti mai potuto.",
+        "en": "You hand the quipu to the veteran chasqui, who nods respectfully, recognizing the governor's knots. Within seconds he vanishes downhill with the ease of someone who has run these trails his whole life. You sit by the tambo's fire, knowing the message will arrive sooner than you could ever have managed alone."
+      },
+      "image_path": "assets/images/inca/inca_5.jpg",
+      "historical_fact": {
+        "es": "Ningún chasqui recorría el trayecto completo: el relevo por postas era la clave de la velocidad del sistema. Cada corredor conocía a la perfección solo su tramo, lo que también funcionaba como medida de seguridad ante emboscadas o captura del mensaje.",
+        "it": "Nessun chasqui percorreva l'intero tragitto: il cambio a staffetta era la chiave della velocità del sistema. Ogni corridore conosceva alla perfezione solo il proprio tratto, il che fungeva anche da misura di sicurezza contro imboscate o cattura del messaggio.",
+        "en": "No chasqui ever ran the full route: the relay system was the key to its speed. Each runner knew only his own stretch perfectly, which also served as a security measure against ambushes or the message being seized."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_exito",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "costa_bridge_risk",
+      "title": {
+        "es": "El Puente Cede",
+        "it": "Il Ponte Cede",
+        "en": "The Bridge Gives Way"
+      },
+      "narrative": {
+        "es": "A mitad de camino, las fibras deshilachadas ceden bajo tu peso. Caes al cauce rocoso y el dolor te recorre el tobillo torcido. Arrastrándote, alcanzas la orilla y, con el quipu aún atado a tu pecho, decides continuar cojeando en lugar de esperar ayuda: cada hora cuenta.",
+        "it": "A metà strada, le fibre sfilacciate cedono sotto il tuo peso. Cadi nel letto roccioso e il dolore ti attraversa la caviglia storta. Trascinandoti, raggiungi la riva e, con il quipu ancora legato al petto, decidi di continuare zoppicando invece di aspettare aiuto: ogni ora conta.",
+        "en": "Halfway across, the frayed fibers give out under your weight. You fall onto the rocky bed, pain shooting through your twisted ankle. Dragging yourself to the bank, quipu still tied to your chest, you decide to keep going, limping, rather than wait for help: every hour counts."
+      },
+      "image_path": "assets/images/inca/inca_2.jpg",
+      "historical_fact": {
+        "es": "Los caminos incas se mantenían mediante la mit'a, trabajo comunitario obligatorio, y su daño o abandono era tomado muy en serio por la administración estatal. Un chasqui que fallaba en su tramo por accidente debía, aun así, garantizar que el mensaje llegara — el honor del corredor y de su ayllu dependía de ello.",
+        "it": "Le strade incaiche venivano mantenute tramite la mit'a, lavoro comunitario obbligatorio, e il loro danneggiamento o abbandono era preso molto sul serio dall'amministrazione statale. Un chasqui che falliva nel proprio tratto per un incidente doveva comunque garantire che il messaggio arrivasse — l'onore del corridore e del suo ayllu ne dipendeva.",
+        "en": "Inca roads were maintained through mit'a, mandatory communal labor, and their damage or neglect was taken very seriously by the state administration. A chasqui who failed his stretch by accident still had to ensure the message got through — the honor of the runner and his ayllu depended on it."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar cojeando hasta el próximo tambo", "it": "Continua zoppicando fino al prossimo tambo", "en": "Keep limping to the next tambo"},
+          "next_node_id": "final_moderado",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "sierra_shortcut",
+      "title": {
+        "es": "El Precio de la Soledad",
+        "it": "Il Prezzo della Solitudine",
+        "en": "The Price of Solitude"
+      },
+      "narrative": {
+        "es": "Decides no perder tiempo en el tambo y sigues corriendo tú mismo, tramo tras tramo, contra el reglamento. El soroche te golpea la cabeza como un tambor y las piernas comienzan a fallar. Sigues cuesta abajo con la vista nublada, negándote a detenerte.",
+        "it": "Decidi di non perdere tempo al tambo e continui a correre da solo, tratto dopo tratto, contro il regolamento. Il soroche ti colpisce la testa come un tamburo e le gambe cominciano a cedere. Continui in discesa con la vista annebbiata, rifiutandoti di fermarti.",
+        "en": "You decide not to waste time at the tambo and keep running yourself, stretch after stretch, against protocol. Soroche pounds at your skull like a drum and your legs begin to fail. You push on downhill, vision blurring, refusing to stop."
+      },
+      "image_path": "assets/images/inca/inca_3.jpg",
+      "historical_fact": {
+        "es": "El sistema de chasquis por relevos existía precisamente para evitar el agotamiento extremo del mal de altura y el desgaste físico en las alturas andinas. Ignorar el relevo no era solo indisciplina: ponía en riesgo tanto al mensajero como al propio mensaje.",
+        "it": "Il sistema di chasqui a staffetta esisteva proprio per evitare lo sfinimento estremo dovuto al mal di montagna e allo sforzo fisico alle alte quote andine. Ignorare il cambio non era solo indisciplina: metteva a rischio sia il messaggero sia il messaggio stesso.",
+        "en": "The chasqui relay system existed precisely to avoid extreme exhaustion from altitude sickness and physical strain at high Andean elevations. Ignoring the relay wasn't just indiscipline — it put both the messenger and the message itself at risk."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_fallido",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "sierra_premium_pass",
+      "title": {
+        "es": "El Sendero de los Apus",
+        "it": "Il Sentiero degli Apu",
+        "en": "The Path of the Apus"
+      },
+      "narrative": {
+        "es": "Te internas en el paso prohibido, donde solo los sacerdotes andinos tienen permiso de caminar. El silencio es absoluto, roto solo por el viento entre las rocas talladas con ofrendas antiguas. Sientes que algo más antiguo que el Imperio observa cada uno de tus pasos.",
+        "it": "Ti addentri nel passo proibito, dove solo i sacerdoti andini hanno il permesso di camminare. Il silenzio è assoluto, rotto solo dal vento tra le rocce scolpite con antiche offerte. Senti che qualcosa di più antico dell'Impero osserva ogni tuo passo.",
+        "en": "You step onto the forbidden pass, where only Andean priests are allowed to walk. The silence is absolute, broken only by wind through rocks carved with ancient offerings. You feel that something older than the Empire is watching your every step."
+      },
+      "image_path": "assets/images/banners/machu-picchu-amanecer.jpg",
+      "historical_fact": {
+        "es": "Ciertos pasos de montaña (apachetas) eran considerados moradas de los Apus, las deidades tutelares de los cerros, y estaban restringidos a rituales sacerdotales. Los cronistas coloniales registraron ofrendas de coca y objetos rituales en estos santuarios de altura, algunos hallados intactos siglos después por arqueólogos modernos.",
+        "it": "Alcuni valichi di montagna (apachetas) erano considerati dimore degli Apu, le divinità tutelari dei monti, ed erano riservati a rituali sacerdotali. I cronisti coloniali documentarono offerte di coca e oggetti rituali in questi santuari d'altura, alcuni ritrovati intatti secoli dopo dagli archeologi moderni.",
+        "en": "Certain mountain passes (apachetas) were considered dwellings of the Apus, the tutelary mountain deities, and were restricted to priestly rituals. Colonial chroniclers recorded coca offerings and ritual objects at these high-altitude shrines, some found intact centuries later by modern archaeologists."
+      },
+      "is_ending": false,
+      "choices": [
+        {
+          "text": {"es": "Continuar", "it": "Continua", "en": "Continue"},
+          "next_node_id": "final_legendario",
+          "required_premium": false
+        }
+      ]
+    },
+    {
+      "node_id": "final_exito",
+      "title": {
+        "es": "Final: Misión Cumplida",
+        "it": "Finale: Missione Compiuta",
+        "en": "Ending: Mission Accomplished"
+      },
+      "narrative": {
+        "es": "El quipu llega a Cajamarca antes de la luna prometida. El gobernador lo desata con manos temblorosas y confirma que el imperio está a salvo de la amenaza que anunciaba. Tu nombre —o mejor dicho, el nombre de la larga cadena de chasquis que hizo posible tu hazaña— queda grabado en la memoria del Tahuantinsuyo.",
+        "it": "Il quipu arriva a Cajamarca prima della luna promessa. Il governatore lo scioglie con mani tremanti e conferma che l'impero è al sicuro dalla minaccia annunciata. Il tuo nome — o meglio, il nome dell'intera catena di chasqui che ha reso possibile la tua impresa — resta scolpito nella memoria del Tahuantinsuyo.",
+        "en": "The quipu reaches Cajamarca before the promised moon. The governor unties it with trembling hands and confirms the empire is safe from the threat it warned of. Your name — or rather, the name of the long chain of chasquis that made your feat possible — is etched into the memory of the Tahuantinsuyo."
+      },
+      "image_path": "assets/images/banners/machu-picchu-amanecer.jpg",
+      "historical_fact": {
+        "es": "Gracias al sistema de chasquis y tambos, el Inca en Cusco podía comer pescado fresco del Pacífico transportado en menos de 48 horas — una proeza logística sin precedentes para su época, siglos antes que cualquier sistema postal comparable en Europa.",
+        "it": "Grazie al sistema di chasqui e tambo, l'Inca a Cusco poteva mangiare pesce fresco del Pacifico trasportato in meno di 48 ore — un'impresa logistica senza precedenti per l'epoca, secoli prima di qualsiasi sistema postale paragonabile in Europa.",
+        "en": "Thanks to the chasqui and tambo system, the Inca in Cusco could eat fresh Pacific fish transported in under 48 hours — an unprecedented logistical feat for its time, centuries before any comparable postal system in Europe."
+      },
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "node_id": "final_moderado",
+      "title": {
+        "es": "Final: La Misión, a Pesar de Todo",
+        "it": "Finale: La Missione, Nonostante Tutto",
+        "en": "Ending: The Mission, Against All Odds"
+      },
+      "narrative": {
+        "es": "Llegas a Cajamarca renqueando, un día después de lo previsto, pero el quipu sigue intacto. El gobernador lee el mensaje con alivio, aunque el retraso ya generó dudas en la corte. Aprendes, a través del dolor, por qué el protocolo de relevos existe: ningún corredor, por veloz que sea, puede reemplazar a la red entera.",
+        "it": "Arrivi a Cajamarca zoppicando, un giorno dopo il previsto, ma il quipu è ancora intatto. Il governatore legge il messaggio con sollievo, anche se il ritardo ha già suscitato dubbi a corte. Impari, attraverso il dolore, perché esiste il protocollo dei cambi: nessun corridore, per quanto veloce, può sostituire l'intera rete.",
+        "en": "You limp into Cajamarca a day behind schedule, but the quipu is still intact. The governor reads the message with relief, though the delay has already raised doubts at court. Through pain, you learn why the relay protocol exists: no runner, however fast, can replace the whole network."
+      },
+      "image_path": "assets/images/inca/inca_4.jpg",
+      "historical_fact": {
+        "es": "La eficacia del Qhapaq Ñan dependía de la disciplina colectiva, no del heroísmo individual. Cronistas como Cieza de León describieron con asombro cómo un sistema de corredores organizados superaba en velocidad a cualquier esfuerzo solitario, sin importar cuán decidido fuera el mensajero.",
+        "it": "L'efficacia del Qhapaq Ñan dipendeva dalla disciplina collettiva, non dall'eroismo individuale. Cronisti come Cieza de León descrissero con stupore come un sistema di corridori organizzati superasse in velocità qualsiasi sforzo solitario, per quanto determinato fosse il messaggero.",
+        "en": "The Qhapaq Ñan's effectiveness relied on collective discipline, not individual heroism. Chroniclers like Cieza de León marveled at how a system of organized runners outpaced any solitary effort, however determined the messenger."
+      },
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "node_id": "final_fallido",
+      "title": {
+        "es": "Final: El Silencio en la Montaña",
+        "it": "Finale: Il Silenzio sulla Montagna",
+        "en": "Ending: Silence on the Mountain"
+      },
+      "narrative": {
+        "es": "Tus piernas ceden a pocos metros del siguiente tambo. Caes sobre la piedra fría, y es otro chasqui quien encuentra tu cuerpo exhausto horas después y retoma el quipu para terminar el trayecto. El mensaje llega, pero con un retraso que pudo evitarse. Sobrevives, pero la lección del soroche queda grabada para siempre.",
+        "it": "Le tue gambe cedono a pochi metri dal prossimo tambo. Cadi sulla pietra fredda, ed è un altro chasqui a trovare il tuo corpo esausto ore dopo e a riprendere il quipu per completare il tragitto. Il messaggio arriva, ma con un ritardo che poteva essere evitato. Sopravvivi, ma la lezione del soroche resta impressa per sempre.",
+        "en": "Your legs give out just a few meters from the next tambo. You collapse onto the cold stone, and it's another chasqui who finds your exhausted body hours later and picks up the quipu to finish the route. The message arrives, but with a delay that could have been avoided. You survive, but the lesson of soroche stays with you forever."
+      },
+      "image_path": "assets/images/inca/inca_3.jpg",
+      "historical_fact": {
+        "es": "El soroche (mal de altura) era una amenaza real incluso para corredores entrenados. La red de tambos y relevos no era un capricho burocrático: era la solución de ingeniería social que permitía operar con seguridad sobre uno de los territorios más extremos del planeta.",
+        "it": "Il soroche (mal di montagna) era una minaccia reale anche per corridori allenati. La rete di tambo e cambi non era un capriccio burocratico: era la soluzione di ingegneria sociale che permetteva di operare in sicurezza in uno dei territori più estremi del pianeta.",
+        "en": "Soroche (altitude sickness) was a real threat even for trained runners. The network of tambos and relays wasn't a bureaucratic whim — it was the social engineering solution that made it possible to operate safely across one of the most extreme territories on the planet."
+      },
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "node_id": "final_legendario",
+      "title": {
+        "es": "Final Legendario: El Favor de los Apus",
+        "it": "Finale Leggendario: Il Favore degli Apu",
+        "en": "Legendary Ending: The Apus' Favor"
+      },
+      "narrative": {
+        "es": "Al salir del paso sagrado, encuentras una segunda ruta —desconocida incluso para los chasquis veteranos— que recorta horas de camino. Llegas a Cajamarca con tiempo de sobra, y los sacerdotes del templo susurran que los Apus favorecieron tu paso. Tu leyenda como chasqui comienza esa misma noche, alrededor del fuego.",
+        "it": "Uscendo dal passo sacro, trovi una seconda via — sconosciuta persino ai chasqui veterani — che accorcia il cammino di ore. Arrivi a Cajamarca con largo anticipo, e i sacerdoti del tempio sussurrano che gli Apu hanno favorito il tuo passaggio. La tua leggenda come chasqui inizia quella stessa notte, attorno al fuoco.",
+        "en": "Emerging from the sacred pass, you find a second route — unknown even to veteran chasquis — that cuts hours off the journey. You reach Cajamarca with time to spare, and the temple priests whisper that the Apus favored your passage. Your legend as a chasqui begins that very night, around the fire."
+      },
+      "image_path": "assets/images/banners/machu-picchu-amanecer.jpg",
+      "historical_fact": {
+        "es": "Más allá del mito, la arqueología ha identificado variantes y atajos del Qhapaq Ñan usados solo por especialistas rituales o mensajeros de máxima confianza, hoy redescubiertos gracias a la fotografía satelital y a los estudios de la Iniciativa Qhapaq Ñan de la UNESCO.",
+        "it": "Al di là del mito, l'archeologia ha identificato varianti e scorciatoie del Qhapaq Ñan usate solo da specialisti rituali o messaggeri di massima fiducia, oggi riscoperte grazie alla fotografia satellitare e agli studi dell'Iniziativa Qhapaq Ñan dell'UNESCO.",
+        "en": "Beyond the myth, archaeology has identified variants and shortcuts of the Qhapaq Ñan used only by ritual specialists or the most trusted messengers, now rediscovered through satellite imagery and studies by UNESCO's Qhapaq Ñan Initiative."
+      },
+      "is_ending": true,
+      "choices": []
+    }
+  ]
+}
