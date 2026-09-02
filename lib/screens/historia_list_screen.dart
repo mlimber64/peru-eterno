@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
 import '../core/navigation/app_navigation.dart';
 import '../data/historia_repository.dart';
+import '../data/historia_stages_repository.dart';
 import '../models/historia_article.dart';
 import '../providers/daily_story_provider.dart';
 import '../providers/language_provider.dart';
@@ -205,7 +206,13 @@ class _ArticleCard extends StatelessWidget {
     final isPremium = context.watch<PremiumProvider>().isPremium;
     final isDaily =
         context.watch<DailyStoryProvider>().dailyArticle?.id == article.id;
-    final isLocked = !isPremium && !isDaily;
+    // Misma regla que usa AppNavigation para decidir si abre el capítulo.
+    final isLocked = AppNavigation.isHistoriaArticleLocked(
+      userIsPremium: isPremium,
+      isDailyArticle: isDaily,
+      stageIsPremium:
+          HistoriaStagesRepository.isStagePremium(article.parentStageId),
+    );
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),

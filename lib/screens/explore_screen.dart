@@ -394,8 +394,12 @@ class _StageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final accent = stage.accentColor;
     final dark = Color.lerp(accent, Colors.black, 0.5)!;
+    final isLocked =
+        stage.isPremium && !context.watch<PremiumProvider>().isPremium;
 
     return GestureDetector(
+      // `openHistoriaStage` decide: si la etapa es de pago y el usuario no lo
+      // es, abre el paywall en vez de la lista de capítulos.
       onTap: () => AppNavigation.openHistoriaStage(context, stage),
       child: Container(
         height: 190,
@@ -454,6 +458,24 @@ class _StageCard extends StatelessWidget {
                   ),
                 ),
               ),
+              // Candado de las etapas de pago. Va arriba a la IZQUIERDA porque
+              // la derecha ya la ocupa el número de etapa. Mismo icono y
+              // mismo ocre que usa CinematicCard para el resto del contenido
+              // premium, para que se lea igual en toda la app.
+              if (isLocked)
+                Positioned(
+                  top: 16,
+                  left: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(7),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.lock_rounded,
+                        size: 15, color: AppColors.ocre),
+                  ),
+                ),
               // Stage number
               Positioned(
                 top: 16,

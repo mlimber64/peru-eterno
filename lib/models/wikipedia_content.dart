@@ -5,19 +5,32 @@ class WikipediaSection {
   final String content;
   final int level;
 
+  /// Sección de entrada (el primer bloque, que la ficha muestra en la pestaña
+  /// "Resumen"). Es un dato explícito, no algo deducido de `title.isEmpty`:
+  /// el contenido editorial propio es prosa corrida SIN encabezados, así que
+  /// todos sus párrafos tienen el título vacío. Deduciéndolo, los cinco
+  /// párrafos de una ficha se marcaban como entrada, "Resumen" enseñaba solo
+  /// el primero y `contentSections` quedaba vacío: la pestaña "Contenido"
+  /// salía en blanco y ~3/4 del texto no se veía en ninguna parte.
+  final bool isLead;
+
   const WikipediaSection({
     required this.title,
     required this.content,
     required this.level,
+    this.isLead = false,
   });
 
-  bool get isLead => title.isEmpty;
-
   factory WikipediaSection.fromJson(Map<String, dynamic> json) {
+    final title = json['title'] as String;
     return WikipediaSection(
-      title: json['title'] as String,
+      title: title,
       content: json['content'] as String,
       level: json['level'] as int,
+      // Las entradas cacheadas antes de que este campo existiera no lo traen:
+      // para esas se conserva la deducción vieja y así no hace falta invalidar
+      // la caché de Wikipedia que el usuario ya tenga en disco.
+      isLead: json['isLead'] as bool? ?? title.isEmpty,
     );
   }
 
@@ -25,6 +38,7 @@ class WikipediaSection {
         'title': title,
         'content': content,
         'level': level,
+        'isLead': isLead,
       };
 }
 
@@ -148,6 +162,7 @@ class WikipediaContent {
         title: isFirst ? '' : sectionTitle,
         content: truncated,
         level: sectionTitle.isEmpty ? 0 : 1,
+        isLead: isFirst,
       ));
 
       isFirst = false;

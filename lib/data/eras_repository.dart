@@ -6,12 +6,17 @@ class ErasRepository {
     EraModel(
       id: 'caral',
       isPremium: false,
+      // Caral es la única era cuyas imágenes no están en
+      // `assets/images/caral/` (esa carpeta quedó vacía): viven junto al
+      // contenido editorial. Los nombres `caral_1.jpg`…`caral_5.jpg` que
+      // había aquí no existían en el bundle.
+      imageFolderOverride: 'assets/images/content/caral/',
       imageFilenames: [
-        'caral_1.jpg',
-        'caral_2.jpg',
-        'caral_3.jpg',
-        'caral_4.jpg',
-        'caral_5.jpg',
+        'caral_desertico.webp',
+        'caral_atardecer_eterno.webp',
+        'caral_nocturno_astronomico.webp',
+        'plaza_circular_caral.webp',
+        'sacerdote_ceremonial_andino.webp',
       ],
       accentColor: AppColors.caralColor,
       sortOrder: 0,

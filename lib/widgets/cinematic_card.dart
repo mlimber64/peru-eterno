@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../core/constants/app_colors.dart';
+import '../providers/language_provider.dart';
 
 /// A reusable cinematic card: image/gradient background + dark overlay + text.
 class CinematicCard extends StatelessWidget {
@@ -44,13 +46,16 @@ class CinematicCard extends StatelessWidget {
   /// estado (bloqueado/próximamente), ya que el contenido visual interno se
   /// excluye del árbol de semántica para evitar que TalkBack/VoiceOver lo
   /// lea como varios nodos sueltos sin indicar que la tarjeta es tocable.
-  String get _semanticLabel {
+  /// [t] es el traductor: el estado "Próximamente" estaba escrito a fuego en
+  /// español y un lector de pantalla en italiano o inglés lo leía así.
+  /// ("Premium" se deja tal cual: es el nombre del plan en los tres idiomas.)
+  String _semanticLabel(String Function(String) t) {
     final parts = <String>[
       if (badge != null && !isPremium && !isComingSoon) badge!,
       title,
       if (subtitle != null) subtitle!,
       if (isPremium) 'Premium',
-      if (isComingSoon) 'Próximamente',
+      if (isComingSoon) t('coming_soon.badge'),
     ];
     return parts.join('. ');
   }
@@ -60,7 +65,7 @@ class CinematicCard extends StatelessWidget {
     return Semantics(
       button: onTap != null,
       enabled: onTap != null,
-      label: _semanticLabel,
+      label: _semanticLabel(context.read<LanguageProvider>().t),
       child: GestureDetector(
         onTap: onTap,
         child: Container(

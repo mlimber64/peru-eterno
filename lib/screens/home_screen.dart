@@ -8,6 +8,7 @@ import '../core/constants/app_colors.dart';
 import '../core/constants/category_config.dart';
 import '../core/constants/world_config.dart';
 import '../core/navigation/app_navigation.dart';
+import '../data/editorial_repository.dart';
 import '../data/content_repository.dart';
 import '../data/eras_repository.dart';
 import '../data/historia_stages_repository.dart';
@@ -25,6 +26,7 @@ import '../widgets/app_drawer.dart';
 import '../widgets/caral_placeholder.dart';
 import '../widgets/cinematic_card.dart';
 import '../widgets/coming_soon.dart';
+import '../widgets/local_cinematic_card.dart';
 import 'interactive_stories_list_screen.dart';
 import 'world_screen.dart';
 
@@ -1383,6 +1385,60 @@ class _FeaturedEraSection extends StatelessWidget {
 
 // ── Personaje del día ─────────────────────────────────────────────────────────
 
+/// Retrato circular del personaje del día. La ficha editorial trae su foto
+/// (`imagen_local`), pero esta tarjeta enseñaba un icono de persona genérico
+/// porque nació como marcador de posición mientras la categoría estaba
+/// bloqueada como "Próximamente".
+///
+/// El icono se conserva como respaldo: se ve mientras se resuelve el asset y
+/// si la ficha no trae imagen.
+class _PersonajeAvatar extends StatelessWidget {
+  final ContentItem item;
+  const _PersonajeAvatar({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 72,
+      height: 72,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: const Color(0xFF8B4513).withOpacity(0.4),
+        border: Border.all(
+          color: AppColors.ocre.withOpacity(0.5),
+          width: 1.5,
+        ),
+      ),
+      child: FutureBuilder<String?>(
+        future: EditorialRepository.imageAssetFor(item.id, item.category),
+        builder: (context, snap) {
+          final path = snap.data;
+          if (path == null) {
+            return Icon(
+              Icons.person_rounded,
+              size: 36,
+              color: AppColors.ocre.withOpacity(0.8),
+            );
+          }
+          return ClipOval(
+            child: Image.asset(
+              path,
+              width: 72,
+              height: 72,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.person_rounded,
+                size: 36,
+                color: AppColors.ocre.withOpacity(0.8),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
 class _PersonajeDiaSection extends StatelessWidget {
   final ContentItem item;
   final String lang;
@@ -1393,7 +1449,18 @@ class _PersonajeDiaSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GestureDetector(
-        onTap: () => showComingSoonSnackBar(context),
+        // El estado de esta tarjeta lo decide `CategoryConfigs.isComingSoon`,
+        // no está escrito a fuego. Antes sí lo estaba —abría siempre el aviso
+        // "Próximamente"—, así que al desbloquear la categoría se habría
+        // quedado como la única tarjeta de la portada que no lleva a ninguna
+        // parte. `openContent` enseña el aviso él solo mientras 'personaje'
+        // siga en la lista, y navega en cuanto se quite.
+        onTap: () => AppNavigation.openContent(
+          context,
+          item,
+          isLocked: item.isPremium &&
+              !context.read<PremiumProvider>().isPremium,
+        ),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -1425,41 +1492,25 @@ class _PersonajeDiaSection extends StatelessWidget {
                 Positioned.fill(
                   child: Container(color: Colors.black.withOpacity(0.45)),
                 ),
-                Positioned(
-                  top: 14,
-                  right: 14,
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      shape: BoxShape.circle,
+                if (CategoryConfigs.isComingSoon(item.category))
+                  Positioned(
+                    top: 14,
+                    right: 14,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.hourglass_top_rounded,
+                          size: 14, color: Colors.white70),
                     ),
-                    child: const Icon(Icons.hourglass_top_rounded,
-                        size: 14, color: Colors.white70),
                   ),
-                ),
                 Padding(
                   padding: const EdgeInsets.all(22),
                   child: Row(
                     children: [
-                      // Avatar circle
-                      Container(
-                        width: 72,
-                        height: 72,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: const Color(0xFF8B4513).withOpacity(0.4),
-                          border: Border.all(
-                            color: AppColors.ocre.withOpacity(0.5),
-                            width: 1.5,
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.person_rounded,
-                          size: 36,
-                          color: AppColors.ocre.withOpacity(0.8),
-                        ),
-                      ),
+                      _PersonajeAvatar(item: item),
                       const SizedBox(width: 18),
                       Expanded(
                         child: Column(
@@ -1491,9 +1542,12 @@ class _PersonajeDiaSection extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  context
-                                      .read<LanguageProvider>()
-                                      .t('coming_soon.badge'),
+                                  context.read<LanguageProvider>().t(
+                                        CategoryConfigs.isComingSoon(
+                                                item.category)
+                                            ? 'coming_soon.badge'
+                                            : 'historia.read',
+                                      ),
                                   style: GoogleFonts.lato(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
@@ -1501,9 +1555,11 @@ class _PersonajeDiaSection extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(width: 4),
-                                const Icon(
-                                  Icons.hourglass_top_rounded,
-                                  size: 14,
+                                Icon(
+                                  CategoryConfigs.isComingSoon(item.category)
+                                      ? Icons.hourglass_top_rounded
+                                      : Icons.arrow_forward_ios_rounded,
+                                  size: 12,
                                   color: Colors.white70,
                                 ),
                               ],
@@ -1546,22 +1602,29 @@ class _ContinueSection extends StatelessWidget {
           final era = item is EraModel ? item : null;
           return Padding(
             padding: const EdgeInsets.only(right: 12),
-            child: CinematicCard(
-              assetImagePath: era != null
-                  ? era.imageAssetPath(era.imageFilenames.first)
-                  : null,
-              accentColor: era?.accentColor ?? const Color(0xFF6B4226),
-              title: item.localizedTitle(context.read<LanguageProvider>().t),
-              width: 160,
-              height: 130,
-              onTap: () {
-                if (era != null) {
-                  AppNavigation.openEra(context, era);
-                } else {
-                  AppNavigation.openContent(context, item as ContentItem);
-                }
-              },
-            ),
+            // Las eras resuelven su imagen por convención de carpeta; el
+            // resto son fichas editoriales y necesitan LocalCinematicCard,
+            // que busca su `imagen_local`. Antes todo lo que no fuera era
+            // pasaba `assetImagePath: null` y se quedaba en un rectángulo de
+            // degradado, aunque la foto estuviera en el bundle.
+            child: era != null
+                ? CinematicCard(
+                    assetImagePath:
+                        era.imageAssetPath(era.imageFilenames.first),
+                    accentColor: era.accentColor,
+                    title: item
+                        .localizedTitle(context.read<LanguageProvider>().t),
+                    width: 160,
+                    height: 130,
+                    onTap: () => AppNavigation.openEra(context, era),
+                  )
+                : LocalCinematicCard(
+                    item: item,
+                    width: 160,
+                    height: 130,
+                    onTap: () => AppNavigation.openContent(
+                        context, item as ContentItem),
+                  ),
           );
         },
       ),

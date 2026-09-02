@@ -12,6 +12,13 @@ class EraModel implements ContentRef {
   final int sortOrder;
   final Map<String, String> wikipediaSlug;
 
+  /// Carpeta de las imágenes cuando NO sigue la convención
+  /// `assets/images/<id>/`. Existe por Caral, cuyas ilustraciones viven en
+  /// `assets/images/content/caral/` (las usa también [CaralHeroCarousel]):
+  /// su carpeta por convención quedó vacía y la tarjeta de la línea de tiempo
+  /// se veía como un rectángulo de degradado sin foto.
+  final String? imageFolderOverride;
+
   const EraModel({
     required this.id,
     required this.isPremium,
@@ -19,6 +26,7 @@ class EraModel implements ContentRef {
     required this.accentColor,
     required this.sortOrder,
     required this.wikipediaSlug,
+    this.imageFolderOverride,
   });
 
   /// Las eras son siempre categoría 'era' (usado por la UI genérica que
@@ -26,7 +34,7 @@ class EraModel implements ContentRef {
   @override
   String get category => 'era';
 
-  String get imageFolderPath => 'assets/images/$id/';
+  String get imageFolderPath => imageFolderOverride ?? 'assets/images/$id/';
 
   String imageAssetPath(String filename) => '$imageFolderPath$filename';
 

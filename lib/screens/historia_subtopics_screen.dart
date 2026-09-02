@@ -431,7 +431,13 @@ class _SubtopicCard extends StatelessWidget {
     final isPremium = context.watch<PremiumProvider>().isPremium;
     final isDaily =
         context.watch<DailyStoryProvider>().dailyArticle?.id == article.id;
-    final isLocked = !isPremium && !isDaily;
+    // Misma regla que usa AppNavigation para decidir si abre el capítulo.
+    final isLocked = AppNavigation.isHistoriaArticleLocked(
+      userIsPremium: isPremium,
+      isDailyArticle: isDaily,
+      stageIsPremium:
+          HistoriaStagesRepository.isStagePremium(article.parentStageId),
+    );
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),

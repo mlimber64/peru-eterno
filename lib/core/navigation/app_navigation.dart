@@ -70,6 +70,11 @@ class AppNavigation {
     BuildContext context,
     HistoriaStage stage,
   ) async {
+    // Puerta de la etapa: las de pago ni se abren para un usuario free, así
+    // no ve una lista de capítulos que no puede leer.
+    if (stage.isPremium && !context.read<PremiumProvider>().isPremium) {
+      return openPremium(context);
+    }
     await Navigator.push(
       context,
       MaterialPageRoute(
@@ -82,6 +87,21 @@ class AppNavigation {
     );
   }
 
+  /// Regla ÚNICA de acceso al archivo histórico. Pura a propósito: las
+  /// pantallas que pintan un candado y esta clase, que decide si navegar,
+  /// tienen que responder lo mismo — antes cada una llevaba su propia copia
+  /// de la condición y al mover el límite de pago se quedaban en desacuerdo
+  /// (la lista decía "Contenido Premium" en capítulos que sí se abrían).
+  ///
+  /// Un usuario free puede leer la "Historia del Día" —sea de la etapa que
+  /// sea, es el gancho de la racha— y cualquier capítulo de una etapa libre.
+  static bool isHistoriaArticleLocked({
+    required bool userIsPremium,
+    required bool isDailyArticle,
+    required bool stageIsPremium,
+  }) =>
+      !userIsPremium && !isDailyArticle && stageIsPremium;
+
   static Future<void> openHistoriaArticle(
     BuildContext context, {
     required HistoriaArticle article,
@@ -90,20 +110,31 @@ class AppNavigation {
     List<String>? carouselImages,
     bool replace = false,
   }) async {
-    // Punto único de bloqueo del archivo histórico: los usuarios free solo
-    // pueden abrir la "Historia del Día"; cualquier otro capítulo cae al
-    // paywall. Cubre todos los caminos de navegación al lector (home,
-    // subtemas, lista prehispánica, álbum de coleccionables, prev/next y
-    // "explora también" dentro del propio lector), que pasan todos por aquí.
+    // Punto único de bloqueo del archivo histórico. Cubre todos los caminos
+    // de navegación al lector (home, subtemas, lista prehispánica, álbum de
+    // coleccionables, mapa, widget, prev/next y "explora también" dentro del
+    // propio lector), que pasan todos por aquí.
+    //
+    // Un usuario free puede leer: la "Historia del Día" —sea de la etapa que
+    // sea, es el gancho de la racha— y cualquier capítulo de una etapa libre
+    // ([HistoriaStage.isPremium] == false). Lo demás cae al paywall.
     final isPremium = context.read<PremiumProvider>().isPremium;
     final isDailyArticle =
         context.read<DailyStoryProvider>().dailyArticle?.id == article.id;
-    if (!isPremium && !isDailyArticle) {
-      return openPremium(context);
-    }
 
+    // La etapa se resuelve ANTES de decidir porque hace falta para saber si
+    // el capítulo es de pago; da igual el orden para el resto del método.
     final resolvedStage = stage ?? await _resolveStage(article.parentStageId);
     if (!context.mounted) return;
+
+    // Sin etapa conocida se asume de pago: es el lado seguro, y solo pasa si
+    // el artículo trae un `parentStageId` roto.
+    final locked = isHistoriaArticleLocked(
+      userIsPremium: isPremium,
+      isDailyArticle: isDailyArticle,
+      stageIsPremium: resolvedStage?.isPremium ?? true,
+    );
+    if (locked) return openPremium(context);
 
     final route = MaterialPageRoute(
       builder: (_) => HistoriaArticleDetailScreen(

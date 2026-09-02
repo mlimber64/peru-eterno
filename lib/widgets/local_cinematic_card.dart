@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../core/constants/category_config.dart';
 import '../data/editorial_repository.dart';
@@ -64,19 +63,13 @@ class _LocalCinematicCardState extends State<LocalCinematicCard> {
   }
 
   Future<void> _resolveAsset() async {
-    final content = await EditorialRepository.findById(
+    // `imageAssetFor` ya confirma que el archivo está en el bundle: si no
+    // está, devuelve null y el gradiente de categoría sigue visible sin
+    // parpadeo.
+    final path = await EditorialRepository.imageAssetFor(
         widget.item.id, widget.item.category);
-    final path = content?.imagenAssetPath;
     if (path == null || !mounted) return;
-
-    // Confirma que el archivo existe en el bundle antes de asignarlo.
-    // Si no existe aún, el gradiente de categoría sigue visible sin parpadeo.
-    try {
-      await rootBundle.load(path);
-      if (mounted) setState(() => _assetPath = path);
-    } catch (_) {
-      // Asset no disponible — el gradiente de fallback permanece activo.
-    }
+    setState(() => _assetPath = path);
   }
 
   @override
