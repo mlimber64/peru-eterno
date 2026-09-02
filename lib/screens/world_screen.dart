@@ -201,9 +201,11 @@ class WorldScreen extends StatelessWidget {
                 ),
               ),
             ),
-            _sliverLabel(
-                context.read<LanguageProvider>().t('world.civilizations'),
-                world.accentColor),
+            // Aquí había un segundo encabezado, "Civilizaciones", justo detrás
+            // de la lista de la línea de tiempo y sin nada debajo: se veía
+            // como un título suelto sobre un hueco. La lista ya tiene el suyo
+            // ("Línea de tiempo") delante. La clave i18n `world.civilizations`
+            // se conserva por si vuelve a haber una sección que encabezar.
           ],
 
           // ── Approfondimenti preispanici (solo Historia) ──────────────────
@@ -474,7 +476,9 @@ class _EditorialMiniCard extends StatelessWidget {
                       size: 9, color: _accent.withOpacity(0.7)),
                   const SizedBox(width: 4),
                   Text(
-                    'Leggi',
+                    // Estaba escrito a mano en italiano: salía "Leggi" también
+                    // con la app en español o en inglés.
+                    context.read<LanguageProvider>().t('historia.read'),
                     style: GoogleFonts.lato(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
