@@ -1449,12 +1449,12 @@ class _PersonajeDiaSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GestureDetector(
-        // Antes esto abría siempre el aviso "Próximamente", escrito a fuego:
-        // no pasaba por `CategoryConfigs.isComingSoon`, así que al desbloquear
-        // la categoría 'personaje' esta tarjeta —en portada, la más visible de
-        // la app— se quedó siendo la única que no llevaba a ninguna parte.
-        // `openContent` mantiene la red de seguridad: si algún día se vuelve a
-        // bloquear la categoría, enseña el aviso él solo.
+        // El estado de esta tarjeta lo decide `CategoryConfigs.isComingSoon`,
+        // no está escrito a fuego. Antes sí lo estaba —abría siempre el aviso
+        // "Próximamente"—, así que al desbloquear la categoría se habría
+        // quedado como la única tarjeta de la portada que no lleva a ninguna
+        // parte. `openContent` enseña el aviso él solo mientras 'personaje'
+        // siga en la lista, y navega en cuanto se quite.
         onTap: () => AppNavigation.openContent(
           context,
           item,
@@ -1492,6 +1492,20 @@ class _PersonajeDiaSection extends StatelessWidget {
                 Positioned.fill(
                   child: Container(color: Colors.black.withOpacity(0.45)),
                 ),
+                if (CategoryConfigs.isComingSoon(item.category))
+                  Positioned(
+                    top: 14,
+                    right: 14,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.hourglass_top_rounded,
+                          size: 14, color: Colors.white70),
+                    ),
+                  ),
                 Padding(
                   padding: const EdgeInsets.all(22),
                   child: Row(
@@ -1528,9 +1542,12 @@ class _PersonajeDiaSection extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  context
-                                      .read<LanguageProvider>()
-                                      .t('historia.read'),
+                                  context.read<LanguageProvider>().t(
+                                        CategoryConfigs.isComingSoon(
+                                                item.category)
+                                            ? 'coming_soon.badge'
+                                            : 'historia.read',
+                                      ),
                                   style: GoogleFonts.lato(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
@@ -1538,8 +1555,10 @@ class _PersonajeDiaSection extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(width: 4),
-                                const Icon(
-                                  Icons.arrow_forward_ios_rounded,
+                                Icon(
+                                  CategoryConfigs.isComingSoon(item.category)
+                                      ? Icons.hourglass_top_rounded
+                                      : Icons.arrow_forward_ios_rounded,
                                   size: 12,
                                   color: Colors.white70,
                                 ),

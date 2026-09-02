@@ -56,26 +56,25 @@ class CategoryConfigs {
   static String labelOf(String category, String lang) =>
       of(category).labelFor(lang);
 
-  /// Categorías cuyo contenido curado todavía no está listo para publicarse.
-  /// Se mantienen visibles en la UI pero bloqueadas con un aviso
-  /// "Próximamente" en vez de quitarse — ver [[widgets/coming_soon.dart]] y su
-  /// uso en HomeScreen/ExploreScreen/WorldScreen. Todo pasa por
-  /// [isComingSoon], así que añadir o quitar una categoría aquí basta.
+  /// Categorías bloqueadas con el aviso "Próximamente" en esta versión. Se
+  /// mantienen visibles en la UI en vez de quitarse — ver
+  /// [[widgets/coming_soon.dart]] y su uso en
+  /// HomeScreen/ExploreScreen/WorldScreen. **Casi** todo pasa por
+  /// [isComingSoon], pero ojo: `_PersonajeDiaSection` de HomeScreen tiene su
+  /// propia tarjeta y también hay que mirarlo al cambiar esta lista.
   ///
-  /// **Vacío desde el 2026-09-02.** Contenía personaje, tradicion,
-  /// gastronomia, musica y geografia, bloqueadas por una "mezcla incompleta
-  /// de contenido editorial + fallback de Wikipedia" que ya no existe: las 27
-  /// fichas están completas en `assets/data/editorial_*.json` (título,
-  /// subtítulo y contenido en es/it/en, con sus imágenes) y las mismas 29
-  /// filas están en `content_items` de Supabase. Como
-  /// `ContentDetailScreen._loadWikipediaContent` busca primero en los assets
-  /// por (id, categoría) y solo cae a Wikipedia si no encuentra nada, y los
-  /// ids del servidor coinciden 1:1 con los de los assets, ninguna de estas
-  /// fichas llega a pedirle nada a Wikipedia.
-  ///
-  /// El mecanismo se conserva a propósito para la próxima categoría que se
-  /// empiece antes de terminarla.
-  static const Set<String> comingSoonCategories = {};
+  /// Decisión de producto (2026-09-02): la v1.0 sale **solo con Historia**.
+  /// El contenido de estas cinco está terminado y verificado —27 fichas en
+  /// `assets/data/editorial_*.json`, trilingües y con imagen, y las mismas
+  /// filas en `content_items` de Supabase—, así que quitar una de aquí la
+  /// publica al instante, sin más trabajo.
+  static const Set<String> comingSoonCategories = {
+    'personaje',
+    'tradicion',
+    'gastronomia',
+    'musica',
+    'geografia',
+  };
 
   static bool isComingSoon(String category) =>
       comingSoonCategories.contains(category);
