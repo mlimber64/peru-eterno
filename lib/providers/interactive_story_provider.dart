@@ -35,6 +35,12 @@ class InteractiveStoryProvider extends ChangeNotifier {
   final List<String> _path = [];
   Set<String> _unlockedEndings = {};
 
+  /// Finales desbloqueados de TODAS las historias, no solo de la cargada.
+  /// Lo necesita el hub para el contador "2 de 4 finales" de cada tarjeta, y
+  /// vive aquí porque este provider ya es el que escribe esas claves para
+  /// todas las historias al sincronizar (ver [applySyncedEndings]).
+  final Map<String, Set<String>> _unlockedByStory = {};
+
   /// Elección pendiente de confirmación: no-`null` mientras se muestra el
   /// dato histórico del nodo actual, antes de avanzar al nodo elegido.
   StoryChoice? _pendingChoice;
@@ -54,6 +60,27 @@ class InteractiveStoryProvider extends ChangeNotifier {
 
   bool isEndingUnlocked(String nodeId) => _unlockedEndings.contains(nodeId);
   int get unlockedEndingsCount => _unlockedEndings.length;
+
+  /// Cuántos finales lleva descubiertos el usuario en [storyId]. Devuelve 0
+  /// mientras [loadUnlockedCounts] no haya terminado.
+  int unlockedEndingsFor(String storyId) =>
+      _unlockedByStory[storyId]?.length ?? 0;
+
+  /// Lee de disco los finales de todas las historias. La llama el hub al
+  /// abrirse y al volver de una historia; es barato (SharedPreferences ya
+  /// está en memoria) y así el contador refleja al instante el final que
+  /// acabas de descubrir.
+  Future<void> loadUnlockedCounts(Iterable<String> storyIds) async {
+    final p = _prefs ??= await SharedPreferences.getInstance();
+    var changed = false;
+    for (final id in storyIds) {
+      final stored =
+          (p.getStringList('$kUnlockedEndingsPrefix$id') ?? const []).toSet();
+      if (_unlockedByStory[id]?.length != stored.length) changed = true;
+      _unlockedByStory[id] = stored;
+    }
+    if (changed) notifyListeners();
+  }
 
   /// Carga [storyId] y posiciona el nodo actual: retoma el progreso guardado
   /// si existe y sigue siendo válido (el nodo aún existe y no es un final ya
@@ -151,6 +178,7 @@ class InteractiveStoryProvider extends ChangeNotifier {
       '$kUnlockedEndingsPrefix${story.id}',
       _unlockedEndings.toList(),
     );
+    _unlockedByStory[story.id] = {..._unlockedEndings};
     // Llegar a un final cierra la partida en curso: se limpia el progreso
     // "en curso" para que la próxima apertura arranque desde el inicio.
     await p.remove('$_kProgressPrefix${story.id}');
@@ -178,10 +206,14 @@ class InteractiveStoryProvider extends ChangeNotifier {
   Future<void> applySyncedEndings(String storyId, Set<String> endings) async {
     final p = _prefs ??= await SharedPreferences.getInstance();
     await p.setStringList('$kUnlockedEndingsPrefix$storyId', endings.toList());
-    if (_story?.id != storyId) return;
-    final before = _unlockedEndings.length;
-    _unlockedEndings = {..._unlockedEndings, ...endings};
-    if (_unlockedEndings.length != before) notifyListeners();
+    _unlockedByStory[storyId] = {...endings};
+    if (_story?.id == storyId) {
+      _unlockedEndings = {..._unlockedEndings, ...endings};
+    }
+    // Se notifica siempre, no solo cuando cambia la historia cargada: el hub
+    // puede estar abierto mientras el sync trae finales de otro dispositivo,
+    // y su contador tiene que enterarse.
+    notifyListeners();
   }
 
   Future<void> _saveProgress() async {
@@ -207,6 +239,7 @@ class InteractiveStoryProvider extends ChangeNotifier {
     }
 
     _unlockedEndings = {};
+    _unlockedByStory.clear();
     _pendingChoice = null;
     _justUnlockedEnding = false;
     final story = _story;
