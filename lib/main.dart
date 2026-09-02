@@ -169,20 +169,42 @@ void main() async {
   final streakNotifications = StreakNotificationService();
 
   Future<void> refreshStreakReminder() async {
-    final streak = dailyStoryProvider.currentStreak;
+    final mensaje = StreakNotificationService.buildMessage(
+      t: languageProvider.t,
+      streak: dailyStoryProvider.currentStreak,
+    );
     await streakNotifications.refresh(
       alreadyReadToday: dailyStoryProvider.isCompletedToday,
-      title: languageProvider.t('notifications.reminder_title'),
-      body: streak > 0
-          ? languageProvider
-              .t('notifications.reminder_body_streak')
-              .replaceAll('{days}', '$streak')
-          : languageProvider.t('notifications.reminder_body'),
+      title: mensaje.title,
+      body: mensaje.body,
     );
   }
 
+  // Tocar el recordatorio lleva a la historia del día, no solo abre la app.
+  // Se resuelve AL TOCAR, no al programar: el aviso se agenda la noche
+  // anterior y se repite a diario, así que el capítulo correcto solo se sabe
+  // en el momento. Mismo patrón que el widget de escritorio
+  // (`HomeWidgetService._handleClick`), incluido el `addPostFrameCallback`:
+  // en arranque en frío esto corre antes de que exista el primer contexto.
+  void abrirHistoriaDelDia() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final context = AppNavigation.navigatorKey.currentContext;
+      final article = dailyStoryProvider.dailyArticle;
+      if (context == null || article == null) return;
+      analytics.log(AnalyticsService.reminderOpen);
+      AppNavigation.openHistoriaArticle(
+        context,
+        article: article,
+        allArticles: dailyStoryProvider.dailyStageArticles,
+        stage: dailyStoryProvider.dailyStage,
+      );
+    });
+  }
+
   unawaited(
-    streakNotifications.initialize().then((_) => refreshStreakReminder()),
+    streakNotifications
+        .initialize(onDailyTap: abrirHistoriaDelDia)
+        .then((_) => refreshStreakReminder()),
   );
   dailyStoryProvider.addListener(() => unawaited(refreshStreakReminder()));
 

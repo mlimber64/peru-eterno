@@ -82,6 +82,34 @@
                 android:resource="@xml/daily_fact_widget_info"/>
         </receiver>
 
+        <!-- Receptores de flutter_local_notifications. SIN ESTO EL
+             RECORDATORIO DE RACHA NO SE MUESTRA NUNCA, y falla en silencio:
+             la alarma se programa bien y el sistema la dispara a su hora,
+             pero apunta a un receptor que no existe, asi que el aviso no
+             llega a mostrarse, no se crea el canal y no se registra ningun
+             error en ninguna parte.
+
+             Desde la version 16 el plugin ya NO declara estos receptores en
+             su propio manifest (solo los permisos), y cada app tiene que
+             declararlos. Ver su README, seccion "To schedule notifications".
+
+             El de arranque reprograma los avisos tras reiniciar el movil o
+             actualizar la app; sin el, el recordatorio se pierde en cuanto
+             el usuario reinicia el telefono. -->
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

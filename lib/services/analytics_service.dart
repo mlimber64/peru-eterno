@@ -155,6 +155,11 @@ class AnalyticsService {
   /// notificaciones ayudan o si la gente las apaga.
   static const reminderEnable = 'reminder_enable';
 
+  /// Abrió la app TOCANDO el recordatorio. Es la medida de si la
+  /// notificación sirve de algo: comparado con cuántos la tienen activada,
+  /// dice si trae gente de vuelta o solo molesta.
+  static const reminderOpen = 'reminder_open';
+
   // ── Configuración ──────────────────────────────────────────────────────
 
   /// Cuántos eventos se acumulan antes de mandar el lote.

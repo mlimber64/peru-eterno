@@ -29,6 +29,12 @@ class StreakNotificationService {
   static const String _channelId = 'streak_reminder';
   static const String _kEnabled = 'streak_reminder_enabled';
 
+  /// Carga útil del aviso. Es un marcador, NO el id del capítulo: el aviso se
+  /// programa la noche anterior y se repite cada día, mientras que la
+  /// historia del día cambia con la fecha. Guardar aquí un id concreto
+  /// llevaría al capítulo equivocado a partir del segundo día.
+  static const String dailyPayload = 'daily';
+
   final FlutterLocalNotificationsPlugin _plugin;
   SharedPreferences? _prefs;
   bool _initialized = false;
@@ -43,11 +49,20 @@ class StreakNotificationService {
 
   /// Prepara el plugin y las zonas horarias. Nunca lanza: si algo falla, el
   /// resto de la app no se entera y simplemente no hay recordatorios.
-  Future<void> initialize() async {
+  ///
+  /// [onDailyTap] se llama cuando el usuario toca el recordatorio. Sin él, el
+  /// aviso abría la app en Inicio y había que buscar la historia a mano —
+  /// justo lo que el aviso pide hacer. Es opcional para no complicar los
+  /// tests, que no necesitan navegar a ninguna parte.
+  Future<void> initialize({VoidCallback? onDailyTap}) async {
     if (_initialized) return;
     try {
       _prefs = await SharedPreferences.getInstance();
       tz_data.initializeTimeZones();
+
+      void handle(NotificationResponse response) {
+        if (response.payload == dailyPayload) onDailyTap?.call();
+      }
 
       await _plugin.initialize(
         settings: const InitializationSettings(
@@ -59,18 +74,51 @@ class StreakNotificationService {
             requestSoundPermission: false,
           ),
         ),
+        onDidReceiveNotificationResponse: handle,
       );
+
+      // Arranque en frío: si la app estaba cerrada, el toque no llega por el
+      // callback de arriba —no había nadie escuchando— sino aquí.
+      final launch = await _plugin.getNotificationAppLaunchDetails();
+      if (launch?.didNotificationLaunchApp ?? false) {
+        final response = launch!.notificationResponse;
+        if (response != null) handle(response);
+      }
+
       _initialized = true;
     } catch (e, s) {
       if (kDebugMode) debugPrint('StreakNotificationService.initialize: $e\n$s');
     }
   }
 
+  /// Texto del recordatorio: título y cuerpo ya traducidos.
+  ///
+  /// Vive aquí, y no en quien llama, porque lo necesitan DOS sitios —el
+  /// arranque de la app y el interruptor de Ajustes— y tenerlo duplicado ya
+  /// causó un fallo: Ajustes programaba el aviso sin texto, así que el primer
+  /// recordatorio que recibía un usuario, la misma noche que lo activaba,
+  /// llegaba con el cuerpo en blanco.
+  static ({String title, String body}) buildMessage({
+    required String Function(String) t,
+    required int streak,
+  }) =>
+      (
+        title: t('notifications.reminder_title'),
+        body: streak > 0
+            ? t('notifications.reminder_body_streak')
+                .replaceAll('{days}', '$streak')
+            : t('notifications.reminder_body'),
+      );
+
   /// Activa el recordatorio: pide permiso y, si lo dan, programa el aviso.
   ///
   /// Devuelve `false` si el usuario negó el permiso, para que Ajustes pueda
   /// dejar el interruptor apagado en vez de mentir diciendo que está activo.
-  Future<bool> enable({required bool alreadyReadToday}) async {
+  Future<bool> enable({
+    required bool alreadyReadToday,
+    String? title,
+    String? body,
+  }) async {
     await initialize();
     if (!_initialized) return false;
 
@@ -78,7 +126,13 @@ class StreakNotificationService {
     if (!granted) return false;
 
     await _prefs?.setBool(_kEnabled, true);
-    await refresh(alreadyReadToday: alreadyReadToday);
+    // El texto se propaga: sin esto el aviso de esta misma noche —el primero
+    // que ve el usuario— saldría con el título por defecto y sin cuerpo.
+    await refresh(
+      alreadyReadToday: alreadyReadToday,
+      title: title,
+      body: body,
+    );
     return true;
   }
 
@@ -127,6 +181,7 @@ class StreakNotificationService {
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
         // Repite cada día a la misma hora.
         matchDateTimeComponents: DateTimeComponents.time,
+        payload: dailyPayload,
       );
     } catch (e, s) {
       if (kDebugMode) debugPrint('StreakNotificationService.refresh: $e\n$s');
