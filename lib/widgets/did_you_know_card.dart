@@ -24,7 +24,7 @@ class DidYouKnowCard extends StatelessWidget {
     const gold = AppColors.ocre;
     final bodyStyle = GoogleFonts.lato(
       fontSize: 15 * textScale,
-      color: AppColors.cremaPergamino.withOpacity(0.9),
+      color: AppColors.cremaPergamino.withValues(alpha: 0.9),
       height: 1.7,
     );
 
@@ -32,9 +32,9 @@ class DidYouKnowCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
       decoration: BoxDecoration(
-        color: gold.withOpacity(0.1),
+        color: gold.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: gold.withOpacity(0.45), width: 1.2),
+        border: Border.all(color: gold.withValues(alpha: 0.45), width: 1.2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class DidYouKnowCard extends StatelessWidget {
                 width: 26,
                 height: 26,
                 decoration: BoxDecoration(
-                  color: gold.withOpacity(0.18),
+                  color: gold.withValues(alpha: 0.18),
                   shape: BoxShape.circle,
                 ),
                 child: const Center(

@@ -59,7 +59,7 @@ class CaralPlaceholder extends StatelessWidget {
                   child: Text(
                     label!.toUpperCase(),
                     style: TextStyle(
-                      color: accentColor.withOpacity(0.75),
+                      color: accentColor.withValues(alpha: 0.75),
                       fontSize: 11,
                       letterSpacing: 3,
                       fontWeight: FontWeight.w600,
@@ -84,18 +84,18 @@ class _CaralPainter extends CustomPainter {
 
     // Trazo principal (contorno) y trazo tenue (detalles internos).
     final stroke = Paint()
-      ..color = accentColor.withOpacity(0.85)
+      ..color = accentColor.withValues(alpha: 0.85)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.4
       ..strokeJoin = StrokeJoin.round;
 
     final faint = Paint()
-      ..color = accentColor.withOpacity(0.28)
+      ..color = accentColor.withValues(alpha: 0.28)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
     final fill = Paint()
-      ..color = accentColor.withOpacity(0.05)
+      ..color = accentColor.withValues(alpha: 0.05)
       ..style = PaintingStyle.fill;
 
     _drawSun(canvas, size, stroke, faint);
@@ -180,7 +180,7 @@ class _CaralPainter extends CustomPainter {
 
     // Acceso central: escalinata sugerida con líneas verticales finas.
     final stair = Paint()
-      ..color = accentColor.withOpacity(0.45)
+      ..color = accentColor.withValues(alpha: 0.45)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     for (var i = 0; i < steps; i++) {
@@ -210,7 +210,7 @@ class _CaralPainter extends CustomPainter {
     // Cuerdas colgantes con un par de nudos (puntos) cada una.
     const cords = 6;
     final knot = Paint()
-      ..color = accentColor.withOpacity(0.35)
+      ..color = accentColor.withValues(alpha: 0.35)
       ..style = PaintingStyle.fill;
 
     for (var i = 0; i < cords; i++) {

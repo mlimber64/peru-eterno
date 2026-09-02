@@ -80,10 +80,10 @@ class _MapTimelineScreenState extends State<MapTimelineScreen> {
                         setState(() => _view = selection.first),
                     style: SegmentedButton.styleFrom(
                       backgroundColor: AppColors.marronProfundo,
-                      foregroundColor: AppColors.cremaPergamino.withOpacity(0.6),
-                      selectedBackgroundColor: AppColors.ocre.withOpacity(0.2),
+                      foregroundColor: AppColors.cremaPergamino.withValues(alpha: 0.6),
+                      selectedBackgroundColor: AppColors.ocre.withValues(alpha: 0.2),
                       selectedForegroundColor: AppColors.ocre,
-                      side: BorderSide(color: AppColors.ocre.withOpacity(0.3)),
+                      side: BorderSide(color: AppColors.ocre.withValues(alpha: 0.3)),
                       textStyle: GoogleFonts.lato(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
@@ -96,9 +96,9 @@ class _MapTimelineScreenState extends State<MapTimelineScreen> {
             const SizedBox(height: 12),
             Expanded(
               child: _view == _ExplorerView.map
-                  ? SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(20, 4, 20, 90),
-                      child: const CulturalMapBody(),
+                  ? const SingleChildScrollView(
+                      padding: EdgeInsets.fromLTRB(20, 4, 20, 90),
+                      child: CulturalMapBody(),
                     )
                   : SingleChildScrollView(
                       padding: const EdgeInsets.only(bottom: 90),

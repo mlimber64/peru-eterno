@@ -33,7 +33,7 @@ void showComingSoonSnackBar(BuildContext context) {
         duration: const Duration(seconds: 3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14),
-          side: BorderSide(color: AppColors.ocre.withOpacity(0.45)),
+          side: BorderSide(color: AppColors.ocre.withValues(alpha: 0.45)),
         ),
       ),
     );

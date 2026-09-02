@@ -231,7 +231,9 @@
     "step_label": "Decisione",
     "premium_choice_badge": "Premium",
     "premium_story_badge": "Storia Premium",
-    "new_ending_unlocked": "Nuovo finale scoperto!"
+    "new_ending_unlocked": "Nuovo finale scoperto!",
+    "endings_progress": "{unlocked} di {total} finali",
+    "endings_all": "Tutti i finali scoperti!"
   },
   "coming_soon": {
     "badge": "Prossimamente",

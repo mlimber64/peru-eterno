@@ -41,10 +41,10 @@ class CulturalMapScreen extends StatelessWidget {
               background: _MapHero(lang: lang),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 18, 20, 90),
-              child: const CulturalMapBody(),
+              padding: EdgeInsets.fromLTRB(20, 18, 20, 90),
+              child: CulturalMapBody(),
             ),
           ),
         ],
@@ -764,7 +764,7 @@ class _MapHero extends StatelessWidget {
           child: Icon(
             Icons.map_rounded,
             size: 170,
-            color: AppColors.ocre.withOpacity(0.06),
+            color: AppColors.ocre.withValues(alpha: 0.06),
           ),
         ),
         Positioned(
@@ -804,7 +804,7 @@ class _MapHero extends StatelessWidget {
                 context.read<LanguageProvider>().t('cultural_map.subtitle'),
                 style: GoogleFonts.lato(
                   fontSize: 13,
-                  color: AppColors.cremaPergamino.withOpacity(0.68),
+                  color: AppColors.cremaPergamino.withValues(alpha: 0.68),
                   height: 1.35,
                 ),
               ),
@@ -883,10 +883,10 @@ class _FilterChip extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
-          color: isActive ? color.withOpacity(0.2) : AppColors.marronProfundo,
+          color: isActive ? color.withValues(alpha: 0.2) : AppColors.marronProfundo,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isActive ? color.withOpacity(0.7) : AppColors.cremaPergamino.withOpacity(0.1),
+            color: isActive ? color.withValues(alpha: 0.7) : AppColors.cremaPergamino.withValues(alpha: 0.1),
           ),
         ),
         child: Center(
@@ -895,7 +895,7 @@ class _FilterChip extends StatelessWidget {
             style: GoogleFonts.lato(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: isActive ? color : AppColors.cremaPergamino.withOpacity(0.5),
+              color: isActive ? color : AppColors.cremaPergamino.withValues(alpha: 0.5),
             ),
           ),
         ),
@@ -941,10 +941,10 @@ class _MapStage extends StatelessWidget {
               Color(0xFF160B08),
             ],
           ),
-          border: Border.all(color: AppColors.ocre.withOpacity(0.16)),
+          border: Border.all(color: AppColors.ocre.withValues(alpha: 0.16)),
           boxShadow: [
             BoxShadow(
-              color: AppColors.ocre.withOpacity(0.08),
+              color: AppColors.ocre.withValues(alpha: 0.08),
               blurRadius: 24,
               offset: const Offset(0, 12),
             ),
@@ -1031,10 +1031,10 @@ class _Hotspot extends StatelessWidget {
           height: size,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: point.accentColor.withOpacity(isSelected ? 0.25 : 0.16),
+            color: point.accentColor.withValues(alpha: isSelected ? 0.25 : 0.16),
             boxShadow: [
               BoxShadow(
-                color: point.accentColor.withOpacity(isSelected ? 0.42 : 0.18),
+                color: point.accentColor.withValues(alpha: isSelected ? 0.42 : 0.18),
                 blurRadius: isSelected ? 20 : 10,
                 spreadRadius: isSelected ? 4 : 1,
               ),
@@ -1043,7 +1043,7 @@ class _Hotspot extends StatelessWidget {
           child: Center(
             child: isLocked
                 ? Icon(Icons.lock_rounded,
-                    size: isSelected ? 15 : 11, color: Colors.white.withOpacity(0.85))
+                    size: isSelected ? 15 : 11, color: Colors.white.withValues(alpha: 0.85))
                 : AnimatedContainer(
                     duration: const Duration(milliseconds: 240),
                     width: isSelected ? 15 : 10,
@@ -1051,7 +1051,7 @@ class _Hotspot extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: point.accentColor,
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white.withOpacity(0.72)),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.72)),
                     ),
                   ),
           ),
@@ -1083,7 +1083,7 @@ class _SelectedPointCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.marronProfundo,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: point.accentColor.withOpacity(0.24)),
+          border: Border.all(color: point.accentColor.withValues(alpha: 0.24)),
         ),
         padding: const EdgeInsets.all(14),
         child: Row(
@@ -1098,7 +1098,7 @@ class _SelectedPointCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 fallbackIcon: Icon(
                   Icons.museum_rounded,
-                  color: Colors.white.withOpacity(0.55),
+                  color: Colors.white.withValues(alpha: 0.55),
                   size: 30,
                 ),
               ),
@@ -1121,7 +1121,7 @@ class _SelectedPointCard extends StatelessWidget {
                     point.regionFor(lang),
                     style: GoogleFonts.lato(
                       fontSize: 12,
-                      color: AppColors.cremaPergamino.withOpacity(0.58),
+                      color: AppColors.cremaPergamino.withValues(alpha: 0.58),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -1193,7 +1193,7 @@ class _MapPointListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: isSelected
-          ? point.accentColor.withOpacity(0.13)
+          ? point.accentColor.withValues(alpha: 0.13)
           : AppColors.marronProfundo,
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
@@ -1204,8 +1204,8 @@ class _MapPointListTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isSelected
-                  ? point.accentColor.withOpacity(0.42)
-                  : AppColors.cremaPergamino.withOpacity(0.08),
+                  ? point.accentColor.withValues(alpha: 0.42)
+                  : AppColors.cremaPergamino.withValues(alpha: 0.08),
             ),
           ),
           padding: const EdgeInsets.all(10),
@@ -1221,7 +1221,7 @@ class _MapPointListTile extends StatelessWidget {
                   fit: BoxFit.cover,
                   fallbackIcon: Icon(
                     Icons.place_rounded,
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withValues(alpha: 0.5),
                     size: 22,
                   ),
                 ),
@@ -1246,7 +1246,7 @@ class _MapPointListTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.lato(
                         fontSize: 11,
-                        color: AppColors.cremaPergamino.withOpacity(0.52),
+                        color: AppColors.cremaPergamino.withValues(alpha: 0.52),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -1257,7 +1257,7 @@ class _MapPointListTile extends StatelessWidget {
                       style: GoogleFonts.lato(
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
-                        color: point.accentColor.withOpacity(0.9),
+                        color: point.accentColor.withValues(alpha: 0.9),
                       ),
                     ),
                   ],
@@ -1267,7 +1267,7 @@ class _MapPointListTile extends StatelessWidget {
               Icon(
                 isLocked ? Icons.lock_rounded : Icons.arrow_forward_ios_rounded,
                 size: 13,
-                color: point.accentColor.withOpacity(0.78),
+                color: point.accentColor.withValues(alpha: 0.78),
               ),
             ],
           ),
@@ -1336,16 +1336,16 @@ class _PeruMapPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final border = Paint()
-      ..color = AppColors.ocre.withOpacity(0.44)
+      ..color = AppColors.ocre.withValues(alpha: 0.44)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
 
-    canvas.drawShadow(path, Colors.black.withOpacity(0.45), 12, true);
+    canvas.drawShadow(path, Colors.black.withValues(alpha: 0.45), 12, true);
     canvas.drawPath(path, fill);
     canvas.drawPath(path, border);
 
     final coast = Paint()
-      ..color = AppColors.cremaPergamino.withOpacity(0.10)
+      ..color = AppColors.cremaPergamino.withValues(alpha: 0.10)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2;
     final coastPath = Path()
@@ -1355,7 +1355,7 @@ class _PeruMapPainter extends CustomPainter {
     canvas.drawPath(coastPath, coast);
 
     final ridge = Paint()
-      ..color = AppColors.ocre.withOpacity(0.16)
+      ..color = AppColors.ocre.withValues(alpha: 0.16)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     for (var i = 0; i < 5; i++) {
@@ -1380,7 +1380,7 @@ class _MuseumTexturePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.045)
+      ..color = color.withValues(alpha: 0.045)
       ..strokeWidth = 1;
     const spacing = 26.0;
     for (double i = -size.height; i < size.width + size.height; i += spacing) {

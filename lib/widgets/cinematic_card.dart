@@ -75,7 +75,7 @@ class CinematicCard extends StatelessWidget {
             borderRadius: borderRadius,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -97,7 +97,7 @@ class CinematicCard extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.75),
+                          Colors.black.withValues(alpha: 0.75),
                         ],
                         stops: const [0.35, 1.0],
                       ),
@@ -105,7 +105,7 @@ class CinematicCard extends StatelessWidget {
                   ),
                   // Premium lock / coming-soon overlay
                   if (isPremium || isComingSoon)
-                    Container(color: Colors.black.withOpacity(0.45)),
+                    Container(color: Colors.black.withValues(alpha: 0.45)),
                   // Content
                   Positioned(
                     bottom: 0,
@@ -123,8 +123,8 @@ class CinematicCard extends StatelessWidget {
                                   horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
                                 color: isComingSoon
-                                    ? Colors.white.withOpacity(0.22)
-                                    : accentColor.withOpacity(0.85),
+                                    ? Colors.white.withValues(alpha: 0.22)
+                                    : accentColor.withValues(alpha: 0.85),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
@@ -156,7 +156,7 @@ class CinematicCard extends StatelessWidget {
                               subtitle!,
                               style: GoogleFonts.lato(
                                 fontSize: 11,
-                                color: Colors.white.withOpacity(0.75),
+                                color: Colors.white.withValues(alpha: 0.75),
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -174,7 +174,7 @@ class CinematicCard extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.5),
+                          color: Colors.black.withValues(alpha: 0.5),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(Icons.lock_rounded,
@@ -188,7 +188,7 @@ class CinematicCard extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.5),
+                          color: Colors.black.withValues(alpha: 0.5),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(Icons.hourglass_top_rounded,
@@ -233,9 +233,9 @@ class CinematicCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            accentColor.withOpacity(0.9),
-            accentColor.withOpacity(0.4),
-            Colors.black.withOpacity(0.8),
+            accentColor.withValues(alpha: 0.9),
+            accentColor.withValues(alpha: 0.4),
+            Colors.black.withValues(alpha: 0.8),
           ],
           stops: const [0.0, 0.5, 1.0],
         ),
@@ -253,7 +253,7 @@ class _DiagonalPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.08)
+      ..color = color.withValues(alpha: 0.08)
       ..strokeWidth = 1;
 
     const spacing = 20.0;

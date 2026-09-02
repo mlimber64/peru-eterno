@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../services/analytics_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -61,7 +62,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  Future<void> _finish() async {
+  /// [skipped] separa "lo terminó" de "le dio a Saltar". La diferencia entre
+  /// los dos números dice si las tres pantallas convencen o estorban, que es
+  /// justo lo que no se puede saber mirando solo cuánta gente llega a Home.
+  Future<void> _finish({bool skipped = false}) async {
+    context.read<AnalyticsService>().log(
+          skipped
+              ? AnalyticsService.onboardingSkip
+              : AnalyticsService.onboardingComplete,
+          value: _page + 1,
+        );
     await OnboardingScreen.markSeen();
     if (!mounted) return;
     context.go('/home');
@@ -91,13 +101,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: _finish,
+                onPressed: () => _finish(skipped: true),
                 child: Text(
                   t('onboarding.skip'),
                   style: GoogleFonts.lato(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.cremaPergamino.withOpacity(0.45),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.45),
                   ),
                 ),
               ),
@@ -135,7 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       dotWidth: 7,
                       expansionFactor: 3.5,
                       spacing: 6,
-                      dotColor: AppColors.cremaPergamino.withOpacity(0.18),
+                      dotColor: AppColors.cremaPergamino.withValues(alpha: 0.18),
                       activeDotColor: AppColors.ocre,
                     ),
                   ),
@@ -198,9 +208,9 @@ class _OnboardingPage extends StatelessWidget {
             width: 76,
             height: 76,
             decoration: BoxDecoration(
-              color: AppColors.ocre.withOpacity(0.12),
+              color: AppColors.ocre.withValues(alpha: 0.12),
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.ocre.withOpacity(0.3)),
+              border: Border.all(color: AppColors.ocre.withValues(alpha: 0.3)),
             ),
             child: Icon(icon, size: 36, color: AppColors.ocre),
           ),
@@ -229,7 +239,7 @@ class _OnboardingPage extends StatelessWidget {
             body,
             style: GoogleFonts.lato(
               fontSize: 15.5,
-              color: AppColors.cremaPergamino.withOpacity(0.65),
+              color: AppColors.cremaPergamino.withValues(alpha: 0.65),
               height: 1.65,
             ),
           ),
@@ -259,9 +269,9 @@ class _LanguagePage extends StatelessWidget {
             width: 76,
             height: 76,
             decoration: BoxDecoration(
-              color: AppColors.ocre.withOpacity(0.12),
+              color: AppColors.ocre.withValues(alpha: 0.12),
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.ocre.withOpacity(0.3)),
+              border: Border.all(color: AppColors.ocre.withValues(alpha: 0.3)),
             ),
             child: const Icon(Icons.translate_rounded,
                 size: 36, color: AppColors.ocre),
@@ -320,7 +330,7 @@ class _LanguageOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: selected
-          ? AppColors.ocre.withOpacity(0.15)
+          ? AppColors.ocre.withValues(alpha: 0.15)
           : AppColors.marronProfundo,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
@@ -332,8 +342,8 @@ class _LanguageOption extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
               color: selected
-                  ? AppColors.ocre.withOpacity(0.6)
-                  : AppColors.cremaPergamino.withOpacity(0.08),
+                  ? AppColors.ocre.withValues(alpha: 0.6)
+                  : AppColors.cremaPergamino.withValues(alpha: 0.08),
               width: 1.5,
             ),
           ),
@@ -349,7 +359,7 @@ class _LanguageOption extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     color: selected
                         ? AppColors.ocre
-                        : AppColors.cremaPergamino.withOpacity(0.7),
+                        : AppColors.cremaPergamino.withValues(alpha: 0.7),
                   ),
                 ),
               ),

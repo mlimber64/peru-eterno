@@ -131,6 +131,15 @@ class InteractiveStory {
 
   InteractiveStoryNode? get startNode => nodesById[startNodeId];
 
+  /// Ids de todos los finales de la historia. Es el denominador del contador
+  /// "2 de 4 finales" del hub: se cuentan del propio árbol de decisiones, no
+  /// de una constante escrita a mano que se quedaría desfasada al añadir una
+  /// rama.
+  Iterable<String> get endingNodeIds =>
+      nodesById.values.where((n) => n.isEnding).map((n) => n.nodeId);
+
+  int get endingCount => endingNodeIds.length;
+
   /// Cantidad de decisiones del camino más corto entre el inicio y un final,
   /// usada solo como referencia para la barra de progreso. Recorrido en
   /// anchura con un set de nodos visitados para blindarse ante ciclos en el

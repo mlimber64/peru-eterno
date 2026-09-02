@@ -52,7 +52,7 @@ class _CaralHeroCarouselState extends State<CaralHeroCarousel> {
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withValues(alpha: 0.4),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -79,7 +79,7 @@ class _CaralHeroCarouselState extends State<CaralHeroCarousel> {
                       child: Icon(
                         Icons.landscape_rounded,
                         size: 56,
-                        color: AppColors.ocre.withOpacity(0.2),
+                        color: AppColors.ocre.withValues(alpha: 0.2),
                       ),
                     ),
                   ),
@@ -115,7 +115,7 @@ class _CaralHeroCarouselState extends State<CaralHeroCarousel> {
                       decoration: BoxDecoration(
                         color: i == _current
                             ? Colors.white
-                            : Colors.white.withOpacity(0.30),
+                            : Colors.white.withValues(alpha: 0.30),
                         borderRadius: BorderRadius.circular(3),
                       ),
                     ),

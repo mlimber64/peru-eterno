@@ -24,6 +24,7 @@ import 'providers/reading_progress_provider.dart';
 import 'providers/reading_text_scale_provider.dart';
 import 'services/account_data_service.dart';
 import 'services/entitlement_service.dart';
+import 'services/analytics_service.dart';
 import 'services/error_reporter_service.dart';
 import 'services/home_widget_service.dart';
 import 'services/review_prompt_service.dart';
@@ -54,7 +55,15 @@ void main() async {
   const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
   final supabaseReady = supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty;
   if (supabaseReady) {
-    await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+    // `publishableKey` es el nombre nuevo del mismo parámetro: dentro del SDK
+    // se resuelve como `publishableKey ?? anonKey`, así que pasar aquí la anon
+    // key de siempre es exactamente equivalente. Se cambia solo el nombre del
+    // argumento; el dart-define sigue llamándose SUPABASE_ANON_KEY para no
+    // invalidar los env.json ni RELEASE.md.
+    await Supabase.initialize(
+      url: supabaseUrl,
+      publishableKey: supabaseAnonKey,
+    );
   }
 
   final contentProvider = ContentProvider(
@@ -98,6 +107,21 @@ void main() async {
   );
 
   final premiumProvider = PremiumProvider(entitlements: entitlementService);
+
+  // Analítica propia (misma decisión que el crash reporting: en el Supabase
+  // del proyecto, sin SDK de terceros, para no contradecir la política de
+  // privacidad ni añadir un procesador que declarar). Se construye aquí, tras
+  // `premiumProvider`, porque marca cada evento con si el usuario paga o no:
+  // sin ese dato no se puede separar "no le interesa" de "no puede".
+  final analytics = AnalyticsService.supabase(
+    client: supabaseReady ? Supabase.instance.client : null,
+    auth: supabaseAuthService,
+    sessionId: AnalyticsService.newSessionId(),
+    localeProvider: () => languageProvider.currentLanguage,
+    premiumProvider: () => premiumProvider.isPremium,
+  );
+  analytics.installLifecycleFlush();
+  analytics.log(AnalyticsService.appOpen);
   // Solo el estado persistido (disco local) bloquea el arranque. La conexión
   // con Google Play / App Store va sin `await`, igual que la auth anónima de
   // Supabase: es canal nativo + red, y esperarla aquí dejaba la app en negro
@@ -145,20 +169,42 @@ void main() async {
   final streakNotifications = StreakNotificationService();
 
   Future<void> refreshStreakReminder() async {
-    final streak = dailyStoryProvider.currentStreak;
+    final mensaje = StreakNotificationService.buildMessage(
+      t: languageProvider.t,
+      streak: dailyStoryProvider.currentStreak,
+    );
     await streakNotifications.refresh(
       alreadyReadToday: dailyStoryProvider.isCompletedToday,
-      title: languageProvider.t('notifications.reminder_title'),
-      body: streak > 0
-          ? languageProvider
-              .t('notifications.reminder_body_streak')
-              .replaceAll('{days}', '$streak')
-          : languageProvider.t('notifications.reminder_body'),
+      title: mensaje.title,
+      body: mensaje.body,
     );
   }
 
+  // Tocar el recordatorio lleva a la historia del día, no solo abre la app.
+  // Se resuelve AL TOCAR, no al programar: el aviso se agenda la noche
+  // anterior y se repite a diario, así que el capítulo correcto solo se sabe
+  // en el momento. Mismo patrón que el widget de escritorio
+  // (`HomeWidgetService._handleClick`), incluido el `addPostFrameCallback`:
+  // en arranque en frío esto corre antes de que exista el primer contexto.
+  void abrirHistoriaDelDia() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final context = AppNavigation.navigatorKey.currentContext;
+      final article = dailyStoryProvider.dailyArticle;
+      if (context == null || article == null) return;
+      analytics.log(AnalyticsService.reminderOpen);
+      AppNavigation.openHistoriaArticle(
+        context,
+        article: article,
+        allArticles: dailyStoryProvider.dailyStageArticles,
+        stage: dailyStoryProvider.dailyStage,
+      );
+    });
+  }
+
   unawaited(
-    streakNotifications.initialize().then((_) => refreshStreakReminder()),
+    streakNotifications
+        .initialize(onDailyTap: abrirHistoriaDelDia)
+        .then((_) => refreshStreakReminder()),
   );
   dailyStoryProvider.addListener(() => unawaited(refreshStreakReminder()));
 
@@ -218,6 +264,7 @@ void main() async {
         Provider.value(value: streakNotifications),
         Provider.value(value: reviewPrompts),
         Provider.value(value: UserProgressSyncService.instance!),
+        Provider.value(value: analytics),
       ],
       child: const PeruEternoApp(),
     ),

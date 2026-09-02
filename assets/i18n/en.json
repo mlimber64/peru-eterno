@@ -231,7 +231,9 @@
     "step_label": "Decision",
     "premium_choice_badge": "Premium",
     "premium_story_badge": "Premium Story",
-    "new_ending_unlocked": "New ending unlocked!"
+    "new_ending_unlocked": "New ending unlocked!",
+    "endings_progress": "{unlocked} of {total} endings",
+    "endings_all": "All endings discovered!"
   },
   "coming_soon": {
     "badge": "Coming soon",

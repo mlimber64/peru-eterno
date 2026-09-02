@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Container(
                   width: 60,
                   height: 1,
-                  color: AppColors.ocre.withOpacity(0.5),
+                  color: AppColors.ocre.withValues(alpha: 0.5),
                 ).animate().scaleX(duration: 600.ms, delay: 1000.ms),
                 const SizedBox(height: 16),
                 // Tagline
@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   t('splash.tagline'),
                   style: GoogleFonts.lato(
                     fontSize: 14,
-                    color: AppColors.cremaPergamino.withOpacity(0.65),
+                    color: AppColors.cremaPergamino.withValues(alpha: 0.65),
                     letterSpacing: 3,
                     fontWeight: FontWeight.w300,
                   ),
@@ -109,8 +109,8 @@ class _SplashScreenState extends State<SplashScreen> {
       height: 110,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: AppColors.ocre.withOpacity(0.6), width: 1.5),
-        color: AppColors.ocre.withOpacity(0.08),
+        border: Border.all(color: AppColors.ocre.withValues(alpha: 0.6), width: 1.5),
+        color: AppColors.ocre.withValues(alpha: 0.08),
       ),
       child: Center(
         child: SizedBox(
@@ -130,7 +130,7 @@ class _AndeanSunPainter extends CustomPainter {
     final radius = size.width / 4;
 
     final fillPaint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.25)
+      ..color = AppColors.ocre.withValues(alpha: 0.25)
       ..style = PaintingStyle.fill;
 
     final strokePaint = Paint()
@@ -161,7 +161,7 @@ class _AndeanSunPainter extends CustomPainter {
 
     // Inner cross
     final shortPaint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.7)
+      ..color = AppColors.ocre.withValues(alpha: 0.7)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
 
@@ -185,7 +185,7 @@ class _BackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.ocre.withOpacity(0.04)
+      ..color = AppColors.ocre.withValues(alpha: 0.04)
       ..strokeWidth = 1;
 
     const spacing = 40.0;
