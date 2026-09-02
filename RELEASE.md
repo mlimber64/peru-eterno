@@ -231,6 +231,22 @@ suscripciones semanales/anuales es suficiente, pero no es lo ideal.
 
 ---
 
+### Copia de seguridad de Android
+
+El manifest excluye los datos de la app del **respaldo en la nube**
+(`res/xml/data_extraction_rules.xml` y `full_backup_content.xml`), pero
+mantiene la **transferencia directa a un móvil nuevo**.
+
+Sin esa exclusión, Android restauraba las preferencias al reinstalar, y eso
+resucitaba progreso ya borrado con "Borrar mis datos": el borrado dejaba de
+ser un borrado y la política de privacidad decía algo falso. Se detectó en un
+móvil real, con una instalación "limpia" que trajo de vuelta la marca de
+prueba gratuita consumida semanas antes.
+
+> Consecuencia al probar: para una instalación realmente limpia hay que
+> desinstalar, no solo borrar datos. Y en versiones anteriores a este cambio,
+> reinstalar NO daba estado virgen.
+
 ### Informes de error
 
 La app captura los errores de Dart y los manda a `app_error_reports` (migración
