@@ -10,6 +10,13 @@ class HistoriaStage {
   final Map<String, String> periodo;
   final Color accentColor;
 
+  /// Etapa de pago. En la v1.0 solo "Perú prehispánico" es libre: es la puerta
+  /// de entrada temática y da 8 capítulos con los que engancharse; las otras
+  /// cuatro van al paywall. Viene de `es_premium` en
+  /// `assets/data/historia_stages.json`, así que cambiar qué se regala no
+  /// toca código.
+  final bool isPremium;
+
   const HistoriaStage({
     required this.id,
     required this.orden,
@@ -17,6 +24,7 @@ class HistoriaStage {
     required this.subtitulo,
     required this.periodo,
     required this.accentColor,
+    this.isPremium = false,
   });
 
   factory HistoriaStage.fromJson(Map<String, dynamic> json) {
@@ -29,6 +37,7 @@ class HistoriaStage {
       subtitulo: LocalizedMapX.parse(json['subtitulo']),
       periodo: LocalizedMapX.parse(json['periodo']),
       accentColor: color,
+      isPremium: json['es_premium'] as bool? ?? false,
     );
   }
 
