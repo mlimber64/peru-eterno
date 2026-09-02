@@ -168,9 +168,15 @@ class InteractiveStoryProvider extends ChangeNotifier {
   /// cargada; para las demás, la próxima vez que [loadStory] las abra leerá
   /// el valor ya fusionado directamente de SharedPreferences. No dispara
   /// push de vuelta.
+  ///
+  /// Abre SharedPreferences por su cuenta (`??=`, igual que [resetProgress]):
+  /// `syncAll()` corre al arrancar la app, mucho antes de que el usuario
+  /// entre a una historia y [loadStory] rellene [_prefs]. Esperar a que
+  /// estuviera puesto hacía que el pull de finales se descartara SIEMPRE en
+  /// silencio, así que los finales descubiertos en otro dispositivo nunca
+  /// llegaban a este.
   Future<void> applySyncedEndings(String storyId, Set<String> endings) async {
-    final p = _prefs;
-    if (p == null) return;
+    final p = _prefs ??= await SharedPreferences.getInstance();
     await p.setStringList('$kUnlockedEndingsPrefix$storyId', endings.toList());
     if (_story?.id != storyId) return;
     final before = _unlockedEndings.length;

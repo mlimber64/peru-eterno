@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -77,17 +78,34 @@ class UserProgressSyncService {
     _syncing = true;
     try {
       await Future.wait([
-        _syncStreak(client, uid),
-        _syncChapterProgress(client, uid),
-        _syncCollectibles(client, uid),
-        _syncStoryEndings(client, uid),
+        _section('streak', () => _syncStreak(client, uid)),
+        _section('chapters', () => _syncChapterProgress(client, uid)),
+        _section('collectibles', () => _syncCollectibles(client, uid)),
+        _section('endings', () => _syncStoryEndings(client, uid)),
       ]);
-    } catch (_) {
-      // Sin red / error del servicio a mitad de sync — lo que ya se haya
-      // fusionado queda aplicado; el resto se reintentará en el próximo
-      // syncAll() (p. ej. el siguiente arranque de la app).
     } finally {
       _syncing = false;
+    }
+  }
+
+  /// Aísla cada sección del sync: sin red o con un error del servicio, lo que
+  /// ya se fusionó queda aplicado y el resto se reintenta en el próximo
+  /// [syncAll] (p. ej. el siguiente arranque).
+  ///
+  /// El aislamiento es el punto: antes las cuatro secciones iban en un solo
+  /// `Future.wait` con un `catch` compartido, así que el primer fallo dejaba
+  /// sin diagnóstico a las otras tres y un error permanente (una policy de
+  /// RLS mal puesta, por ejemplo) era indistinguible de estar sin cobertura.
+  /// En debug se imprime; en release se ignora en silencio a propósito —
+  /// fallar el sync nunca debe molestar al usuario.
+  Future<void> _section(String label, Future<void> Function() task) async {
+    try {
+      await task();
+    } catch (e) {
+      assert(() {
+        debugPrint('[sync] falló la sección "$label": $e');
+        return true;
+      }());
     }
   }
 
@@ -105,12 +123,12 @@ class UserProgressSyncService {
     final remoteDate = remote?['last_completed_date'] as String?;
 
     final localCurrent = _daily.currentStreak;
-    final localWins = localCurrent >= remoteCurrent;
+    final localDate = _daily.lastReadDate;
 
     final mergedCurrent = localCurrent > remoteCurrent ? localCurrent : remoteCurrent;
     final mergedMax =
         _daily.longestStreak > remoteMax ? _daily.longestStreak : remoteMax;
-    final mergedDate = localWins ? _daily.lastReadDate : remoteDate;
+    final mergedDate = mergeLastCompletedDate(localDate, remoteDate);
 
     await _daily.applySyncedStreak(
       currentStreak: mergedCurrent,
@@ -124,6 +142,21 @@ class UserProgressSyncService {
       'max_streak': mergedMax,
       'last_completed_date': mergedDate,
     }, onConflict: 'user_id');
+  }
+
+  /// Fecha de la última lectura diaria tras fusionar dos dispositivos: gana
+  /// la más RECIENTE, independientemente de quién tenga la racha más larga.
+  /// Las claves son 'YYYY-MM-DD', así que el orden alfabético ya es el
+  /// cronológico.
+  ///
+  /// Antes se tomaba la fecha del lado con más racha. Si el usuario leía hoy
+  /// en otro dispositivo y en este tenía una racha mayor pero de ayer, la app
+  /// olvidaba la lectura de hoy y se la volvía a pedir — y al hacerla, la
+  /// racha subía dos veces por el mismo día.
+  static String? mergeLastCompletedDate(String? local, String? remote) {
+    if (local == null) return remote;
+    if (remote == null) return local;
+    return local.compareTo(remote) >= 0 ? local : remote;
   }
 
   /// Push incremental de la racha tras [DailyStoryProvider.completeToday].
@@ -215,8 +248,10 @@ class UserProgressSyncService {
         .eq('user_id', uid);
 
     final merged = <String, DateTime>{..._collectibles.unlockedAtMap};
+    final alreadyRemote = <String>{};
     for (final row in (remoteRows as List).cast<Map<String, dynamic>>()) {
       final id = row['collectible_id'] as String;
+      alreadyRemote.add(id);
       final remoteAt = DateTime.parse(row['unlocked_at'] as String);
       final localAt = merged[id];
       if (localAt == null || remoteAt.isBefore(localAt)) merged[id] = remoteAt;
@@ -224,10 +259,19 @@ class UserProgressSyncService {
 
     await _collectibles.applySyncedUnlocks(merged);
 
-    if (merged.isEmpty) return;
+    // Solo se suben las que el servidor todavía no tiene. `user_collectibles`
+    // NO tiene policy de UPDATE (desbloquear es un evento único, ver la
+    // migración), así que un upsert que choque con una fila existente entra
+    // por la rama ON CONFLICT DO UPDATE y RLS lo rechaza con 403 — y como
+    // PostgREST manda el lote en una sola sentencia, ese 403 tumbaba también
+    // las cartas nuevas que iban en el mismo lote. `ignoreDuplicates` (DO
+    // NOTHING) cubre la carrera de que otro dispositivo inserte la misma
+    // carta entre el select y este insert.
+    final pending = merged.entries.where((e) => !alreadyRemote.contains(e.key));
+    if (pending.isEmpty) return;
     await client.from('user_collectibles').upsert(
       [
-        for (final entry in merged.entries)
+        for (final entry in pending)
           {
             'user_id': uid,
             'collectible_id': entry.key,
@@ -235,6 +279,7 @@ class UserProgressSyncService {
           },
       ],
       onConflict: 'user_id,collectible_id',
+      ignoreDuplicates: true,
     );
   }
 
@@ -250,7 +295,7 @@ class UserProgressSyncService {
         'user_id': uid,
         'collectible_id': collectibleId,
         'unlocked_at': unlockedAt.toIso8601String(),
-      }, onConflict: 'user_id,collectible_id');
+      }, onConflict: 'user_id,collectible_id', ignoreDuplicates: true);
     } catch (_) {
       // Sin red — se resincroniza en el próximo syncAll().
     }
