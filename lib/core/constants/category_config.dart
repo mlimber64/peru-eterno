@@ -56,11 +56,18 @@ class CategoryConfigs {
   static String labelOf(String category, String lang) =>
       of(category).labelFor(lang);
 
-  /// Categorías cuyo contenido curado todavía no está listo para publicarse
-  /// (mezcla incompleta de contenido editorial + fallback de Wikipedia). Se
-  /// mantienen visibles en la UI pero bloqueadas con un aviso "Próximamente"
-  /// en vez de quitarse — ver [[widgets/coming_soon.dart]] y su uso en
-  /// HomeScreen/ExploreScreen/WorldScreen.
+  /// Categorías bloqueadas con el aviso "Próximamente" en esta versión. Se
+  /// mantienen visibles en la UI en vez de quitarse — ver
+  /// [[widgets/coming_soon.dart]] y su uso en
+  /// HomeScreen/ExploreScreen/WorldScreen. **Casi** todo pasa por
+  /// [isComingSoon], pero ojo: `_PersonajeDiaSection` de HomeScreen tiene su
+  /// propia tarjeta y también hay que mirarlo al cambiar esta lista.
+  ///
+  /// Decisión de producto (2026-09-02): la v1.0 sale **solo con Historia**.
+  /// El contenido de estas cinco está terminado y verificado —27 fichas en
+  /// `assets/data/editorial_*.json`, trilingües y con imagen, y las mismas
+  /// filas en `content_items` de Supabase—, así que quitar una de aquí la
+  /// publica al instante, sin más trabajo.
   static const Set<String> comingSoonCategories = {
     'personaje',
     'tradicion',

@@ -69,9 +69,11 @@ class ReadingProgressProvider extends ChangeNotifier {
     }
     notifyListeners();
     await _save();
-    if (read) {
-      unawaited(UserProgressSyncService.instance?.pushChapterProgress(articleId));
-    }
+    // Se empuja en los dos sentidos. Solo al marcar, el servidor se quedaba
+    // con `is_read = true` y el siguiente `syncAll()` (unión local ∪ remoto)
+    // volvía a marcar el capítulo: desmarcarlo se deshacía solo al reabrir
+    // la app.
+    unawaited(UserProgressSyncService.instance?.pushChapterProgress(articleId));
   }
 
   /// Añade [ids] al conjunto de leídos ya fusionado (máximo/unión entre

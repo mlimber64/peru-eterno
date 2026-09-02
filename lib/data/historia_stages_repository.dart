@@ -48,6 +48,26 @@ class HistoriaStagesRepository {
     return _stagesCache!;
   }
 
+  /// ¿Es de pago la etapa [stageId]? Sincrónico: lee la caché que deja
+  /// [loadStages], para poder decidirlo dentro de un `build()`.
+  ///
+  /// Devuelve `true` (bloqueado) si la etapa no se conoce o las etapas aún no
+  /// se han cargado. Equivocarse hacia "bloqueado" solo enseña un candado de
+  /// más un instante; hacia "libre" regalaría contenido de pago.
+  ///
+  /// En la práctica la caché ya está caliente antes del primer frame:
+  /// `main()` espera a `DailyStoryProvider.initialize`, que pasa por
+  /// [loadAllArticles] y este por [loadStages].
+  static bool isStagePremium(String? stageId) {
+    if (stageId == null || stageId.isEmpty) return true;
+    final stages = _stagesCache;
+    if (stages == null) return true;
+    for (final stage in stages) {
+      if (stage.id == stageId) return stage.isPremium;
+    }
+    return true;
+  }
+
   static Future<List<HistoriaArticle>> loadArticlesForStage(
       String stageId) async {
     if (_articlesCache.containsKey(stageId)) return _articlesCache[stageId]!;

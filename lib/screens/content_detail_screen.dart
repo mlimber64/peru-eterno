@@ -38,6 +38,14 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
   bool _isEditorial = false;
   String? _editorialFuente;
 
+  /// Ruta del asset con la imagen de la ficha editorial, ya confirmada en el
+  /// bundle. La cabecera y la galería solo sabían pintar `thumbnailUrl`, que
+  /// es una URL REMOTA de Wikipedia: el contenido editorial propio trae
+  /// `imagen_local` y nunca un thumbnail, así que la ficha se abría con la
+  /// cabecera en degradado pelado y la galería vacía, aunque la misma imagen
+  /// sí se veía en la tarjeta de la lista.
+  String? _editorialImagePath;
+
   final TransformationController _txController = TransformationController();
   double _textScale = 1.0;
   double _baseTextScale = 1.0;
@@ -80,6 +88,7 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
       _wikiFailed = false;
       _isEditorial = false;
       _editorialFuente = null;
+      _editorialImagePath = null;
     });
 
     // Try local editorial content first; no network needed.
@@ -104,6 +113,11 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
           _isEditorial = true;
           _editorialFuente = editorial.fuenteFor(lang);
         });
+      }
+      final imagePath = await EditorialRepository.imageAssetFor(
+          widget.item.id, widget.item.category);
+      if (imagePath != null && mounted) {
+        setState(() => _editorialImagePath = imagePath);
       }
       return;
     }
@@ -233,8 +247,17 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                 color: Colors.white.withOpacity(0.07),
               ),
             ),
-            // Wikipedia thumbnail if available
-            if (_wikiContent?.hasThumbnail == true)
+            // Imagen de la ficha: primero el asset local (contenido editorial
+            // propio), y si no lo hay, el thumbnail remoto de Wikipedia.
+            if (_editorialImagePath != null)
+              Positioned.fill(
+                child: Image.asset(
+                  _editorialImagePath!,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                ),
+              )
+            else if (_wikiContent?.hasThumbnail == true)
               Positioned.fill(
                 child: CachedNetworkImage(
                   imageUrl: _wikiContent!.thumbnailUrl!,
@@ -242,6 +265,24 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
                   errorWidget: (_, __, ___) => const SizedBox.shrink(),
                 ),
               ),
+            // Velo superior: los iconos de la barra (volver, favorito, idioma)
+            // son claros y antes siempre tenían detrás el degradado de
+            // categoría. Ahora la cabecera puede ser una foto clara —los
+            // retratos de personajes lo son casi siempre— y sin este velo
+            // quedan ilegibles.
+            DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    AppColors.marronOscuro.withOpacity(0.55),
+                    Colors.transparent,
+                  ],
+                  stops: const [0.0, 0.35],
+                ),
+              ),
+            ),
             // Gradient overlay
             DecoratedBox(
               decoration: BoxDecoration(
@@ -667,6 +708,32 @@ class _ContentDetailScreenState extends State<ContentDetailScreen>
     final color = CategoryConfigs.colorOf(widget.item.category);
     final icon = CategoryConfigs.iconOf(widget.item.category);
     final hasThumb = _wikiContent?.hasThumbnail == true && !_isLoadingWiki;
+    final localPath = _editorialImagePath;
+
+    // Contenido editorial propio: su ilustración es un asset local, no un
+    // thumbnail de Wikipedia. Aquí se ve entera y con pinch-to-zoom, mientras
+    // que en la cabecera va recortada y bajo el degradado del título.
+    if (localPath != null) {
+      return GridView.count(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: Image.asset(
+              localPath,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Container(
+                color: color.withOpacity(0.1),
+                child: const Icon(Icons.image_not_supported_outlined),
+              ),
+            ),
+          ).animate().fadeIn(duration: 400.ms),
+        ],
+      );
+    }
 
     if (!hasThumb) {
       return Center(

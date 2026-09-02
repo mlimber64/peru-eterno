@@ -17,7 +17,8 @@
       "it": "Dalle prime comunità alle grandi civiltà andine",
       "es": "De las primeras comunidades a las grandes civilizaciones andinas",
       "en": "From the first communities to the great Andean civilizations"
-    }
+    },
+    "es_premium": false
   },
   {
     "id": "conquista_spagnola",
@@ -37,7 +38,8 @@
       "it": "L'arrivo degli europei e la fine del Tahuantinsuyo",
       "es": "La llegada de los europeos y el fin del Tahuantinsuyo",
       "en": "The arrival of Europeans and the end of the Tahuantinsuyo"
-    }
+    },
+    "es_premium": true
   },
   {
     "id": "vicereame_peru",
@@ -57,7 +59,8 @@
       "it": "La formazione della società coloniale",
       "es": "La formación de la sociedad colonial",
       "en": "The formation of the colonial society"
-    }
+    },
+    "es_premium": true
   },
   {
     "id": "indipendenza",
@@ -77,7 +80,8 @@
       "it": "Il cammino verso la libertà repubblicana",
       "es": "El camino hacia la libertad republicana",
       "en": "The path toward republican freedom"
-    }
+    },
+    "es_premium": true
   },
   {
     "id": "republica_peru",
@@ -97,6 +101,7 @@
       "it": "Tempeste e glorie: il guano, la Guerra del Pacifico e la resistenza eroica",
       "es": "Tempestades y glorias: el guano, la Guerra del Pacífico y la resistencia heroica",
       "en": "Storms and glories: the guano era, the War of the Pacific, and heroic resistance"
-    }
+    },
+    "es_premium": true
   }
 ]

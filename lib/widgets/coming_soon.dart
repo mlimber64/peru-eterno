@@ -14,9 +14,27 @@ void showComingSoonSnackBar(BuildContext context) {
     ..clearSnackBars()
     ..showSnackBar(
       SnackBar(
-        content: Text(t('coming_soon.message')),
+        // El color del texto va explícito: por defecto el SnackBar usa el del
+        // tema (pensado para su fondo oscuro estándar) y sobre este marrón
+        // apagado quedaba casi ilegible. Se añaden también el borde en ocre y
+        // algo más de aire para que se lea como un aviso y no como un error.
+        content: Text(
+          t('coming_soon.message'),
+          style: const TextStyle(
+            color: AppColors.cremaPergamino,
+            fontSize: 14,
+            height: 1.4,
+          ),
+        ),
         backgroundColor: AppColors.marronProfundo,
         behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+        duration: const Duration(seconds: 3),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14),
+          side: BorderSide(color: AppColors.ocre.withOpacity(0.45)),
+        ),
       ),
     );
 }
