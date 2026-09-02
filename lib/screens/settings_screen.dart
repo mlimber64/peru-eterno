@@ -10,6 +10,7 @@ import '../providers/history_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/premium_provider.dart';
 import '../services/account_data_service.dart';
+import '../services/analytics_service.dart';
 import '../services/streak_notification_service.dart';
 import '../services/supabase_auth_service.dart';
 import '../services/wikipedia_service.dart';
@@ -459,12 +460,25 @@ class _StreakReminderCardState extends State<_StreakReminderCard> {
     final service = context.read<StreakNotificationService>();
     final daily = context.read<DailyStoryProvider>();
     final messenger = ScaffoldMessenger.of(context);
+    // Se lee antes del await: después el widget puede estar desmontado.
+    final analytics = context.read<AnalyticsService>();
 
     setState(() => _busy = true);
 
     var ok = true;
     if (value) {
-      ok = await service.enable(alreadyReadToday: daily.isCompletedToday);
+      final mensaje = StreakNotificationService.buildMessage(
+        t: t,
+        streak: daily.currentStreak,
+      );
+      ok = await service.enable(
+        alreadyReadToday: daily.isCompletedToday,
+        title: mensaje.title,
+        body: mensaje.body,
+      );
+      // Solo si de verdad quedó activado: si denegó el permiso, el
+      // interruptor vuelve a off y contarlo como activación mentiría.
+      if (ok) analytics.log(AnalyticsService.reminderEnable);
     } else {
       await service.disable();
     }
