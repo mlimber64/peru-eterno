@@ -90,7 +90,7 @@ Deno.serve(async (req: Request) => {
   let requestedPlan = DEFAULT_TRIAL_PLAN;
   try {
     const body = await req.json();
-    if (typeof body?.plan === 'string' && body.plan in TRIAL_DAYS) {
+    if (typeof body?.plan === 'string' && Object.hasOwn(TRIAL_DAYS, body.plan)) {
       requestedPlan = body.plan;
     }
   } catch (_) {
