@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updated_at": "2026-09-02",
+  "updated_at": "2026-11-03",
   "controller": "Limber Mendoza",
   "controller_country": "Italia",
   "contact_email": "perueterno.app@gmail.com",
@@ -321,7 +321,7 @@
           "h": "4. Suscripción premium",
           "p": [
             "Parte del contenido es gratuito y parte requiere suscripción premium. Se ofrecen dos planes: semanal y anual.",
-            "Prueba gratuita: la app ofrece una prueba de 7 días, disponible una sola vez por usuario. Al terminar la prueba, el acceso premium se interrumpe salvo que contrates un plan.",
+            "Prueba gratuita: la app ofrece una prueba de 3 días si eliges el plan semanal o de 7 días si eliges el anual, disponible una sola vez por usuario. Al terminar la prueba, el acceso premium se interrumpe salvo que contrates un plan.",
             "El cobro lo gestiona íntegramente Google Play o la App Store, en tu moneda local y al precio que muestre la tienda en el momento de la compra.",
             "La suscripción se renueva automáticamente al final de cada periodo, salvo que la canceles al menos 24 horas antes de la fecha de renovación.",
             "Para cancelar debes hacerlo desde la propia tienda: en Android, Google Play → Pagos y suscripciones; en iOS, Ajustes → tu nombre → Suscripciones. Desinstalar la app NO cancela la suscripción."
@@ -407,7 +407,7 @@
           "h": "4. Abbonamento premium",
           "p": [
             "Una parte dei contenuti è gratuita, un'altra richiede l'abbonamento premium. Sono disponibili due piani: settimanale e annuale.",
-            "Prova gratuita: l'app offre una prova di 7 giorni, disponibile una sola volta per utente. Al termine della prova l'accesso premium si interrompe, salvo sottoscrizione di un piano.",
+            "Prova gratuita: l'app offre una prova di 3 giorni se scegli il piano settimanale o di 7 giorni se scegli quello annuale, disponibile una sola volta per utente. Al termine della prova l'accesso premium si interrompe, salvo sottoscrizione di un piano.",
             "L'addebito è gestito interamente da Google Play o dall'App Store, nella tua valuta locale e al prezzo indicato dallo store al momento dell'acquisto.",
             "L'abbonamento si rinnova automaticamente al termine di ogni periodo, salvo cancellazione almeno 24 ore prima della data di rinnovo.",
             "La cancellazione va effettuata dallo store stesso: su Android, Google Play → Pagamenti e abbonamenti; su iOS, Impostazioni → il tuo nome → Abbonamenti. Disinstallare l'app NON cancella l'abbonamento."
@@ -493,7 +493,7 @@
           "h": "4. Premium subscription",
           "p": [
             "Some content is free and some requires a premium subscription. Two plans are offered: weekly and annual.",
-            "Free trial: the app offers a 7-day trial, available once per user. When the trial ends, premium access stops unless you subscribe to a plan.",
+            "Free trial: the app offers a 3-day trial if you choose the weekly plan or a 7-day trial if you choose the annual plan, available once per user. When the trial ends, premium access stops unless you subscribe to a plan.",
             "Billing is handled entirely by Google Play or the App Store, in your local currency and at the price the store displays at the time of purchase.",
             "The subscription renews automatically at the end of each period unless you cancel at least 24 hours before the renewal date.",
             "Cancellation must be done in the store itself: on Android, Google Play → Payments and subscriptions; on iOS, Settings → your name → Subscriptions. Uninstalling the app does NOT cancel the subscription."

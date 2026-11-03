@@ -185,7 +185,9 @@ Si no existen en Play Console con esos IDs, el paywall mostrará
 
 #### La prueba gratuita: configúrala como oferta de Play
 
-La app trae una prueba de 7 días propia. Con la migración
+La app trae una prueba propia: **3 días en el plan semanal y 7 en el anual**
+(`PremiumProvider.trialDaysFor` y `TRIAL_DAYS` en la Edge Function
+`start-trial`; deben coincidir). Con la migración
 `20260901_entitlements.sql` aplicada, el "ya la usaste" se guarda en el
 servidor en vez de en el dispositivo, pero **solo sobrevive a una
 reinstalación si el usuario vinculó su cuenta a un correo**: con una sesión
@@ -197,8 +199,9 @@ Google la asocia a la cuenta de Google del usuario, que sobrevive a cualquier
 reinstalación o cambio de teléfono. Es además lo que hace la competencia,
 porque obliga a introducir método de pago y convierte mucho mejor.
 
-Si se hace así, el botón "Prueba gratis 7 días" del paywall debe pasar a
-lanzar la compra normal (Play ya muestra "7 días gratis, luego X €") en vez de
+Si se hace así, el botón "Prueba gratis" del paywall debe pasar a
+lanzar la compra normal (Play ya muestra "3 días gratis, luego X €" en el
+semanal y "7 días gratis" en el anual, según la oferta de cada plan) en vez de
 llamar a `startFreeTrial()`. Es un cambio pequeño en `premium_screen.dart`,
 pendiente de decidir.
 

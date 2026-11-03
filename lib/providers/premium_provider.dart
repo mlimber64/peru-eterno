@@ -25,7 +25,7 @@ enum PremiumStatus {
 enum PremiumPlan { none, weekly, annual }
 
 /// Gestiona el desbloqueo premium como **suscripción** (plan semanal o
-/// anual, con prueba gratuita de 7 días) usando el plugin oficial
+/// anual, con prueba gratuita de 3 o 7 días según el plan) usando el plugin oficial
 /// `in_app_purchase` para la compra real, con el estado de vigencia
 /// (prueba/plan activo, fecha de expiración) resuelto y persistido
 /// localmente en [SharedPreferences] — no hay backend de renovación/recibo
@@ -36,8 +36,8 @@ enum PremiumPlan { none, weekly, annual }
 /// Flujo:
 /// 1. [initialize] carga el estado persistido, comprueba disponibilidad de la
 ///    tienda, se suscribe al `purchaseStream` y consulta los productos.
-/// 2. [startFreeTrial] activa la prueba de 7 días sin pasar por la tienda
-///    (un solo uso por usuario).
+/// 2. [startFreeTrial] activa la prueba (3 días en el semanal, 7 en el anual,
+///    ver [trialDaysFor]) sin pasar por la tienda (un solo uso por usuario).
 /// 3. [buyPlan] lanza el flujo nativo de compra para el plan elegido.
 /// 4. El resultado de una compra real llega **siempre** de forma asíncrona
 ///    por el stream y se procesa en [_onPurchaseUpdated], que verifica,
@@ -67,7 +67,14 @@ class PremiumProvider extends ChangeNotifier {
 
   static const Duration _weeklyDuration = Duration(days: 7);
   static const Duration _annualDuration = Duration(days: 365);
-  static const Duration _trialDuration = Duration(days: 7);
+
+  /// Días de prueba gratuita según el plan que el usuario tiene elegido en el
+  /// paywall. El semanal es el plan estrella y 7 días regalarían un ciclo de
+  /// pago entero; en el anual una prueba larga no cuesta nada. La Edge
+  /// Function `start-trial` lleva la MISMA tabla (`TRIAL_DAYS`): si se cambia
+  /// aquí, cambiarla allí.
+  static int trialDaysFor(PremiumPlan plan) =>
+      plan == PremiumPlan.annual ? 7 : 3;
 
   // Claves i18n de los mensajes de usuario (resueltas en la UI con `t(...)`).
   // Evitan exponer textos técnicos en inglés de la tienda.
@@ -168,7 +175,10 @@ class PremiumProvider extends ChangeNotifier {
 
   int get daysLeftInTrial {
     if (!isInTrial) return 0;
-    return _trialEndsAt!.difference(DateTime.now()).inDays + 1;
+    // Redondeo hacia arriba: queda "1 día" hasta el último segundo. Con
+    // `inDays + 1`, una prueba recién activada con el reloj sin avanzar daba N+1.
+    final seconds = _trialEndsAt!.difference(DateTime.now()).inSeconds;
+    return (seconds + 86399) ~/ 86400;
   }
 
   bool get hasUsedTrial => _hasUsedTrial;
@@ -384,9 +394,10 @@ class PremiumProvider extends ChangeNotifier {
 
   // ── Prueba gratuita ─────────────────────────────────────────────────────────
 
-  /// Activa la prueba gratuita de 7 días. Mock local (no pasa por la
-  /// tienda): un solo uso por usuario. Devuelve `false` si ya se usó antes.
-  Future<bool> startFreeTrial() async {
+  /// Activa la prueba gratuita ([trialDaysFor] días según [plan]). Mock local
+  /// (no pasa por la tienda): un solo uso por usuario. Devuelve `false` si ya
+  /// se usó antes.
+  Future<bool> startFreeTrial({PremiumPlan plan = PremiumPlan.weekly}) async {
     if (_hasUsedTrial) return false;
 
     // El servidor es quien lleva la cuenta de si esta cuenta ya gastó su
@@ -394,7 +405,7 @@ class PremiumProvider extends ChangeNotifier {
     // infinita. Solo si no se le puede preguntar se decide en el dispositivo.
     final service = _entitlements;
     if (service != null) {
-      final result = await service.startTrial();
+      final result = await service.startTrial(plan: plan.name);
       if (result.alreadyUsed) {
         _hasUsedTrial = true;
         await _persistState();
@@ -416,7 +427,7 @@ class PremiumProvider extends ChangeNotifier {
     }
 
     _hasUsedTrial = true;
-    _trialEndsAt = DateTime.now().add(_trialDuration);
+    _trialEndsAt = DateTime.now().add(Duration(days: trialDaysFor(plan)));
     _status = PremiumStatus.purchased;
     await _persistState();
     notifyListeners();

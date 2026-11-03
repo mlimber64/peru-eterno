@@ -14,7 +14,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('PremiumProvider.startFreeTrial', () {
-    test('activa 7 días de premium la primera vez', () async {
+    test('activa 3 días de premium la primera vez en el plan semanal', () async {
       final provider = PremiumProvider();
       expect(provider.isPremium, isFalse);
       expect(provider.hasUsedTrial, isFalse);
@@ -25,7 +25,21 @@ void main() {
       expect(provider.isPremium, isTrue);
       expect(provider.isInTrial, isTrue);
       expect(provider.hasUsedTrial, isTrue);
+      expect(provider.daysLeftInTrial, inInclusiveRange(2, 3));
+    });
+
+    test('el plan anual da 7 días de prueba', () async {
+      final provider = PremiumProvider();
+
+      final started = await provider.startFreeTrial(plan: PremiumPlan.annual);
+
+      expect(started, isTrue);
       expect(provider.daysLeftInTrial, inInclusiveRange(6, 7));
+    });
+
+    test('trialDaysFor: 3 en el semanal, 7 en el anual', () {
+      expect(PremiumProvider.trialDaysFor(PremiumPlan.weekly), 3);
+      expect(PremiumProvider.trialDaysFor(PremiumPlan.annual), 7);
     });
 
     test('no se puede activar una segunda vez', () async {

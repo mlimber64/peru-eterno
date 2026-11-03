@@ -1,5 +1,6 @@
 // ============================================================================
-//  start-trial — activa la prueba gratuita de 7 días, una sola vez por cuenta
+//  start-trial — activa la prueba gratuita (3 días en el plan semanal, 7 en el
+//  anual), una sola vez por cuenta
 // ----------------------------------------------------------------------------
 //  La prueba vivía en `SharedPreferences` (`premium_has_used_trial`), así que
 //  desinstalar y reinstalar la app la volvía a activar: prueba infinita, gratis.
@@ -20,7 +21,11 @@
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
-const TRIAL_DAYS = 7;
+// Días de prueba por plan. Misma tabla que `PremiumProvider.trialDaysFor` en la
+// app: si se cambia aquí, cambiarla allí. La duración la decide el servidor; el
+// cliente solo dice qué plan tiene elegido, nunca cuántos días quiere.
+const TRIAL_DAYS: Record<string, number> = { weekly: 3, annual: 7 };
+const DEFAULT_TRIAL_PLAN = 'weekly';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -82,7 +87,18 @@ Deno.serve(async (req: Request) => {
     return json({ error: 'already_subscribed' }, 409);
   }
 
-  const expiresAt = new Date(Date.now() + TRIAL_DAYS * 24 * 60 * 60 * 1000);
+  let requestedPlan = DEFAULT_TRIAL_PLAN;
+  try {
+    const body = await req.json();
+    if (typeof body?.plan === 'string' && body.plan in TRIAL_DAYS) {
+      requestedPlan = body.plan;
+    }
+  } catch (_) {
+    // Sin cuerpo o no es JSON: se usa el plan por defecto.
+  }
+  const trialDays = TRIAL_DAYS[requestedPlan];
+
+  const expiresAt = new Date(Date.now() + trialDays * 24 * 60 * 60 * 1000);
 
   const { error: upsertError } = await admin.from('user_entitlements').upsert(
     {

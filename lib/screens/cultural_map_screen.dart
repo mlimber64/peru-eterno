@@ -146,21 +146,8 @@ class _CulturalMapBodyState extends State<CulturalMapBody> {
     );
   }
 
-  /// Un punto ligado a un capítulo respeta el mismo gating que el resto del
-  /// archivo histórico (ver `AppNavigation.openHistoriaArticle`): free solo
-  /// puede la Historia del Día. Uno ligado a un `ContentItem` respeta
-  /// `ContentItem.isPremium`.
-  bool _isLocked(CulturalMapPoint point, bool isPremium, String? dailyArticleId) {
-    if (isPremium) return false;
-    if (point.historiaArticleId != null) {
-      return point.historiaArticleId != dailyArticleId;
-    }
-    if (point.contentItemId != null) {
-      final item = ContentRepository.findById(point.contentItemId!);
-      return item?.isPremium ?? false;
-    }
-    return false;
-  }
+  bool _isLocked(CulturalMapPoint point, bool isPremium, String? dailyArticleId) =>
+      isMapPointLocked(point, isPremium, dailyArticleId);
 
   Future<void> _openPoint(
     BuildContext context,
@@ -202,7 +189,8 @@ class _CulturalMapBodyState extends State<CulturalMapBody> {
       }
     }
 
-    // TODO: Create a dedicated article or ContentItem route for this map point.
+    // Red de seguridad: hoy todos los puntos llevan capítulo o ficha, pero
+    // si se añade uno sin contenido enlazado se avisa en vez de no hacer nada.
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -225,6 +213,34 @@ class _CulturalMapBodyState extends State<CulturalMapBody> {
           orElse: () => null,
         );
   }
+}
+
+/// ¿Está bloqueado este punto del mapa para el usuario?
+///
+/// Un punto ligado a un capítulo usa la MISMA regla que el resto del archivo
+/// histórico ([AppNavigation.isHistoriaArticleLocked]): un usuario free puede
+/// leer la Historia del Día y cualquier capítulo de una etapa libre. Antes el
+/// mapa llevaba su propia copia ("solo el del día"), y con Perú prehispánico
+/// libre marcaba con candado capítulos que sí se abrían. Un punto ligado a un
+/// `ContentItem` respeta `ContentItem.isPremium`.
+bool isMapPointLocked(
+  CulturalMapPoint point,
+  bool isPremium,
+  String? dailyArticleId,
+) {
+  if (isPremium) return false;
+  if (point.historiaArticleId != null) {
+    return AppNavigation.isHistoriaArticleLocked(
+      userIsPremium: isPremium,
+      isDailyArticle: point.historiaArticleId == dailyArticleId,
+      stageIsPremium: HistoriaStagesRepository.isStagePremium(point.stageId),
+    );
+  }
+  if (point.contentItemId != null) {
+    final item = ContentRepository.findById(point.contentItemId!);
+    return item?.isPremium ?? false;
+  }
+  return false;
 }
 
 class CulturalMapPoint {
@@ -447,7 +463,7 @@ const culturalMapPoints = [
     position: Offset(0.58, 0.58),
     accentColor: AppColors.incaColor,
     stageId: 'peru_prehispanico',
-    // TODO: Add a dedicated Cusco article route or ContentItem.
+    historiaArticleId: 'incas',
   ),
 
   // ── Conquista española ───────────────────────────────────────────────────
@@ -921,10 +937,8 @@ class _MapStage extends StatelessWidget {
     required this.onPointTap,
   });
 
-  bool _isLocked(CulturalMapPoint point) {
-    if (isPremium || point.historiaArticleId == null) return false;
-    return point.historiaArticleId != dailyArticleId;
-  }
+  bool _isLocked(CulturalMapPoint point) =>
+      isMapPointLocked(point, isPremium, dailyArticleId);
 
   @override
   Widget build(BuildContext context) {
