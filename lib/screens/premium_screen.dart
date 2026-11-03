@@ -102,7 +102,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       .fadeIn(duration: 600.ms, delay: 400.ms),
                   const SizedBox(height: 24),
                   if (!premium.hasUsedTrial)
-                    _buildTrialBanner(t)
+                    _buildTrialBanner(t, _selectedPlan)
                         .animate()
                         .fadeIn(duration: 600.ms, delay: 450.ms)
                         .slideY(begin: 0.15, end: 0, delay: 450.ms),
@@ -213,7 +213,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
   // ── Banner de prueba gratuita ───────────────────────────────────────────
 
-  Widget _buildTrialBanner(String Function(String) t) {
+  Widget _buildTrialBanner(String Function(String) t, PremiumPlan plan) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -236,7 +236,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              t('premium.trial_banner'),
+              t('premium.trial_banner')
+                  .replaceAll('{days}', '${PremiumProvider.trialDaysFor(plan)}'),
               style: GoogleFonts.lato(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -295,7 +296,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
             ? null
             : () async {
                 if (showTrialCta) {
-                  await p.startFreeTrial();
+                  await p.startFreeTrial(plan: _selectedPlan);
                 } else {
                   await p.buyPlan(_selectedPlan);
                 }
@@ -321,7 +322,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
               )
             : Text(
                 (showTrialCta
-                        ? t('premium.cta_trial')
+                        ? t('premium.cta_trial').replaceAll(
+                            '{days}',
+                            '${PremiumProvider.trialDaysFor(_selectedPlan)}')
                         : t('premium.cta_subscribe'))
                     .toUpperCase(),
                 style: GoogleFonts.lato(

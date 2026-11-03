@@ -109,14 +109,17 @@ class EntitlementService {
   ///
   /// Distingue tres cosas que la UI necesita separar: se activó, ya se había
   /// usado, o no se pudo saber (y entonces decide el cliente).
-  Future<TrialRequestResult> startTrial() async {
+  Future<TrialRequestResult> startTrial({String plan = 'weekly'}) async {
     final client = _client;
     if (client == null || _auth.userId.value == null) {
       return const TrialRequestResult.unknown();
     }
 
     try {
-      final response = await client.functions.invoke(startTrialFunctionName);
+      final response = await client.functions.invoke(
+        startTrialFunctionName,
+        body: {'plan': plan},
+      );
       if (response.status == 409) {
         return const TrialRequestResult.alreadyUsed();
       }
